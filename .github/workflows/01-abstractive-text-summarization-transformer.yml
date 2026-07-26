@@ -17,9 +17,12 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+
     defaults:
       run:
         working-directory: 01-abstractive-text-summarization-transformer
+
     env:
       HF_HUB_OFFLINE: "1"
       TRANSFORMERS_OFFLINE: "1"
@@ -28,29 +31,44 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
           cache: pip
           cache-dependency-path: |
             01-abstractive-text-summarization-transformer/requirements.txt
-            01-abstractive-text-summarization-transformer/requirements-dev.txt
+            01-abstractive-text-summarization-transformer/requirements-ci.txt
 
-      - name: Install dependencies
+      - name: Verify corrected dependency pins
+        shell: bash
+        run: |
+          grep -Fx "gradio==5.49.1" requirements.txt
+          grep -Fx "transformers==4.57.6" requirements.txt
+          grep -Fx "huggingface-hub==0.36.2" requirements.txt
+          grep -Fx "gradio==5.49.1" requirements-ci.txt
+          grep -Fx "huggingface-hub==0.36.2" requirements-ci.txt
+
+      - name: Install lightweight CI dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install -r requirements-dev.txt
+          python -m pip install -r requirements-ci.txt
+          python -m pip check
+
+      - name: Show installed compatibility versions
+        run: |
+          python -c "import gradio, huggingface_hub; print('gradio=', gradio.__version__); print('huggingface_hub=', huggingface_hub.__version__)"
+
+      - name: Run unit tests
+        run: python -m pytest -q
+
+      - name: Validate inference pipeline import
+        run: python -c "from src.inference_pipeline import summarize_text; print('Inference import passed')"
+
+      - name: Validate Gradio app import without downloading models
+        run: python -c "import app; import gradio_app; print('Gradio app import passed')"
 
       - name: Compile Python files
-        run: python -m compileall app.py gradio_app.py src scripts tests
-
-      - name: Run tests without downloading models
-        run: pytest -q
-
-      - name: Validate app and inference imports
-        run: |
-          python -c "import app; import gradio_app; from src.inference_pipeline import summarize_text; print('Import validation passed')"
+        run: python -m compileall -q app.py gradio_app.py src scripts tests

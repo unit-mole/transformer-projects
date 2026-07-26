@@ -1,16 +1,26 @@
-# Runtime dependencies tested for Python 3.10+
-gradio==6.20.0
-transformers>=4.56.0,<5.0.0
-torch>=2.4.0
-safetensors>=0.4.5
-sentencepiece>=0.2.0
-pandas>=2.2.0
+# Project 01 runtime dependencies (Python 3.11)
+#
+# IMPORTANT COMPATIBILITY PINS
+# Gradio 6.x requires huggingface-hub 1.x, while Transformers 4.x requires
+# huggingface-hub below 1.0. The exact versions below share a compatible
+# huggingface-hub range and prevent pip dependency backtracking.
+gradio==5.49.1
+transformers==4.57.6
+huggingface-hub==0.36.2
+
+# Model runtime and serialization
+torch>=2.4.0,<3.0.0
+safetensors>=0.4.5,<1.0.0
+sentencepiece>=0.2.0,<1.0.0
+
+# Data processing and evaluation
+pandas>=2.2.0,<3.0.0
 numpy>=1.26.0,<3.0.0
-scikit-learn>=1.5.0
-rouge-score>=0.1.2
-bert-score>=0.3.13
-datasets>=4.0.0
-evaluate>=0.4.6
-accelerate>=1.0.0
-matplotlib>=3.9.0
-PyYAML>=6.0.2
+scikit-learn>=1.5.0,<2.0.0
+rouge-score==0.1.2
+bert-score>=0.3.13,<1.0.0
+datasets>=3.2.0,<5.0.0
+evaluate>=0.4.3,<1.0.0
+accelerate>=1.2.0,<2.0.0
+matplotlib>=3.8.0,<4.0.0
+PyYAML>=6.0.0,<7.0.0
