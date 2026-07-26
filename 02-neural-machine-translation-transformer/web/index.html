@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="English-to-Hindi and Hindi-to-English MarianMT translation running directly in the browser with Transformers.js." />
+  <title>English–Hindi Neural Machine Translation</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./src/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-content">
+      <div>
+        <div class="eyebrow">Transformer Portfolio · Project 02</div>
+        <h1>English–Hindi Neural Machine Translation</h1>
+        <p class="subtitle">Real MarianMT encoder-decoder inference in your browser with Transformers.js and ONNX Runtime.</p>
+      </div>
+      <div class="header-badges" aria-label="Project badges">
+        <span class="badge success">Free Static Space</span>
+        <span class="badge">No server API</span>
+        <span class="badge">Lazy model loading</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="notice" aria-label="Model loading information">
+      <strong>Portfolio evidence:</strong> This is not a mock UI. The selected quantized MarianMT model is downloaded from the Hugging Face Hub and executed locally in the browser. The first translation can take several minutes on a slow connection; later requests use browser caching.
+    </section>
+
+    <section class="deployment-map" aria-labelledby="deployment-map-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="deployment-map-title">Three-layer portfolio architecture</h2>
+          <p>The live demo complements—not replaces—the complete Python ML project.</p>
+        </div>
+      </div>
+      <div class="map-grid">
+        <article class="map-card">
+          <span class="map-number">1</span>
+          <h3>GitHub project</h3>
+          <p>Python pipelines, preprocessing, tests, notebooks, evaluation, CI, error analysis, and reproducibility.</p>
+        </article>
+        <article class="map-card">
+          <span class="map-number">2</span>
+          <h3>Hugging Face models</h3>
+          <p>ONNX-compatible MarianMT model repositories, model lineage, configuration, and model cards.</p>
+        </article>
+        <article class="map-card active">
+          <span class="map-number">3</span>
+          <h3>Static Space</h3>
+          <p>Interactive browser inference, language detection, tokens, latency, batch translation, and limitations.</p>
+        </article>
+      </div>
+    </section>
+
+    <nav class="tabs" aria-label="Application sections">
+      <button class="tab active" type="button" data-tab="sentence">Sentence translation</button>
+      <button class="tab" type="button" data-tab="batch">Batch CSV</button>
+      <button class="tab" type="button" data-tab="evidence">Model evidence</button>
+      <button class="tab" type="button" data-tab="evaluation">Evaluation</button>
+    </nav>
+
+    <section id="sentence-panel" class="tab-panel active" aria-labelledby="sentence-tab">
+      <div class="workspace-grid">
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Translate a sentence</h2>
+              <p>Automatic direction uses Latin and Devanagari script ratios.</p>
+            </div>
+          </div>
+
+          <label for="direction">Translation direction</label>
+          <select id="direction">
+            <option value="auto">Automatic detection</option>
+            <option value="en-hi">English → Hindi</option>
+            <option value="hi-en">Hindi → English</option>
+          </select>
+
+          <label for="source-text">Source text</label>
+          <textarea id="source-text" rows="7" placeholder="Enter an English or Hindi sentence...">Machine learning helps us discover useful patterns in data.</textarea>
+
+          <div class="example-row" aria-label="Example inputs">
+            <button class="secondary-button example" type="button" data-example="en">English example</button>
+            <button class="secondary-button example" type="button" data-example="hi">Hindi example</button>
+            <button class="secondary-button" id="clear-button" type="button">Clear</button>
+          </div>
+
+          <details class="generation-controls">
+            <summary>Generation controls</summary>
+            <div class="control-grid">
+              <div>
+                <label for="beam-size">Beam size</label>
+                <select id="beam-size">
+                  <option value="1">1 — Greedy</option>
+                  <option value="2">2</option>
+                  <option value="4" selected>4 — Recommended</option>
+                  <option value="6">6</option>
+                </select>
+              </div>
+              <div>
+                <label for="max-tokens">Maximum new tokens</label>
+                <select id="max-tokens">
+                  <option value="64">64</option>
+                  <option value="128" selected>128</option>
+                  <option value="256">256</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+          <button id="translate-button" class="primary-button" type="button">Load model and translate</button>
+
+          <div class="progress-wrap" id="progress-wrap" hidden>
+            <div class="progress-label"><span id="progress-text">Preparing model…</span><span id="progress-value"></span></div>
+            <progress id="model-progress" max="100" value="0"></progress>
+          </div>
+          <p id="sentence-status" class="status" aria-live="polite"></p>
+        </article>
+
+        <article class="panel output-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Translation output</h2>
+              <p>The confidence value is an explainable heuristic proxy, not a calibrated correctness probability.</p>
+            </div>
+          </div>
+          <label for="translated-text">Translated text</label>
+          <textarea id="translated-text" rows="7" readonly placeholder="The translation will appear here."></textarea>
+          <div class="metric-grid" id="sentence-metrics">
+            <div class="metric"><span>Detected language</span><strong id="metric-language">—</strong></div>
+            <div class="metric"><span>Direction</span><strong id="metric-direction">—</strong></div>
+            <div class="metric"><span>Source tokens</span><strong id="metric-source-tokens">—</strong></div>
+            <div class="metric"><span>Target tokens</span><strong id="metric-target-tokens">—</strong></div>
+            <div class="metric"><span>Inference latency</span><strong id="metric-latency">—</strong></div>
+            <div class="metric"><span>Confidence proxy</span><strong id="metric-confidence">—</strong></div>
+          </div>
+          <div class="token-panel">
+            <h3>Tokenizer preview</h3>
+            <p id="token-preview" class="token-preview">Tokens will be displayed after inference.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="batch-panel" class="tab-panel" hidden>
+      <article class="panel">
+        <div class="panel-heading">
+          <div>
+            <h2>CSV batch translation</h2>
+            <p>Rows are processed locally in the browser. The portfolio demo limits each run to 25 rows for responsiveness.</p>
+          </div>
+        </div>
+        <div class="control-grid three">
+          <div>
+            <label for="csv-file">CSV file</label>
+            <input id="csv-file" type="file" accept=".csv,text/csv" />
+          </div>
+          <div>
+            <label for="csv-column">Text column</label>
+            <select id="csv-column"><option value="">Upload a CSV first</option></select>
+          </div>
+          <div>
+            <label for="batch-direction">Direction</label>
+            <select id="batch-direction">
+              <option value="auto">Automatic per row</option>
+              <option value="en-hi">English → Hindi</option>
+              <option value="hi-en">Hindi → English</option>
+            </select>
+          </div>
+        </div>
+        <div class="button-row">
+          <button id="batch-button" class="primary-button" type="button" disabled>Translate selected rows</button>
+          <button id="sample-csv-button" class="secondary-button" type="button">Download sample CSV</button>
+          <button id="download-results-button" class="secondary-button" type="button" disabled>Download results</button>
+        </div>
+        <p id="batch-status" class="status" aria-live="polite"></p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Original text</th><th>Detected</th><th>Direction</th><th>Translation</th><th>Confidence</th><th>Latency</th><th>Status</th></tr></thead>
+            <tbody id="batch-results"><tr><td colspan="8">Upload a CSV file to begin.</td></tr></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section id="evidence-panel" class="tab-panel" hidden>
+      <div class="evidence-grid">
+        <article class="panel">
+          <h2>Transformer architecture evidence</h2>
+          <div class="flow" role="img" aria-label="Source text moves through preprocessing, tokenizer, Marian encoder, cross attention, Marian decoder, and translated output.">
+            <div class="flow-node">Source text</div><span>→</span>
+            <div class="flow-node">SentencePiece tokenizer</div><span>→</span>
+            <div class="flow-node highlighted">6-layer Marian encoder</div><span>→</span>
+            <div class="flow-node highlighted">Cross-attention + 6-layer decoder</div><span>→</span>
+            <div class="flow-node">Target text</div>
+          </div>
+          <ul class="detail-list">
+            <li>Encoder-decoder Transformer architecture</li>
+            <li>8 attention heads and 512-dimensional hidden state in the EN→HI base configuration</li>
+            <li>Beam-search generation with user-selectable beam size</li>
+            <li>Quantized ONNX inference through ONNX Runtime Web</li>
+            <li>Separate directional models loaded only when required</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h2>Model lineage</h2>
+          <div class="model-row"><div><strong>English → Hindi</strong><code>Xenova/opus-mt-en-hi</code><small>ONNX conversion of Helsinki-NLP/opus-mt-en-hi</small></div><a href="https://huggingface.co/Xenova/opus-mt-en-hi" target="_blank" rel="noreferrer">Model card</a></div>
+          <div class="model-row"><div><strong>Hindi → English</strong><code>Xenova/opus-mt-hi-en</code><small>ONNX conversion of Helsinki-NLP/opus-mt-hi-en</small></div><a href="https://huggingface.co/Xenova/opus-mt-hi-en" target="_blank" rel="noreferrer">Model card</a></div>
+          <p class="muted">This project does not claim ownership of pretrained weights. The repository documents model lineage and can later publish separately fine-tuned or converted artifacts.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="evaluation-panel" class="tab-panel" hidden>
+      <div class="evidence-grid">
+        <article class="panel">
+          <h2>Evaluation framework</h2>
+          <div class="metric-grid">
+            <div class="metric"><span>EN→HI SacreBLEU</span><strong id="eval-enhi-bleu">Not run</strong></div>
+            <div class="metric"><span>EN→HI chrF</span><strong id="eval-enhi-chrf">Not run</strong></div>
+            <div class="metric"><span>HI→EN SacreBLEU</span><strong id="eval-hien-bleu">Not run</strong></div>
+            <div class="metric"><span>HI→EN chrF</span><strong id="eval-hien-chrf">Not run</strong></div>
+          </div>
+          <p>The authoritative metrics are generated by the Python evaluation pipeline and copied into this Static Space only after a real evaluation run. Placeholder values are never presented as measured results.</p>
+        </article>
+        <article class="panel">
+          <h2>Manual error analysis</h2>
+          <ul class="detail-list">
+            <li>Named entities, numbers, dates, and product terminology</li>
+            <li>Word order, gender, tense, and agreement</li>
+            <li>Under-translation and over-translation</li>
+            <li>Mixed-script and code-switched inputs</li>
+            <li>Domain-specific quality and customer-support language</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="responsible-use">
+      <h2>Responsible use and limitations</h2>
+      <p>Generated translations can be inaccurate, incomplete, culturally inappropriate, or contextually misleading. The confidence proxy is not a guarantee of correctness. Do not enter private, confidential, personal, copyrighted, legal, medical, immigration, safety-critical, or business-critical content. Human review is required before real-world use.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <span>Project 02 · Transformer Models Portfolio</span>
+      <span>Browser inference · Transformers.js · MarianMT · ONNX Runtime</span>
+    </div>
+  </footer>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

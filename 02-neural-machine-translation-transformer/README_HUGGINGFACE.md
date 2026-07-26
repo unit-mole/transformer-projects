@@ -1,40 +1,17 @@
----
-title: English Hindi Neural Machine Translation
-emoji: 🌐
-colorFrom: blue
-colorTo: green
-sdk: gradio
-sdk_version: 6.20.0
-python_version: 3.11
-app_file: app.py
-pinned: false
-license: mit
-suggested_hardware: cpu-basic
----
+# Hugging Face Static Space Card — Project 02
 
-# English–Hindi Neural Machine Translation
+Use the complete `web/` directory as the root of the Hugging Face Space. Its
+`README.md` already contains `sdk: static` and `app_file: index.html` metadata.
 
-Interactive MarianMT demo for English→Hindi and Hindi→English translation.
+The Space demonstrates:
 
-## How to use
+- real English-to-Hindi and Hindi-to-English MarianMT inference;
+- Transformers.js and ONNX Runtime browser execution;
+- automatic language detection and manual direction control;
+- tokenization evidence, model identity, latency and beam controls;
+- CSV batch translation and downloadable output;
+- evaluation placeholders populated only from genuine Python results;
+- responsible-use notes and model limitations.
 
-1. Open **Sentence Translation**.
-2. Paste English or Hindi text.
-3. Keep direction on **Automatic** or select a manual direction.
-4. Review the translation, detected language, confidence proxy, and latency.
-5. Use **Batch Translation** for a CSV containing a text column.
-
-## Models
-
-- `Helsinki-NLP/opus-mt-en-hi`
-- `Helsinki-NLP/opus-mt-hi-en`
-
-Models are loaded lazily on the first request and are not trained during Space startup.
-
-## Important limitation
-
-The confidence value is a model-based proxy, not a guarantee of translation correctness. Human review is required. Do not submit sensitive or decision-critical text.
-
-## Repository
-
-`<YOUR_GITHUB_REPOSITORY_URL>`
+See [DEPLOYMENT_HUGGINGFACE_STATIC.md](./DEPLOYMENT_HUGGINGFACE_STATIC.md) for the
+step-by-step deployment process.

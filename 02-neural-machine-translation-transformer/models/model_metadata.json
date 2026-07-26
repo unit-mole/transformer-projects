@@ -28,5 +28,16 @@
     "latency",
     "manual_error_analysis"
   ],
-  "responsible_use": "Human review required; do not submit sensitive or decision-critical text."
+  "responsible_use": "Human review required; do not submit sensitive or decision-critical text.",
+  "deployment": {
+    "public_portfolio_target": "hugging_face_static_space",
+    "browser_runtime": "Transformers.js 3.8.1 with ONNX Runtime Web",
+    "browser_models": {
+      "en_hi": "Xenova/opus-mt-en-hi",
+      "hi_en": "Xenova/opus-mt-hi-en"
+    },
+    "browser_dtype_preference": "q4 with q8 fallback",
+    "server_inference_required": false,
+    "paid_compute_required": false
+  }
 }

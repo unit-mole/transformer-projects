@@ -19,3 +19,13 @@ language_detection:
 confidence:
   label: confidence proxy
   calibrated: false
+browser_deployment:
+  sdk: static
+  runtime: Transformers.js 3.8.1
+  en_hi_model: Xenova/opus-mt-en-hi
+  hi_en_model: Xenova/opus-mt-hi-en
+  preferred_dtype: q4
+  fallback_dtype: q8
+  batch_max_rows: 25
+  server_inference_required: false
+

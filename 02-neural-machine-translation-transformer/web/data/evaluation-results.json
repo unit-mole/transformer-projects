@@ -1,0 +1,13 @@
+{
+  "note": "Populate only after running the Python evaluation pipeline. Null values prevent fabricated metrics.",
+  "en_hi": {
+    "sacrebleu": null,
+    "chrf": null,
+    "average_latency_seconds": null
+  },
+  "hi_en": {
+    "sacrebleu": null,
+    "chrf": null,
+    "average_latency_seconds": null
+  }
+}

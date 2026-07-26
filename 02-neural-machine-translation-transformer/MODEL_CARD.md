@@ -91,3 +91,22 @@ print(result.translated_text)
 ## Deployment
 
 The application loads model weights directly from the Hugging Face Hub. Fine-tuned checkpoints should be pushed to a separate model repository and referenced through environment variables or `models/model_metadata.json`.
+
+## Browser deployment variant
+
+The free public demo uses the ONNX-compatible repositories
+`Xenova/opus-mt-en-hi` and `Xenova/opus-mt-hi-en`, which preserve lineage to the
+Helsinki-NLP MarianMT base models. Inference is executed with Transformers.js
+and ONNX Runtime Web in a Hugging Face Static Space.
+
+- Preferred browser dtype: q4
+- Compatibility fallback: q8
+- Model loading: lazy, one direction at a time
+- Storage: browser cache when available
+- Confidence: heuristic proxy; not calibrated
+- Server API: none
+- Paid compute: none
+
+The project does not claim that the pretrained weights were trained by the
+portfolio author. A personal Model Hub repository should be created only after
+actual fine-tuning or a documented conversion of owned artifacts.

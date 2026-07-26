@@ -1,0 +1,13 @@
+{
+  "name": "english-hindi-transformer-static-space",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Browser-based English-Hindi MarianMT demo using Transformers.js.",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "check": "node --check src/main.js && node --check src/translation.worker.js && node --check src/language-detection.js && node --check src/confidence.js && node --check src/csv.js",
+    "validate": "npm run check && npm test",
+    "serve": "python -m http.server 8000"
+  }
+}
