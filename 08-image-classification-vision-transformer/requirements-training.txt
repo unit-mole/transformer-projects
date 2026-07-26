@@ -1,0 +1,10 @@
+-r requirements.txt
+torch>=2.2
+torchvision>=0.17
+transformers>=4.40
+datasets>=2.18
+evaluate>=0.4
+accelerate>=0.28
+onnx>=1.16
+onnxruntime>=1.18
+optimum[onnxruntime]>=1.19

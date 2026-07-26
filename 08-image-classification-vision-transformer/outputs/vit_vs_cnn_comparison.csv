@@ -1,0 +1,3 @@
+model,accuracy,macro_f1,parameters,avg_latency_ms,model_size_mb,status
+Vision Transformer,,,,,,not_evaluated
+CNN or ResNet baseline,,,,,,not_evaluated
