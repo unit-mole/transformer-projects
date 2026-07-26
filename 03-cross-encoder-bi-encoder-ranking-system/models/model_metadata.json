@@ -1,0 +1,23 @@
+{
+  "project_name": "03-cross-encoder-bi-encoder-ranking-system",
+  "display_name": "DocRank360 \u2014 Two-Stage Transformer Search Ranking",
+  "bi_encoder_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "cross_encoder_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+  "index_backend": "numpy",
+  "similarity_metric": "cosine",
+  "document_preprocessing": [
+    "HTML entity decoding",
+    "Unicode NFKC normalization",
+    "HTML tag removal",
+    "whitespace normalization",
+    "duplicate ID and duplicate document removal"
+  ],
+  "query_preprocessing": [
+    "Unicode NFKC normalization",
+    "whitespace normalization",
+    "minimum three characters"
+  ],
+  "dataset": "public-safe synthetic quality analytics and job-search sample",
+  "evaluation_status": "not_run",
+  "responsible_use": "Educational portfolio demonstration only. Do not use ranking scores as the sole basis for hiring, legal, immigration, compensation, or employment decisions."
+}

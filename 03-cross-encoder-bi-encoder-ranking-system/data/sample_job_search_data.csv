@@ -1,0 +1,7 @@
+document_id,job_title,job_description,source
+DOC011,Machine learning engineer — information retrieval,"Role requires Python, PyTorch, sentence-transformers, semantic search, vector databases, evaluation with MRR and nDCG, API development, and production monitoring.",synthetic
+DOC012,Data scientist — quality analytics,"Role focuses on complaint analytics, root-cause discovery, statistical analysis, dashboards, Python, SQL, machine learning, stakeholder communication, and corrective-action insights.",synthetic
+DOC013,Applied AI engineer — RAG and reranking,"Build retrieval-augmented generation applications using embedding models, hybrid search, cross-encoder reranking, prompt evaluation, grounded answers, citations, and observability.",synthetic
+DOC014,NLP engineer — multilingual search,"Develop multilingual semantic search, query understanding, transformer fine-tuning, hard-negative mining, ranking evaluation, and low-latency model serving.",synthetic
+DOC015,Analytics engineer — manufacturing data,"Create tested data models for manufacturing operations using SQL, dbt, Python, data quality checks, lineage, documentation, and business-facing metrics.",synthetic
+DOC016,Quality engineer — corrective action systems,"Investigate nonconformances, perform root-cause analysis, manage CAPA records, analyze supplier issues, verify corrective actions, and improve quality-system documentation.",synthetic

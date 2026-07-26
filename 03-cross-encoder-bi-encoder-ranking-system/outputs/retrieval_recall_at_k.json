@@ -1,0 +1,4 @@
+{
+  "status": "not_run",
+  "message": "Run python scripts/evaluate_model.py with the Transformer dependencies installed. This file intentionally contains no invented metric values."
+}

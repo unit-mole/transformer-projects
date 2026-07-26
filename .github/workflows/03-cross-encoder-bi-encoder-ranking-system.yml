@@ -1,0 +1,89 @@
+name: 03 Cross Encoder Bi Encoder Ranking System CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "03-cross-encoder-bi-encoder-ranking-system/**"
+      - ".github/workflows/03-cross-encoder-bi-encoder-ranking-system.yml"
+  pull_request:
+    paths:
+      - "03-cross-encoder-bi-encoder-ranking-system/**"
+      - ".github/workflows/03-cross-encoder-bi-encoder-ranking-system.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PROJECT_DIR: 03-cross-encoder-bi-encoder-ranking-system
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            03-cross-encoder-bi-encoder-ranking-system/requirements.txt
+            03-cross-encoder-bi-encoder-ranking-system/requirements-dev.txt
+
+      - name: Install lightweight CI dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install \
+            numpy \
+            pandas \
+            scikit-learn \
+            pyyaml \
+            pytest \
+            gradio
+
+      - name: Compile Python files
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: |
+          python -m compileall app.py gradio_app.py src scripts tests
+
+      - name: Validate imports without downloading models
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: |
+          python -c "import app; print('Gradio app import passed')"
+          python -c "from src.inference_pipeline import get_engine; print('Inference import passed')"
+          python -c "from src.retrieval_pipeline import RetrievalPipeline; print('Retrieval import passed')"
+          python -c "from src.reranking_pipeline import RerankingPipeline; print('Reranking import passed')"
+
+      - name: Run tests
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: pytest -q
+
+  sync-to-hugging-face:
+    needs: test
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      vars.HF_SPACE_ID != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Sync project subdirectory to Hugging Face Space
+        uses: huggingface/hub-sync@v0.1.0
+        with:
+          github_repo_id: ${{ github.repository }}
+          huggingface_repo_id: ${{ vars.HF_SPACE_ID }}
+          hf_token: ${{ secrets.HF_TOKEN }}
+          repo_type: space
+          space_sdk: gradio
+          subdirectory: 03-cross-encoder-bi-encoder-ranking-system

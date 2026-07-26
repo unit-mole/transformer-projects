@@ -1,0 +1,31 @@
+project:
+  number: "03"
+  name: "03-cross-encoder-bi-encoder-ranking-system"
+  display_name: "DocRank360 — Two-Stage Transformer Search Ranking"
+
+models:
+  bi_encoder: "sentence-transformers/all-MiniLM-L6-v2"
+  cross_encoder: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  device: "cpu"
+
+retrieval:
+  default_candidate_k: 10
+  maximum_candidate_k: 20
+  default_rerank_k: 5
+  similarity_metric: "cosine"
+  index_backend: "numpy"
+  normalize_embeddings: true
+
+data:
+  documents_path: "data/sample_documents.csv"
+  queries_path: "data/sample_queries.csv"
+  qrels_path: "data/sample_qrels.csv"
+  minimum_query_characters: 3
+  minimum_document_characters: 20
+
+deployment:
+  platform: "Hugging Face Spaces"
+  sdk: "gradio"
+  app_file: "app.py"
+  train_on_startup: false
+  build_full_index_on_startup: false

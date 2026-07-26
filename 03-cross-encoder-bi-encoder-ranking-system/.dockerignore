@@ -1,0 +1,9 @@
+.git
+.github
+__pycache__
+.pytest_cache
+.venv
+outputs/*
+models/vector_index/*.npy
+models/vector_index/*.faiss
+notebooks/.ipynb_checkpoints
