@@ -1,0 +1,24 @@
+{
+  "project": "DocRank360",
+  "task": "two-stage-search-ranking",
+  "training_status": "pretrained models used without new fine-tuning",
+  "python_models": {
+    "bi_encoder": "sentence-transformers/all-MiniLM-L6-v2",
+    "cross_encoder": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  },
+  "browser_models": {
+    "bi_encoder": "Xenova/all-MiniLM-L6-v2",
+    "cross_encoder": "Xenova/ms-marco-MiniLM-L-6-v2",
+    "dtype": "q8"
+  },
+  "retrieval": {
+    "similarity": "cosine",
+    "candidate_k_default": 10,
+    "rerank_k_default": 5
+  },
+  "deployment": {
+    "github": "complete Python ML project",
+    "hugging_face_space": "static",
+    "runtime": "Transformers.js + ONNX Runtime Web"
+  }
+}

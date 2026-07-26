@@ -1,0 +1,170 @@
+[
+  {
+    "document_id": "DOC001",
+    "title": "Two-stage retrieval for quality complaint search",
+    "document": "A quality analytics team indexes historical complaint narratives with a sentence-transformer bi-encoder. The top candidates are reranked with a cross-encoder so investigators can find similar cases, root causes, and corrective actions faster.",
+    "category": "quality-search",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC002",
+    "title": "FAISS indexing for large complaint archives",
+    "document": "This guide explains normalized dense embeddings, FAISS inner-product indexing, index persistence, and document metadata alignment for a large archive of manufacturing complaints.",
+    "category": "vector-search",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC003",
+    "title": "NumPy cosine search for small demonstrations",
+    "document": "For a small public portfolio demo, normalized embeddings and a NumPy matrix multiplication provide reliable cosine similarity without adding FAISS deployment complexity.",
+    "category": "vector-search",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC004",
+    "title": "Cross-encoder reranking of root-cause records",
+    "document": "A cross-encoder jointly reads a search query and each retrieved root-cause record. It produces a relevance score that can improve ordering among semantically similar candidates.",
+    "category": "reranking",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC005",
+    "title": "Bi-encoder semantic retrieval fundamentals",
+    "document": "Bi-encoders encode queries and documents separately. Document vectors can be precomputed, making candidate retrieval fast enough for interactive semantic search and RAG pipelines.",
+    "category": "retrieval",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC006",
+    "title": "Latency benchmarking for retrieval systems",
+    "document": "Measure document embedding time, index build time, query encoding time, candidate retrieval time, cross-encoder reranking time, and total search latency across multiple top-k settings.",
+    "category": "evaluation",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC007",
+    "title": "Recall at K for candidate retrieval",
+    "document": "Recall at K measures how many known relevant documents appear within the first K retrieved candidates. High candidate recall is important because the reranker cannot recover a relevant document that was never retrieved.",
+    "category": "evaluation",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC008",
+    "title": "MRR and nDCG for ranked search",
+    "document": "Mean Reciprocal Rank rewards systems that place the first relevant result early. nDCG uses graded relevance and discounts useful documents that appear lower in the ranked list.",
+    "category": "evaluation",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC009",
+    "title": "Manual error analysis for semantic search",
+    "document": "Review ambiguous queries, keyword-only matches, semantically similar but wrong results, domain mismatch, missing context, and cross-encoder overconfidence. Record both successful and failed examples.",
+    "category": "evaluation",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC010",
+    "title": "Responsible use of job matching models",
+    "document": "Automated job and resume matching can reflect bias and incomplete information. Model scores must not be the sole basis for hiring, rejection, compensation, immigration, or employment decisions.",
+    "category": "responsible-ai",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC011",
+    "title": "Machine learning engineer — information retrieval",
+    "document": "Role requires Python, PyTorch, sentence-transformers, semantic search, vector databases, evaluation with MRR and nDCG, API development, and production monitoring.",
+    "category": "job-search",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC012",
+    "title": "Data scientist — quality analytics",
+    "document": "Role focuses on complaint analytics, root-cause discovery, statistical analysis, dashboards, Python, SQL, machine learning, stakeholder communication, and corrective-action insights.",
+    "category": "job-search",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC013",
+    "title": "Applied AI engineer — RAG and reranking",
+    "document": "Build retrieval-augmented generation applications using embedding models, hybrid search, cross-encoder reranking, prompt evaluation, grounded answers, citations, and observability.",
+    "category": "job-search",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC014",
+    "title": "NLP engineer — multilingual search",
+    "document": "Develop multilingual semantic search, query understanding, transformer fine-tuning, hard-negative mining, ranking evaluation, and low-latency model serving.",
+    "category": "job-search",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC015",
+    "title": "Analytics engineer — manufacturing data",
+    "document": "Create tested data models for manufacturing operations using SQL, dbt, Python, data quality checks, lineage, documentation, and business-facing metrics.",
+    "category": "job-search",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC016",
+    "title": "Quality engineer — corrective action systems",
+    "document": "Investigate nonconformances, perform root-cause analysis, manage CAPA records, analyze supplier issues, verify corrective actions, and improve quality-system documentation.",
+    "category": "job-search",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC017",
+    "title": "Hybrid search with dense and keyword retrieval",
+    "document": "Hybrid search combines semantic embeddings with lexical methods such as BM25. Score fusion can improve coverage for part numbers, error codes, acronyms, and natural-language descriptions.",
+    "category": "retrieval",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC018",
+    "title": "Hard-negative mining for ranking models",
+    "document": "Hard negatives are plausible but nonrelevant documents retrieved by a strong first-stage model. They are useful for training ranking models to distinguish subtle relevance differences.",
+    "category": "training",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC019",
+    "title": "MS MARCO MiniLM cross-encoder",
+    "document": "The MS MARCO MiniLM reranker scores query-passage pairs jointly. It is commonly used as a compact second-stage reranker because it offers a practical quality and latency tradeoff.",
+    "category": "reranking",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC020",
+    "title": "MiniLM sentence embeddings",
+    "document": "The all-MiniLM-L6-v2 sentence-transformer maps sentences and short documents into a compact embedding space and is practical for CPU-based portfolio demonstrations.",
+    "category": "retrieval",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC021",
+    "title": "Search result monitoring and drift",
+    "document": "Monitor query mix, empty-result rate, click or relevance feedback, latency percentiles, index freshness, score distributions, and ranking quality to detect search-system drift.",
+    "category": "monitoring",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC022",
+    "title": "Knowledge-base search for corrective actions",
+    "document": "A searchable corrective-action knowledge base helps quality teams retrieve similar failures, containment plans, verified root causes, supplier actions, and effectiveness checks.",
+    "category": "quality-search",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC023",
+    "title": "RAG retrieval and citation grounding",
+    "document": "A RAG system retrieves relevant passages before generation. Candidate recall, reranking quality, source attribution, and citation correctness strongly affect answer groundedness.",
+    "category": "rag",
+    "source": "synthetic"
+  },
+  {
+    "document_id": "DOC024",
+    "title": "Deployment checklist for Hugging Face Spaces",
+    "document": "Keep app.py and requirements.txt at the Space root, load pretrained models lazily, avoid training at startup, use a small public-safe dataset, cache the index, and document resource limitations.",
+    "category": "deployment",
+    "source": "synthetic"
+  }
+]

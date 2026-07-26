@@ -8,6 +8,11 @@ venv/
 .env
 .DS_Store
 
+# Browser build artifacts
+web/node_modules/
+web/dist/
+web/.vite/
+
 # Generated model/index artifacts
 models/vector_index/*.npy
 models/vector_index/*.faiss

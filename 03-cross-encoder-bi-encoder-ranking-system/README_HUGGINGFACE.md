@@ -1,63 +1,56 @@
----
-title: DocRank360 Two Stage Search Ranking
-emoji: 🔎
-colorFrom: blue
-colorTo: green
-sdk: gradio
-python_version: "3.11"
-app_file: app.py
-pinned: false
-license: mit
-models:
-  - sentence-transformers/all-MiniLM-L6-v2
-  - cross-encoder/ms-marco-MiniLM-L-6-v2
-preload_from_hub:
-  - sentence-transformers/all-MiniLM-L6-v2
-  - cross-encoder/ms-marco-MiniLM-L-6-v2
-suggested_hardware: cpu-basic
----
+# Hugging Face Portfolio Structure
 
-# DocRank360 — Bi-Encoder Retrieval + Cross-Encoder Reranking
+Project 03 uses three Hugging Face-facing components.
 
-Enter a query, retrieve top candidates with MiniLM sentence embeddings, and
-rerank them with an MS MARCO MiniLM cross-encoder.
+## 1. Static Space
 
-## How to use
+Source:
 
-1. Enter a query or choose a sample.
-2. Select candidate K.
-3. Select rerank K.
-4. Choose bi-encoder-only or two-stage mode.
-5. Compare scores, rank movement, and latency.
+```text
+web/
+```
 
-## Models
+Build:
 
-- Bi-encoder: `sentence-transformers/all-MiniLM-L6-v2`
-- Cross-encoder: `cross-encoder/ms-marco-MiniLM-L-6-v2`
-- Vector search: normalized NumPy cosine similarity
+```bash
+cd web
+npm install
+npm run build
+```
 
-## Output
+Deploy:
 
-The demo shows candidate results, reranked results, bi-encoder scores,
-cross-encoder scores, rank movement, and measured stage latency.
+```bash
+python scripts/deploy_static_space.py
+```
 
-## Evaluation
+The Space runs real browser-based MiniLM retrieval and MS MARCO reranking.
 
-Run the repository evaluation script to calculate Recall@K, MRR@10, nDCG@10,
-reranking improvement, and latency. The interface does not display invented
-metrics.
+## 2. Pipeline model card repository
 
-## Responsible use
+Source:
 
-This educational demo can produce biased, incomplete, irrelevant, or misleading
-rankings. Do not upload private or confidential content. Do not use job-ranking
-scores as the sole basis for employment, immigration, legal, compensation, or
-hiring decisions.
+```text
+model_hub/pipeline-card/
+```
 
-## Limitations
+Publish:
 
-The committed dataset is a small public-safe synthetic sample. Cross-encoder
-scores are not probabilities, and results do not establish production
-performance or fairness.
+```bash
+python scripts/publish_pipeline_card.py
+```
 
-GitHub: `https://github.com/<YOUR_GITHUB_USERNAME>/transformer-projects`
+This repository documents the complete system and credits the original model
+owners. It does not claim that pretrained weights were newly trained.
+
+## 3. Future fine-tuned model repositories
+
+Templates:
+
+```text
+model_hub/bi-encoder-template/
+model_hub/cross-encoder-template/
+```
+
+Only publish those as personal model repositories after genuine fine-tuning or
+your own validated conversion.

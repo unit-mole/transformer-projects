@@ -21,7 +21,7 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
 
     steps:
       - name: Check out repository
@@ -36,23 +36,45 @@ jobs:
             03-cross-encoder-bi-encoder-ranking-system/requirements.txt
             03-cross-encoder-bi-encoder-ranking-system/requirements-dev.txt
 
-      - name: Install lightweight CI dependencies
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
+      - name: Install lightweight Python CI dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install \
-            numpy \
-            pandas \
-            scikit-learn \
-            pyyaml \
-            pytest \
-            gradio
+          pip install numpy pandas pyyaml pytest gradio
+
+      - name: Validate browser project structure
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: python scripts/validate_web_project.py
+
+      - name: Install browser dependencies
+        working-directory: ${{ env.PROJECT_DIR }}/web
+        run: npm install
+
+      - name: Check browser JavaScript
+        working-directory: ${{ env.PROJECT_DIR }}/web
+        run: npm run check
+
+      - name: Run browser metric tests
+        working-directory: ${{ env.PROJECT_DIR }}/web
+        run: npm test
+
+      - name: Build Hugging Face Static Space
+        working-directory: ${{ env.PROJECT_DIR }}/web
+        run: npm run build
+
+      - name: Validate deployable Static Space
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: python scripts/validate_dist.py
 
       - name: Compile Python files
         working-directory: ${{ env.PROJECT_DIR }}
-        run: |
-          python -m compileall app.py gradio_app.py src scripts tests
+        run: python -m compileall app.py gradio_app.py src scripts tests
 
-      - name: Validate imports without downloading models
+      - name: Validate Python application imports
         working-directory: ${{ env.PROJECT_DIR }}
         run: |
           python -c "import app; print('Gradio app import passed')"
@@ -60,30 +82,45 @@ jobs:
           python -c "from src.retrieval_pipeline import RetrievalPipeline; print('Retrieval import passed')"
           python -c "from src.reranking_pipeline import RerankingPipeline; print('Reranking import passed')"
 
-      - name: Run tests
+      - name: Run Python tests
         working-directory: ${{ env.PROJECT_DIR }}
         run: pytest -q
 
-  sync-to-hugging-face:
+  deploy-static-space:
     needs: test
     if: >-
       github.event_name == 'push' &&
       github.ref == 'refs/heads/main' &&
       vars.HF_SPACE_ID != ''
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    timeout-minutes: 20
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Sync project subdirectory to Hugging Face Space
-        uses: huggingface/hub-sync@v0.1.0
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
         with:
-          github_repo_id: ${{ github.repository }}
-          huggingface_repo_id: ${{ vars.HF_SPACE_ID }}
-          hf_token: ${{ secrets.HF_TOKEN }}
-          repo_type: space
-          space_sdk: gradio
-          subdirectory: 03-cross-encoder-bi-encoder-ranking-system
+          node-version: "22"
+
+      - name: Build Static Space
+        working-directory: ${{ env.PROJECT_DIR }}/web
+        run: |
+          npm install
+          npm run build
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install Hugging Face Hub client
+        run: pip install "huggingface_hub>=0.28,<2"
+
+      - name: Upload Vite build to Hugging Face Static Space
+        working-directory: ${{ env.PROJECT_DIR }}
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_SPACE_ID: ${{ vars.HF_SPACE_ID }}
+        run: python scripts/deploy_static_space.py

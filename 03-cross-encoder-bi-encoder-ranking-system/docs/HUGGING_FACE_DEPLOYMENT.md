@@ -1,90 +1,241 @@
-# Hugging Face Spaces Deployment Guide
+# Hugging Face Static Space Deployment Guide
 
+## Deployment architecture
 
-## Current hosting eligibility note
+Project 03 keeps the complete Python/Gradio implementation in GitHub and deploys
+a separate Vite frontend as a free Hugging Face Static Space.
 
-Hugging Face currently treats Static Spaces as free for everyone. Gradio and
-Docker Spaces use compute and generally require an eligible paid plan to create;
-free personal accounts in good standing may host a limited number of Gradio
-Spaces using the platform's ZeroGPU exception. CPU Basic has no hourly hardware
-charge, but account eligibility for creating a compute-backed Space still
-applies.
+```text
+GitHub project
+├── Python implementation
+├── Gradio local app
+├── evaluation and tests
+└── web/ Vite application
+        ↓ npm run build
+    web/dist/
+        ↓ upload
+Hugging Face Static Space
+```
 
-This repository remains Gradio-ready as requested. Check the current Spaces
-Overview before deployment. When a compute-backed Space is unavailable, keep
-the GitHub project complete and use a Static Space or browser-inference version
-as a separate deployment fallback.
+The Static Space performs real Transformer inference in the browser with:
 
-## Option A — Manual upload
+```text
+Xenova/all-MiniLM-L6-v2
+Xenova/ms-marco-MiniLM-L-6-v2
+Transformers.js
+ONNX Runtime Web
+```
 
-1. Sign in to Hugging Face.
-2. Create a new Space.
-3. Choose a public Space and select **Gradio** as the SDK.
-4. Use a name such as `cross-encoder-bi-encoder-ranking`.
-5. Copy the contents of `03-cross-encoder-bi-encoder-ranking-system/` to the
-   root of the Space repository.
-6. Confirm these root files exist:
-   - `README.md`
-   - `app.py`
-   - `gradio_app.py`
-   - `requirements.txt`
-   - `config.yaml`
-   - `src/`
-   - `data/`
-7. Commit the files.
-8. Wait for dependency installation and model download.
-9. Run a sample query.
-10. Copy the final Space URL into both GitHub README files.
+## Create the Space
 
-The models are downloaded from the Hub. The Space does not train a model. When a
-saved compatible index is absent, it creates only the 24-document NumPy sample
-index.
+Use:
 
-## Option B — GitHub Actions sync
+| Field | Value |
+|---|---|
+| Owner | `anmol-unitmole` |
+| Space name | `cross-encoder-bi-encoder-ranking` |
+| Short description | `Browser-based MiniLM retrieval and MS MARCO reranking with Transformers.js.` |
+| License | MIT |
+| SDK | Static |
+| Template | Blank |
+| Visibility | Public |
 
-The included workflow can sync only this project subdirectory to a Space.
+The project already contains a complete Vite application, so the Blank template
+is appropriate.
 
-Configure:
+## Space metadata
 
-- GitHub Actions secret: `HF_TOKEN`
-- GitHub Actions repository variable: `HF_SPACE_ID`
-  - Example: `your-username/cross-encoder-bi-encoder-ranking`
+The metadata source is:
 
-Push to `main`. The CI runs first; the sync job runs only when `HF_SPACE_ID` is
-configured.
+```text
+web/public/README.md
+```
 
-Use a fine-grained Hugging Face token with write permission only to the target
-Space.
+Vite copies it to:
 
-## Large files
+```text
+web/dist/README.md
+```
 
-Do not commit large model weights. Load pretrained models from the Hub.
+It contains:
 
-For a larger saved index:
+```yaml
+sdk: static
+app_file: index.html
+```
 
-- track large files with Git LFS;
-- keep document metadata aligned with index IDs;
-- document the source dataset and license;
-- never upload private or proprietary documents;
-- consider a dedicated dataset or model repository for versioned artifacts.
+Do not use `sdk: gradio` for the live Space.
+
+## Local browser testing
+
+```bash
+cd web
+npm install
+npm run check
+npm test
+npm run dev
+```
+
+Production verification:
+
+```bash
+npm run build
+npm run preview
+```
+
+Then, from the project root:
+
+```bash
+python scripts/validate_dist.py
+```
+
+## Automatic GitHub deployment
+
+Create the following in:
+
+```text
+GitHub repository
+→ Settings
+→ Secrets and variables
+→ Actions
+```
+
+### Secret
+
+```text
+HF_TOKEN
+```
+
+Use a fine-grained token with write access to the target Space.
+
+### Repository variable
+
+```text
+HF_SPACE_ID
+```
+
+Example:
+
+```text
+anmol-unitmole/cross-encoder-bi-encoder-ranking
+```
+
+The dedicated workflow:
+
+```text
+.github/workflows/03-cross-encoder-bi-encoder-ranking-system.yml
+```
+
+performs:
+
+1. browser project validation;
+2. JavaScript syntax checks;
+3. browser metric tests;
+4. Vite production build;
+5. built-Space validation;
+6. Python compilation;
+7. Gradio import validation;
+8. Python unit tests;
+9. upload of `web/dist/` to the Static Space.
+
+## Manual deployment
+
+Build:
+
+```bash
+cd web
+npm install
+npm run build
+cd ..
+```
+
+Set environment variables.
+
+Windows PowerShell:
+
+```powershell
+$env:HF_TOKEN="<YOUR_TOKEN>"
+$env:HF_SPACE_ID="anmol-unitmole/cross-encoder-bi-encoder-ranking"
+```
+
+macOS/Linux:
+
+```bash
+export HF_TOKEN="<YOUR_TOKEN>"
+export HF_SPACE_ID="anmol-unitmole/cross-encoder-bi-encoder-ranking"
+```
+
+Deploy:
+
+```bash
+python -m pip install huggingface_hub
+python scripts/deploy_static_space.py
+```
+
+The script creates or updates the target as a Static Space and uploads only the
+contents of `web/dist/`.
+
+## First-run model behavior
+
+Each visitor's browser downloads quantized model assets from Hugging Face.
+
+The first search includes:
+
+- model download;
+- tokenizer loading;
+- ONNX initialization;
+- document embedding;
+- query embedding;
+- retrieval;
+- optional reranking.
+
+Browser caching makes later searches faster.
 
 ## Troubleshooting
 
-### Space is slow on first request
+### Sync job is skipped
 
-The first request may download and initialize both models. Subsequent requests
-reuse the process cache.
+Verify that the GitHub repository variable exists:
 
-### Out-of-memory condition
+```text
+HF_SPACE_ID
+```
 
-Reduce candidate K, use a smaller reranker such as
-`cross-encoder/ms-marco-TinyBERT-L-2-v2`, or prebuild the index.
+### Authentication failure
 
-### Model download failure
+Verify:
 
-Check Space logs, verify model IDs, and confirm outbound network availability.
+- `HF_TOKEN` is stored under Actions Secrets;
+- the token has write permission;
+- the target Space ID is correct;
+- the token owner can write to the Space.
 
-### Gradio build failure
+### Space opens but model loading fails
 
-Confirm that `app.py` is at the root and imports `build_demo` from
-`gradio_app.py`. Avoid moving `src/`, `data/`, or `config.yaml`.
+Possible causes:
+
+- company network blocks model assets;
+- WebAssembly is disabled;
+- browser cache is corrupted;
+- old browser version;
+- interrupted first download.
+
+Use a current Chrome, Edge, or Firefox browser and reload.
+
+### Low-memory device
+
+Use bi-encoder-only mode. This avoids loading the cross-encoder.
+
+### Build does not include README metadata
+
+Confirm this exists before building:
+
+```text
+web/public/README.md
+```
+
+Then delete `web/dist/` and rerun:
+
+```bash
+npm run build
+```

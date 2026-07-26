@@ -1,49 +1,97 @@
-# Changes From the Attached DocRank360 Notebook
+# Changes From the Original DocRank360 Notebook
 
-The attached notebook was carefully used as the base concept. Its strongest
-elements were retained:
+## Original foundation retained
 
-- synthetic-first runnable corpus;
-- `all-MiniLM-L6-v2` bi-encoder;
-- `ms-marco-MiniLM-L-6-v2` cross-encoder;
-- two-stage retrieval concept;
-- fallback-aware thinking;
-- latency measurement;
-- exportable analysis;
-- connection to quality analytics.
+The attached notebook established:
 
-## Productionization changes
+- MiniLM sentence embeddings;
+- semantic retrieval;
+- MS MARCO cross-encoder reranking;
+- ranking latency analysis;
+- quality-analytics positioning;
+- synthetic-first demonstration data.
 
-| Original notebook | Portfolio-ready project |
-|---|---|
-| One 124-cell notebook | Modular `src/`, `scripts/`, `tests/`, and two focused notebooks |
-| Streamlit application | Gradio application for Hugging Face Spaces |
-| Synthetic plus SQuAD QA corpus | Explicit query-document-qrels ranking sample |
-| Hit@K and MRR | Recall@K, MRR@10, graded nDCG@10, and improvement deltas |
-| One combined search latency | Query embedding, retrieval, reranking, total, median, and p95 |
-| Weighted `0.35 × bi + 0.65 × cross` final score | Cross-encoder-only ordering within reranked candidates |
-| ASCII-only cleanup | Unicode-preserving NFKC cleanup |
-| Lexical fallback could look like the final model | Tests use deterministic fakes; public metrics remain `not_run` until real models execute |
-| Streamlit code embedded as a long string | Maintainable `app.py` and `gradio_app.py` |
-| Optional public dataset fetched in notebook | Safe committed sample; external benchmark instructions documented |
-| Limited rank-change visibility | Retrieval rank, reranked rank, movement, and reranked flag |
-| No repository CI | Lightweight pytest and import validation workflow |
-| No Space card | Hugging Face YAML metadata and deployment guide |
-| No formal model card | Intended use, prohibited use, risks, data, metrics, and deployment details |
+The original notebook remains under:
 
-## Why the weighted score was removed
+```text
+notebooks/original_docrank360_notebook.ipynb
+```
 
-A weighted combination can be useful after score calibration and validation, but
-the original bi-encoder cosine scores and cross-encoder logits are on different
-scales. Combining them with fixed weights can be misleading. This project uses
-the bi-encoder strictly for candidate generation and the cross-encoder strictly
-for reranking, which matches the stated two-stage architecture.
+## Python productionization
 
-## Original artifact
+The notebook was converted into:
 
-The uploaded notebook is retained as:
+- modular `src/` components;
+- reusable preprocessing;
+- query, document and qrels loaders;
+- NumPy cosine index;
+- candidate retrieval pipeline;
+- cross-encoder reranking pipeline;
+- two-stage ranking engine;
+- Recall@K, MRR@10 and nDCG@10;
+- latency benchmarking;
+- Gradio local application;
+- tests;
+- Docker;
+- GitHub Actions;
+- model card;
+- manual error-analysis framework.
 
-`notebooks/original_docrank360_notebook.ipynb`
+## Browser deployment layer
 
-This preserves the starting point while keeping the deployable application
-separate and maintainable.
+A separate Vite project now exists under:
+
+```text
+web/
+```
+
+It adds:
+
+- Transformers.js;
+- ONNX Runtime Web;
+- q8 browser models;
+- model-loading progress;
+- real browser document embeddings;
+- cosine retrieval;
+- browser cross-encoder scoring;
+- live sample-query metrics;
+- downloadable JSON;
+- free Hugging Face Static Space deployment.
+
+## Model Hub layer
+
+The repository now includes:
+
+```text
+model_hub/pipeline-card/
+```
+
+This provides transparent system documentation without claiming ownership of
+the base model weights.
+
+Fine-tuned model-card templates are included but must not be published as
+trained models until genuine fine-tuning or conversion has occurred.
+
+## Important technical correction
+
+The original weighted score:
+
+```text
+0.35 × bi-encoder score + 0.65 × cross-encoder score
+```
+
+was removed from the primary ranking pipeline. The two model outputs are on
+different scales. The final system uses:
+
+```text
+bi-encoder → candidate generation
+cross-encoder → candidate reranking
+```
+
+This is clearer and technically aligned with the stated two-stage architecture.
+
+## Text processing correction
+
+ASCII-only cleanup was replaced with Unicode-preserving NFKC normalization.
+This prevents unnecessary damage to multilingual names, symbols and domain
+terms.

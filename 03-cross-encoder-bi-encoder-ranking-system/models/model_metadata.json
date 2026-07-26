@@ -19,5 +19,22 @@
   ],
   "dataset": "public-safe synthetic quality analytics and job-search sample",
   "evaluation_status": "not_run",
-  "responsible_use": "Educational portfolio demonstration only. Do not use ranking scores as the sole basis for hiring, legal, immigration, compensation, or employment decisions."
+  "responsible_use": "Educational portfolio demonstration only. Do not use ranking scores as the sole basis for hiring, legal, immigration, compensation, or employment decisions.",
+  "primary_deployment": "Hugging Face Static Space",
+  "space_sdk": "static",
+  "space_app_file": "index.html",
+  "browser_runtime": "Transformers.js 3.8.1 + ONNX Runtime Web",
+  "browser_bi_encoder_model": "Xenova/all-MiniLM-L6-v2",
+  "browser_cross_encoder_model": "Xenova/ms-marco-MiniLM-L-6-v2",
+  "browser_dtype": "q8",
+  "paid_compute_required": false,
+  "gradio_status": "retained at project root for local Python demonstration",
+  "portfolio_structure": {
+    "github": "complete Python ML project with Gradio comparison app",
+    "model_hub": "pipeline card and evaluation documentation",
+    "static_space": "Vite + Transformers.js browser demo"
+  },
+  "static_source_directory": "web",
+  "static_build_directory": "web/dist",
+  "training_status": "pretrained models used without new fine-tuning"
 }

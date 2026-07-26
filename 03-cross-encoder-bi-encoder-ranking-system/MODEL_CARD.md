@@ -1,43 +1,57 @@
-# Model Card — DocRank360 Ranking Pipeline
+# Model Card — DocRank360 Two-Stage Ranking Pipeline
 
-## Model details
+## System summary
 
-| Component | Model |
-|---|---|
-| Bi-encoder | `sentence-transformers/all-MiniLM-L6-v2` |
-| Cross-encoder | `cross-encoder/ms-marco-MiniLM-L-6-v2` |
-| Index | Normalized NumPy embedding matrix |
-| Similarity | Cosine similarity |
-| Task | Candidate retrieval and query-document reranking |
+DocRank360 is a two-stage information-retrieval system.
 
-This repository does not redistribute the pretrained weights. It downloads the
-models from their Hugging Face repositories.
+| Stage | Python model | Browser model |
+|---|---|---|
+| Candidate retrieval | `sentence-transformers/all-MiniLM-L6-v2` | `Xenova/all-MiniLM-L6-v2` |
+| Candidate reranking | `cross-encoder/ms-marco-MiniLM-L-6-v2` | `Xenova/ms-marco-MiniLM-L-6-v2` |
 
-## Intended use
+## Portfolio contribution
 
-- educational demonstration of two-stage ranking;
-- semantic search over a small public-safe corpus;
-- learning retrieval metrics and latency tradeoffs;
-- portfolio demonstration of Sentence Transformers and Gradio;
-- prototyping quality-case, knowledge-base, and RAG retrieval workflows.
+This project contributes:
 
-## Not intended use
+- modular Python retrieval and reranking code;
+- preprocessing and dataset validation;
+- NumPy vector indexing;
+- ranking metrics;
+- latency benchmarking;
+- Gradio comparison application;
+- Vite browser application;
+- Transformers.js inference;
+- Static Space deployment;
+- tests and CI;
+- pipeline documentation and responsible-use controls.
 
-- final hiring, rejection, promotion, compensation, immigration, or legal decisions;
-- ranking people without appropriate governance and human review;
-- factual verification;
-- confidential or personally identifiable data in a public Space;
-- production deployment without domain evaluation, security review, monitoring,
-  fairness analysis, and data-governance controls.
+## Training status
+
+- New bi-encoder fine-tuning: **No**
+- New cross-encoder fine-tuning: **No**
+- New browser conversion by this project: **No**
+- Original and converted base models are credited above.
+
+The project must not be presented as having trained those pretrained weights.
+
+## Task
+
+- semantic candidate retrieval;
+- query-document relevance scoring;
+- cross-encoder reranking;
+- ranking evaluation;
+- browser and Python latency analysis.
 
 ## Data
 
-The committed sample contains 24 synthetic documents, 12 synthetic queries, and
-36 graded qrels. Topics include quality analytics, information retrieval, RAG,
-evaluation, deployment, and fictional job descriptions.
+The public sample includes:
 
-The project can be adapted to MS MARCO or another licensed query-document
-ranking dataset. Large or restricted datasets should not be committed.
+- 24 synthetic documents;
+- 12 synthetic queries;
+- 36 graded qrels;
+- quality analytics, information retrieval, RAG and fictional job-search topics.
+
+No private company data or personal resumes are included.
 
 ## Preprocessing
 
@@ -45,65 +59,90 @@ ranking dataset. Large or restricted datasets should not be committed.
 - Unicode NFKC normalization;
 - HTML tag removal;
 - whitespace normalization;
-- missing and duplicate removal;
+- minimum-length validation;
+- duplicate removal;
 - title-document concatenation;
-- relevance values restricted to 0–3.
+- graded relevance validation.
 
-The same cleaning functions are used during indexing and inference.
+## Python inference
 
-## Training
+The Python implementation:
 
-No training or fine-tuning is performed by this project. It uses pretrained
-models. Future versions can fine-tune the bi-encoder with hard negatives or
-train a domain reranker.
+1. embeds documents with Sentence Transformers;
+2. normalizes embeddings;
+3. retrieves top candidates with cosine similarity;
+4. scores query-document pairs with CrossEncoder;
+5. reranks by cross-encoder score.
+
+## Browser inference
+
+The Static Space:
+
+1. downloads q8 ONNX models;
+2. generates document embeddings in browser memory;
+3. embeds the query;
+4. performs cosine retrieval;
+5. tokenizes query-document pairs;
+6. applies the sequence-classification reranker;
+7. displays rank movement and metrics.
 
 ## Evaluation
 
-Required outputs:
+Required metrics:
 
-- Recall@5 and Recall@10;
-- bi-encoder and reranked MRR@10;
-- bi-encoder and reranked nDCG@10;
-- MRR and nDCG improvement;
-- query embedding, retrieval, reranking, and total latency;
-- query-level ranking examples;
-- manual relevance and failure analysis.
+- Recall@5;
+- Recall@10;
+- bi-encoder MRR@10;
+- reranked MRR@10;
+- bi-encoder nDCG@10;
+- reranked nDCG@10;
+- MRR improvement;
+- nDCG improvement;
+- query embedding latency;
+- candidate retrieval latency;
+- cross-encoder reranking latency;
+- total latency.
 
-Committed placeholders contain `status: not_run`; run
-`python scripts/evaluate_model.py` to generate actual values.
+No placeholder value should be presented as a measured result.
+
+## Intended use
+
+- educational information-retrieval demonstration;
+- portfolio review;
+- semantic search over public-safe text;
+- learning two-stage ranking;
+- prototyping quality case and knowledge-base retrieval.
+
+## Not intended use
+
+- sole-basis hiring or rejection decisions;
+- immigration, legal, compensation or promotion decisions;
+- factual verification;
+- confidential or personally identifiable text in a public Space;
+- production use without security, monitoring, fairness and domain evaluation.
 
 ## Risks and limitations
 
-- small synthetic data does not represent production traffic;
-- lexical entities, part numbers, and rare terms may benefit from hybrid search;
-- the bi-encoder can miss relevant candidates;
-- the cross-encoder can be overconfident or reorder results incorrectly;
+- small synthetic data does not establish production performance;
+- bi-encoder candidate misses cannot be repaired by reranking;
+- cross-encoder reranking can introduce regressions;
 - scores are not calibrated probabilities;
-- pretrained data can encode social and occupational bias;
-- CPU cold start includes model download and loading;
-- rankings must be reviewed by a human in consequential settings.
+- browser speed varies by device;
+- first load requires model downloads;
+- lexical part numbers and codes may need hybrid search;
+- pretrained models may contain occupational and language bias.
 
-## Inference example
+## Responsible use
 
-```python
-from src.ranking_engine import TwoStageRankingEngine
-from src.settings import Settings
-
-engine = TwoStageRankingEngine.from_settings(Settings.from_yaml())
-response = engine.search(
-    "How can I find similar quality complaints?",
-    candidate_k=10,
-    rerank_k=5,
-)
-print(response.reranked_results)
-```
+Human review is required for consequential decisions. Do not upload private,
+confidential, copyrighted, proprietary or personally identifiable text to the
+public demo.
 
 ## Deployment
 
-- Platform: Hugging Face Spaces
-- SDK: Gradio
-- Entry point: `app.py`
-- Hardware target: CPU
-- Training at startup: no
-- Full-scale indexing at startup: no
-- Small sample index fallback: yes
+| Surface | Implementation |
+|---|---|
+| GitHub | Complete Python project |
+| Hugging Face Model Hub | Pipeline card and evaluation documentation |
+| Hugging Face Static Space | Vite + Transformers.js browser demo |
+| Local comparison | Gradio |

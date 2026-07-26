@@ -1,30 +1,46 @@
 # Validation Report
 
-## Completed checks
+## Completed locally
 
-- Python source compilation: **passed**
-- Gradio application import: **passed**
-- Dataset loading: **passed**
-- Documents loaded: **24**
-- Queries loaded: **12**
-- Graded qrels loaded: **36**
-- Pytest suite: **7 passed**
-- Tests download pretrained models: **no**
-- Application trains a model at startup: **no**
+- Browser project structure: passed
+- Static Space metadata: passed
+- Browser documents: 24
+- Browser queries: 12
+- Browser qrels: 36
+- JavaScript syntax checks: passed
+- Browser metric tests: 3 passed
+- Python source compilation: passed
+- Gradio application import: passed
+- Python tests: 7 passed
+- Python tests download Transformer models: no
+- Model training during app startup: no
 
-## Deliberately not claimed
+## Production Vite build
 
-The execution environment used to build this downloadable bundle did not have
-the `sentence-transformers` package or internet model access. Therefore, the
-actual MiniLM bi-encoder and MS MARCO cross-encoder were not executed here.
+The build environment used to generate this downloadable bundle did not provide
+package-registry access, so `npm install` and the final Vite build could not be
+executed here.
 
-The evaluation JSON files correctly remain marked `status: not_run`. Install
-`requirements.txt` and run:
+The GitHub workflow performs:
 
 ```bash
-python scripts/build_index.py
-python scripts/evaluate_model.py
-python scripts/benchmark_latency.py
+npm install
+npm run check
+npm test
+npm run build
+python scripts/validate_dist.py
 ```
 
-Only those measured results should be displayed in the GitHub README or demo.
+Run the same commands locally after extracting the files.
+
+## Transformer execution
+
+Actual Python MiniLM inference requires installing `requirements.txt` and
+downloading the models.
+
+Actual browser inference requires opening the Vite application with internet
+access so Transformers.js can download the q8 ONNX model assets.
+
+No model metric has been invented. Offline output files remain `status:
+not_run` until the evaluation scripts are executed. Browser metrics are
+calculated live only for labelled sample queries.

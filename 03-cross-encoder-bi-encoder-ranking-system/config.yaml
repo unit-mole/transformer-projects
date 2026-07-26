@@ -6,6 +6,8 @@ project:
 models:
   bi_encoder: "sentence-transformers/all-MiniLM-L6-v2"
   cross_encoder: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  browser_bi_encoder: "Xenova/all-MiniLM-L6-v2"
+  browser_cross_encoder: "Xenova/ms-marco-MiniLM-L-6-v2"
   device: "cpu"
 
 retrieval:
@@ -24,8 +26,22 @@ data:
   minimum_document_characters: 20
 
 deployment:
-  platform: "Hugging Face Spaces"
-  sdk: "gradio"
-  app_file: "app.py"
-  train_on_startup: false
-  build_full_index_on_startup: false
+  github:
+    purpose: "Complete Python ML engineering project"
+  model_hub:
+    purpose: "Pipeline model card, configuration, evaluation and limitations"
+    default_repository: "anmol-unitmole/docrank360-ranking-pipeline-card"
+    contains_trained_weights: false
+  static_space:
+    platform: "Hugging Face Static Spaces"
+    sdk: "static"
+    app_file: "index.html"
+    source_directory: "web"
+    build_directory: "web/dist"
+    inference_runtime: "Transformers.js + ONNX Runtime Web"
+    dtype: "q8"
+    paid_compute_required: false
+  gradio:
+    purpose: "Local Python comparison and optional compute-backed deployment"
+    app_file: "app.py"
+    primary_deployment: false

@@ -1,0 +1,17 @@
+{
+  "status": "not_run",
+  "message": "Generate actual values with scripts/evaluate_model.py and scripts/benchmark_latency.py before publishing results.",
+  "metrics": {
+    "recall_at_5": null,
+    "recall_at_10": null,
+    "bi_encoder_mrr_at_10": null,
+    "reranked_mrr_at_10": null,
+    "bi_encoder_ndcg_at_10": null,
+    "reranked_ndcg_at_10": null,
+    "mrr_improvement": null,
+    "ndcg_improvement": null,
+    "average_retrieval_ms": null,
+    "average_reranking_ms": null,
+    "average_total_search_ms": null
+  }
+}

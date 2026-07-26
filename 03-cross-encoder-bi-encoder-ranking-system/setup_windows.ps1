@@ -1,17 +1,19 @@
 $ErrorActionPreference = "Stop"
 
-Write-Host "Creating virtual environment..."
+Write-Host "Creating Python environment..."
 python -m venv .venv
-
-Write-Host "Activating virtual environment..."
 & .\.venv\Scripts\Activate.ps1
 
-Write-Host "Upgrading pip..."
+Write-Host "Installing Python dependencies..."
 python -m pip install --upgrade pip
-
-Write-Host "Installing project dependencies..."
 pip install -r requirements.txt
+
+Write-Host "Installing browser dependencies..."
+Push-Location web
+npm install
+Pop-Location
 
 Write-Host ""
 Write-Host "Setup complete."
-Write-Host "Run the app with: python app.py"
+Write-Host "Python Gradio demo: python app.py"
+Write-Host "Static browser demo: cd web; npm run dev"

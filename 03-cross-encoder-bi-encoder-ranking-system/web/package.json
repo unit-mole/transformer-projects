@@ -1,0 +1,20 @@
+{
+  "name": "docrank360-static-space",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Browser-based MiniLM retrieval and MS MARCO cross-encoder reranking.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "check": "node --check src/constants.js && node --check src/data-loader.js && node --check src/metrics.js && node --check src/export-results.js && node --check src/ranking-engine.js && node --check src/ui.js && node --check src/main.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "3.8.1"
+  },
+  "devDependencies": {
+    "vite": "7.0.6"
+  }
+}

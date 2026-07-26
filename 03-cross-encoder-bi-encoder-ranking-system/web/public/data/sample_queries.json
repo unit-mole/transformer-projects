@@ -1,0 +1,74 @@
+[
+  {
+    "query_id": "Q001",
+    "query": "How can I find similar quality complaints and corrective actions?",
+    "split": "test",
+    "domain": "quality-search"
+  },
+  {
+    "query_id": "Q002",
+    "query": "Why are bi-encoders fast for semantic retrieval?",
+    "split": "test",
+    "domain": "retrieval"
+  },
+  {
+    "query_id": "Q003",
+    "query": "How does a cross-encoder improve ranking?",
+    "split": "test",
+    "domain": "reranking"
+  },
+  {
+    "query_id": "Q004",
+    "query": "Which metrics should I use for ranked search evaluation?",
+    "split": "test",
+    "domain": "evaluation"
+  },
+  {
+    "query_id": "Q005",
+    "query": "How should retrieval and reranking latency be measured?",
+    "split": "test",
+    "domain": "evaluation"
+  },
+  {
+    "query_id": "Q006",
+    "query": "Find a role focused on RAG, embeddings, and reranking.",
+    "split": "test",
+    "domain": "job-search"
+  },
+  {
+    "query_id": "Q007",
+    "query": "Find a quality data scientist role using complaints, Python, and SQL.",
+    "split": "test",
+    "domain": "job-search"
+  },
+  {
+    "query_id": "Q008",
+    "query": "What is a lightweight alternative to FAISS for a small demo?",
+    "split": "validation",
+    "domain": "vector-search"
+  },
+  {
+    "query_id": "Q009",
+    "query": "How can hybrid search handle part numbers and error codes?",
+    "split": "validation",
+    "domain": "retrieval"
+  },
+  {
+    "query_id": "Q010",
+    "query": "What should be monitored after deploying a search system?",
+    "split": "validation",
+    "domain": "monitoring"
+  },
+  {
+    "query_id": "Q011",
+    "query": "What are the risks of using ranking scores for hiring?",
+    "split": "validation",
+    "domain": "responsible-ai"
+  },
+  {
+    "query_id": "Q012",
+    "query": "How does retrieval quality affect a RAG assistant?",
+    "split": "validation",
+    "domain": "rag"
+  }
+]

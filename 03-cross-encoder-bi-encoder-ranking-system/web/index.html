@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="A free Hugging Face Static Space demonstrating MiniLM bi-encoder retrieval and MS MARCO cross-encoder reranking entirely in the browser."
+  />
+  <title>DocRank360 — Two-Stage Transformer Search</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://huggingface.co" />
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__glow hero__glow--one" aria-hidden="true"></div>
+    <div class="hero__glow hero__glow--two" aria-hidden="true"></div>
+
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="DocRank360 home">
+        <span class="brand__mark">D3</span>
+        <span>
+          <strong>DocRank360</strong>
+          <small>Static Transformer Search</small>
+        </span>
+      </a>
+      <div class="nav__links">
+        <a href="#demo">Demo</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#evaluation">Evaluation</a>
+        <a href="#responsible-use">Responsible use</a>
+      </div>
+    </nav>
+
+    <section id="top" class="hero__content container">
+      <div class="eyebrow">
+        <span class="status-dot"></span>
+        100% browser-side inference · No paid compute
+      </div>
+      <h1>Fast retrieval.<br /><span>Precise reranking.</span></h1>
+      <p class="hero__lead">
+        A two-stage Transformer ranking system using a MiniLM bi-encoder for
+        semantic candidate retrieval and an MS MARCO MiniLM cross-encoder for
+        query-document reranking.
+      </p>
+
+      <div class="hero__actions">
+        <a class="button button--primary" href="#demo">Open interactive demo</a>
+        <a
+          class="button button--secondary"
+          href="https://github.com/unit-mole/transformer-projects"
+          target="_blank"
+          rel="noreferrer"
+        >
+          View GitHub repository
+        </a>
+      </div>
+
+      <div class="model-strip" aria-label="Model and deployment summary">
+        <div>
+          <span>Stage 1</span>
+          <strong>MiniLM bi-encoder</strong>
+        </div>
+        <div>
+          <span>Stage 2</span>
+          <strong>MS MARCO reranker</strong>
+        </div>
+        <div>
+          <span>Runtime</span>
+          <strong>Transformers.js + ONNX</strong>
+        </div>
+        <div>
+          <span>Hosting</span>
+          <strong>Hugging Face Static Space</strong>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section id="demo" class="section container">
+      <div class="section-heading">
+        <div>
+          <span class="kicker">Interactive search laboratory</span>
+          <h2>Compare retrieval and reranking</h2>
+        </div>
+        <div id="runtimeBadge" class="runtime-badge runtime-badge--idle">
+          <span class="runtime-badge__dot"></span>
+          <span id="runtimeBadgeText">Models not loaded</span>
+        </div>
+      </div>
+
+      <div class="notice notice--info">
+        <strong>First-run download:</strong>
+        the browser downloads quantized ONNX model files from Hugging Face.
+        This can take a minute depending on your connection. Files are cached
+        by the browser for faster later searches.
+      </div>
+
+      <div class="demo-grid">
+        <form id="searchForm" class="panel panel--controls">
+          <div class="panel__header">
+            <span class="step">01</span>
+            <div>
+              <h3>Configure the search</h3>
+              <p>Select a labelled example or enter your own query.</p>
+            </div>
+          </div>
+
+          <label class="field">
+            <span>Sample query</span>
+            <select id="sampleQuery" aria-label="Sample query"></select>
+          </label>
+
+          <label class="field">
+            <span>Custom query <small>optional</small></span>
+            <textarea
+              id="customQuery"
+              rows="4"
+              maxlength="500"
+              placeholder="Example: How can I retrieve similar quality complaints and corrective actions?"
+            ></textarea>
+          </label>
+
+          <div class="slider-grid">
+            <label class="field">
+              <span>Candidate K: <output id="candidateKOutput">10</output></span>
+              <input
+                id="candidateK"
+                type="range"
+                min="3"
+                max="20"
+                value="10"
+                step="1"
+              />
+            </label>
+
+            <label class="field">
+              <span>Rerank K: <output id="rerankKOutput">5</output></span>
+              <input
+                id="rerankK"
+                type="range"
+                min="1"
+                max="10"
+                value="5"
+                step="1"
+              />
+            </label>
+          </div>
+
+          <fieldset class="mode-selector">
+            <legend>Search mode</legend>
+            <label>
+              <input
+                type="radio"
+                name="searchMode"
+                value="two-stage"
+                checked
+              />
+              <span>
+                <strong>Two-stage ranking</strong>
+                <small>Retrieve candidates, then rerank them.</small>
+              </span>
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="searchMode"
+                value="retrieval-only"
+              />
+              <span>
+                <strong>Bi-encoder only</strong>
+                <small>Show the fast retrieval stage alone.</small>
+              </span>
+            </label>
+          </fieldset>
+
+          <button id="searchButton" class="button button--primary button--full" type="submit">
+            <span id="searchButtonText">Run two-stage search</span>
+          </button>
+
+          <div id="progressArea" class="progress-area" hidden>
+            <div class="progress-area__top">
+              <span id="progressLabel">Preparing models…</span>
+              <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-track">
+              <div id="progressBar" class="progress-bar"></div>
+            </div>
+          </div>
+
+          <p id="errorMessage" class="error-message" role="alert" hidden></p>
+        </form>
+
+        <aside class="panel panel--system">
+          <div class="panel__header">
+            <span class="step">02</span>
+            <div>
+              <h3>System overview</h3>
+              <p>What runs inside your browser.</p>
+            </div>
+          </div>
+
+          <ol class="pipeline">
+            <li>
+              <span>1</span>
+              <div>
+                <strong>Query embedding</strong>
+                <small>Xenova/all-MiniLM-L6-v2 · q8</small>
+              </div>
+            </li>
+            <li>
+              <span>2</span>
+              <div>
+                <strong>Cosine candidate retrieval</strong>
+                <small>Normalized document embeddings</small>
+              </div>
+            </li>
+            <li>
+              <span>3</span>
+              <div>
+                <strong>Pairwise reranking</strong>
+                <small>Xenova/ms-marco-MiniLM-L-6-v2 · q8</small>
+              </div>
+            </li>
+            <li>
+              <span>4</span>
+              <div>
+                <strong>Ranking analysis</strong>
+                <small>Rank movement, MRR, nDCG, latency</small>
+              </div>
+            </li>
+          </ol>
+
+          <div class="system-note">
+            <strong>No backend server</strong>
+            <p>
+              Static Spaces serve HTML, CSS, and JavaScript. Transformer
+              inference runs locally through ONNX Runtime Web.
+            </p>
+          </div>
+        </aside>
+      </div>
+
+      <section id="resultsSection" class="results" hidden>
+        <div class="results__header">
+          <div>
+            <span class="kicker">Executed query</span>
+            <h3 id="executedQuery"></h3>
+          </div>
+          <button id="exportButton" class="button button--secondary button--small" type="button">
+            Export results JSON
+          </button>
+        </div>
+
+        <div class="metric-grid" id="latencyMetrics" aria-label="Latency metrics"></div>
+
+        <div id="qualityMetricsWrapper">
+          <div class="subheading">
+            <div>
+              <span class="kicker">Labelled sample evaluation</span>
+              <h3>Query-level ranking quality</h3>
+            </div>
+            <p id="qualityMetricNote"></p>
+          </div>
+          <div class="metric-grid metric-grid--quality" id="qualityMetrics"></div>
+        </div>
+
+        <div class="comparison-grid">
+          <article class="panel result-panel">
+            <div class="result-panel__header">
+              <div>
+                <span class="stage-label">Stage 1</span>
+                <h3>Bi-encoder candidates</h3>
+              </div>
+              <span class="tradeoff-tag tradeoff-tag--speed">Fast</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Document</th>
+                    <th>Category</th>
+                    <th>Cosine score</th>
+                  </tr>
+                </thead>
+                <tbody id="retrievalTableBody"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article id="rerankingPanel" class="panel result-panel">
+            <div class="result-panel__header">
+              <div>
+                <span class="stage-label">Stage 2</span>
+                <h3>Cross-encoder reranking</h3>
+              </div>
+              <span class="tradeoff-tag tradeoff-tag--quality">Precise</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Final</th>
+                    <th>Move</th>
+                    <th>Document</th>
+                    <th>Cross score</th>
+                  </tr>
+                </thead>
+                <tbody id="rerankingTableBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+
+        <div id="interpretation" class="notice notice--success"></div>
+      </section>
+    </section>
+
+    <section id="architecture" class="section section--muted">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="kicker">Architecture</span>
+            <h2>Why use two ranking stages?</h2>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-card__number">01</span>
+            <h3>Independent embeddings</h3>
+            <p>
+              The bi-encoder embeds documents once and embeds each query
+              independently. This makes candidate search efficient and reusable.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-card__number">02</span>
+            <h3>Joint pair scoring</h3>
+            <p>
+              The cross-encoder reads the query and document together, enabling
+              richer token-level interaction and more precise relevance scoring.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-card__number">03</span>
+            <h3>Practical tradeoff</h3>
+            <p>
+              The slower model evaluates only the top candidate set, preserving
+              interactive latency while improving the final order.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="evaluation" class="section container">
+      <div class="section-heading">
+        <div>
+          <span class="kicker">Evaluation framework</span>
+          <h2>Metrics beyond classification accuracy</h2>
+        </div>
+      </div>
+
+      <div class="evaluation-grid">
+        <article>
+          <h3>Recall@K</h3>
+          <p>
+            Measures whether known relevant documents entered the candidate
+            set. A reranker cannot recover a document that was never retrieved.
+          </p>
+        </article>
+        <article>
+          <h3>MRR@10</h3>
+          <p>
+            Rewards systems that place the first relevant result as early as
+            possible in the first ten positions.
+          </p>
+        </article>
+        <article>
+          <h3>nDCG@10</h3>
+          <p>
+            Uses graded relevance and penalizes useful documents that appear
+            lower in the ranked list.
+          </p>
+        </article>
+        <article>
+          <h3>Latency</h3>
+          <p>
+            Separates model loading, document indexing, query embedding,
+            retrieval, reranking, and total search time.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="responsible-use" class="section section--warning">
+      <div class="container responsible-grid">
+        <div>
+          <span class="kicker">Responsible use</span>
+          <h2>Human review remains essential</h2>
+        </div>
+        <div>
+          <p>
+            This project is an educational portfolio demonstration. Rankings
+            may be incomplete, biased, irrelevant, or misleading. Cross-encoder
+            outputs are relevance estimates—not factual guarantees or calibrated
+            probabilities.
+          </p>
+          <p>
+            Do not upload confidential, proprietary, copyrighted, sensitive, or
+            personally identifiable content. Do not use this demo as the sole
+            basis for hiring, rejection, compensation, promotion, immigration,
+            legal, or employment decisions.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <div>
+        <strong>DocRank360</strong>
+        <p>Project 03 · Transformer Portfolio</p>
+      </div>
+      <div>
+        <a href="https://github.com/unit-mole/transformer-projects" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://huggingface.co/anmol-unitmole" target="_blank" rel="noreferrer">Hugging Face</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
