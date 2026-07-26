@@ -7,6 +7,9 @@
 
 > **Responsible-use notice:** This project is for educational and portfolio demonstration purposes only. Semantic results may be incomplete, outdated, irrelevant, or ranked imperfectly. Cosine similarity is a model-based relevance signal, not a probability or guarantee. Do not publish private, confidential, proprietary, copyrighted, sensitive, or personally identifiable documents. Review retrieved results before using them for decisions.
 
+
+> **Deployment prerequisite:** Before the first deployment, open **Settings → Pages** and select **GitHub Actions** under **Build and deployment → Source**. A `Get Pages site failed: Not Found` workflow error means Pages has not yet been enabled for the repository.
+
 ## Live demo
 
 - **GitHub Pages:** https://unit-mole.github.io/transformer-projects/07-document-semantic-search-sentence-bert/
@@ -57,7 +60,7 @@ The application uses a **hybrid static strategy**:
 4. Every query is embedded with the same model; JavaScript ranks filtered chunks by cosine similarity.
 5. If the model or CDN is unavailable, the interface labels the mode correctly and uses a keyword fallback rather than falsely presenting lexical ranking as semantic search.
 
-All paths are relative, so the app works under the nested GitHub Pages route `/transformer-projects/07-document-semantic-search-sentence-bert/`.
+All browser assets use relative paths. The included workflow publishes `web/` under the nested GitHub Pages route `/transformer-projects/07-document-semantic-search-sentence-bert/` and creates a root redirect.
 
 ## Corpus
 

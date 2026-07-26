@@ -2,16 +2,16 @@ name: 07 Document Semantic Search Sentence BERT CI and Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - "07-document-semantic-search-sentence-bert/**"
-      - "pages/**"
       - ".github/workflows/07-document-semantic-search-sentence-bert.yml"
   pull_request:
-    branches: [main]
+    branches:
+      - main
     paths:
       - "07-document-semantic-search-sentence-bert/**"
-      - "pages/**"
       - ".github/workflows/07-document-semantic-search-sentence-bert.yml"
   workflow_dispatch:
 
@@ -19,7 +19,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: "pages"
+  group: github-pages-project-07
   cancel-in-progress: true
 
 env:
@@ -27,8 +27,9 @@ env:
 
 jobs:
   quality:
-    name: Test and validate project
+    name: Test and validate Project 07
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -43,12 +44,13 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r "$PROJECT_DIR/requirements.txt"
+          python -m pip install -r "$PROJECT_DIR/requirements.txt"
 
       - name: Run unit tests
-        run: pytest "$PROJECT_DIR/tests" -q
+        run: python -m pytest "$PROJECT_DIR/tests" -q
 
-      - name: Validate required static files and JSON
+      - name: Validate required browser files and JSON
+        shell: bash
         run: |
           python - <<'PY'
           import json
@@ -67,14 +69,15 @@ jobs:
               root / "web/data/evaluation_queries.json",
               root / "web/data/metadata.json",
           ]
+
           missing = [str(path) for path in required if not path.is_file()]
           if missing:
               raise SystemExit("Missing required files:\n" + "\n".join(missing))
 
-          for path in root.glob("web/data/*.json"):
+          for path in sorted((root / "web/data").glob("*.json")):
               with path.open(encoding="utf-8") as handle:
                   json.load(handle)
-              print(f"validated {path}")
+              print(f"Validated {path}")
           PY
 
       - name: Check JavaScript syntax
@@ -84,42 +87,60 @@ jobs:
           node --check "$PROJECT_DIR/web/embeddings.js"
 
   deploy:
-    name: Deploy all browser demos to GitHub Pages
+    name: Deploy Project 07 to GitHub Pages
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: quality
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
       pages: write
       id-token: write
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Configure Pages
+      # One-time repository setup is required:
+      # Settings -> Pages -> Build and deployment -> Source: GitHub Actions
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Assemble monorepo Pages site
+      - name: Assemble Project 07 Pages site
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p _site
-          cp -R pages/. _site/
 
-          shopt -s nullglob
-          for web_dir in [0-9][0-9]-*/web; do
-            project_dir="${web_dir%/web}"
-            echo "Publishing ${project_dir}"
-            mkdir -p "_site/${project_dir}"
-            cp -R "${web_dir}/." "_site/${project_dir}/"
-          done
+          rm -rf _site
+          mkdir -p "_site/$PROJECT_DIR"
+          cp -R "$PROJECT_DIR/web/." "_site/$PROJECT_DIR/"
+
+          cat > _site/index.html <<EOF
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              <meta http-equiv="refresh" content="0; url=./$PROJECT_DIR/">
+              <link rel="canonical" href="./$PROJECT_DIR/">
+              <title>Project 07 · Document Semantic Search</title>
+            </head>
+            <body>
+              <p><a href="./$PROJECT_DIR/">Open Project 07 — Document Semantic Search</a></p>
+            </body>
+          </html>
+          EOF
 
           touch _site/.nojekyll
+          test -f "_site/index.html"
+          test -f "_site/$PROJECT_DIR/index.html"
+          test -f "_site/$PROJECT_DIR/data/document_chunks.json"
 
-      - name: Upload Pages artifact
+      - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: _site
