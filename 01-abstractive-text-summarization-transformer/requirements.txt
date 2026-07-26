@@ -1,0 +1,16 @@
+# Runtime dependencies tested for Python 3.10+
+gradio==6.20.0
+transformers>=4.56.0,<5.0.0
+torch>=2.4.0
+safetensors>=0.4.5
+sentencepiece>=0.2.0
+pandas>=2.2.0
+numpy>=1.26.0,<3.0.0
+scikit-learn>=1.5.0
+rouge-score>=0.1.2
+bert-score>=0.3.13
+datasets>=4.0.0
+evaluate>=0.4.6
+accelerate>=1.0.0
+matplotlib>=3.9.0
+PyYAML>=6.0.2

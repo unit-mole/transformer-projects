@@ -1,0 +1,13 @@
+.git
+.github
+.venv
+__pycache__
+.pytest_cache
+.ruff_cache
+.ipynb_checkpoints
+outputs/runs
+models/transformer_summarization_model/*
+models/tokenizer/*
+notebooks/archive
+*.zip
+*.xlsx

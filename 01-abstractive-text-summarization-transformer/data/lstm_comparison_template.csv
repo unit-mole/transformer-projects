@@ -1,0 +1,2 @@
+id,article,reference_summary,lstm_summary
+sample-001,"Paste the same article used by both models here.","Paste the human reference summary here.","Paste the actual LSTM Seq2Seq prediction here."

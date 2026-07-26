@@ -1,0 +1,33 @@
+{
+  "project": "01-abstractive-text-summarization-transformer",
+  "status": "pretrained_inference_ready",
+  "base_model": "sshleifer/distilbart-cnn-12-6",
+  "tokenizer": "sshleifer/distilbart-cnn-12-6",
+  "fine_tuned_model_path": null,
+  "max_input_tokens": 900,
+  "chunk_overlap_tokens": 64,
+  "generation_defaults": {
+    "min_length": 30,
+    "max_length": 120,
+    "num_beams": 4,
+    "length_penalty": 2.0,
+    "no_repeat_ngram_size": 3,
+    "early_stopping": true
+  },
+  "dataset": {
+    "bundled": "original synthetic samples",
+    "supported_public": [
+      "EdinburghNLP/xsum",
+      "abisee/cnn_dailymail:3.0.0"
+    ]
+  },
+  "evaluation_metrics": [
+    "ROUGE-1",
+    "ROUGE-2",
+    "ROUGE-L",
+    "BERTScore",
+    "inference time",
+    "compression ratio"
+  ],
+  "responsible_use": "Human review required; do not use public demo for private or high-stakes text."
+}

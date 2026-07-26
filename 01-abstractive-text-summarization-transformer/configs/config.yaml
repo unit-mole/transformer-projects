@@ -1,0 +1,37 @@
+project:
+  number: 1
+  name: 01-abstractive-text-summarization-transformer
+  task: abstractive-summarization
+
+model:
+  name: sshleifer/distilbart-cnn-12-6
+  tokenizer: sshleifer/distilbart-cnn-12-6
+  max_input_tokens: 900
+  chunk_overlap_tokens: 64
+
+preprocessing:
+  min_article_words: 25
+  min_summary_words: 5
+  preserve_unicode: true
+  remove_html: true
+
+inference:
+  min_length: 30
+  max_length: 120
+  num_beams: 4
+  length_penalty: 2.0
+  no_repeat_ngram_size: 3
+  early_stopping: true
+
+evaluation:
+  metrics:
+    - rouge1
+    - rouge2
+    - rougeL
+    - bertscore
+    - inference_time
+    - compression_ratio
+
+responsible_use:
+  public_demo_private_text_warning: true
+  human_review_required: true

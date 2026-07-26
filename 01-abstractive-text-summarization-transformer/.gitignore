@@ -1,0 +1,14 @@
+.venv/
+.env
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+outputs/runs/
+outputs/*.xlsx
+outputs/*.zip
+models/transformer_summarization_model/*
+!models/transformer_summarization_model/.gitkeep
+models/tokenizer/*
+!models/tokenizer/.gitkeep

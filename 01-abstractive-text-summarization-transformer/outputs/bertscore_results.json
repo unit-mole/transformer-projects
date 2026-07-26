@@ -1,0 +1,4 @@
+{
+  "status": "not_run",
+  "message": "Run scripts/evaluate_model.py and commit only documented, reproducible results."
+}
