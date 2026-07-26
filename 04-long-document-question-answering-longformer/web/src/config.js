@@ -1,0 +1,15 @@
+export const APP_CONFIG = Object.freeze({
+  projectName: '04-long-document-question-answering-longformer',
+  browserModelId: 'Xenova/distilbert-base-cased-distilled-squad',
+  pythonModelId: 'valhalla/longformer-base-4096-finetuned-squadv1',
+  browserArchitecture: 'DistilBERT extractive QA deployment baseline',
+  pythonArchitecture: 'Longformer extractive QA core implementation',
+  defaultChunkWords: 260,
+  defaultOverlapWords: 60,
+  defaultCandidateChunks: 6,
+  maximumDocumentCharacters: 1_000_000,
+  githubUrl: 'https://github.com/<YOUR_GITHUB_USERNAME>/transformer-projects/tree/main/04-long-document-question-answering-longformer',
+  gradioSpaceUrl: 'https://huggingface.co/spaces/<YOUR_HF_USERNAME>/long-document-qa-longformer',
+  staticSpaceUrl: 'https://huggingface.co/spaces/<YOUR_HF_USERNAME>/long-document-qa-browser',
+  modelCardUrl: 'https://github.com/<YOUR_GITHUB_USERNAME>/transformer-projects/blob/main/04-long-document-question-answering-longformer/MODEL_CARD.md',
+});

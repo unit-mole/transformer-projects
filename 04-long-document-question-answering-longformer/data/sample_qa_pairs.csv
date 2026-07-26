@@ -1,0 +1,7 @@
+example_id,document_name,question,answer,reference_evidence,reference_paragraph_index,source_type
+demo_001,quality_capa_report.txt,Who was assigned as the CAPA owner?,Priya Raman,Priya Raman was assigned as the CAPA owner.,5,synthetic_quality_report
+demo_002,quality_capa_report.txt,What was the confirmed root cause?,variation in the supplier's ultraviolet curing time,The confirmed root cause was variation in the supplier's ultraviolet curing time.,4,synthetic_quality_report
+demo_003,quality_capa_report.txt,When was the effectiveness review approved?,"June 18, 2026","The effectiveness review was approved on June 18, 2026.",7,synthetic_quality_report
+demo_004,supplier_quality_report.txt,Who owns the supplier follow-up plan?,Elena Martinez,Elena Martinez owns the supplier follow-up plan.,5,synthetic_supplier_report
+demo_005,supplier_quality_report.txt,When was the evidence due?,"August 15, 2026","Evidence of the revised layered audit was due by August 15, 2026.",5,synthetic_supplier_report
+demo_006,longformer_overview.md,What type of attention do the question tokens receive?,global attention,"For extractive question answering, the question tokens receive global attention so they can interact with the complete available context.",2,synthetic_technical_note

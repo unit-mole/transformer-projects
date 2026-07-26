@@ -1,0 +1,9 @@
+{
+  "status": "not_run",
+  "examples": 0,
+  "exact_match": null,
+  "token_f1": null,
+  "evidence_recall": null,
+  "average_latency_seconds": null,
+  "note": "Run python scripts/evaluate_model.py before reporting metrics."
+}

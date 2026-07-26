@@ -1,0 +1,24 @@
+{
+  "name": "long-document-qa-browser-baseline",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static Hugging Face Space for browser-based long-document QA with Transformers.js.",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node --test tests/*.test.js",
+    "check": "node --check src/config.js && node --check src/chunking.js && node --check src/csv-parser.js && node --check src/evidence.js && node --check src/document-parser.js && node --check src/qa-engine.js && node --check src/main.js"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "3.8.1",
+    "pdfjs-dist": "4.10.38"
+  },
+  "devDependencies": {
+    "vite": "6.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

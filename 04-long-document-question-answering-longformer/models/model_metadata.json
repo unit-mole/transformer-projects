@@ -1,0 +1,24 @@
+{
+  "project_name": "04-long-document-question-answering-longformer",
+  "selected_model_id": "valhalla/longformer-base-4096-finetuned-squadv1",
+  "tokenizer_id": "valhalla/longformer-base-4096-finetuned-squadv1",
+  "architecture": "LongformerForQuestionAnswering",
+  "fine_tuned_by_this_project": false,
+  "checkpoint_training_dataset": "SQuAD v1 (as stated by the checkpoint model card)",
+  "model_supported_context_tokens": 4096,
+  "public_demo_default_context_tokens": 2048,
+  "default_stride_tokens": 256,
+  "maximum_answer_tokens": 48,
+  "answer_extraction": "Highest valid start/end span across overlapping tokenizer windows",
+  "confidence_scoring": "Uncalibrated geometric mean of selected start/end token probabilities",
+  "evidence_highlighting": "Character-offset mapping to the original normalized document",
+  "dataset": "Safe synthetic sample reports; optional external long-document QA dataset",
+  "evaluation_metrics": [
+    "Exact Match",
+    "Token-level F1",
+    "Evidence recall",
+    "Context-length analysis",
+    "Latency"
+  ],
+  "responsible_use": "Educational portfolio demonstration only; human review required."
+}

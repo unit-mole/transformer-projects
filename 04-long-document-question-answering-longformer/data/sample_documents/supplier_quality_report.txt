@@ -1,0 +1,32 @@
+SUPPLIER QUALITY REVIEW — SYNTHETIC DEMONSTRATION
+
+Scope
+This review covers a fictional supplier of molded optical housings used in a
+water-quality instrument. It is safe sample content created for this portfolio.
+
+Performance Summary
+On-time delivery improved from 91 percent to 97 percent during the review
+period. Incoming inspection acceptance remained above 99 percent. Two minor
+nonconformances involved cosmetic surface marks and were contained before
+production use.
+
+Audit Finding
+The audit found that calibration labels on one measurement fixture were
+difficult to read. The calibration itself was current and traceable. The
+supplier replaced the labels on the day of the audit and added a legibility
+check to the weekly layered process audit.
+
+Risk Assessment
+The finding was rated low risk because measurement status was independently
+verified in the electronic calibration system. No affected product escaped,
+and no measurement result required correction.
+
+Ownership and Due Date
+Elena Martinez owns the supplier follow-up plan. Evidence of the revised layered
+audit was due by August 15, 2026. Site Supplier Quality Engineering was
+responsible for verifying closure.
+
+Closure Evidence
+The supplier submitted three completed weekly audit records, photographs of the
+new labels, and the updated audit checklist. The closure package was accepted
+after document review.

@@ -1,0 +1,42 @@
+project:
+  number: "04"
+  name: "04-long-document-question-answering-longformer"
+  task: "extractive long-document question answering"
+  deployment: "Dual: Gradio/ZeroGPU Longformer plus Static Transformers.js baseline"
+
+model:
+  id: "valhalla/longformer-base-4096-finetuned-squadv1"
+  architecture: "LongformerForQuestionAnswering"
+  maximum_supported_tokens: 4096
+  default_runtime_tokens: 2048
+  stride_tokens: 256
+  maximum_answer_tokens: 48
+  fine_tuned_by_this_project: false
+
+input:
+  supported_extensions:
+    - ".txt"
+    - ".md"
+    - ".csv"
+    - ".pdf"
+  maximum_upload_mb: 10
+  maximum_document_characters: 2000000
+
+evaluation:
+  metrics:
+    - "Exact Match"
+    - "Token-level F1"
+    - "Evidence recall"
+    - "Context-length analysis"
+    - "Answer latency"
+  claim_results_only_after_execution: true
+
+
+browser_deployment:
+  type: "Hugging Face Static Space"
+  model_id: "Xenova/distilbert-base-cased-distilled-squad"
+  architecture: "DistilBERTForQuestionAnswering"
+  runtime: "Transformers.js with ONNX Runtime"
+  strategy: "Overlapping chunks plus lexical candidate retrieval"
+  executes_longformer: false
+  disclosure_required: true

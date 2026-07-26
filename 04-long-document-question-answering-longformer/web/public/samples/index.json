@@ -1,0 +1,19 @@
+{
+  "samples": [
+    {
+      "name": "Quality CAPA Report",
+      "file": "quality_capa_report.txt",
+      "question": "What date was assigned for the effectiveness review?"
+    },
+    {
+      "name": "Supplier Quality Report",
+      "file": "supplier_quality_report.txt",
+      "question": "What corrective action was assigned to the supplier?"
+    },
+    {
+      "name": "Longformer Overview",
+      "file": "longformer_overview.md",
+      "question": "How does Longformer reduce the cost of attention?"
+    }
+  ]
+}

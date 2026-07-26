@@ -1,0 +1,7 @@
+document_name,question
+quality_capa_report.txt,Who was assigned as the CAPA owner?
+quality_capa_report.txt,What was the confirmed root cause?
+quality_capa_report.txt,When was the effectiveness review approved?
+supplier_quality_report.txt,Who owns the supplier follow-up plan?
+supplier_quality_report.txt,When was the evidence due?
+longformer_overview.md,What type of attention do the question tokens receive?

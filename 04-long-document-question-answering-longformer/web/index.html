@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Browser-based long-document question answering portfolio demo using Transformers.js, ONNX Runtime, document chunking, retrieval, evidence highlighting, and a Longformer Python core implementation." />
+    <title>Long-Document QA | Transformer Project 04</title>
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="hero">
+        <p class="eyebrow">Transformer Portfolio · Project 04</p>
+        <h1>Long-Document Question Answering</h1>
+        <p class="hero-copy">
+          A dual-implementation Document AI project: Longformer powers the full Python engineering pipeline,
+          while this free Static Space runs a compact extractive QA Transformer directly in the visitor's browser
+          over retrieved document chunks.
+        </p>
+        <div class="badge-row">
+          <span class="badge">Longformer core</span>
+          <span class="badge">Transformers.js</span>
+          <span class="badge">ONNX Runtime</span>
+          <span class="badge">Evidence grounding</span>
+          <span class="badge">Static Space</span>
+        </div>
+        <div class="link-row">
+          <a class="hero-link" id="githubLink" target="_blank" rel="noreferrer">Python implementation</a>
+          <a class="hero-link" id="gradioLink" target="_blank" rel="noreferrer">Longformer Gradio demo</a>
+          <a class="hero-link" id="modelCardLink" target="_blank" rel="noreferrer">Model card</a>
+        </div>
+      </section>
+
+      <div class="notice">
+        <strong>Deployment honesty:</strong> this Static Space performs genuine browser-side Transformer inference,
+        but it uses a DistilBERT QA deployment baseline with client-side retrieval and chunking. The repository's
+        Python implementation uses Longformer. The two models are never presented as the same architecture.
+      </div>
+
+      <section class="grid">
+        <div>
+          <section class="card">
+            <h2>1. Provide a document</h2>
+            <div class="field">
+              <label for="sampleSelect">Preloaded sample</label>
+              <select id="sampleSelect"><option value="">Loading samples...</option></select>
+            </div>
+            <div class="field">
+              <label for="fileInput">Upload TXT, Markdown, CSV, or selectable-text PDF</label>
+              <input id="fileInput" type="file" accept=".txt,.md,.csv,.pdf" />
+              <small>Scanned PDFs require OCR and are intentionally not processed in this lightweight static demo.</small>
+            </div>
+            <div class="field">
+              <label for="documentText">Document text</label>
+              <textarea id="documentText" placeholder="Paste a report, policy, manual, research excerpt, or other non-sensitive document."></textarea>
+            </div>
+            <div class="input-stats">
+              <div class="stat"><span>Source</span><strong id="sourceName">pasted-text</strong></div>
+              <div class="stat"><span>Characters</span><strong id="inputCharacters">0</strong></div>
+              <div class="stat"><span>Words</span><strong id="inputWords">0</strong></div>
+              <div class="stat"><span>Privacy</span><strong>Browser session</strong></div>
+            </div>
+            <div id="securityNote" class="status"></div>
+          </section>
+
+          <section class="card">
+            <h2>2. Ask a focused question</h2>
+            <div class="field">
+              <label for="question">Question</label>
+              <textarea id="question" placeholder="Example: What corrective action was assigned to the supplier?"></textarea>
+            </div>
+            <div class="control-grid">
+              <div class="field">
+                <label for="chunkWords">Chunk size (words)</label>
+                <input id="chunkWords" type="number" min="100" max="420" step="20" value="260" />
+              </div>
+              <div class="field">
+                <label for="overlapWords">Chunk overlap (words)</label>
+                <input id="overlapWords" type="number" min="0" max="160" step="10" value="60" />
+              </div>
+              <div class="field">
+                <label for="candidateChunks">Candidate chunks evaluated</label>
+                <input id="candidateChunks" type="number" min="1" max="12" step="1" value="6" />
+              </div>
+              <div class="field">
+                <label for="runtimeSelect">Browser runtime</label>
+                <select id="runtimeSelect">
+                  <option value="wasm">WASM / CPU</option>
+                  <option value="webgpu">WebGPU</option>
+                </select>
+              </div>
+            </div>
+            <div class="button-row">
+              <button id="loadModelButton" class="secondary">Load model</button>
+              <button id="askButton" class="primary">Ask document</button>
+              <button id="resetButton" class="ghost">Reset outputs</button>
+              <button id="exportButton" class="ghost" disabled>Download result JSON</button>
+            </div>
+            <div class="progress-stack">
+              <div class="progress-row">
+                <strong>Model</strong>
+                <div id="modelProgress" class="progress-box"><progress max="100" value="0"></progress><span>Not loaded</span></div>
+              </div>
+              <div class="progress-row">
+                <strong>Inference</strong>
+                <div id="inferenceProgress" class="progress-box"><progress max="100" value="0"></progress><span>Not started</span></div>
+              </div>
+            </div>
+            <div id="statusMessage" class="status" data-kind="info"></div>
+          </section>
+        </div>
+
+        <div>
+          <section class="card">
+            <h2>3. Inspect grounded output</h2>
+            <div class="metrics">
+              <div class="stat"><span>Total chunks</span><strong id="metricChunks">—</strong></div>
+              <div class="stat"><span>QA candidates</span><strong id="metricEvaluated">—</strong></div>
+              <div class="stat"><span>Latency</span><strong id="metricLatency">—</strong></div>
+              <div class="stat"><span>Runtime</span><strong id="metricRuntime">—</strong></div>
+            </div>
+            <div class="output-block">
+              <span class="output-label">Answer</span>
+              <div id="answerOutput" class="output-value answer-value"></div>
+            </div>
+            <div class="output-block">
+              <span class="output-label">Confidence proxy</span>
+              <div id="confidenceOutput" class="output-value"></div>
+            </div>
+            <div class="output-block">
+              <span class="output-label">Supporting paragraph</span>
+              <div id="supportingOutput" class="output-value"></div>
+            </div>
+            <div class="output-block">
+              <span class="output-label">Highlighted evidence</span>
+              <div id="evidenceOutput"></div>
+            </div>
+            <details class="output-block">
+              <summary class="output-label">Diagnostics and candidate answers</summary>
+              <pre id="diagnosticsOutput">{}</pre>
+            </details>
+          </section>
+
+          <section class="card">
+            <h2>Architecture shown to recruiters</h2>
+            <div class="architecture">
+              <div>Document upload / sample / pasted text</div><div class="arrow">↓</div>
+              <div>Browser text or PDF extraction</div><div class="arrow">↓</div>
+              <div>Overlapping word chunks</div><div class="arrow">↓</div>
+              <div>Lexical candidate retrieval</div><div class="arrow">↓</div>
+              <div>DistilBERT ONNX extractive QA in browser</div><div class="arrow">↓</div>
+              <div>Best answer span + supporting paragraph + evidence highlight</div>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2>Core model versus static deployment baseline</h2>
+            <table class="comparison">
+              <thead><tr><th>Component</th><th>Full Python project</th><th>This Static Space</th></tr></thead>
+              <tbody>
+                <tr><td>Model</td><td id="pythonModelName"></td><td id="browserModelName"></td></tr>
+                <tr><td>Architecture</td><td>Longformer sparse attention</td><td>DistilBERT over retrieved chunks</td></tr>
+                <tr><td>Context handling</td><td>Up to ~4,096 tokens per Longformer window</td><td>Many short overlapping chunks</td></tr>
+                <tr><td>Inference location</td><td>Python / PyTorch compute</td><td>Visitor's browser / ONNX Runtime</td></tr>
+                <tr><td>Portfolio value</td><td>Long-context model engineering and evaluation</td><td>Free, serverless browser deployment</td></tr>
+              </tbody>
+            </table>
+          </section>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Responsible use and limitations</h2>
+        <p>
+          This educational portfolio demo may return incomplete, incorrect, unsupported, or misleading answers.
+          The confidence value is a model output score, not a calibrated probability. Always inspect the supporting
+          paragraph. Do not upload confidential, proprietary, sensitive, copyrighted, regulated, or personally
+          identifiable documents. Do not use the result as the sole basis for legal, medical, financial,
+          safety-critical, academic, official, quality-release, or business-critical decisions.
+        </p>
+        <p>
+          <a id="staticLink" target="_blank" rel="noreferrer">Static Space link placeholder</a>
+        </p>
+      </section>
+
+      <footer class="footer">
+        Project 04 · Long-Document Question Answering · Python Longformer core + browser deployment baseline
+      </footer>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

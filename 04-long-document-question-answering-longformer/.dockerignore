@@ -1,0 +1,15 @@
+.git
+.github
+.venv
+__pycache__
+.pytest_cache
+.ipynb_checkpoints
+notebooks
+tests
+outputs
+models/long_document_qa_model
+models/tokenizer
+*.pyc
+*.pyo
+*.pyd
+.env

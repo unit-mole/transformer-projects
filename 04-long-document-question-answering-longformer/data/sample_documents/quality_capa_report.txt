@@ -1,0 +1,49 @@
+QUALITY CORRECTIVE AND PREVENTIVE ACTION REPORT
+Document ID: CAPA-DEMO-2026-004
+Status: Closed after effectiveness review
+This is a synthetic portfolio document and does not contain company data.
+
+1. Executive Summary
+A quality review identified intermittent discoloration on labels applied to
+Total Kjeldahl Nitrogen reagent containers. The issue was limited to a small
+demonstration lot and did not affect reagent chemistry or analytical
+performance. Distribution was paused while the investigation was completed.
+
+2. Problem Statement
+During incoming inspection, operators observed that several labels had a faded
+blue region after routine handling. The complaint history showed similar visual
+observations but no barcode-readability failures. The investigation team
+therefore treated the event as an appearance and supplier-process issue.
+
+3. Investigation
+The team reviewed printing records, environmental logs, adhesive certificates,
+incoming inspection images, and supplier batch documentation. Barcode scanners
+successfully read every tested label. Accelerated light exposure reproduced the
+discoloration only on labels made during one supplier curing cycle.
+
+4. Root Cause
+The confirmed root cause was variation in the supplier's ultraviolet curing
+time. A maintenance adjustment had reduced lamp intensity, but the supplier's
+work instruction did not require an immediate verification check after that
+adjustment.
+
+5. Corrective Action
+Priya Raman was assigned as the CAPA owner. The supplier restored the validated
+curing settings, added an hourly intensity verification, and revised the work
+instruction. Incoming inspection added a temporary color-density check for the
+next five received lots.
+
+6. Preventive Action
+The approved preventive action was to add curing-intensity trend review to the
+quarterly supplier scorecard. Supplier Quality Engineering will review the
+trend, while Site Quality will verify that the incoming inspection control is
+removed only after successful effectiveness evidence.
+
+7. Effectiveness Check
+Five consecutive lots passed visual, barcode, and color-density inspection.
+No related complaint was observed during the 90-day monitoring window. The
+effectiveness review was approved on June 18, 2026.
+
+8. Limitations
+This synthetic report is intended only for demonstrating document question
+answering, evidence localization, and portfolio deployment.
