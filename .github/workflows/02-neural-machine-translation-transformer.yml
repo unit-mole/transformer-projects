@@ -16,6 +16,7 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: 02-neural-machine-translation-transformer
@@ -48,10 +49,12 @@ jobs:
         run: pytest -q -m "not integration"
 
       - name: Validate inference pipeline import
-        run: python -c "from src.translation_pipeline import TranslationPipeline; print('translation pipeline import: OK')"
+        run: |
+          python -c "from src.translation_pipeline import TranslationPipeline; print('translation pipeline import: OK')"
 
       - name: Validate Gradio app import without downloading models
-        run: python -c "import app; assert app.demo is not None; print('Gradio app import: OK')"
+        run: |
+          python -c "import app; assert app.demo is not None; print('Gradio app import: OK')"
 
       - name: Compile Python files
         run: python -m compileall app.py gradio_app.py src scripts
