@@ -1,0 +1,8 @@
+# Lightweight GitHub Actions dependencies.
+# CI validates preprocessing, language detection, batch logic, imports,
+# and compilation without downloading PyTorch or Transformer model weights.
+gradio==6.20.0
+pandas>=2.2,<4.0
+numpy>=1.26,<3.0
+PyYAML>=6.0,<7.0
+pytest>=8.4,<10.0
