@@ -1,0 +1,15 @@
+[project]
+name = "english-hindi-neural-machine-translation"
+version = "1.0.0"
+description = "Bidirectional English-Hindi MarianMT portfolio project"
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = ["E501"]

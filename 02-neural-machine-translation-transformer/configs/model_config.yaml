@@ -1,0 +1,21 @@
+project_name: english-hindi-neural-machine-translation
+models:
+  en_hi: Helsinki-NLP/opus-mt-en-hi
+  hi_en: Helsinki-NLP/opus-mt-hi-en
+generation:
+  num_beams: 4
+  max_source_length: 512
+  max_new_tokens: 256
+  early_stopping: true
+  length_penalty: 1.0
+  no_repeat_ngram_size: 3
+  renormalize_logits: true
+batch:
+  default_max_rows: 100
+  hard_max_rows: 500
+language_detection:
+  mixed_script_min_ratio: 0.20
+  minimum_letters: 2
+confidence:
+  label: confidence proxy
+  calibrated: false

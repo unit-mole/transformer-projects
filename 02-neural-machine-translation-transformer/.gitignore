@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+.env
+.ipynb_checkpoints/
+models/fine_tuned_*/
+models/**/*.bin
+models/**/*.safetensors
+outputs/generated/
+outputs/batch_*.csv
+*.log
