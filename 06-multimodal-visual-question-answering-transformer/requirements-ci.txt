@@ -1,0 +1,4 @@
+pillow>=10.3,<13
+numpy>=1.26,<3
+pandas>=2.2,<4
+pytest>=8,<10

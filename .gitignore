@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ML artifacts and datasets
+**/data/raw/
+**/data/vqa_v2/
+**/checkpoints/
+**/models/cache/
+**/*.pt
+**/*.pth
+**/*.ckpt
+**/*.safetensors
+**/*.onnx
+**/outputs/runs/
+**/wandb/
+
+# Node / static builds
+**/node_modules/
+**/dist/
+**/.vite/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

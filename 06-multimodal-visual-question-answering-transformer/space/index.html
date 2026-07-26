@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Static browser-based multimodal visual question answering demo." />
+  <title>Multimodal Visual Question Answering Transformer</title>
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__inner">
+      <div class="eyebrow">Transformer Project 06 · Static Hugging Face Space</div>
+      <h1>Multimodal Visual Question Answering</h1>
+      <p class="hero__copy">
+        Ask a natural-language question about an image. Inference runs locally
+        in your browser using Transformers.js, ONNX Runtime Web, and WebGPU.
+      </p>
+      <div class="badges">
+        <span>Vision-language model</span><span>WebGPU</span><span>No Python server</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="notice notice--warning">
+      <strong>Large first download:</strong> the browser model is approximately
+      1+ GB in its selected quantized components. Use Chrome or Edge on a
+      desktop with WebGPU and a stable connection. Model files are cached by the browser.
+    </section>
+
+    <section class="notice">
+      <strong>Privacy and responsible use:</strong> do not upload personal
+      photos, IDs, medical images, confidential workplace images, or copyrighted
+      material without permission. Answers can be wrong and must not be used for
+      high-stakes decisions.
+    </section>
+
+    <section class="card workspace">
+      <div class="panel">
+        <div class="section-heading">
+          <div><span class="step">1</span><h2>Choose an image</h2></div>
+          <span id="imageMeta" class="muted">No image selected</span>
+        </div>
+
+        <label class="upload" for="imageInput">
+          <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp" />
+          <span class="upload__icon">↥</span>
+          <span><strong>Upload an image</strong><small>PNG, JPEG or WebP · maximum 25 MP</small></span>
+        </label>
+
+        <div class="samples">
+          <button class="sample" data-image="./samples/shapes_scene.png" data-question="What color is the circle?">
+            <img src="./samples/shapes_scene.png" alt="Synthetic blue square and red circle" />
+            <span>Shapes</span>
+          </button>
+          <button class="sample" data-image="./samples/three_blocks.png" data-question="How many blue blocks are present?">
+            <img src="./samples/three_blocks.png" alt="Three blue blocks" />
+            <span>Counting</span>
+          </button>
+          <button class="sample" data-image="./samples/yellow_triangle.png" data-question="What shape is visible?">
+            <img src="./samples/yellow_triangle.png" alt="Yellow triangle" />
+            <span>Object</span>
+          </button>
+        </div>
+
+        <div class="preview">
+          <img id="previewImage" alt="Selected preview" hidden />
+          <div id="previewPlaceholder">Your selected image will appear here.</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="section-heading">
+          <div><span class="step">2</span><h2>Ask a question</h2></div>
+        </div>
+        <label for="questionInput">Question</label>
+        <textarea id="questionInput" maxlength="300" rows="4" placeholder="Example: What is the person holding?"></textarea>
+        <div class="question-chips">
+          <button data-question="What object is visible?">Object</button>
+          <button data-question="What color is the main object?">Color</button>
+          <button data-question="How many objects are present?">Count</button>
+          <button data-question="What is happening in the image?">Action</button>
+        </div>
+
+        <button id="askButton" class="primary" disabled>Load model and answer</button>
+        <button id="cancelButton" class="secondary" hidden>Cancel</button>
+
+        <div class="status">
+          <div class="status__row"><span id="statusDot" class="dot"></span><strong id="statusText">Waiting for an image and question</strong></div>
+          <progress id="progressBar" value="0" max="100"></progress>
+          <div id="progressDetail" class="muted">The model loads only after you click the button.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results">
+      <article class="metric metric--answer">
+        <span>Predicted answer</span>
+        <strong id="answerOutput">—</strong>
+      </article>
+      <article class="metric">
+        <span>Confidence proxy</span>
+        <strong id="confidenceOutput">N/A</strong>
+        <small>Not exposed reliably by this generative browser model.</small>
+      </article>
+      <article class="metric">
+        <span>Question type</span>
+        <strong id="questionTypeOutput">—</strong>
+      </article>
+      <article class="metric">
+        <span>Answer type</span>
+        <strong id="answerTypeOutput">—</strong>
+      </article>
+      <article class="metric">
+        <span>Inference latency</span>
+        <strong id="latencyOutput">—</strong>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card prose">
+        <h2>How the static deployment works</h2>
+        <ol>
+          <li>The image stays in the browser and is converted into model-ready pixels.</li>
+          <li>The question is normalized without removing meaning-bearing words.</li>
+          <li>Quantized Moondream2 ONNX components are downloaded from the Hugging Face Hub.</li>
+          <li>WebGPU performs vision-language generation and returns the answer.</li>
+        </ol>
+      </article>
+      <article class="card prose">
+        <h2>Limitations</h2>
+        <p>
+          The model can miss small objects, miscount, hallucinate, struggle with
+          OCR, or answer ambiguous questions incorrectly. Browser performance
+          varies by hardware, driver, memory, and network speed.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <span>Project 06 · Multimodal VQA Transformer</span>
+    <a href="https://github.com/unit-mole/transformer-projects" target="_blank" rel="noreferrer">GitHub repository</a>
+  </footer>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

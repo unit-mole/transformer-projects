@@ -1,0 +1,31 @@
+{
+  "project": "06-multimodal-visual-question-answering-transformer",
+  "python_reference_model": {
+    "model_id": "dandelin/vilt-b32-finetuned-vqa",
+    "task": "visual-question-answering",
+    "role": "local reproducible inference and VQA-style evaluation"
+  },
+  "static_space_model": {
+    "model_id": "Xenova/moondream2",
+    "task": "image-text-to-text / visual question answering",
+    "runtime": "Transformers.js + ONNX Runtime Web + WebGPU",
+    "dtype": {
+      "embed_tokens": "int8",
+      "vision_encoder": "q4",
+      "decoder_model_merged": "q4f16"
+    },
+    "role": "fully static browser demo"
+  },
+  "question_preprocessing": {
+    "whitespace_normalization": true,
+    "max_characters": 300,
+    "meaning_preserved": true
+  },
+  "image_preprocessing": {
+    "rgb_conversion": true,
+    "metadata_removed_for_repository_samples": true,
+    "maximum_megapixels": 25
+  },
+  "metrics_status": "not_evaluated",
+  "note": "Do not publish numerical metrics until scripts/evaluate_vqa.py has been run on a documented dataset."
+}

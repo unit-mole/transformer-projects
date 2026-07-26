@@ -1,0 +1,10 @@
+# Full local inference and evaluation environment
+torch>=2.2,<3
+transformers>=4.45,<6
+pillow>=10.3,<13
+numpy>=1.26,<3
+pandas>=2.2,<4
+scikit-learn>=1.4,<2
+matplotlib>=3.8,<4
+tqdm>=4.66,<5
+pytest>=8,<10

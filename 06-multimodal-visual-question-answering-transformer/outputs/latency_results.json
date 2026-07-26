@@ -1,0 +1,4 @@
+{
+  "status": "not_evaluated",
+  "message": "Latency is hardware-dependent. Run scripts/benchmark_latency.py."
+}

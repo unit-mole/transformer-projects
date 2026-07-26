@@ -1,0 +1,4 @@
+image_id,image_path,question,answer,answers,question_type,answer_type,category,split,source
+synthetic-001,data/sample_images/shapes_scene.png,What color is the circle?,red,"[""red"", ""red"", ""red"", ""red"", ""red"", ""red"", ""red"", ""red"", ""red"", ""red""]",color,other,color,demo,project-generated synthetic image
+synthetic-002,data/sample_images/three_blocks.png,How many blue blocks are present?,3,"[""3"", ""3"", ""3"", ""3"", ""3"", ""3"", ""3"", ""3"", ""3"", ""3""]",number,number,number,demo,project-generated synthetic image
+synthetic-003,data/sample_images/yellow_triangle.png,What shape is visible?,triangle,"[""triangle"", ""triangle"", ""triangle"", ""triangle"", ""triangle"", ""triangle"", ""triangle"", ""triangle"", ""triangle"", ""triangle""]",object,other,object,demo,project-generated synthetic image

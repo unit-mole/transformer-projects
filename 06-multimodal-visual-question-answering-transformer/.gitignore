@@ -1,0 +1,15 @@
+__pycache__/
+.pytest_cache/
+.venv/
+.ipynb_checkpoints/
+outputs/runs/
+models/cache/
+data/raw/
+data/vqa_v2/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+space/node_modules/
+space/dist/

@@ -1,0 +1,4 @@
+{
+  "status": "not_evaluated",
+  "message": "Run scripts/evaluate_vqa.py before publishing metrics."
+}

@@ -1,0 +1,8 @@
+Python evaluation model:
+dandelin/vilt-b32-finetuned-vqa
+
+Static Hugging Face Space browser model:
+Xenova/moondream2
+
+Model weights are loaded from the Hugging Face Hub and are not committed to
+this repository.
