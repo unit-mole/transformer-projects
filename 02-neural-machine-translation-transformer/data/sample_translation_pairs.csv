@@ -1,0 +1,16 @@
+﻿english,hindi,category
+Hello.,नमस्ते।,general
+How are you?,आप कैसे हैं?,general
+The quality report is ready.,गुणवत्ता रिपोर्ट तैयार है।,quality
+Please review the customer complaint.,कृपया ग्राहक की शिकायत की समीक्षा करें।,quality
+The sensor needs calibration.,सेंसर को अंशांकन की आवश्यकता है।,technical
+The team analyzed the failure mode.,टीम ने विफलता के प्रकार का विश्लेषण किया।,quality
+The dashboard shows the monthly trend.,डैशबोर्ड मासिक रुझान दिखाता है।,analytics
+We need more data before making a decision.,निर्णय लेने से पहले हमें अधिक डेटा की आवश्यकता है।,analytics
+The model generated a summary.,मॉडल ने एक सारांश तैयार किया।,machine-learning
+Please verify the product number.,कृपया उत्पाद संख्या सत्यापित करें।,quality
+The meeting starts at three o'clock.,बैठक तीन बजे शुरू होती है।,general
+The shipment arrived on Monday.,शिपमेंट सोमवार को पहुँचा।,business
+This translation must be reviewed by a person.,इस अनुवाद की समीक्षा किसी व्यक्ति द्वारा की जानी चाहिए।,responsible-ai
+Do not enter confidential information.,गोपनीय जानकारी दर्ज न करें।,responsible-ai
+The results may change after validation.,सत्यापन के बाद परिणाम बदल सकते हैं।,analytics
