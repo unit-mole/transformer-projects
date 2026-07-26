@@ -1,0 +1,8 @@
+Python model: sentence-transformers/all-MiniLM-L6-v2
+Browser model: Xenova/all-MiniLM-L6-v2
+Embedding dimension: 384
+Pooling: mean
+Normalization: L2
+Similarity: cosine
+
+Model weights are not committed to this repository. Python downloads the model through Sentence Transformers; the browser downloads a compatible ONNX model through Transformers.js and caches it according to browser policy.

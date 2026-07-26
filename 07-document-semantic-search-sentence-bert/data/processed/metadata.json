@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-07-26T23:27:35.301618+00:00",
+  "document_count": 12,
+  "chunk_count": 34,
+  "average_document_words": 89.58,
+  "average_chunk_words": 27.38,
+  "chunk_size_words": 180,
+  "chunk_overlap_words": 40,
+  "project_categories": {
+    "Transformer / NLP": 3,
+    "Transformer / Information Retrieval": 2,
+    "Generative AI / LLM": 1,
+    "Multimodal AI": 1,
+    "RNN / NLP": 1,
+    "CNN / Computer Vision": 2,
+    "Portfolio Engineering": 1,
+    "Quality Analytics / Applied AI": 1
+  },
+  "document_types": {
+    "project_readme": 7,
+    "model_card": 2,
+    "deployment_guide": 2,
+    "knowledge_note": 1
+  },
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "browser_model": "Xenova/all-MiniLM-L6-v2",
+  "embedding_dimension": 384,
+  "similarity_metric": "cosine",
+  "data_safety": "Public, self-authored, redistributable, or synthetic documents only."
+}

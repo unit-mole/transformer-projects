@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Browser-based semantic search over ML portfolio documentation using Sentence-BERT and Transformers.js." />
+  <meta name="theme-color" content="#08111f" />
+  <title>Document Semantic Search · Sentence-BERT</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#search-panel">Skip to search</a>
+  <header class="topbar">
+    <a class="brand" href="../" aria-label="Transformer Projects demo hub">
+      <span class="brand-mark">07</span>
+      <span><strong>Transformer Projects</strong><small>Browser AI Portfolio</small></span>
+    </a>
+    <nav>
+      <a href="#architecture">Architecture</a>
+      <a href="#evaluation">Evaluation</a>
+      <a href="https://github.com/unit-mole/transformer-projects/tree/main/07-document-semantic-search-sentence-bert">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero shell">
+      <div class="hero-copy">
+        <p class="eyebrow">SENTENCE-BERT · TRANSFORMERS.JS · GITHUB PAGES</p>
+        <h1>Search an ML portfolio by <span>meaning</span>, not only keywords.</h1>
+        <p class="hero-text">A static semantic-search application that embeds portfolio documentation, ranks passages with cosine similarity, and runs entirely in your browser.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#search-panel">Try semantic search</a>
+          <a class="button secondary" href="https://github.com/unit-mole/transformer-projects/tree/main/07-document-semantic-search-sentence-bert">View source</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Project facts">
+        <div><span>Model</span><strong>all-MiniLM-L6-v2</strong></div>
+        <div><span>Embedding size</span><strong>384 dimensions</strong></div>
+        <div><span>Ranking</span><strong>Cosine similarity</strong></div>
+        <div><span>Backend</span><strong>None</strong></div>
+      </aside>
+    </section>
+
+    <section id="search-panel" class="search-section shell" aria-labelledby="search-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">LIVE RETRIEVAL DEMO</p>
+          <h2 id="search-title">Document semantic search</h2>
+        </div>
+        <div id="mode-badge" class="status-badge loading" role="status" aria-live="polite">Initializing browser model…</div>
+      </div>
+
+      <div class="search-card">
+        <label for="query">Natural-language query</label>
+        <div class="query-row">
+          <input id="query" type="search" autocomplete="off" placeholder="Example: Which project uses cross-encoder reranking?" />
+          <button id="search-button" class="button primary" type="button">Search</button>
+        </div>
+        <div class="sample-queries" aria-label="Sample queries">
+          <button type="button" data-query="Which projects are deployed on Hugging Face Spaces?">Hugging Face deployments</button>
+          <button type="button" data-query="Find projects using U-Net for image segmentation.">U-Net segmentation</button>
+          <button type="button" data-query="Which project uses a cross-encoder to rerank bi-encoder candidates?">Cross-encoder reranking</button>
+          <button type="button" data-query="How can semantic search support quality analytics and root-cause knowledge?">Quality analytics</button>
+        </div>
+
+        <div class="controls-grid">
+          <label>Top results
+            <select id="top-k">
+              <option value="3">3</option>
+              <option value="5" selected>5</option>
+              <option value="8">8</option>
+              <option value="10">10</option>
+            </select>
+          </label>
+          <label>Project category
+            <select id="category-filter"><option value="">All categories</option></select>
+          </label>
+          <label>Document type
+            <select id="type-filter"><option value="">All document types</option></select>
+          </label>
+        </div>
+
+        <div class="model-progress" id="model-progress" hidden>
+          <div class="progress-track"><span id="progress-bar"></span></div>
+          <p id="progress-text">Preparing semantic model…</p>
+        </div>
+      </div>
+
+      <div id="search-summary" class="search-summary" hidden></div>
+      <div id="results" class="results" aria-live="polite"></div>
+    </section>
+
+    <section class="metrics-section shell" aria-label="Corpus statistics">
+      <article><span>Documents</span><strong id="stat-documents">—</strong></article>
+      <article><span>Chunks</span><strong id="stat-chunks">—</strong></article>
+      <article><span>Average chunk</span><strong id="stat-avg-chunk">—</strong></article>
+      <article><span>Search location</span><strong>On-device</strong></article>
+    </section>
+
+    <section id="architecture" class="content-section shell two-column">
+      <div>
+        <p class="eyebrow">HOW IT WORKS</p>
+        <h2>Static deployment, real Transformer inference</h2>
+        <p>Public documents are processed into section-aware chunks. The app loads precomputed vectors when available; otherwise it generates and caches normalized document embeddings locally. A query embedding is compared with each eligible chunk, and the highest cosine-similarity scores are returned with provenance.</p>
+      </div>
+      <ol class="steps">
+        <li><span>01</span><div><strong>Load</strong><p>Fetch static corpus and metadata JSON.</p></div></li>
+        <li><span>02</span><div><strong>Embed</strong><p>Run all-MiniLM-L6-v2 through Transformers.js.</p></div></li>
+        <li><span>03</span><div><strong>Rank</strong><p>Apply filters and cosine-similarity scoring.</p></div></li>
+        <li><span>04</span><div><strong>Explain</strong><p>Show source, section, tags, score, and latency.</p></div></li>
+      </ol>
+    </section>
+
+    <section id="evaluation" class="content-section shell">
+      <p class="eyebrow">EVALUATION</p>
+      <h2>Metrics without invented results</h2>
+      <div class="evaluation-grid">
+        <article><h3>Recall@K</h3><p>Checks whether a relevant document or chunk appears within the top K results.</p><strong>Run offline evaluation</strong></article>
+        <article><h3>MRR</h3><p>Rewards systems that place the first relevant result near the top of the ranking.</p><strong>Run offline evaluation</strong></article>
+        <article><h3>Cosine analysis</h3><p>Inspects score distributions, weak matches, and high-similarity false positives.</p><strong>Human review required</strong></article>
+        <article><h3>Query latency</h3><p>The live app reports query embedding, ranking, and total browser latency.</p><strong>Measured per search</strong></article>
+      </div>
+    </section>
+
+    <section class="notice shell" aria-label="Responsible use">
+      <h2>Responsible use and data safety</h2>
+      <p>This educational demo may return incomplete, outdated, irrelevant, or imperfectly ranked results. Similarity scores are not probabilities. Do not add private company files, internal quality or GCS records, complaint investigations, customer data, emails, credentials, copyrighted material, or personally identifiable information to a public corpus. Review results before using them for decisions.</p>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+    <p>Built by Anmol Tripathi · Quality Data Scientist → Applied ML / AI</p>
+    <div><a href="https://github.com/unit-mole/transformer-projects">Repository</a><a href="../">All demos</a></div>
+  </footer>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

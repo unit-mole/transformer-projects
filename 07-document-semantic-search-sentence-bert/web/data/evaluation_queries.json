@@ -1,0 +1,71 @@
+[
+  {
+    "query": "Which projects are deployed on Hugging Face Spaces?",
+    "relevant_document_ids": [
+      "01-abstractive-text-summarization-transformer",
+      "02-neural-machine-translation-transformer",
+      "04-long-document-question-answering-longformer",
+      "06-multimodal-visual-question-answering-transformer"
+    ],
+    "relevant_chunk_ids": [],
+    "notes": "Relevant when a passage explicitly discusses a Hugging Face Spaces deployment."
+  },
+  {
+    "query": "Find projects using U-Net for image segmentation.",
+    "relevant_document_ids": [
+      "cnn-image-segmentation-unet"
+    ],
+    "relevant_chunk_ids": [],
+    "notes": "Relevant when the result describes U-Net segmentation."
+  },
+  {
+    "query": "Which project uses a cross-encoder to rerank bi-encoder candidates?",
+    "relevant_document_ids": [
+      "03-cross-encoder-bi-encoder-ranking-system"
+    ],
+    "relevant_chunk_ids": [],
+    "notes": "Relevant when both retrieval stages are described."
+  },
+  {
+    "query": "Where did I deploy a browser model with GitHub Pages?",
+    "relevant_document_ids": [
+      "07-document-semantic-search-sentence-bert",
+      "cnn-resnet-browser-deployment",
+      "portfolio-deployment-overview"
+    ],
+    "relevant_chunk_ids": [],
+    "notes": "Relevant when static browser deployment is discussed."
+  },
+  {
+    "query": "Which project evaluates summarization with BERTScore?",
+    "relevant_document_ids": [
+      "01-abstractive-text-summarization-transformer"
+    ],
+    "relevant_chunk_ids": [],
+    "notes": "Relevant when BERTScore is listed as a summarization metric."
+  },
+  {
+    "query": "How can semantic search support quality analytics and root-cause knowledge?",
+    "relevant_document_ids": [
+      "quality-analytics-semantic-search-use-case"
+    ],
+    "relevant_chunk_ids": [],
+    "notes": "Relevant when quality knowledge search, root cause, CAPA, SOP, or governance is discussed."
+  },
+  {
+    "query": "Which project uses a bidirectional LSTM with attention?",
+    "relevant_document_ids": [
+      "bilstm-emotion-detection"
+    ],
+    "relevant_chunk_ids": [],
+    "notes": "Relevant when BiLSTM and attention are both described."
+  },
+  {
+    "query": "What metrics evaluate this document semantic search engine?",
+    "relevant_document_ids": [
+      "07-document-semantic-search-sentence-bert"
+    ],
+    "relevant_chunk_ids": [],
+    "notes": "Relevant when Recall@K, MRR, cosine similarity, or latency is discussed."
+  }
+]

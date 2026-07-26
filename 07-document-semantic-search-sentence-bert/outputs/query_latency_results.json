@@ -1,0 +1,5 @@
+{
+  "status": "not_run",
+  "reason": "Generate Sentence-BERT embeddings and run the evaluation script before publishing numeric metrics.",
+  "values": null
+}

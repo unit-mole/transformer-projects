@@ -1,0 +1,22 @@
+{
+  "project_model_name": "Document Semantic Search Sentence-BERT",
+  "python_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "browser_model": "Xenova/all-MiniLM-L6-v2",
+  "task": "feature-extraction",
+  "pooling": "mean",
+  "normalize": true,
+  "embedding_dimension": 384,
+  "similarity_metric": "cosine",
+  "browser_runtime": "Transformers.js + ONNX Runtime Web",
+  "preprocessing": {
+    "markdown_aware": true,
+    "preserve_headings": true,
+    "preserve_code_text": true,
+    "preserve_technical_terms": true
+  },
+  "chunking": {
+    "chunk_size_words": 180,
+    "chunk_overlap_words": 40,
+    "section_aware": true
+  }
+}

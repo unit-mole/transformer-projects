@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "status": "browser_generation_required",
+  "strategy": "hybrid_browser_fallback",
+  "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+  "browser_model_name": "Xenova/all-MiniLM-L6-v2",
+  "embedding_dimension": 384,
+  "normalized": true,
+  "similarity_metric": "cosine",
+  "embeddings": [],
+  "note": "Run scripts/generate_embeddings.py for offline vectors, or let the GitHub Pages app generate and cache vectors locally on first use."
+}

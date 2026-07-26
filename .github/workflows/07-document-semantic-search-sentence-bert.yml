@@ -1,0 +1,129 @@
+name: 07 Document Semantic Search Sentence BERT CI and Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "07-document-semantic-search-sentence-bert/**"
+      - "pages/**"
+      - ".github/workflows/07-document-semantic-search-sentence-bert.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "07-document-semantic-search-sentence-bert/**"
+      - "pages/**"
+      - ".github/workflows/07-document-semantic-search-sentence-bert.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+env:
+  PROJECT_DIR: 07-document-semantic-search-sentence-bert
+
+jobs:
+  quality:
+    name: Test and validate project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: ${{ env.PROJECT_DIR }}/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r "$PROJECT_DIR/requirements.txt"
+
+      - name: Run unit tests
+        run: pytest "$PROJECT_DIR/tests" -q
+
+      - name: Validate required static files and JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("07-document-semantic-search-sentence-bert")
+          required = [
+              root / "web/index.html",
+              root / "web/style.css",
+              root / "web/app.js",
+              root / "web/search.js",
+              root / "web/embeddings.js",
+              root / "web/data/corpus.json",
+              root / "web/data/document_chunks.json",
+              root / "web/data/embeddings.json",
+              root / "web/data/evaluation_queries.json",
+              root / "web/data/metadata.json",
+          ]
+          missing = [str(path) for path in required if not path.is_file()]
+          if missing:
+              raise SystemExit("Missing required files:\n" + "\n".join(missing))
+
+          for path in root.glob("web/data/*.json"):
+              with path.open(encoding="utf-8") as handle:
+                  json.load(handle)
+              print(f"validated {path}")
+          PY
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check "$PROJECT_DIR/web/app.js"
+          node --check "$PROJECT_DIR/web/search.js"
+          node --check "$PROJECT_DIR/web/embeddings.js"
+
+  deploy:
+    name: Deploy all browser demos to GitHub Pages
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: quality
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Assemble monorepo Pages site
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          cp -R pages/. _site/
+
+          shopt -s nullglob
+          for web_dir in [0-9][0-9]-*/web; do
+            project_dir="${web_dir%/web}"
+            echo "Publishing ${project_dir}"
+            mkdir -p "_site/${project_dir}"
+            cp -R "${web_dir}/." "_site/${project_dir}/"
+          done
+
+          touch _site/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

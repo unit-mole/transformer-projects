@@ -1,0 +1,9 @@
+{
+  "title": "Document Semantic Search with Sentence-BERT",
+  "project_number": "07",
+  "repository": "https://github.com/unit-mole/transformer-projects",
+  "live_demo": "https://unit-mole.github.io/transformer-projects/07-document-semantic-search-sentence-bert/",
+  "deployment": "GitHub Pages",
+  "backend": null,
+  "responsible_use": "Public, non-confidential, redistributable documents only. Human review is required."
+}
