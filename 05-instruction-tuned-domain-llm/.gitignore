@@ -1,0 +1,19 @@
+__pycache__/
+.pytest_cache/
+.venv/
+.env
+models/lora_adapter/*
+!models/lora_adapter/README.md
+models/tokenizer/*
+!models/tokenizer/README.md
+*.safetensors
+*.bin
+outputs/runs/
+# Static frontend
+web/node_modules/
+web/dist/
+web/.vite/
+
+# Merged / exported browser models
+models/merged_model/
+models/browser_model/

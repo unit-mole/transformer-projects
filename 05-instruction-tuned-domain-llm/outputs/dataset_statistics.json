@@ -1,0 +1,21 @@
+{
+  "rows": 82,
+  "categories": {
+    "concept_explanation": 38,
+    "algorithm_comparison": 11,
+    "metric_explanation": 8,
+    "example_generation": 5,
+    "interview_answer": 5,
+    "workflow_explanation": 6,
+    "quality_analytics": 5,
+    "responsible_ai": 4
+  },
+  "topics": 77,
+  "splits": {
+    "test": 9,
+    "validation": 9,
+    "train": 64
+  },
+  "average_prompt_words": 6.63,
+  "average_response_words": 35.94
+}

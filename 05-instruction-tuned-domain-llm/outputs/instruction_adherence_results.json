@@ -1,0 +1,14 @@
+{
+  "status": "not_run",
+  "reason": "A LoRA adapter has not been trained or evaluated inside this generated source bundle.",
+  "next_command": "python scripts/evaluate_model.py after configuring ADAPTER_MODEL_ID or training models/lora_adapter",
+  "metrics": {
+    "instruction_adherence": null,
+    "bertscore_precision": null,
+    "bertscore_recall": null,
+    "bertscore_f1": null,
+    "response_relevance": null,
+    "hallucination_flag_rate": null,
+    "average_latency_seconds": null
+  }
+}

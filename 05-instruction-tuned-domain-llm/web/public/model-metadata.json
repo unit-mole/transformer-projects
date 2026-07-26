@@ -1,0 +1,11 @@
+{
+  "project": "05-instruction-tuned-domain-llm",
+  "base_model": "google/flan-t5-small",
+  "browser_base_model": "Xenova/flan-t5-small",
+  "task": "text2text-generation",
+  "architecture": "T5 encoder-decoder Transformer",
+  "fine_tuning": "LoRA / PEFT",
+  "browser_runtime": "Transformers.js + ONNX Runtime Web",
+  "custom_model_status": "not_published",
+  "claim_policy": "The custom model is labelled fine-tuned only after training, merging, ONNX export, evaluation, and publication."
+}

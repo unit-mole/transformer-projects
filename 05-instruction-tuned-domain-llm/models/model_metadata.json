@@ -1,0 +1,20 @@
+{
+  "project": "05-instruction-tuned-domain-llm",
+  "base_model_id": "google/flan-t5-small",
+  "fine_tuning_method": "LoRA / PEFT",
+  "peft_task_type": "SEQ_2_SEQ_LM",
+  "adapter_model_id": "YOUR_HF_USERNAME/ml-ds-instruction-tuned-flan-t5-small-lora",
+  "adapter_status": "not_trained_in_generated_bundle",
+  "demo_behavior": "Loads adapter when ADAPTER_MODEL_ID is configured; otherwise transparently loads the base model.",
+  "lora": {
+    "r": 8,
+    "alpha": 16,
+    "dropout": 0.05,
+    "target_modules": [
+      "q",
+      "v"
+    ]
+  },
+  "training_dataset": "data/ml_ds_instruction_dataset.jsonl",
+  "responsible_use": "Educational portfolio demonstration only."
+}

@@ -1,0 +1,7 @@
+{
+  "max_new_tokens": 160,
+  "temperature": 0.3,
+  "top_p": 0.9,
+  "repetition_penalty": 1.1,
+  "max_input_length": 384
+}

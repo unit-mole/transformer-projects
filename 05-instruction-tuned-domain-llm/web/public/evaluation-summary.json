@@ -1,0 +1,11 @@
+{
+  "status": "not_run",
+  "metrics": {
+    "Instruction adherence": "Not run",
+    "BERTScore F1": "Not run",
+    "Response relevance": "Not run",
+    "Hallucination review": "Not run",
+    "Average latency": "Not run"
+  },
+  "note": "Run the Python evaluation scripts against the trained adapter before replacing these values."
+}

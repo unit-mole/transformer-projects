@@ -1,0 +1,401 @@
+{
+  "project": "05-instruction-tuned-domain-llm",
+  "deployment_strategy": {
+    "github": "Complete Python and JavaScript engineering project",
+    "hugging_face_model_hub": "LoRA adapter plus merged ONNX browser model after training",
+    "hugging_face_static_space": "Transformers.js browser inference frontend"
+  },
+  "base_browser_model": "Xenova/flan-t5-small",
+  "custom_model_status": "not_published",
+  "file_count": 97,
+  "files": [
+    {
+      "path": ".dockerignore",
+      "size_bytes": 110
+    },
+    {
+      "path": ".gitignore",
+      "size_bytes": 310
+    },
+    {
+      "path": ".pytest_cache/.gitignore",
+      "size_bytes": 37
+    },
+    {
+      "path": ".pytest_cache/CACHEDIR.TAG",
+      "size_bytes": 191
+    },
+    {
+      "path": ".pytest_cache/README.md",
+      "size_bytes": 302
+    },
+    {
+      "path": ".pytest_cache/v/cache/nodeids",
+      "size_bytes": 608
+    },
+    {
+      "path": "CHANGELOG_FROM_ORIGINAL.md",
+      "size_bytes": 1353
+    },
+    {
+      "path": "DATASET_CARD.md",
+      "size_bytes": 2878
+    },
+    {
+      "path": "DEPLOYMENT_HUGGINGFACE.md",
+      "size_bytes": 1663
+    },
+    {
+      "path": "DEPLOYMENT_STATIC_SPACE.md",
+      "size_bytes": 2551
+    },
+    {
+      "path": "Dockerfile",
+      "size_bytes": 273
+    },
+    {
+      "path": "MODEL_CARD.md",
+      "size_bytes": 2170
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 9113
+    },
+    {
+      "path": "README_HUGGINGFACE.md",
+      "size_bytes": 1285
+    },
+    {
+      "path": "STATIC_BROWSER_DEPLOYMENT_ROADMAP.md",
+      "size_bytes": 5715
+    },
+    {
+      "path": "VALIDATION_REPORT.md",
+      "size_bytes": 1146
+    },
+    {
+      "path": "app.py",
+      "size_bytes": 235
+    },
+    {
+      "path": "archive/original_instruction_tune_360.ipynb",
+      "size_bytes": 668325
+    },
+    {
+      "path": "configs/config.yaml",
+      "size_bytes": 454
+    },
+    {
+      "path": "configs/generation_config.json",
+      "size_bytes": 121
+    },
+    {
+      "path": "data/README_data.md",
+      "size_bytes": 1236
+    },
+    {
+      "path": "data/evaluation_prompts.jsonl",
+      "size_bytes": 3893
+    },
+    {
+      "path": "data/ml_ds_instruction_dataset.jsonl",
+      "size_bytes": 87510
+    },
+    {
+      "path": "data/sample_instructions.jsonl",
+      "size_bytes": 11481
+    },
+    {
+      "path": "gradio_app.py",
+      "size_bytes": 6744
+    },
+    {
+      "path": "images/README.md",
+      "size_bytes": 274
+    },
+    {
+      "path": "images/architecture.png",
+      "size_bytes": 72458
+    },
+    {
+      "path": "models/base_model_reference.txt",
+      "size_bytes": 307
+    },
+    {
+      "path": "models/lora_adapter/README.md",
+      "size_bytes": 347
+    },
+    {
+      "path": "models/model_metadata.json",
+      "size_bytes": 673
+    },
+    {
+      "path": "models/tokenizer/README.md",
+      "size_bytes": 280
+    },
+    {
+      "path": "notebooks/instruction_tuned_domain_llm.ipynb",
+      "size_bytes": 3111
+    },
+    {
+      "path": "notebooks/response_evaluation_hallucination_analysis.ipynb",
+      "size_bytes": 2022
+    },
+    {
+      "path": "outputs/before_after_finetuning_examples.md",
+      "size_bytes": 351
+    },
+    {
+      "path": "outputs/bertscore_results.json",
+      "size_bytes": 496
+    },
+    {
+      "path": "outputs/dataset_statistics.json",
+      "size_bytes": 424
+    },
+    {
+      "path": "outputs/dataset_validation_report.json",
+      "size_bytes": 74
+    },
+    {
+      "path": "outputs/generated_response_examples.csv",
+      "size_bytes": 107
+    },
+    {
+      "path": "outputs/hallucination_analysis.md",
+      "size_bytes": 424
+    },
+    {
+      "path": "outputs/instruction_adherence_results.json",
+      "size_bytes": 496
+    },
+    {
+      "path": "outputs/instruction_category_distribution.png",
+      "size_bytes": 69227
+    },
+    {
+      "path": "outputs/manual_review_results.csv",
+      "size_bytes": 107
+    },
+    {
+      "path": "outputs/model_metrics.json",
+      "size_bytes": 496
+    },
+    {
+      "path": "outputs/prompt_length_distribution.png",
+      "size_bytes": 29792
+    },
+    {
+      "path": "outputs/response_length_distribution.png",
+      "size_bytes": 32934
+    },
+    {
+      "path": "outputs/response_relevance_results.json",
+      "size_bytes": 496
+    },
+    {
+      "path": "project_manifest.json",
+      "size_bytes": 4976
+    },
+    {
+      "path": "pyproject.toml",
+      "size_bytes": 113
+    },
+    {
+      "path": "requirements-ci.txt",
+      "size_bytes": 110
+    },
+    {
+      "path": "requirements-export.txt",
+      "size_bytes": 127
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 222
+    },
+    {
+      "path": "scripts/evaluate_model.py",
+      "size_bytes": 999
+    },
+    {
+      "path": "scripts/export_merged_model_to_onnx.py",
+      "size_bytes": 4892
+    },
+    {
+      "path": "scripts/merge_lora_adapter.py",
+      "size_bytes": 2112
+    },
+    {
+      "path": "scripts/prepare_dataset.py",
+      "size_bytes": 1322
+    },
+    {
+      "path": "scripts/publish_browser_model.py",
+      "size_bytes": 1299
+    },
+    {
+      "path": "scripts/run_gradio.py",
+      "size_bytes": 323
+    },
+    {
+      "path": "scripts/run_hallucination_analysis.py",
+      "size_bytes": 1083
+    },
+    {
+      "path": "scripts/train_lora.py",
+      "size_bytes": 623
+    },
+    {
+      "path": "src/__init__.py",
+      "size_bytes": 99
+    },
+    {
+      "path": "src/bertscore_evaluation.py",
+      "size_bytes": 1099
+    },
+    {
+      "path": "src/data_preprocessing.py",
+      "size_bytes": 5000
+    },
+    {
+      "path": "src/hallucination_analysis.py",
+      "size_bytes": 1362
+    },
+    {
+      "path": "src/inference_pipeline.py",
+      "size_bytes": 2035
+    },
+    {
+      "path": "src/instruction_adherence.py",
+      "size_bytes": 1551
+    },
+    {
+      "path": "src/instruction_dataset_builder.py",
+      "size_bytes": 1129
+    },
+    {
+      "path": "src/model_evaluation.py",
+      "size_bytes": 3003
+    },
+    {
+      "path": "src/model_loader.py",
+      "size_bytes": 2280
+    },
+    {
+      "path": "src/model_training.py",
+      "size_bytes": 3598
+    },
+    {
+      "path": "src/peft_lora_config.py",
+      "size_bytes": 858
+    },
+    {
+      "path": "src/prompt_templates.py",
+      "size_bytes": 2018
+    },
+    {
+      "path": "src/relevance_scoring.py",
+      "size_bytes": 1176
+    },
+    {
+      "path": "src/response_generation.py",
+      "size_bytes": 1526
+    },
+    {
+      "path": "src/tokenizer_utils.py",
+      "size_bytes": 581
+    },
+    {
+      "path": "src/visualization.py",
+      "size_bytes": 1511
+    },
+    {
+      "path": "tests/test_data_preprocessing.py",
+      "size_bytes": 1137
+    },
+    {
+      "path": "tests/test_inference_pipeline.py",
+      "size_bytes": 323
+    },
+    {
+      "path": "tests/test_instruction_adherence.py",
+      "size_bytes": 318
+    },
+    {
+      "path": "tests/test_prompt_templates.py",
+      "size_bytes": 270
+    },
+    {
+      "path": "tests/test_response_generation.py",
+      "size_bytes": 261
+    },
+    {
+      "path": "web/README.md",
+      "size_bytes": 1235
+    },
+    {
+      "path": "web/index.html",
+      "size_bytes": 456
+    },
+    {
+      "path": "web/package.json",
+      "size_bytes": 419
+    },
+    {
+      "path": "web/public/architecture.svg",
+      "size_bytes": 2658
+    },
+    {
+      "path": "web/public/evaluation-summary.json",
+      "size_bytes": 332
+    },
+    {
+      "path": "web/public/model-metadata.json",
+      "size_bytes": 491
+    },
+    {
+      "path": "web/scripts/validate-config.mjs",
+      "size_bytes": 1228
+    },
+    {
+      "path": "web/src/config.js",
+      "size_bytes": 1299
+    },
+    {
+      "path": "web/src/evaluation.js",
+      "size_bytes": 2166
+    },
+    {
+      "path": "web/src/examples.js",
+      "size_bytes": 1259
+    },
+    {
+      "path": "web/src/main.js",
+      "size_bytes": 16862
+    },
+    {
+      "path": "web/src/model-client.js",
+      "size_bytes": 1545
+    },
+    {
+      "path": "web/src/model-worker.js",
+      "size_bytes": 3845
+    },
+    {
+      "path": "web/src/prompt-templates.js",
+      "size_bytes": 2171
+    },
+    {
+      "path": "web/src/styles.css",
+      "size_bytes": 8490
+    },
+    {
+      "path": "web/src/utils.js",
+      "size_bytes": 933
+    },
+    {
+      "path": "web/vite.config.js",
+      "size_bytes": 213
+    }
+  ]
+}
