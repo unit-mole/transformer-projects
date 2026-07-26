@@ -1,137 +1,204 @@
----
-title: Abstractive Text Summarization Transformer
-emoji: 📝
-colorFrom: blue
-colorTo: purple
-sdk: gradio
-sdk_version: 6.20.0
-python_version: 3.10
-app_file: app.py
-pinned: false
-license: mit
-suggested_hardware: cpu-basic
----
-
 # 01 — Abstractive Text Summarization Transformer
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
-[![Transformers](https://img.shields.io/badge/Hugging%20Face-Transformers-yellow)](https://huggingface.co/docs/transformers/)
-[![Gradio](https://img.shields.io/badge/Demo-Gradio-orange)](https://www.gradio.app/)
+[![Project 01 CI](https://github.com/unit-mole/transformer-projects/actions/workflows/01-abstractive-text-summarization-transformer.yml/badge.svg)](https://github.com/unit-mole/transformer-projects/actions/workflows/01-abstractive-text-summarization-transformer.yml)
+[![Python](https://img.shields.io/badge/Python-3.11-blue)](https://www.python.org/)
+[![Transformers.js](https://img.shields.io/badge/Transformers.js-Browser%20Inference-yellow)](https://huggingface.co/docs/transformers.js/)
+[![Hugging Face](https://img.shields.io/badge/Hugging%20Face-Static%20Space-orange)](https://huggingface.co/spaces)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](../LICENSE)
 
-A portfolio-ready encoder-decoder Transformer application that generates concise abstractive summaries from news articles, quality reports, complaint narratives, root-cause descriptions, and other long text. The project exposes decoding controls, evaluates quality and latency, and provides a strict comparison framework for the earlier LSTM Seq2Seq summarizer.
+A portfolio-ready encoder-decoder Transformer system that creates concise abstractive summaries from news articles, quality reports, complaint narratives, root-cause descriptions, and other long English text. The repository preserves the complete Python ML engineering project and adds a separate, fully interactive **free Hugging Face Static Space** where the Transformer runs inside the visitor's browser.
 
-> **Responsible use:** This project is for educational and portfolio demonstration purposes. Generated summaries may be incomplete, inaccurate, biased, over-compressed, or hallucinated. Do not use them as the sole basis for legal, medical, financial, safety-critical, academic, journalistic, or official decisions. Do not paste private, confidential, sensitive, copyrighted, or personally identifiable text into a public demo. Human review is required before real-world use.
+> **Responsible use:** Generated summaries may omit context, distort facts, over-compress important information, or hallucinate. Do not paste private, confidential, sensitive, copyrighted, or personally identifiable text into a public demo. Do not use outputs as the sole basis for legal, medical, financial, safety-critical, academic, journalistic, or official decisions. Human review is required.
+
+## Portfolio Deployment Architecture
+
+Static deployment changes where inference runs; it does not turn the application into a mock demo.
+
+| Portfolio component | Purpose |
+|---|---|
+| GitHub repository | Complete Python implementation, evaluation, tests, notebooks, baselines, LSTM comparison, and engineering documentation |
+| Hugging Face model references | Honest documentation of the original Python checkpoint and its browser-compatible ONNX conversion |
+| Hugging Face Static Space | Live browser-based summarization using Transformers.js and ONNX Runtime Web without paid compute |
+
+```text
+GitHub
+└── Complete Python ML project
+
+Hugging Face Model Hub
+├── sshleifer/distilbart-cnn-12-6           # Python base checkpoint
+└── Xenova/distilbart-cnn-12-6              # Browser-compatible ONNX conversion
+
+Hugging Face Static Space
+└── web/                                     # Live Transformers.js demo
+```
+
+The project does **not** claim that either public checkpoint was trained by the portfolio author. A separate personal model repository should be created only after actual fine-tuning or model conversion.
 
 ## Live Links
 
-- **Hugging Face Space:** `https://huggingface.co/spaces/<YOUR_USERNAME>/abstractive-text-summarization-transformer`
-- **Hugging Face model repository:** `https://huggingface.co/<YOUR_USERNAME>/distilbart-summarization-portfolio`
-- **GitHub repository:** `https://github.com/<YOUR_GITHUB_USERNAME>/transformer-projects`
+- **GitHub project:** https://github.com/unit-mole/transformer-projects/tree/main/01-abstractive-text-summarization-transformer
+- **Hugging Face Static Space:** `https://huggingface.co/spaces/anmol-unitmole/01-abstractive-text-summarization-transformer`
+- **Python base model:** https://huggingface.co/sshleifer/distilbart-cnn-12-6
+- **Browser ONNX model:** https://huggingface.co/Xenova/distilbart-cnn-12-6
 
 ## Strict Project Pattern
 
 | Requirement | Implementation |
 |---|---|
-| Application | Summarize pasted news articles and long text |
-| Comparison | Transformer vs previous LSTM Seq2Seq framework, plus Lead-3 and TextRank baselines |
-| Controls | Minimum/maximum summary length, beams, length penalty, no-repeat n-grams, early stopping |
-| Model | `sshleifer/distilbart-cnn-12-6` by default; configurable through `MODEL_NAME` |
-| Dataset | Bundled safe samples; XSum and CNN/DailyMail loaders for evaluation/fine-tuning |
-| Metrics | ROUGE-1, ROUGE-2, ROUGE-L, BERTScore, compression ratio, inference time |
-| Deployment | Gradio application prepared for Hugging Face Spaces |
+| Application | Generate concise summaries from pasted news articles and long text |
+| Comparison | Transformer vs prior LSTM Seq2Seq framework, plus Lead-3 and TextRank baselines |
+| Controls | Minimum/maximum output tokens, beam count, length penalty, no-repeat n-grams, early stopping |
+| Python model | `sshleifer/distilbart-cnn-12-6` |
+| Browser model | `Xenova/distilbart-cnn-12-6` with quantized ONNX weights |
+| Dataset | Safe bundled examples; bounded XSum or CNN/DailyMail subsets for offline evaluation and optional fine-tuning |
+| Metrics | ROUGE-1, ROUGE-2, ROUGE-L, BERTScore, inference time, lengths, and compression ratio |
+| Deployment | Free Hugging Face Static Space using Transformers.js; Python/Gradio retained for local development |
 
-## Why DistilBART
+## Why the Static Space Is Still a Real Transformer Project
 
-The original notebook referenced `sshleifer/distilbart-cnn-12-6` but disabled Transformer inference by default. This rebuilt project makes that encoder-decoder model the actual inference engine. DistilBART is selected because it is already trained for English news summarization, supports beam-search generation settings directly, and is smaller and faster than full BART-large while retaining strong summarization quality. The app loads the tokenizer and sequence-to-sequence model directly instead of using the removed Transformers v5 summarization pipeline interface.
+The live application imports `@huggingface/transformers`, downloads quantized ONNX weights from the Hugging Face Hub, tokenizes the source text, executes the DistilBART encoder and autoregressive decoder in the browser, and returns the generated summary. It does not call a Python backend or a paid inference API.
 
-## Architecture
+The browser layer demonstrates:
+
+- encoder-decoder Transformer inference;
+- quantized ONNX model deployment;
+- WebGPU with a WASM fallback;
+- model download and browser caching;
+- decoding controls and beam-search experiments;
+- token counts and token-ID previews;
+- long-document chunking and second-pass aggregation;
+- latency, compression, word-count, runtime, and chunk metrics;
+- accessible UI, error states, copy, and download actions.
+
+## Models
+
+### Python engineering model
+
+```text
+sshleifer/distilbart-cnn-12-6
+```
+
+Used by `app.py`, `gradio_app.py`, the Python inference pipeline, evaluation scripts, and optional fine-tuning workflow.
+
+### Static browser model
+
+```text
+Xenova/distilbart-cnn-12-6
+```
+
+This repository contains ONNX weights prepared for Transformers.js. The Static Space selects:
+
+- `q4f16` with WebGPU when supported;
+- `q8` with WASM as the compatibility fallback.
+
+The initial download is substantial and can take several minutes. Browser caching makes later visits faster.
+
+## System Architecture
 
 ```mermaid
 flowchart LR
     A[Article or long text] --> B[Unicode-safe cleanup]
-    B --> C{Within context limit?}
-    C -- Yes --> D[DistilBART encoder]
-    C -- No --> E[Token-aware chunking]
-    E --> F[Chunk summaries]
-    F --> G[Second-pass summary]
-    D --> H[Autoregressive decoder]
-    G --> H
-    H --> I[Generated summary]
-    I --> J[Latency, compression and length metrics]
+    B --> C[Browser tokenizer]
+    C --> D{Within input limit?}
+    D -- Yes --> E[DistilBART encoder]
+    D -- No --> F[Token-aware chunks]
+    F --> G[Chunk summaries]
+    G --> H[Optional second pass]
+    E --> I[Autoregressive decoder]
+    H --> I
+    I --> J[Summary]
+    J --> K[Latency, compression, token and chunk metrics]
 ```
 
-DistilBART is an encoder-decoder Transformer. The encoder creates contextual representations of the source text; the decoder generates the summary token by token while attending to the encoded source. Unlike a recurrent LSTM Seq2Seq model, Transformer attention processes token relationships in parallel and handles long-range dependencies without recurrent hidden-state propagation.
+The Python implementation follows the same conceptual flow and adds offline training, dataset loading, formal evaluation, plots, baselines, and comparison scripts.
+
+## Static Demo Features
+
+The application in `web/` provides:
+
+- article/long-text entry and safe sample documents;
+- automatic WebGPU-to-WASM fallback;
+- model-loading progress and cache messaging;
+- minimum and maximum generated-token controls;
+- beam count, length penalty, and no-repeat n-gram controls;
+- optional token-aware long-document chunking;
+- generated summary with copy and download actions;
+- latency, compression ratio, word count, chunk count, runtime, and quantization details;
+- input token count and token-ID preview;
+- beam 1 versus selected-beam comparison;
+- architecture, Python engineering, evaluation, LSTM comparison, limitations, and responsible-use sections.
+
+## Python Project Capabilities
+
+The existing Python project remains the technical foundation and should not be deleted. It includes:
+
+- direct `AutoTokenizer` and `AutoModelForSeq2SeqLM` inference;
+- token-aware long-input processing;
+- XSum and CNN/DailyMail dataset loaders;
+- optional fine-tuning scripts;
+- ROUGE and BERTScore evaluation;
+- average/minimum/maximum latency reporting;
+- Lead-3 and TextRank-style baselines;
+- strict LSTM Seq2Seq comparison framework;
+- error-analysis templates;
+- Gradio application for local use or eligible compute-backed hosting;
+- Python unit tests and lightweight GitHub CI.
 
 ## Dataset Strategy
 
-The repository intentionally does not redistribute a large news dataset.
+Large news datasets are not committed to GitHub.
 
-- `data/sample_articles.csv` contains original, synthetic demonstration articles that are safe to publish.
-- `data/sample_summaries.csv` contains their human-written reference summaries.
-- `src/dataset_loader.py` can load a bounded XSum or CNN/DailyMail subset through Hugging Face Datasets.
-- Training and evaluation scripts record the dataset name, split, sample count, article column, summary column, and split configuration.
+- `data/sample_articles.csv` contains safe original/synthetic examples.
+- `data/sample_summaries.csv` contains reference summaries.
+- `src/dataset_loader.py` loads bounded public subsets when requested.
+- `data/README_data.md` documents source, columns, intended use, and redistribution limits.
 
-The original notebook successfully loaded 80 synthetic rows and 80 XSum rows, but it evaluated only extractive baselines because Transformer execution was disabled. The rebuilt notebooks and scripts keep the useful dataset-loading idea while replacing the repetitive notebook structure with modular, testable code.
-
-## Text Preprocessing
-
-The preprocessing pipeline:
-
-1. converts missing values safely;
-2. decodes HTML entities and removes HTML tags;
-3. normalizes Unicode without deleting non-ASCII names or language characters;
-4. removes control characters and repeated whitespace;
-5. preserves facts, entities, dates, numbers, and punctuation;
-6. applies the same cleaning during evaluation and inference;
-7. uses token-aware truncation/chunking rather than cutting arbitrary words.
-
-Default maximum input size is 900 model tokens per chunk, with a 64-token overlap. The model itself supports up to 1,024 positions.
+The same cleaning logic preserves entities, dates, numbers, punctuation, and Unicode text without aggressive meaning-destroying preprocessing.
 
 ## Generation Controls
 
 | Control | Default | Purpose |
 |---|---:|---|
-| Minimum summary length | 30 tokens | Prevents extremely short outputs |
-| Maximum summary length | 120 tokens | Caps output size |
-| Number of beams | 4 | Keeps multiple candidate sequences during decoding |
-| Length penalty | 2.0 | Controls preference for longer or shorter sequences |
-| No-repeat n-gram size | 3 | Reduces repeated phrases |
-| Early stopping | Enabled | Stops when beam candidates are complete |
-
-Beam search keeps several candidate summaries at every generation step. More beams can improve output fluency or coverage, but increase latency and memory use. The demo includes a beam-comparison tab so reviewers can observe this trade-off.
+| Minimum new tokens | 30 | Reduces extremely short outputs |
+| Maximum new tokens | 120 | Caps summary length |
+| Beam count | 4 | Retains multiple decoding candidates; higher values increase latency |
+| Length penalty | 2.0 | Adjusts preference for shorter or longer sequences |
+| No-repeat n-gram | 3 | Reduces repeated phrases |
+| Early stopping | Enabled | Stops completed beam search appropriately |
+| Long-document chunking | Enabled | Summarizes safe token-sized sections before optional aggregation |
 
 ## Evaluation
 
-The evaluation script reports:
+Offline evaluation reports:
 
-- **ROUGE-1:** unigram overlap with the reference summary.
-- **ROUGE-2:** bigram overlap.
-- **ROUGE-L:** longest-common-subsequence overlap.
-- **BERTScore:** contextual semantic similarity.
-- **Inference time:** average, minimum, maximum, and per-example latency.
-- **Compression ratio:** generated-summary word count divided by article word count.
-- **Generated/reference lengths:** helps detect over-compression or excessive verbosity.
+- **ROUGE-1:** unigram overlap;
+- **ROUGE-2:** bigram overlap;
+- **ROUGE-L:** longest-common-subsequence overlap;
+- **BERTScore:** contextual semantic similarity;
+- **inference time:** average, minimum, maximum, and per-example latency;
+- **compression ratio:** generated-summary words divided by source words;
+- **generated/reference lengths:** useful for diagnosing over-compression.
 
-Run actual evaluation before publishing metrics:
+Run actual evaluation before publishing numbers:
 
 ```bash
 python scripts/evaluate_model.py --input-csv data/sample_summaries.csv --compute-bertscore
 ```
 
-Results are written to `outputs/runs/<timestamp>/`. The committed JSON and CSV files in `outputs/` are honest `not_run` templates—not fabricated scores.
+The committed JSON and CSV files remain honest `not_run` templates until a real run is completed. Copy verified results into `web/public/evaluation-results.json` only after evaluation.
 
 ## Transformer vs LSTM Seq2Seq
 
 | Dimension | LSTM Seq2Seq with Attention | DistilBART Transformer |
 |---|---|---|
 | Sequence processing | Recurrent, step by step | Attention-based parallel encoding |
-| Long-range dependencies | Can weaken across long sequences | Direct token-to-token attention |
+| Long-range context | Compressed through recurrent states | Direct token-to-token attention |
 | Pretraining | Depends on the earlier custom project | Large-scale pretrained language model |
-| Decoding | Autoregressive, often custom beam logic | Mature generation API with beam controls |
-| Comparison status | Awaiting actual prior predictions/metrics | Ready for evaluation |
+| Decoding | Often custom beam logic | Mature generation controls |
+| Browser deployment | Requires a separate conversion | ONNX checkpoint runs through Transformers.js |
+| Metric publication | Requires actual prior predictions | Evaluated through repository scripts |
 
-To avoid invented results, place actual LSTM predictions in a CSV with:
+Place real LSTM predictions in a CSV with:
 
 ```text
 id,article,reference_summary,lstm_summary
@@ -143,133 +210,109 @@ Then run:
 python scripts/compare_with_lstm.py --lstm-csv data/lstm_comparison_template.csv
 ```
 
-The script evaluates the same rows and creates a comparison table only when real LSTM summaries are supplied.
+No LSTM metrics are invented.
 
-## Error Analysis
-
-Review examples for:
-
-- missing important context;
-- incorrect entities, numbers, or dates;
-- hallucinated facts;
-- overly generic or short summaries;
-- repetition;
-- over-compression;
-- failure on very long inputs;
-- domain mismatch between news-trained models and quality/manufacturing text.
-
-Use `outputs/error_analysis_examples.md` as the reporting template and replace placeholders with actual model outputs.
-
-## Folder Structure
+## Repository Structure
 
 ```text
 01-abstractive-text-summarization-transformer/
-├── app.py
-├── gradio_app.py
-├── configs/config.yaml
+├── app.py                         # Local Python/Gradio entry point
+├── gradio_app.py                  # Python interactive application
+├── configs/
 ├── data/
 ├── docs/
-├── images/
 ├── models/
 ├── notebooks/
 ├── outputs/
 ├── scripts/
 ├── src/
 ├── tests/
+├── web/                           # Free Hugging Face Static Space
+│   ├── README.md                  # Static Space metadata/card
+│   ├── index.html
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── public/
+│   ├── src/
+│   │   ├── main.js
+│   │   ├── model-worker.js
+│   │   ├── summarizer-client.js
+│   │   ├── samples.js
+│   │   ├── text-utils.js
+│   │   └── styles.css
+│   └── tests/
 ├── MODEL_CARD.md
 ├── README_HUGGINGFACE.md
 ├── requirements.txt
-├── Dockerfile
-└── pyproject.toml
+└── requirements-ci.txt
 ```
 
-## Local Setup
+## Run the Python Application Locally
 
 ```bash
-git clone https://github.com/<YOUR_GITHUB_USERNAME>/transformer-projects.git
+git clone https://github.com/unit-mole/transformer-projects.git
 cd transformer-projects/01-abstractive-text-summarization-transformer
 python -m venv .venv
 ```
 
-Windows PowerShell:
+Windows CMD:
 
-```powershell
-.venv\Scripts\Activate.ps1
+```bat
+.venv\Scripts\activate
 pip install -r requirements.txt
 python app.py
 ```
 
-macOS/Linux:
+The first inference request downloads the Python checkpoint. Training is never performed during startup.
+
+## Run the Static Application Locally
 
 ```bash
-source .venv/bin/activate
-pip install -r requirements.txt
-python app.py
+cd web
+npm install
+npm run dev
 ```
 
-The first summary request downloads the pretrained model and caches it locally. Training is never performed during app startup.
-
-## Evaluation and Training
+Production validation:
 
 ```bash
-# Evaluate the pretrained model
-python scripts/evaluate_model.py --input-csv data/sample_summaries.csv --compute-bertscore
-
-# Compare actual LSTM outputs
-python scripts/compare_with_lstm.py --lstm-csv data/lstm_comparison_template.csv
-
-# Optional fine-tuning; GPU strongly recommended
-python scripts/train_model.py --dataset xsum --train-samples 2000 --validation-samples 200
+npm test
+npm run build
+npm run preview
 ```
 
-Fine-tuned artifacts are saved under `models/transformer_summarization_model/` and tokenizer files under `models/tokenizer/`. Large weights are ignored by Git and should be pushed to a Hugging Face model repository or tracked with Git LFS.
+## Free Hugging Face Static Space Deployment
 
-## Hugging Face Deployment
+The workflow can automatically create or update the Space after GitHub tests pass.
 
-1. Create a Space and select **Gradio**.
-2. Copy this project folder’s contents to the root of the Space repository.
-3. Keep `app.py`, `requirements.txt`, and the YAML metadata at the top of `README.md` in the Space root.
-4. Use `cpu-basic` for the suggested hardware.
-5. Push the files and inspect the build logs.
-6. Add the final Space URL to this README and the root portfolio README.
+1. Create a Hugging Face write token.
+2. In the GitHub repository, open **Settings → Secrets and variables → Actions**.
+3. Add the repository secret:
 
-**Current platform note (July 2026):** Hugging Face documentation says newly created Gradio/Docker Spaces require an eligible paid plan even though CPU Basic has no hourly hardware charge. Static Spaces remain free. This repository is fully Gradio-ready, but a strictly free account may need a separate Static Space/Transformers.js implementation or local Gradio sharing. See `docs/HUGGING_FACE_DEPLOYMENT.md`.
-
-## Docker
-
-```bash
-docker build -t abstractive-summarizer .
-docker run --rm -p 7860:7860 abstractive-summarizer
+```text
+HF_TOKEN=<your Hugging Face write token>
 ```
 
-## Portfolio Positioning
+4. Add the repository variable:
 
-**One-line description**
+```text
+HF_SPACE_REPO=anmol-unitmole/01-abstractive-text-summarization-transformer
+```
 
-> Built and deployed a DistilBART abstractive summarization system with configurable beam search, long-text handling, ROUGE/BERTScore evaluation, latency analysis, and a rigorous LSTM Seq2Seq comparison framework.
+5. Push changes to `main` or manually run the Project 01 workflow.
+6. The `sync-to-hugging-face` job uploads only `web/`, creates the Space with `space_sdk="static"` when needed, and allows Hugging Face to run `npm run build`.
 
-**Quality Data Science relevance**
-
-The same architecture can support complaint summaries, GCS case summaries, issue-detail condensation, root-cause narratives, customer-feedback summarization, quality-report summarization, and automated business reporting—with human review and domain-specific validation.
+See `docs/STATIC_SPACE_DEPLOYMENT.md` for the complete setup and troubleshooting guide.
 
 ## Limitations
 
-- The default checkpoint is trained primarily on news-style summarization.
-- CPU inference can be slow, especially with multiple chunks or high beam counts.
-- Long-document map-reduce summarization can lose cross-chunk context.
-- ROUGE rewards lexical overlap and does not guarantee factual correctness.
-- BERTScore is semantic but can still miss factual errors.
-- The system does not verify claims against external evidence.
-
-## Future Improvements
-
-- Fine-tune on a documented CNN/DailyMail or XSum subset.
-- Add quality-domain data with appropriate governance and de-identification.
-- Add factual-consistency metrics and named-entity preservation checks.
-- Export an optimized ONNX model for browser/static deployment.
-- Add quantization and caching to reduce CPU latency.
-- Publish a versioned Hugging Face model card with actual benchmark results.
+- The first browser download is large.
+- Performance depends on connection speed, memory, browser, WebGPU support, and beam count.
+- WebGPU support is still browser- and device-dependent; WASM is slower but more compatible.
+- DistilBART is oriented toward English news and may underperform on specialized domains.
+- Chunked summarization can lose context spanning distant sections.
+- Generated text may omit or invent details.
 
 ## Skills Demonstrated
 
-Transformer architecture, encoder-decoder modeling, generative NLP, DistilBART, beam search, long-text chunking, ROUGE, BERTScore, latency benchmarking, baseline design, LSTM comparison, Gradio, Hugging Face deployment, testing, CI/CD, Docker, responsible AI, and professional ML repository design.
+Transformer architecture, abstractive NLP, DistilBART, PyTorch, Hugging Face Transformers, Transformers.js, ONNX Runtime Web, WebGPU/WASM deployment, quantization, tokenization, beam search, long-document handling, ROUGE, BERTScore, latency analysis, baselines, error analysis, testing, GitHub Actions, browser workers, accessible frontend development, and free Hugging Face Static Space deployment.

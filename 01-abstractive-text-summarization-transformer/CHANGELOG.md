@@ -8,3 +8,12 @@
 - Made the Transformer model the real inference path instead of an optional disabled branch.
 - Added direct model loading compatible with the modern Transformers API.
 - Added Gradio, full generation controls, long-text chunking, ROUGE, BERTScore, honest output templates, LSTM comparison, tests, CI, Docker, model card, and deployment guides.
+
+## 1.1.0 — Free Static Space deployment
+
+- Added a complete `web/` application using Transformers.js and ONNX Runtime Web.
+- Added WebGPU and WASM runtime selection with automatic fallback.
+- Added model-loading progress, token-aware chunking, beam comparison, latency, compression, token, and chunk metrics.
+- Added Static Space metadata and Vite build configuration.
+- Extended GitHub Actions to test/build the browser app and optionally synchronize it to Hugging Face.
+- Updated deployment documentation and model metadata without removing the Python/Gradio implementation.

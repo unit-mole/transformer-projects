@@ -14,8 +14,13 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: project-01-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  test:
+  test-python:
+    name: Test Python project
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -42,7 +47,7 @@ jobs:
             01-abstractive-text-summarization-transformer/requirements.txt
             01-abstractive-text-summarization-transformer/requirements-ci.txt
 
-      - name: Verify corrected dependency pins
+      - name: Verify dependency compatibility pins
         shell: bash
         run: |
           grep -Fx "gradio==5.49.1" requirements.txt
@@ -57,18 +62,111 @@ jobs:
           python -m pip install -r requirements-ci.txt
           python -m pip check
 
-      - name: Show installed compatibility versions
-        run: |
-          python -c "import gradio, huggingface_hub; print('gradio=', gradio.__version__); print('huggingface_hub=', huggingface_hub.__version__)"
-
       - name: Run unit tests
         run: python -m pytest -q
 
-      - name: Validate inference pipeline import
-        run: python -c "from src.inference_pipeline import summarize_text; print('Inference import passed')"
-
-      - name: Validate Gradio app import without downloading models
-        run: python -c "import app; import gradio_app; print('Gradio app import passed')"
+      - name: Validate inference and Gradio imports without model downloads
+        run: |
+          python -c "from src.inference_pipeline import summarize_text; print('Inference import passed')"
+          python -c "import app; import gradio_app; print('Gradio app import passed')"
 
       - name: Compile Python files
         run: python -m compileall -q app.py gradio_app.py src scripts tests
+
+  build-static-space:
+    name: Test and build Static Space
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    defaults:
+      run:
+        working-directory: 01-abstractive-text-summarization-transformer/web
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          package-manager-cache: false
+
+      - name: Install browser application dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run browser utility tests
+        run: npm test
+
+      - name: Build Hugging Face Static Space
+        run: npm run build
+
+      - name: Validate Static Space output
+        shell: bash
+        run: |
+          test -f dist/index.html
+          grep -F "sdk: static" README.md
+          grep -F "app_build_command: npm run build" README.md
+          grep -F "app_file: dist/index.html" README.md
+          grep -F "Xenova/distilbart-cnn-12-6" README.md
+
+  sync-to-hugging-face:
+    name: Sync Static Space to Hugging Face
+    needs: [test-python, build-static-space]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: >-
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
+      github.ref == 'refs/heads/main' &&
+      vars.HF_SPACE_REPO != ''
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install Hugging Face Hub client
+        run: python -m pip install "huggingface-hub==0.36.2"
+
+      - name: Create or update free Static Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_SPACE_REPO: ${{ vars.HF_SPACE_REPO }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import os
+          from huggingface_hub import HfApi
+
+          token = os.environ.get("HF_TOKEN", "").strip()
+          repo_id = os.environ.get("HF_SPACE_REPO", "").strip()
+          sha = os.environ.get("GITHUB_SHA", "")[:7]
+
+          if not token:
+              raise SystemExit("HF_TOKEN is missing. Add it under GitHub Settings > Secrets and variables > Actions > Secrets.")
+          if "/" not in repo_id:
+              raise SystemExit("HF_SPACE_REPO must use owner/space-name format.")
+
+          api = HfApi(token=token)
+          api.create_repo(
+              repo_id=repo_id,
+              repo_type="space",
+              space_sdk="static",
+              private=False,
+              exist_ok=True,
+          )
+          api.upload_folder(
+              repo_id=repo_id,
+              repo_type="space",
+              folder_path="01-abstractive-text-summarization-transformer/web",
+              path_in_repo=".",
+              ignore_patterns=["node_modules/**", "dist/**", ".vite/**", "*.log"],
+              delete_patterns="*",
+              commit_message=f"Deploy Project 01 Static Space from GitHub {sha}",
+          )
+          print(f"Static Space synchronized: https://huggingface.co/spaces/{repo_id}")
+          PY

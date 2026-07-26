@@ -1,0 +1,16 @@
+{
+  "status": "not_run",
+  "evaluated_at": null,
+  "dataset": null,
+  "sample_count": null,
+  "python_model": "sshleifer/distilbart-cnn-12-6",
+  "browser_model": "Xenova/distilbart-cnn-12-6",
+  "metrics": {
+    "rouge_1": null,
+    "rouge_2": null,
+    "rouge_l": null,
+    "bertscore_f1": null,
+    "average_inference_seconds": null
+  },
+  "note": "Replace null values only with results from an actual evaluation run."
+}

@@ -1,48 +1,44 @@
-# Hugging Face Space Card — Abstractive Text Summarization Transformer
+# Hugging Face Deployment Card — Project 01
 
-## Description
+Project 01 uses a dedicated browser application under `web/` for the free Hugging Face Static Space.
 
-Generate concise abstractive summaries from news articles and long text using DistilBART. Adjust minimum/maximum summary length, beam count, length penalty, repetition control, and early stopping. The app reports latency, compression ratio, input/output lengths, chunks processed, model, and device.
+## Deployment source
 
-## How to Use
+```text
+web/
+├── README.md
+├── index.html
+├── package.json
+├── vite.config.js
+├── public/
+├── src/
+└── tests/
+```
 
-1. Paste an article or select a bundled sample.
-2. Adjust generation controls.
-3. Select **Generate summary**.
-4. Review the output and metrics.
-5. Download the generated summary if needed.
-6. Use the beam-comparison tab to inspect speed-quality trade-offs.
+The deployment workflow uploads the contents of `web/` to the root of the Space repository. The actual Space card and required YAML metadata are in `web/README.md`.
 
-## Model
+## Runtime
 
-- Base model: `sshleifer/distilbart-cnn-12-6`
-- Task: English abstractive summarization
-- Architecture: distilled BART encoder-decoder Transformer
-- Inference: direct `AutoTokenizer` + `AutoModelForSeq2SeqLM`
-- Training at startup: none
+- Space SDK: `static`
+- Build command: `npm run build`
+- Served file: `dist/index.html`
+- Browser library: `@huggingface/transformers==3.8.1`
+- Browser model: `Xenova/distilbart-cnn-12-6`
+- Preferred runtime: WebGPU with `q4f16`
+- Fallback runtime: WASM with `q8`
+- Python server: none
+- Paid Hugging Face compute: none
 
-## Inputs and Outputs
+## Honest model attribution
 
-- Input: English article or long-form text.
-- Output: Generated summary plus latency, compression ratio, word counts, chunks processed, and runtime information.
+The browser model is an ONNX conversion of `sshleifer/distilbart-cnn-12-6`. It is used as a public base model and is not presented as a model trained by the portfolio author.
 
-## Evaluation
+## Responsible use
 
-Repository scripts support ROUGE-1, ROUGE-2, ROUGE-L, BERTScore, compression ratio, and inference-time reporting. Published metrics must come from an actual evaluation run; no result is fabricated in this template.
-
-## Transformer vs LSTM
-
-The repository contains a comparison framework for actual outputs from the prior LSTM Seq2Seq summarization project. The demo explains architectural differences, while offline scripts calculate comparable metrics once real LSTM predictions are supplied.
-
-## Responsible Use
-
-Generated summaries can omit context, distort facts, or hallucinate. Do not paste confidential or sensitive text into a public Space. Do not rely on outputs for high-stakes decisions. Human review is required.
+Summaries can omit, distort, or hallucinate details. Do not paste sensitive or confidential text. Human review is mandatory before real-world use.
 
 ## Links
 
-- GitHub: `https://github.com/<YOUR_GITHUB_USERNAME>/transformer-projects`
-- Model repository: `https://huggingface.co/<YOUR_USERNAME>/distilbart-summarization-portfolio`
-
-## Portfolio Note
-
-This is Project 01 in a ten-project Transformer portfolio progressing from sequence-to-sequence generation to retrieval, multimodal AI, instruction tuning, and RAG.
+- GitHub: https://github.com/unit-mole/transformer-projects
+- Project: https://github.com/unit-mole/transformer-projects/tree/main/01-abstractive-text-summarization-transformer
+- Browser model: https://huggingface.co/Xenova/distilbart-cnn-12-6

@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Browser-based abstractive text summarization with DistilBART, Transformers.js, and ONNX Runtime Web."
+    />
+    <meta name="theme-color" content="#0b1220" />
+    <title>Abstractive Text Summarization Transformer</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to summarization workspace</a>
+
+    <header class="hero">
+      <nav class="topbar" aria-label="Project links">
+        <a class="brand" href="#top" aria-label="Project home">
+          <span class="brand-mark" aria-hidden="true">T</span>
+          <span>Transformer Project 01</span>
+        </a>
+        <div class="nav-links">
+          <a href="https://github.com/unit-mole/transformer-projects" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://huggingface.co/Xenova/distilbart-cnn-12-6" target="_blank" rel="noreferrer">Browser model</a>
+        </div>
+      </nav>
+
+      <div id="top" class="hero-content">
+        <p class="eyebrow">Real browser-based Transformer inference</p>
+        <h1>Abstractive Text Summarization</h1>
+        <p class="hero-copy">
+          Generate concise summaries with a DistilBART encoder-decoder Transformer running locally in your
+          browser through Transformers.js and ONNX Runtime Web. No paid inference server is used.
+        </p>
+        <div class="hero-badges" aria-label="Technology badges">
+          <span>DistilBART</span>
+          <span>Transformers.js</span>
+          <span>ONNX Runtime Web</span>
+          <span>Static Space</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="notice responsible-use" aria-labelledby="responsible-title">
+        <div class="notice-icon" aria-hidden="true">!</div>
+        <div>
+          <h2 id="responsible-title">Responsible-use notice</h2>
+          <p>
+            Generated summaries may omit context, distort facts, or hallucinate. Do not enter confidential,
+            sensitive, copyrighted, or personally identifiable text. Human review is required, especially for
+            high-stakes or official use.
+          </p>
+        </div>
+      </section>
+
+      <section id="workspace" class="workspace" aria-labelledby="workspace-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Interactive demo</p>
+            <h2 id="workspace-title">Summarization workspace</h2>
+          </div>
+          <div id="model-state" class="status-pill status-idle" role="status" aria-live="polite">
+            Model not loaded
+          </div>
+        </div>
+
+        <div class="workspace-grid">
+          <article class="panel input-panel">
+            <div class="panel-heading">
+              <div>
+                <h3>1. Source text</h3>
+                <p>Paste a news article, report, complaint narrative, or other English text.</p>
+              </div>
+              <label class="sample-label" for="sample-select">
+                Example
+                <select id="sample-select">
+                  <option value="">Choose a sample</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="sr-only" for="article-input">Article or long text</label>
+            <textarea
+              id="article-input"
+              rows="16"
+              maxlength="40000"
+              placeholder="Paste an article or long text here..."
+              spellcheck="true"
+            ></textarea>
+
+            <div class="text-stats" aria-live="polite">
+              <span><strong id="source-words">0</strong> words</span>
+              <span><strong id="source-characters">0</strong> characters</span>
+              <span><strong id="source-tokens">—</strong> model tokens</span>
+            </div>
+
+            <details class="token-preview">
+              <summary>Tokenized input preview</summary>
+              <p id="token-preview-text">Load the model and generate a summary to view the first token IDs.</p>
+            </details>
+          </article>
+
+          <aside class="panel controls-panel" aria-labelledby="controls-title">
+            <div class="panel-heading compact">
+              <div>
+                <h3 id="controls-title">2. Generation controls</h3>
+                <p>Experiment with decoding and output-length settings.</p>
+              </div>
+            </div>
+
+            <label class="control">
+              <span>Runtime</span>
+              <select id="runtime-select">
+                <option value="auto">Auto: WebGPU then WASM fallback</option>
+                <option value="webgpu">WebGPU</option>
+                <option value="wasm">WASM / CPU</option>
+              </select>
+              <small>Changing runtime reloads the model.</small>
+            </label>
+
+            <label class="control">
+              <span>Minimum new tokens <output id="min-token-output">30</output></span>
+              <input id="min-tokens" type="range" min="10" max="100" step="5" value="30" />
+            </label>
+
+            <label class="control">
+              <span>Maximum new tokens <output id="max-token-output">120</output></span>
+              <input id="max-tokens" type="range" min="40" max="220" step="10" value="120" />
+            </label>
+
+            <label class="control">
+              <span>Beam count <output id="beam-output">4</output></span>
+              <input id="num-beams" type="range" min="1" max="8" step="1" value="4" />
+              <small>More beams can improve search quality but increase latency.</small>
+            </label>
+
+            <label class="control">
+              <span>Length penalty <output id="penalty-output">2.0</output></span>
+              <input id="length-penalty" type="range" min="0.5" max="3" step="0.1" value="2" />
+            </label>
+
+            <label class="control">
+              <span>No-repeat n-gram <output id="ngram-output">3</output></span>
+              <input id="no-repeat-ngram" type="range" min="0" max="5" step="1" value="3" />
+            </label>
+
+            <label class="checkbox-control">
+              <input id="long-document-mode" type="checkbox" checked />
+              <span>
+                <strong>Long-document chunking</strong>
+                <small>Summarize token-aware chunks, then combine them in a second pass.</small>
+              </span>
+            </label>
+
+            <div class="action-stack">
+              <button id="load-model-button" class="button button-secondary" type="button">Load model</button>
+              <button id="generate-button" class="button button-primary" type="button">Generate summary</button>
+              <button id="compare-button" class="button button-ghost" type="button">Compare beam 1 vs selected</button>
+            </div>
+          </aside>
+        </div>
+
+        <div id="progress-panel" class="progress-panel" hidden>
+          <div class="progress-heading">
+            <span id="progress-label">Preparing model…</span>
+            <span id="progress-percent">0%</span>
+          </div>
+          <progress id="model-progress" max="100" value="0">0%</progress>
+          <p id="progress-detail">The first model load downloads quantized ONNX weights and stores them in the browser cache.</p>
+        </div>
+
+        <div id="error-panel" class="error-panel" role="alert" hidden></div>
+
+        <section class="results" aria-labelledby="results-title">
+          <div class="section-heading result-heading">
+            <div>
+              <p class="eyebrow">Model output</p>
+              <h2 id="results-title">Generated summary</h2>
+            </div>
+            <div class="result-actions">
+              <button id="copy-button" class="button button-small" type="button" disabled>Copy</button>
+              <button id="download-button" class="button button-small" type="button" disabled>Download</button>
+            </div>
+          </div>
+
+          <article class="summary-card">
+            <p id="summary-output" class="summary-placeholder">
+              Your generated summary will appear here. The model runs only after you select Generate summary.
+            </p>
+          </article>
+
+          <div class="metric-grid" aria-label="Inference metrics">
+            <article class="metric-card">
+              <span>Inference latency</span>
+              <strong id="latency-metric">—</strong>
+            </article>
+            <article class="metric-card">
+              <span>Compression ratio</span>
+              <strong id="compression-metric">—</strong>
+            </article>
+            <article class="metric-card">
+              <span>Summary words</span>
+              <strong id="summary-words-metric">—</strong>
+            </article>
+            <article class="metric-card">
+              <span>Input chunks</span>
+              <strong id="chunks-metric">—</strong>
+            </article>
+            <article class="metric-card">
+              <span>Runtime</span>
+              <strong id="runtime-metric">—</strong>
+            </article>
+            <article class="metric-card">
+              <span>Quantization</span>
+              <strong id="dtype-metric">—</strong>
+            </article>
+          </div>
+        </section>
+
+        <section id="beam-comparison" class="comparison-panel" aria-labelledby="beam-comparison-title" hidden>
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Decoding experiment</p>
+              <h2 id="beam-comparison-title">Beam-search comparison</h2>
+            </div>
+          </div>
+          <div class="comparison-grid">
+            <article class="comparison-card">
+              <h3>Greedy decoding — beam 1</h3>
+              <p id="beam-one-summary"></p>
+              <dl>
+                <div><dt>Latency</dt><dd id="beam-one-latency">—</dd></div>
+              </dl>
+            </article>
+            <article class="comparison-card">
+              <h3 id="selected-beam-title">Beam search</h3>
+              <p id="selected-beam-summary"></p>
+              <dl>
+                <div><dt>Latency</dt><dd id="selected-beam-latency">—</dd></div>
+              </dl>
+            </article>
+          </div>
+        </section>
+      </section>
+
+      <section class="technical-section" aria-labelledby="architecture-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Architecture</p>
+            <h2 id="architecture-title">Where the Transformer runs</h2>
+          </div>
+        </div>
+        <div class="flow" role="img" aria-label="Text enters browser preprocessing, DistilBART encoder, autoregressive decoder, then summary metrics">
+          <div class="flow-node">Source text</div><span aria-hidden="true">→</span>
+          <div class="flow-node">Browser preprocessing</div><span aria-hidden="true">→</span>
+          <div class="flow-node accent">DistilBART encoder</div><span aria-hidden="true">→</span>
+          <div class="flow-node accent">Transformer decoder</div><span aria-hidden="true">→</span>
+          <div class="flow-node">Summary + metrics</div>
+        </div>
+        <p class="technical-copy">
+          Static deployment changes the execution location, not the model. Quantized ONNX weights are executed
+          locally through ONNX Runtime Web. The application does not send the article to a Python backend or a
+          paid inference endpoint.
+        </p>
+      </section>
+
+      <section class="technical-section two-column" aria-label="Portfolio evidence">
+        <article class="content-card">
+          <p class="eyebrow">Python engineering layer</p>
+          <h2>Full ML project preserved on GitHub</h2>
+          <ul>
+            <li>PyTorch and Hugging Face Transformers inference</li>
+            <li>ROUGE, BERTScore, latency, and compression evaluation</li>
+            <li>Lead-3, TextRank, and LSTM Seq2Seq comparison framework</li>
+            <li>Training, tests, notebooks, model card, and error analysis</li>
+          </ul>
+        </article>
+        <article class="content-card">
+          <p class="eyebrow">Model evaluation</p>
+          <h2>Publish only measured results</h2>
+          <div id="evaluation-status" class="evaluation-status">Loading evaluation status…</div>
+          <p>
+            The committed evaluation file contains null values until the Python evaluation script is executed.
+            This prevents fabricated portfolio metrics.
+          </p>
+        </article>
+      </section>
+
+      <section class="technical-section" aria-labelledby="lstm-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Model comparison</p>
+            <h2 id="lstm-title">Transformer vs LSTM Seq2Seq</h2>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Dimension</th><th>LSTM Seq2Seq with attention</th><th>DistilBART Transformer</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Sequence processing</td><td>Recurrent, token by token</td><td>Attention-based parallel encoding</td></tr>
+              <tr><td>Long-range context</td><td>Compressed through recurrent states</td><td>Direct token-to-token attention</td></tr>
+              <tr><td>Pretraining</td><td>Earlier custom project</td><td>Large-scale pretrained checkpoint</td></tr>
+              <tr><td>Browser deployment</td><td>Requires a separate conversion</td><td>ONNX model runs through Transformers.js</td></tr>
+              <tr><td>Published metrics</td><td>Requires actual prior predictions</td><td>Generated by repository evaluation scripts</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="technical-section limitations" aria-labelledby="limitations-title">
+        <div>
+          <p class="eyebrow">Limitations</p>
+          <h2 id="limitations-title">What reviewers should know</h2>
+        </div>
+        <ul>
+          <li>The initial model download is large and can take several minutes on a slower connection.</li>
+          <li>Browser speed depends on device memory, WebGPU availability, browser support, and beam count.</li>
+          <li>The model is news-oriented and may perform less reliably on legal, medical, or specialized technical text.</li>
+          <li>Chunked long-document summarization can lose cross-section context or over-compress details.</li>
+          <li>Generated text may contain unsupported or incorrect facts and always requires review.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>Project 01 of the Transformer Models portfolio · Built for free Static Space deployment.</p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

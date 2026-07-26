@@ -29,5 +29,18 @@
     "inference time",
     "compression ratio"
   ],
-  "responsible_use": "Human review required; do not use public demo for private or high-stakes text."
+  "responsible_use": "Human review required; do not use public demo for private or high-stakes text.",
+  "browser_deployment": {
+    "model_name": "Xenova/distilbart-cnn-12-6",
+    "library": "@huggingface/transformers",
+    "library_version": "3.8.1",
+    "format": "ONNX",
+    "space_sdk": "static",
+    "runtime_preference": [
+      "webgpu:q4f16",
+      "wasm:q8"
+    ],
+    "inference_location": "visitor browser",
+    "paid_server_required": false
+  }
 }
