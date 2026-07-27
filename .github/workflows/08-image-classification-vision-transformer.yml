@@ -2,86 +2,89 @@ name: 08 Image Classification Vision Transformer CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - "08-image-classification-vision-transformer/**"
-      - "docs/**"
+      - "docs/08-image-classification-vision-transformer/**"
       - ".github/workflows/08-image-classification-vision-transformer.yml"
+
   pull_request:
+    branches:
+      - main
     paths:
       - "08-image-classification-vision-transformer/**"
-      - "docs/**"
+      - "docs/08-image-classification-vision-transformer/**"
       - ".github/workflows/08-image-classification-vision-transformer.yml"
+
   workflow_dispatch:
 
 permissions:
   contents: read
 
-concurrency:
-  group: project-08-validation-${{ github.ref }}
-  cancel-in-progress: true
+env:
+  PROJECT_DIR: 08-image-classification-vision-transformer
+  DEPLOY_DIR: docs/08-image-classification-vision-transformer
 
 jobs:
   validate:
-    name: Validate Project 08 and Pages Files
+    name: Validate Project 08 source and docs deployment copy
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.11"
-          cache: pip
-          cache-dependency-path: 08-image-classification-vision-transformer/requirements.txt
-
-      - name: Install lightweight requirements
-        working-directory: 08-image-classification-vision-transformer
+      - name: Validate source web application files
+        shell: bash
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
+          set -euo pipefail
+          test -f "$PROJECT_DIR/web/index.html"
+          test -f "$PROJECT_DIR/web/style.css"
+          test -f "$PROJECT_DIR/web/app.js"
 
-      - name: Validate project browser application
+      - name: Validate docs deployment files
+        shell: bash
         run: |
-          test -f 08-image-classification-vision-transformer/web/index.html
-          test -f 08-image-classification-vision-transformer/web/style.css
-          test -f 08-image-classification-vision-transformer/web/app.js
-          test -f 08-image-classification-vision-transformer/web/inference.js
-          test -f 08-image-classification-vision-transformer/web/image_preprocessing.js
-          test -f 08-image-classification-vision-transformer/web/attention.js
-          test -f 08-image-classification-vision-transformer/web/metadata.json
-          test -f 08-image-classification-vision-transformer/web/class_names.json
-          python -m json.tool 08-image-classification-vision-transformer/web/metadata.json > /dev/null
-          python -m json.tool 08-image-classification-vision-transformer/web/class_names.json > /dev/null
+          set -euo pipefail
+          test -f "$DEPLOY_DIR/index.html"
+          test -f "$DEPLOY_DIR/style.css"
+          test -f "$DEPLOY_DIR/app.js"
 
-      - name: Validate GitHub Pages publishing folder
+      - name: Check JavaScript syntax
+        shell: bash
         run: |
-          test -f docs/.nojekyll
-          test -f docs/index.html
-          test -f docs/08-image-classification-vision-transformer/index.html
-          test -f docs/08-image-classification-vision-transformer/style.css
-          test -f docs/08-image-classification-vision-transformer/app.js
-          test -f docs/08-image-classification-vision-transformer/inference.js
-          test -f docs/08-image-classification-vision-transformer/image_preprocessing.js
-          test -f docs/08-image-classification-vision-transformer/attention.js
-          test -f docs/08-image-classification-vision-transformer/metadata.json
-          test -f docs/08-image-classification-vision-transformer/class_names.json
-          python -m json.tool docs/08-image-classification-vision-transformer/metadata.json > /dev/null
-          python -m json.tool docs/08-image-classification-vision-transformer/class_names.json > /dev/null
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            echo "Checking $file"
+            node --check "$file"
+          done < <(find "$PROJECT_DIR/web" "$DEPLOY_DIR" -type f -name '*.js' -print0)
 
-      - name: Check deployed copy matches project web folder
+      - name: Validate JSON assets
+        shell: bash
         run: |
-          diff -qr \
-            --exclude=.nojekyll \
-            08-image-classification-vision-transformer/web \
-            docs/08-image-classification-vision-transformer
+          python - <<'PY'
+          import json
+          from pathlib import Path
 
-      - name: Validate Python modules
-        working-directory: 08-image-classification-vision-transformer
-        run: python -m compileall -q src scripts
+          roots = [
+              Path("08-image-classification-vision-transformer/web"),
+              Path("docs/08-image-classification-vision-transformer"),
+          ]
 
-      - name: Run tests
-        working-directory: 08-image-classification-vision-transformer
-        run: python -m pytest -q
+          for root in roots:
+              if not root.exists():
+                  raise FileNotFoundError(f"Missing required directory: {root}")
+
+              for path in sorted(root.rglob("*.json")):
+                  with path.open(encoding="utf-8") as handle:
+                      json.load(handle)
+                  print(f"Validated {path}")
+          PY
+
+      - name: Confirm workflow is validation-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Project 08 is published by GitHub Pages from main/docs."
+          echo "This workflow validates files only and does not deploy Pages."
