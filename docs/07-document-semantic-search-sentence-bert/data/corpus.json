@@ -1,0 +1,226 @@
+[
+  {
+    "document_id": "01-abstractive-text-summarization-transformer",
+    "project_name": "Abstractive Text Summarization Transformer",
+    "project_category": "Transformer / NLP",
+    "source_file": "01-abstractive-text-summarization-transformer.md",
+    "document_type": "project_readme",
+    "text": "# Abstractive Text Summarization Transformer\n\n## Objective\nBuild an end-to-end abstractive summarization system that converts long articles into concise, fluent summaries. The project compares Transformer checkpoints, preserves factual meaning, and documents responsible use for generated text.\n\n## Model and evaluation\nThe workflow uses BART or T5-style sequence-to-sequence Transformers. Evaluation includes ROUGE, BERTScore, compression ratio, latency, and qualitative error analysis for hallucination, repetition, and omitted facts.\n\n## Deployment\nThe interactive demonstration is designed for Hugging Face Spaces. The repository includes a model card, dataset card, reproducible inference code, and sample summaries.",
+    "url_or_local_path": "https://github.com/unit-mole/transformer-projects/tree/main/01-abstractive-text-summarization-transformer",
+    "tags": [
+      "summarization",
+      "bart",
+      "t5",
+      "rouge",
+      "bertscore",
+      "hugging-face-spaces"
+    ],
+    "created_from": "public synthetic portfolio documentation",
+    "content_hash": "86bdff0a1e690d85673e421adb5f781bc04ac512d51814f7011bd0b2e5eaf81b"
+  },
+  {
+    "document_id": "02-neural-machine-translation-transformer",
+    "project_name": "Neural Machine Translation Transformer",
+    "project_category": "Transformer / NLP",
+    "source_file": "02-neural-machine-translation-transformer.md",
+    "document_type": "project_readme",
+    "text": "# Neural Machine Translation Transformer\n\n## Objective\nCreate an English-to-Hindi neural machine translation application using an encoder-decoder Transformer. The system handles tokenization, batched inference, translation examples, and language-specific error analysis.\n\n## Metrics\nThe project reports BLEU, chrF, sentence-level examples, inference latency, and manual review of named entities, word order, transliteration, and meaning preservation.\n\n## Deployment\nA free Hugging Face Spaces demo lets users enter English text and view Hindi translations. The project separates training, evaluation, and deployment code.",
+    "url_or_local_path": "https://github.com/unit-mole/transformer-projects/tree/main/02-neural-machine-translation-transformer",
+    "tags": [
+      "translation",
+      "english-hindi",
+      "marianmt",
+      "bleu",
+      "chrf",
+      "hugging-face-spaces"
+    ],
+    "created_from": "public synthetic portfolio documentation",
+    "content_hash": "9b47ebb621154ed8fdacb6f688474150870cdc7eef94b683136800ecb11b1240"
+  },
+  {
+    "document_id": "03-cross-encoder-bi-encoder-ranking-system",
+    "project_name": "Cross-Encoder and Bi-Encoder Ranking System",
+    "project_category": "Transformer / Information Retrieval",
+    "source_file": "03-cross-encoder-bi-encoder-ranking-system.md",
+    "document_type": "project_readme",
+    "text": "# Cross-Encoder and Bi-Encoder Ranking System\n\n## Objective\nBuild a two-stage search-ranking pipeline. A Sentence-BERT bi-encoder converts queries and documents into reusable embeddings for efficient candidate retrieval. A cross-encoder then jointly scores each query-document pair for more precise reranking.\n\n## Architecture\nThe bi-encoder retrieves a broad top-K shortlist with cosine similarity. The cross-encoder reranks only those candidates, balancing retrieval speed and relevance quality. Evaluation includes Recall@K, MRR, NDCG, reranking lift, and latency by candidate-set size.\n\n## Portfolio value\nThe project demonstrates production-oriented information retrieval, embedding indexes, semantic search, reranking, and evaluation beyond simple accuracy.",
+    "url_or_local_path": "https://github.com/unit-mole/transformer-projects/tree/main/03-cross-encoder-bi-encoder-ranking-system",
+    "tags": [
+      "sentence-transformers",
+      "bi-encoder",
+      "cross-encoder",
+      "reranking",
+      "information-retrieval"
+    ],
+    "created_from": "public synthetic portfolio documentation",
+    "content_hash": "21f4f6fab097ef4b0824f9c1312dada16e7e287d52107d1d162077564e103547"
+  },
+  {
+    "document_id": "04-long-document-question-answering-longformer",
+    "project_name": "Long-Document Question Answering with Longformer",
+    "project_category": "Transformer / NLP",
+    "source_file": "04-long-document-question-answering-longformer.md",
+    "document_type": "model_card",
+    "text": "# Long-Document Question Answering with Longformer\n\n## Problem\nStandard Transformer context windows can truncate long reports. This project uses a Longformer-style architecture and sliding-window preprocessing to answer questions from lengthy technical documents.\n\n## Evaluation\nAnswer quality is assessed with exact match, token-level F1, unanswerable-question handling, context coverage, and latency. Error analysis distinguishes retrieval failure, span-selection failure, and ambiguous questions.\n\n## Deployment\nThe public demo is hosted on Hugging Face Spaces and uses only public sample documents.",
+    "url_or_local_path": "https://github.com/unit-mole/transformer-projects/tree/main/04-long-document-question-answering-longformer",
+    "tags": [
+      "longformer",
+      "long-document",
+      "question-answering",
+      "long-context",
+      "hugging-face-spaces"
+    ],
+    "created_from": "public synthetic portfolio documentation",
+    "content_hash": "c189096d6974417ee2abcabb2451e507a9659e584c8f6791d24c314bf921b6ac"
+  },
+  {
+    "document_id": "05-instruction-tuned-domain-llm",
+    "project_name": "Instruction-Tuned Domain LLM",
+    "project_category": "Generative AI / LLM",
+    "source_file": "05-instruction-tuned-domain-llm.md",
+    "document_type": "model_card",
+    "text": "# Instruction-Tuned Domain LLM\n\n## Objective\nAdapt a compact language model to follow domain-specific instructions using supervised fine-tuning and parameter-efficient LoRA adapters. The project emphasizes reproducible prompt formatting, safe data preparation, evaluation, and transparent limitations.\n\n## Evaluation\nThe analysis covers instruction-following quality, exact-match tasks, semantic similarity, latency, failure categories, and manual review. It does not claim domain expertise or safe autonomous decision-making.\n\n## Deployment\nModel artifacts and an interactive demonstration are prepared for Hugging Face. Private company data is excluded from training and examples.",
+    "url_or_local_path": "https://github.com/unit-mole/transformer-projects/tree/main/05-instruction-tuned-domain-llm",
+    "tags": [
+      "instruction-tuning",
+      "lora",
+      "peft",
+      "generative-ai",
+      "domain-llm",
+      "hugging-face"
+    ],
+    "created_from": "public synthetic portfolio documentation",
+    "content_hash": "cb9ec0abb69e9284af185b2f9c434f58d84a6be2bb08fb0fc5695f8cb0b4a6d7"
+  },
+  {
+    "document_id": "06-multimodal-visual-question-answering-transformer",
+    "project_name": "Multimodal Visual Question Answering Transformer",
+    "project_category": "Multimodal AI",
+    "source_file": "06-multimodal-visual-question-answering-transformer.md",
+    "document_type": "project_readme",
+    "text": "# Multimodal Visual Question Answering Transformer\n\n## Objective\nAnswer natural-language questions about an uploaded image using a vision-language Transformer such as ViLT. The application combines image preprocessing, text tokenization, multimodal attention, answer ranking, and confidence-aware presentation.\n\n## Evaluation\nThe project records VQA accuracy, answer-type performance, latency, qualitative examples, and failure analysis for OCR, counting, spatial relationships, and out-of-domain images.\n\n## Deployment\nThe demo is packaged for Hugging Face Spaces with a public sample-image policy and a responsible-use disclaimer.",
+    "url_or_local_path": "https://github.com/unit-mole/transformer-projects/tree/main/06-multimodal-visual-question-answering-transformer",
+    "tags": [
+      "vqa",
+      "vilt",
+      "vision-language",
+      "multimodal",
+      "transformer",
+      "hugging-face-spaces"
+    ],
+    "created_from": "public synthetic portfolio documentation",
+    "content_hash": "dc23759e9dff260551054d6a5f527af315a8310c0a6f5798e867995f6c1efda2"
+  },
+  {
+    "document_id": "07-document-semantic-search-sentence-bert",
+    "project_name": "Document Semantic Search with Sentence-BERT",
+    "project_category": "Transformer / Information Retrieval",
+    "source_file": "07-document-semantic-search-sentence-bert.md",
+    "document_type": "project_readme",
+    "text": "# Document Semantic Search with Sentence-BERT\n\n## Objective\nCreate an entirely browser-based semantic search engine for public portfolio documentation. Sentence-BERT maps natural-language queries and document chunks into a shared 384-dimensional embedding space.\n\n## Retrieval\nThe system preserves Markdown section metadata, generates normalized embeddings, applies optional category and document-type filters, calculates cosine similarity, and returns ranked cards with provenance. The interface reports query embedding latency, ranking latency, total latency, and the active retrieval mode.\n\n## Deployment\nThe app is static HTML, CSS, and JavaScript deployed to GitHub Pages. Transformers.js runs a browser-compatible all-MiniLM-L6-v2 model. No Python backend, vector database, paid API, Streamlit, or Gradio service is required.\n\n## Evaluation\nRecall@K and MRR measure retrieval quality. Cosine-score analysis and manual relevance review identify high-similarity false positives, weak matches, and chunking problems.",
+    "url_or_local_path": "https://github.com/unit-mole/transformer-projects/tree/main/07-document-semantic-search-sentence-bert",
+    "tags": [
+      "sentence-bert",
+      "semantic-search",
+      "cosine-similarity",
+      "github-pages",
+      "transformersjs",
+      "recall-at-k",
+      "mrr"
+    ],
+    "created_from": "public synthetic portfolio documentation",
+    "content_hash": "f23b54c48f1f17658378d7f535446fa3240190ea9ff8ae794241217fe9c2ccfd"
+  },
+  {
+    "document_id": "bilstm-emotion-detection",
+    "project_name": "Emotion Detection with BiLSTM and Attention",
+    "project_category": "RNN / NLP",
+    "source_file": "bilstm-emotion-detection.md",
+    "document_type": "project_readme",
+    "text": "# Emotion Detection with BiLSTM and Attention\n\n## Objective\nClassify text into emotion categories using a bidirectional LSTM and an attention mechanism. The model captures left-to-right and right-to-left context, while attention surfaces influential tokens.\n\n## Evaluation\nThe project reports macro F1, weighted F1, class-level recall, confusion matrices, and error analysis for sarcasm, mixed emotions, and short messages. It provides a useful sequence-model baseline before Transformer-based text classification.",
+    "url_or_local_path": "https://github.com/unit-mole/bi-directional-lstm-projects",
+    "tags": [
+      "bilstm",
+      "attention",
+      "emotion-detection",
+      "nlp",
+      "text-classification"
+    ],
+    "created_from": "public synthetic portfolio documentation",
+    "content_hash": "68a06cf1a053f8e6347278e8d58d691f2acc1f24302486f0918fed68e2f06f95"
+  },
+  {
+    "document_id": "cnn-image-segmentation-unet",
+    "project_name": "Medical Image Segmentation with U-Net",
+    "project_category": "CNN / Computer Vision",
+    "source_file": "cnn-image-segmentation-unet.md",
+    "document_type": "project_readme",
+    "text": "# Medical Image Segmentation with U-Net\n\n## Objective\nSegment target regions in medical images using a U-Net convolutional neural network. The pipeline includes image-mask pairing, augmentation, normalization, training callbacks, and visual comparison of predicted and reference masks.\n\n## Metrics\nEvaluation uses Dice coefficient, Intersection over Union, precision, recall, and per-image qualitative analysis. The project explains why pixel accuracy alone can be misleading for small structures.\n\n## Deployment\nA lightweight browser demonstration can display pre-generated predictions or use a converted browser model when practical. It is an educational project and not a clinical diagnostic system.",
+    "url_or_local_path": "https://github.com/unit-mole/cnn-projects/tree/main/01-image-segmentation-unet-medical-imaging",
+    "tags": [
+      "cnn",
+      "unet",
+      "image-segmentation",
+      "medical-imaging",
+      "dice",
+      "iou"
+    ],
+    "created_from": "public synthetic portfolio documentation",
+    "content_hash": "2082c47f784151979aaaa8c456793bf3986c626a564e18690283e0761382fab1"
+  },
+  {
+    "document_id": "cnn-resnet-browser-deployment",
+    "project_name": "Image Classification with ResNet",
+    "project_category": "CNN / Computer Vision",
+    "source_file": "cnn-resnet-browser-deployment.md",
+    "document_type": "deployment_guide",
+    "text": "# Image Classification with ResNet\n\n## Model\nTransfer learning with ResNet provides a strong image-classification baseline. The workflow freezes pretrained layers, trains a task-specific classification head, fine-tunes selected layers, and evaluates class-level precision, recall, F1, and confusion matrices.\n\n## Browser deployment\nThe static demo uses HTML, CSS, JavaScript, and a browser-compatible model format such as TensorFlow.js. GitHub Pages hosts the interface without a Python server. All model and label files use relative paths so deployment works inside a repository subfolder.",
+    "url_or_local_path": "https://github.com/unit-mole/cnn-projects/tree/main/04-image-classification-resnet",
+    "tags": [
+      "resnet",
+      "image-classification",
+      "transfer-learning",
+      "tensorflowjs",
+      "github-pages"
+    ],
+    "created_from": "public synthetic portfolio documentation",
+    "content_hash": "99841c8e6c501e0ebc8bb822dd98a42304e0f2672e63f5cf708f1abb13f77375"
+  },
+  {
+    "document_id": "portfolio-deployment-overview",
+    "project_name": "ML Portfolio Deployment Overview",
+    "project_category": "Portfolio Engineering",
+    "source_file": "portfolio-deployment-overview.md",
+    "document_type": "deployment_guide",
+    "text": "# ML Portfolio Deployment Overview\n\n## Deployment diversity\nThe Transformer portfolio uses free deployment platforms according to application requirements. Hugging Face Spaces supports Python and model-centric demos. GitHub Pages supports static browser AI projects that can run with JavaScript, Transformers.js, TensorFlow.js, or precomputed outputs. Vercel supports a polished RAG assistant with serverless application routes when needed.\n\n## Engineering standards\nEach project includes a professional README, reproducible scripts, tests, data and model cards, responsible-use notes, output artifacts, deployment instructions, and a GitHub Actions workflow. Live links and screenshots make recruiter review faster.",
+    "url_or_local_path": "https://github.com/unit-mole",
+    "tags": [
+      "github-pages",
+      "hugging-face-spaces",
+      "vercel",
+      "ci-cd",
+      "deployment"
+    ],
+    "created_from": "public synthetic portfolio documentation",
+    "content_hash": "7b143db00374014ae956f33d064ce2b56757909e3c663b55737f4f8ec7e1ce6a"
+  },
+  {
+    "document_id": "quality-analytics-semantic-search-use-case",
+    "project_name": "Quality Analytics Knowledge Search Use Case",
+    "project_category": "Quality Analytics / Applied AI",
+    "source_file": "quality-analytics-semantic-search-use-case.md",
+    "document_type": "knowledge_note",
+    "text": "# Quality Analytics Knowledge Search Use Case\n\n## Business relevance\nSemantic search can help quality teams locate related public or properly governed complaint summaries, investigation patterns, corrective actions, root-cause themes, SOP references, and technical knowledge. It is especially useful when different authors describe similar issues with different vocabulary.\n\n## Governance\nAn enterprise implementation requires access control, document-level permissions, retention rules, audit logs, redaction, versioning, and human review. Internal Hach, GCS, customer, employee, and complaint data must never be placed in a public GitHub Pages corpus.\n\n## RAG connection\nSemantic retrieval is the first stage of a future retrieval-augmented generation workflow. Retrieved passages should include citations and provenance before a language model generates an answer.",
+    "url_or_local_path": "https://github.com/unit-mole/transformer-projects/tree/main/07-document-semantic-search-sentence-bert",
+    "tags": [
+      "quality-analytics",
+      "semantic-search",
+      "root-cause",
+      "capa",
+      "sop",
+      "rag"
+    ],
+    "created_from": "public synthetic portfolio documentation",
+    "content_hash": "d2c823142d7de2b9a0cbd442c6ea89b92550938b8585c1c2468b7403c7d88185"
+  }
+]

@@ -1,97 +1,183 @@
-# GitHub Pages Deployment Guide
+# GitHub Pages Deployment Guide — `main` / `docs`
 
-This project uses a **branch-based GitHub Pages deployment**. The workflow validates Project 07, assembles the static site, and force-publishes the generated site to the repository's `gh-pages` branch.
+This repository uses one permanent GitHub Pages configuration for all static browser projects:
 
-This method intentionally does **not** use:
+```text
+Source: Deploy from a branch
+Branch: main
+Folder: /docs
+```
 
-- `actions/configure-pages`
-- `actions/upload-pages-artifact`
-- `actions/deploy-pages`
-- the GitHub Pages REST API
-- a Personal Access Token
+GitHub Pages publishes the content already committed under `/docs`. Project-specific workflows validate files and tests only; they do not deploy the site.
 
-Therefore, the workflow is not blocked by the `Get Pages site failed: Not Found` error that occurs when a Pages site has not yet been enabled.
+## Required Project 07 structure
 
-## Files deployed
+```text
+transformer-projects/
+├── 07-document-semantic-search-sentence-bert/
+│   └── web/
+│       ├── index.html
+│       ├── style.css
+│       ├── app.js
+│       ├── search.js
+│       ├── embeddings.js
+│       ├── metadata.json
+│       └── data/
+│           ├── corpus.json
+│           ├── document_chunks.json
+│           ├── embeddings.json
+│           ├── evaluation_queries.json
+│           └── metadata.json
+├── docs/
+│   ├── .nojekyll
+│   ├── index.html
+│   └── 07-document-semantic-search-sentence-bert/
+│       └── exact copy of the files in Project 07 web/
+└── .github/workflows/
+    └── 07-document-semantic-search-sentence-bert.yml
+```
 
-The workflow copies:
+## Development and deployment copies
+
+The editable application remains here:
 
 ```text
 07-document-semantic-search-sentence-bert/web/
 ```
 
-into this published route:
+The GitHub Pages copy is here:
 
 ```text
-/07-document-semantic-search-sentence-bert/
+docs/07-document-semantic-search-sentence-bert/
 ```
 
-It also creates a root `index.html` that redirects visitors to Project 07 and adds `.nojekyll`.
+Do not manually edit the `/docs` copy. Edit `web/` and synchronize it using:
 
-## First deployment
+```bash
+python 07-document-semantic-search-sentence-bert/scripts/sync_docs_site.py
+```
 
-1. Push Project 07 and `.github/workflows/07-document-semantic-search-sentence-bert.yml` to `main`.
-2. Open the repository's **Actions** tab.
-3. Confirm that **Test and validate Project 07** succeeds.
-4. Confirm that **Publish Project 07 to gh-pages branch** succeeds.
-5. Open **Settings → Pages**.
-6. Under **Build and deployment**, choose **Deploy from a branch**.
-7. Select branch **`gh-pages`** and folder **`/ (root)`**.
-8. Click **Save**.
+The script replaces the Project 07 deployment directory with an exact copy of `web/` and ensures that `docs/.nojekyll` exists.
 
-The one-time Pages setting is a repository configuration; it cannot be reliably created by a normal workflow using the default `GITHUB_TOKEN`.
+Verify that both copies are identical:
+
+```bash
+python 07-document-semantic-search-sentence-bert/scripts/sync_docs_site.py --check
+```
+
+## Complete publishing sequence
+
+From the repository root:
+
+```bash
+python 07-document-semantic-search-sentence-bert/scripts/sync_docs_site.py
+pytest 07-document-semantic-search-sentence-bert/tests -q
+node --check 07-document-semantic-search-sentence-bert/web/app.js
+node --check 07-document-semantic-search-sentence-bert/web/search.js
+node --check 07-document-semantic-search-sentence-bert/web/embeddings.js
+```
+
+Then stage Project 07, its deployment mirror, and its validation workflow:
+
+```bash
+git add -A -- \
+  "07-document-semantic-search-sentence-bert" \
+  "docs/07-document-semantic-search-sentence-bert" \
+  "docs/.nojekyll" \
+  ".github/workflows/07-document-semantic-search-sentence-bert.yml"
+```
+
+Commit and push to `main`. Because `/docs` changed on the configured publishing branch, GitHub runs its built-in `pages build and deployment` workflow.
 
 ## Live URL
-
-After GitHub finishes publishing, the project URL is expected to be:
 
 ```text
 https://unit-mole.github.io/transformer-projects/07-document-semantic-search-sentence-bert/
 ```
 
-## Local testing
+## Relative-path rule
+
+All browser files must use relative asset and data references:
+
+```javascript
+fetch("./data/document_chunks.json")
+import { rankSemantic } from "./search.js"
+```
+
+```html
+<link rel="stylesheet" href="./style.css">
+<script type="module" src="./app.js"></script>
+```
+
+Do not use repository-root paths such as:
+
+```text
+/data/document_chunks.json
+/model/model.json
+```
+
+A leading slash points to the root of `unit-mole.github.io`, not to the Project 07 subdirectory.
+
+## Workflow responsibility
+
+`.github/workflows/07-document-semantic-search-sentence-bert.yml` is intentionally validation-only. It:
+
+- runs only when Project 07, its `/docs` mirror, or its own workflow changes;
+- runs Python tests;
+- checks JavaScript syntax;
+- validates required JSON and static files;
+- verifies that `web/` and the `/docs` Project 07 copy are identical;
+- never modifies Pages settings or publishes another branch.
+
+It must not contain:
+
+```text
+actions/configure-pages
+actions/deploy-pages
+actions/upload-pages-artifact
+PAGES_DEPLOY_TOKEN
+gh-pages branch publishing
+```
+
+## Troubleshooting
+
+### The project URL returns 404
+
+Check all four conditions:
+
+1. Repository Settings → Pages shows `main` and `/docs`.
+2. `docs/07-document-semantic-search-sentence-bert/index.html` exists on the remote `main` branch.
+3. The latest built-in `pages build and deployment` run is green.
+4. The URL exactly matches the folder name, including hyphens and the trailing slash.
+
+### Project 07 CI passes but the website does not update
+
+CI only validates. Confirm that the `/docs` copy was staged and committed. Run:
 
 ```bash
-cd 07-document-semantic-search-sentence-bert/web
+python 07-document-semantic-search-sentence-bert/scripts/sync_docs_site.py --check
+git status
+```
+
+### Project 08 runs when only Project 07 changes
+
+The Project 08 workflow must include `paths` filters for only Project 08 and its own workflow file. A broad `on: push` trigger runs on every push to `main`.
+
+### JSON fails to load
+
+Serve locally with HTTP rather than opening the HTML file directly:
+
+```bash
+cd docs
 python -m http.server 8000
 ```
 
 Open:
 
 ```text
-http://localhost:8000
+http://localhost:8000/07-document-semantic-search-sentence-bert/
 ```
 
-Do not open `index.html` directly with `file://`, because browsers may block JavaScript module and JSON requests.
+### The model does not load
 
-## Troubleshooting
-
-### The workflow succeeds, but the site is not available
-
-Open **Settings → Pages** and verify:
-
-```text
-Source: Deploy from a branch
-Branch: gh-pages
-Folder: / (root)
-```
-
-### The workflow cannot push to `gh-pages`
-
-Open **Settings → Actions → General → Workflow permissions** and make sure workflows are allowed to use write permissions. The workflow explicitly requests `contents: write`.
-
-### JSON files fail to load
-
-Verify that these files exist on the `gh-pages` branch:
-
-```text
-07-document-semantic-search-sentence-bert/data/document_chunks.json
-07-document-semantic-search-sentence-bert/data/embeddings.json
-07-document-semantic-search-sentence-bert/data/metadata.json
-```
-
-The browser app uses relative paths, so it works from the nested GitHub Pages route.
-
-### Browser embedding model does not load
-
-The app attempts to load a browser-compatible Sentence Transformer through Transformers.js. Network restrictions, browser privacy settings, or CDN availability can block the model. The interface displays the active search mode and can use its documented fallback behavior.
+The application automatically labels and uses its keyword fallback when the Transformers.js CDN or browser model cannot load. Check browser developer tools for network, CSP, WebAssembly, or storage errors.
