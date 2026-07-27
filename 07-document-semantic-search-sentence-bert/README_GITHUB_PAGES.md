@@ -1,108 +1,97 @@
 # GitHub Pages Deployment Guide
 
-This project is a static HTML/CSS/JavaScript application. It does not require a Python backend, API server, vector database, Streamlit, Gradio, or paid hosting.
+This project uses a **branch-based GitHub Pages deployment**. The workflow validates Project 07, assembles the static site, and force-publishes the generated site to the repository's `gh-pages` branch.
 
-## Final route
+This method intentionally does **not** use:
+
+- `actions/configure-pages`
+- `actions/upload-pages-artifact`
+- `actions/deploy-pages`
+- the GitHub Pages REST API
+- a Personal Access Token
+
+Therefore, the workflow is not blocked by the `Get Pages site failed: Not Found` error that occurs when a Pages site has not yet been enabled.
+
+## Files deployed
+
+The workflow copies:
+
+```text
+07-document-semantic-search-sentence-bert/web/
+```
+
+into this published route:
+
+```text
+/07-document-semantic-search-sentence-bert/
+```
+
+It also creates a root `index.html` that redirects visitors to Project 07 and adds `.nojekyll`.
+
+## First deployment
+
+1. Push Project 07 and `.github/workflows/07-document-semantic-search-sentence-bert.yml` to `main`.
+2. Open the repository's **Actions** tab.
+3. Confirm that **Test and validate Project 07** succeeds.
+4. Confirm that **Publish Project 07 to gh-pages branch** succeeds.
+5. Open **Settings → Pages**.
+6. Under **Build and deployment**, choose **Deploy from a branch**.
+7. Select branch **`gh-pages`** and folder **`/ (root)`**.
+8. Click **Save**.
+
+The one-time Pages setting is a repository configuration; it cannot be reliably created by a normal workflow using the default `GITHUB_TOKEN`.
+
+## Live URL
+
+After GitHub finishes publishing, the project URL is expected to be:
 
 ```text
 https://unit-mole.github.io/transformer-projects/07-document-semantic-search-sentence-bert/
 ```
 
-The repository root URL redirects to the Project 07 route:
+## Local testing
+
+```bash
+cd 07-document-semantic-search-sentence-bert/web
+python -m http.server 8000
+```
+
+Open:
 
 ```text
-https://unit-mole.github.io/transformer-projects/
+http://localhost:8000
 ```
 
-## Important one-time GitHub setting
-
-GitHub Pages is a repository-level service and must exist before `actions/configure-pages` can read it. A workflow file cannot create the Pages site with the default `GITHUB_TOKEN`.
-
-Choose either method below once:
-
-### Method A — GitHub interface
-
-1. Open the `unit-mole/transformer-projects` repository.
-2. Select **Settings → Pages**.
-3. Under **Build and deployment**, set **Source** to **GitHub Actions**.
-4. Save the setting.
-
-### Method B — GitHub CLI
-
-After `gh auth login`, run:
-
-```cmd
-gh api --method POST repos/unit-mole/transformer-projects/pages -f build_type=workflow 2>nul || gh api --method PUT repos/unit-mole/transformer-projects/pages -f build_type=workflow
-```
-
-A `Get Pages site failed: Not Found` error means the Pages site still has not been enabled. Replacing the YAML alone cannot correct that repository-level 404.
-
-## Files that must be pushed
-
-Push only these paths:
-
-```text
-07-document-semantic-search-sentence-bert/
-.github/workflows/07-document-semantic-search-sentence-bert.yml
-```
-
-The corrected workflow does not depend on a root-level `pages/` folder. It creates a temporary `_site` directory during the Actions run, copies only Project 07's `web/` application into the nested public route, adds a repository-root redirect, uploads the Pages artifact, and deploys it.
-
-## Before deployment
-
-1. Keep only public, redistributable documents in `data/raw_documents/`.
-2. Run `python scripts/prepare_corpus.py` when the corpus changes.
-3. Run `python scripts/generate_embeddings.py` for precomputed production embeddings.
-4. Run `python scripts/export_browser_data.py`.
-5. Confirm that these files exist:
-   - `web/index.html`
-   - `web/style.css`
-   - `web/app.js`
-   - `web/search.js`
-   - `web/embeddings.js`
-   - `web/data/corpus.json`
-   - `web/data/document_chunks.json`
-   - `web/data/embeddings.json`
-   - `web/data/evaluation_queries.json`
-   - `web/data/metadata.json`
-6. Test locally from the `web/` directory with `python -m http.server 8000`.
-
-## Deployment steps
-
-1. Enable **Settings → Pages → Source → GitHub Actions**.
-2. Replace the existing Project 07 workflow with the corrected YAML.
-3. Push Project 07 and that workflow to `main`.
-4. Open **Actions → 07 Document Semantic Search Sentence BERT CI and Pages**.
-5. Confirm that `Test and validate Project 07` succeeds.
-6. Confirm that `Deploy Project 07 to GitHub Pages` succeeds.
-7. Open the deployment URL shown in the workflow summary.
+Do not open `index.html` directly with `file://`, because browsers may block JavaScript module and JSON requests.
 
 ## Troubleshooting
 
-### `Get Pages site failed: Not Found`
+### The workflow succeeds, but the site is not available
 
-Enable GitHub Pages under **Settings → Pages** and choose **GitHub Actions** as the source. Then rerun the failed job.
+Open **Settings → Pages** and verify:
 
-### JSON files return 404
-
-- Verify that JSON files are committed under `web/data/`.
-- Keep browser paths relative, such as `./data/document_chunks.json`.
-- Check filename capitalization because GitHub Pages paths are case-sensitive.
-- Inspect the browser Network tab for the exact failed URL.
-
-### The browser model does not load
-
-- Confirm that the browser permits requests to the Hugging Face Hub and jsDelivr CDN.
-- Temporarily disable restrictive content blockers for the demo.
-- Test with a current Chrome, Edge, or Firefox release.
-- The app switches visibly to keyword fallback when semantic model initialization fails.
-
-### First load is slow
-
-The first visit may download a quantized ONNX model and generate document embeddings. Later visits can reuse the browser cache and locally cached vectors. Precomputed embeddings provide a faster public demo.
-
-## README link
-
-```markdown
-[Open the live GitHub Pages demo](https://unit-mole.github.io/transformer-projects/07-document-semantic-search-sentence-bert/)
+```text
+Source: Deploy from a branch
+Branch: gh-pages
+Folder: / (root)
 ```
+
+### The workflow cannot push to `gh-pages`
+
+Open **Settings → Actions → General → Workflow permissions** and make sure workflows are allowed to use write permissions. The workflow explicitly requests `contents: write`.
+
+### JSON files fail to load
+
+Verify that these files exist on the `gh-pages` branch:
+
+```text
+07-document-semantic-search-sentence-bert/data/document_chunks.json
+07-document-semantic-search-sentence-bert/data/embeddings.json
+07-document-semantic-search-sentence-bert/data/metadata.json
+```
+
+The browser app uses relative paths, so it works from the nested GitHub Pages route.
+
+### Browser embedding model does not load
+
+The app attempts to load a browser-compatible Sentence Transformer through Transformers.js. Network restrictions, browser privacy settings, or CDN availability can block the model. The interface displays the active search mode and can use its documented fallback behavior.

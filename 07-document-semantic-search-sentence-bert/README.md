@@ -8,7 +8,7 @@
 > **Responsible-use notice:** This project is for educational and portfolio demonstration purposes only. Semantic results may be incomplete, outdated, irrelevant, or ranked imperfectly. Cosine similarity is a model-based relevance signal, not a probability or guarantee. Do not publish private, confidential, proprietary, copyrighted, sensitive, or personally identifiable documents. Review retrieved results before using them for decisions.
 
 
-> **Deployment prerequisite:** Before the first deployment, open **Settings → Pages** and select **GitHub Actions** under **Build and deployment → Source**. A `Get Pages site failed: Not Found` workflow error means Pages has not yet been enabled for the repository.
+> **Deployment method:** The workflow publishes the static site to a dedicated `gh-pages` branch and does not call `actions/configure-pages` or the GitHub Pages REST API. After the first successful workflow run, select **Settings → Pages → Deploy from a branch → `gh-pages` → `/ (root)`** once.
 
 ## Live demo
 
@@ -179,7 +179,7 @@ The root workflow `.github/workflows/07-document-semantic-search-sentence-bert.y
 4. deploys only after a successful push to `main`;
 5. publishes this project at the nested URL shown above.
 
-Enable **Settings → Pages → Source → GitHub Actions** once. Full instructions are in [README_GITHUB_PAGES.md](README_GITHUB_PAGES.md).
+After the workflow creates the `gh-pages` branch, select **Settings → Pages → Deploy from a branch → `gh-pages` → `/ (root)`** once. Full instructions are in [README_GITHUB_PAGES.md](README_GITHUB_PAGES.md).
 
 ## Folder structure
 

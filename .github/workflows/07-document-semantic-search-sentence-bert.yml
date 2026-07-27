@@ -1,13 +1,15 @@
-name: 07 Document Semantic Search Sentence BERT CI and Pages
+name: 07 Document Semantic Search Sentence BERT CI and Branch Deploy
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - "07-document-semantic-search-sentence-bert/**"
       - ".github/workflows/07-document-semantic-search-sentence-bert.yml"
   pull_request:
-    branches: [main]
+    branches:
+      - main
     paths:
       - "07-document-semantic-search-sentence-bert/**"
       - ".github/workflows/07-document-semantic-search-sentence-bert.yml"
@@ -17,7 +19,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: github-pages-project-07
+  group: project-07-gh-pages-branch
   cancel-in-progress: true
 
 env:
@@ -85,38 +87,19 @@ jobs:
           node --check "$PROJECT_DIR/web/embeddings.js"
 
   deploy:
-    name: Deploy Project 07 to GitHub Pages
+    name: Publish Project 07 to gh-pages branch
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: quality
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      contents: write
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Verify GitHub Pages is enabled
-        env:
-          GH_TOKEN: ${{ github.token }}
-        shell: bash
-        run: |
-          if ! gh api "repos/${GITHUB_REPOSITORY}/pages" >/dev/null 2>&1; then
-            echo "::error title=GitHub Pages is not enabled::Enable Pages once in Settings > Pages > Source > GitHub Actions, or run: gh api --method POST repos/${GITHUB_REPOSITORY}/pages -f build_type=workflow"
-            exit 1
-          fi
-
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-
-      - name: Assemble Project 07 Pages site
+      - name: Assemble static Pages site
         shell: bash
         run: |
           set -euo pipefail
@@ -146,11 +129,19 @@ jobs:
           test -f "_site/$PROJECT_DIR/index.html"
           test -f "_site/$PROJECT_DIR/data/document_chunks.json"
 
-      - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: _site
+      - name: Publish site files to gh-pages
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          cd _site
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b gh-pages
+          git add --all
+          git commit -m "Deploy Project 07 from ${GITHUB_SHA}"
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin gh-pages
