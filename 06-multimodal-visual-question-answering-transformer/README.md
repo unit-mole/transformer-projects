@@ -16,7 +16,7 @@ multimodal models.
 | Application | Visual Question Answering |
 | User workflow | Upload image → ask question → receive answer, question type, answer type, and latency |
 | Local / evaluation model | `dandelin/vilt-b32-finetuned-vqa` |
-| Static browser demo model | `Xenova/moondream2` through Transformers.js |
+| Static browser demo model | `HuggingFaceTB/SmolVLM-256M-Instruct` through Transformers.js |
 | Dataset support | VQA v2-style subset plus safe synthetic samples |
 | Evaluation | VQA consensus accuracy, exact match, category analysis, failure analysis, latency |
 | Deployment | **Hugging Face Static Space** |
@@ -27,7 +27,7 @@ The local Python pipeline uses ViLT because it provides a compact,
 classification-style VQA head and exposes answer logits for an honest
 confidence proxy. The deployed Space is fully static, so it cannot run the
 Python ViLT server. Its browser demo therefore uses the ONNX-compatible
-Moondream2 model with Transformers.js and WebGPU.
+SmolVLM-256M-Instruct model with Transformers.js and WebGPU.
 
 The browser app does **not** fabricate a confidence value. It displays
 `Not calibrated` after a successful generation because the selected generative
@@ -49,7 +49,7 @@ This project preserves that notebook as a legacy reference while adding:
 - VQA-style consensus evaluation;
 - question and answer categorization;
 - latency and failure-analysis utilities;
-- a browser-only vision-language demo with WebGPU preflight checks and automatic dtype fallback;
+- a browser-only vision-language demo with WebGPU preflight checks and an official SmolVLM processing pipeline;
 - Static Space metadata and automated GitHub-to-Hugging-Face synchronization;
 - tests, model card, dataset card, and privacy documentation.
 
@@ -60,9 +60,9 @@ This project preserves that notebook as a legacy reference while adding:
 
 The first browser model download is large and requires a modern desktop browser
 with WebGPU. Model files are downloaded from the Hugging Face Hub and cached by
-the browser. The app uses only dtype combinations documented for Moondream2:
-`fp16/fp16/q4` when `shader-f16` is available, and `fp32/q8/q4` as a
-compatibility profile. Failed loads are reset so the visitor can retry.
+the browser. The static app uses `AutoProcessor`, `AutoModelForVision2Seq`, the
+model chat template, and the stable WebGPU `fp32` setup used by Hugging Face's
+official SmolVLM browser example. Failed workers are reset so the visitor can retry.
 
 ## Responsible use and image privacy
 
@@ -178,7 +178,7 @@ For GitHub Actions deployment, create:
 ## Portfolio description
 
 **One line:** Browser-deployed multimodal VQA system that answers
-natural-language questions about images using ViLT, Moondream2,
+natural-language questions about images using ViLT, SmolVLM-256M-Instruct,
 Transformers.js, WebGPU, VQA-style evaluation, and failure analysis.
 
 **Skills demonstrated:** multimodal AI, vision-language Transformers, VQA,

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Static browser-based multimodal visual question answering demo." />
   <title>Multimodal Visual Question Answering Transformer</title>
-  <link rel="stylesheet" href="./src/style.css?v=2.0.0" />
+  <link rel="stylesheet" href="./src/style.css?v=3.0.0" />
 </head>
 <body>
   <header class="hero">
@@ -17,7 +17,7 @@
         Transformer directly in the browser with Transformers.js and WebGPU.
       </p>
       <div class="badges">
-        <span>Moondream2 VLM</span><span>WebGPU</span><span>ONNX</span><span>No Python server</span>
+        <span>SmolVLM 256M</span><span>WebGPU</span><span>ONNX</span><span>No Python server</span>
       </div>
     </div>
   </header>
@@ -46,7 +46,7 @@
       </div>
       <div>
         <span>Model</span>
-        <strong>Xenova/moondream2</strong>
+        <strong>HuggingFaceTB/SmolVLM-256M-Instruct</strong>
       </div>
     </section>
 
@@ -158,8 +158,8 @@
         <ol>
           <li>The uploaded image stays in the browser and is converted to RGB pixels.</li>
           <li>The question is normalized without removing meaning-bearing words.</li>
-          <li>Compatible quantized Moondream2 ONNX components load from Hugging Face.</li>
-          <li>The app selects an fp16 profile when supported and a compatibility profile otherwise.</li>
+          <li>SmolVLM-256M-Instruct ONNX components load from Hugging Face.</li>
+          <li>The app follows Hugging Face’s official SmolVLM WebGPU preprocessing and generation flow.</li>
           <li>WebGPU performs vision-language generation and returns the answer.</li>
         </ol>
       </article>
@@ -179,6 +179,6 @@
     <a href="https://github.com/unit-mole/transformer-projects" target="_blank" rel="noreferrer">GitHub repository</a>
   </footer>
 
-  <script type="module" src="./src/main.js?v=2.0.0"></script>
+  <script type="module" src="./src/main.js?v=3.0.0"></script>
 </body>
 </html>

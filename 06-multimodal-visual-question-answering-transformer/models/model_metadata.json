@@ -6,27 +6,17 @@
     "role": "local reproducible inference and VQA-style evaluation"
   },
   "static_space_model": {
-    "model_id": "Xenova/moondream2",
+    "model_id": "HuggingFaceTB/SmolVLM-256M-Instruct",
     "task": "image-text-to-text / visual question answering",
     "runtime": "Transformers.js + ONNX Runtime Web + WebGPU",
     "role": "fully static browser demo",
-    "dtype_profiles": {
-      "preferred_webgpu": {
-        "embed_tokens": "fp16",
-        "vision_encoder": "fp16",
-        "decoder_model_merged": "q4"
-      },
-      "compatibility_webgpu": {
-        "embed_tokens": "fp32",
-        "vision_encoder": "q8",
-        "decoder_model_merged": "q4"
-      }
-    },
+    "dtype": "fp32",
+    "implementation": "Hugging Face official SmolVLM WebGPU processing and generation pattern",
     "reliability_notes": [
       "The app checks for a WebGPU adapter before loading the model.",
-      "The fp16 profile is used only when shader-f16 is supported.",
-      "A compatibility profile is attempted automatically when required.",
-      "Failed model loads are reset so the user can retry without refreshing the page."
+      "Image inputs are converted to data URLs and loaded with the Transformers.js load_image helper.",
+      "The processor chat template and AutoModelForVision2Seq class match the official browser example.",
+      "Failed model workers are reset so the user can retry without reloading the page."
     ]
   },
   "question_preprocessing": {
@@ -35,7 +25,7 @@
     "meaning_preserved": true
   },
   "image_preprocessing": {
-    "rgb_conversion": true,
+    "browser_data_url_conversion": true,
     "metadata_removed_for_repository_samples": true,
     "maximum_megapixels": 25
   },

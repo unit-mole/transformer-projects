@@ -89,6 +89,15 @@ function updateButton() {
   elements.askButton.disabled = busy || !selectedBlob || !elements.questionInput.value.trim();
 }
 
+function blobToDataUrl(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () => reject(reader.error || new Error("The image could not be read."));
+    reader.readAsDataURL(blob);
+  });
+}
+
 async function validateImageBlob(blob) {
   if (!SUPPORTED_TYPES.has(blob.type)) {
     throw new Error("Use a PNG, JPEG, or WebP image.");
@@ -133,10 +142,7 @@ async function checkBrowser() {
       return;
     }
 
-    const f16 = adapter.features.has("shader-f16");
-    elements.browserStatus.textContent = f16
-      ? "WebGPU ready · fp16 supported"
-      : "WebGPU ready · compatibility mode";
+    elements.browserStatus.textContent = "WebGPU ready · stable fp32 mode";
     elements.browserStatus.dataset.state = "ready";
   } catch (error) {
     elements.browserStatus.textContent = "WebGPU check failed";
@@ -190,7 +196,7 @@ function destroyWorker() {
 function ensureWorker() {
   if (worker) return worker;
 
-  const workerUrl = new URL("./model-worker.js?v=2.0.0", import.meta.url);
+  const workerUrl = new URL("./model-worker.js?v=3.0.0", import.meta.url);
   worker = new Worker(workerUrl, { type: "module" });
   worker.addEventListener("message", handleWorkerMessage);
   worker.addEventListener("error", (event) => {
@@ -326,10 +332,11 @@ elements.askButton.addEventListener("click", async () => {
     elements.modelStatus.dataset.state = "loading";
     setStatus("Starting model", "The first download can take several minutes.", "loading", 1);
 
+    const imageDataUrl = await blobToDataUrl(selectedBlob);
     ensureWorker().postMessage({
       type: "predict",
       question,
-      imageBlob: selectedBlob,
+      imageDataUrl,
     });
   } catch (error) {
     finishWithError(error.message, error.stack || "");

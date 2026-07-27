@@ -12,7 +12,7 @@
 
 ### Static browser demo model
 
-- **Model:** `Xenova/moondream2`
+- **Model:** `HuggingFaceTB/SmolVLM-256M-Instruct`
 - **Architecture:** browser-compatible vision-language generative model
 - **Runtime:** Transformers.js, ONNX Runtime Web, WebGPU
 - **Preferred WebGPU profile:** fp16 embedding, fp16 vision encoder, q4 decoder

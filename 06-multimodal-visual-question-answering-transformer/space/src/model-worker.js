@@ -1,20 +1,20 @@
 import {
   AutoProcessor,
-  AutoTokenizer,
-  Moondream1ForConditionalGeneration,
-  RawImage,
+  AutoModelForVision2Seq,
+  TextStreamer,
+  load_image,
   env,
-} from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1";
+} from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1/+esm";
 
 env.allowLocalModels = false;
 env.useBrowserCache = true;
 
-const MODEL_ID = "Xenova/moondream2";
-const MODEL_LABEL = "Moondream2 ONNX";
+const MODEL_ID = "HuggingFaceTB/SmolVLM-256M-Instruct";
+const MODEL_LABEL = "SmolVLM-256M-Instruct";
+const MAX_NEW_TOKENS = 64;
 
-let assetsPromise = null;
+let processorPromise = null;
 let modelPromise = null;
-let activeProfile = null;
 
 function postProgress(status, detail = "", progress = 0) {
   self.postMessage({ type: "progress", status, detail, progress });
@@ -26,141 +26,74 @@ function normalizeProgress(value) {
   return numeric <= 1 ? numeric * 100 : numeric;
 }
 
-function reportDownload(prefix, info) {
+function reportDownload(info) {
   const raw = normalizeProgress(info?.progress);
-  const progress = raw === null ? 10 : Math.min(90, 10 + raw * 0.8);
+  const progress = raw === null ? 10 : Math.min(90, 8 + raw * 0.82);
   const file = info?.file ? String(info.file).split("/").pop() : "";
-  const status = info?.status === "done"
-    ? `${prefix} component ready`
-    : `Loading ${prefix.toLowerCase()}`;
-  postProgress(status, file || "Downloading and caching model files.", progress);
+
+  if (info?.status === "done") {
+    postProgress("Model component ready", file || "A model component finished loading.", progress);
+    return;
+  }
+
+  postProgress(
+    "Downloading SmolVLM",
+    file || "Downloading and caching the browser model.",
+    progress,
+  );
 }
 
-async function getWebGPUProfiles() {
+async function ensureWebGPU() {
   if (!("gpu" in navigator)) {
     throw new Error(
-      "WebGPU is not available in this browser. Use a current desktop version of Chrome or Edge."
+      "WebGPU is unavailable. Use a current desktop version of Chrome or Edge.",
     );
   }
 
   const adapter = await navigator.gpu.requestAdapter();
   if (!adapter) {
     throw new Error(
-      "A WebGPU adapter could not be created. Update the browser and graphics driver, then restart the browser."
+      "No WebGPU adapter was found. Update the browser and graphics driver, then restart the browser.",
     );
   }
+}
 
-  const supportsF16 = adapter.features.has("shader-f16");
-  const profiles = [];
+async function loadRuntime() {
+  await ensureWebGPU();
 
-  if (supportsF16) {
-    profiles.push({
-      name: "WebGPU fp16/q4",
-      dtype: {
-        embed_tokens: "fp16",
-        vision_encoder: "fp16",
-        decoder_model_merged: "q4",
-      },
-    });
-  }
-
-  profiles.push({
-    name: "WebGPU compatibility",
-    dtype: {
-      embed_tokens: "fp32",
-      vision_encoder: "q8",
-      decoder_model_merged: "q4",
-    },
+  processorPromise ??= AutoProcessor.from_pretrained(MODEL_ID, {
+    progress_callback: reportDownload,
+  }).catch((error) => {
+    processorPromise = null;
+    throw error;
   });
 
-  return profiles;
+  // This matches Hugging Face's official SmolVLM WebGPU example. The stable
+  // fp32 profile is intentionally used instead of experimental mixed dtypes.
+  modelPromise ??= AutoModelForVision2Seq.from_pretrained(MODEL_ID, {
+    dtype: "fp32",
+    device: "webgpu",
+    progress_callback: reportDownload,
+  }).catch((error) => {
+    modelPromise = null;
+    throw error;
+  });
+
+  postProgress(
+    "Loading vision-language model",
+    "The first download can take several minutes. Later runs use the browser cache.",
+    10,
+  );
+
+  const [processor, model] = await Promise.all([processorPromise, modelPromise]);
+  postProgress("Model ready", `${MODEL_LABEL} is ready on WebGPU.`, 93);
+  return { processor, model };
 }
 
-async function loadAssets() {
-  if (!assetsPromise) {
-    assetsPromise = (async () => {
-      postProgress("Loading processor", "Downloading model configuration files.", 4);
-      const processor = await AutoProcessor.from_pretrained(MODEL_ID, {
-        progress_callback: (info) => reportDownload("Processor", info),
-      });
-
-      postProgress("Loading tokenizer", "Preparing the text input pipeline.", 8);
-      const tokenizer = await AutoTokenizer.from_pretrained(MODEL_ID, {
-        progress_callback: (info) => reportDownload("Tokenizer", info),
-      });
-
-      return { processor, tokenizer };
-    })().catch((error) => {
-      assetsPromise = null;
-      throw error;
-    });
-  }
-
-  return assetsPromise;
-}
-
-async function loadModel() {
-  if (!modelPromise) {
-    modelPromise = (async () => {
-      const { processor, tokenizer } = await loadAssets();
-      const profiles = await getWebGPUProfiles();
-      const failures = [];
-
-      for (let index = 0; index < profiles.length; index += 1) {
-        const profile = profiles[index];
-        const attemptText = profiles.length > 1
-          ? `Profile ${index + 1} of ${profiles.length}: ${profile.name}`
-          : profile.name;
-
-        try {
-          postProgress(
-            "Loading vision-language model",
-            `${attemptText}. The first download is large and may take several minutes.`,
-            10
-          );
-
-          const model = await Moondream1ForConditionalGeneration.from_pretrained(MODEL_ID, {
-            device: "webgpu",
-            dtype: profile.dtype,
-            progress_callback: (info) => reportDownload("Model", info),
-          });
-
-          activeProfile = profile.name;
-          postProgress("Model ready", `${MODEL_LABEL} loaded with ${activeProfile}.`, 92);
-          return { processor, tokenizer, model, profile: activeProfile };
-        } catch (error) {
-          failures.push(`${profile.name}: ${error instanceof Error ? error.message : String(error)}`);
-          if (index < profiles.length - 1) {
-            postProgress(
-              "Retrying with compatibility settings",
-              "The first WebGPU precision profile was not supported by this device.",
-              12
-            );
-          }
-        }
-      }
-
-      throw new Error(
-        `The browser could not load the model with the supported WebGPU profiles. ${failures.join(" | ")}`
-      );
-    })().catch((error) => {
-      modelPromise = null;
-      activeProfile = null;
-      throw error;
-    });
-  }
-
-  return modelPromise;
-}
-
-function extractAnswer(decoded) {
-  const text = String(decoded ?? "");
-  const matches = [...text.matchAll(/Answer:\s*([\s\S]*?)(?:<\|endoftext\|>|$)/gi)];
-  let answer = matches.length ? matches[matches.length - 1][1] : text;
-
-  answer = answer
-    .replaceAll("<|endoftext|>", "")
-    .replace(/^\s*Answer:\s*/i, "")
+function cleanAnswer(value) {
+  const answer = String(value ?? "")
+    .replace(/<\|[^>]+\|>/g, " ")
+    .replace(/\s+/g, " ")
     .trim();
 
   if (!answer) {
@@ -171,41 +104,52 @@ function extractAnswer(decoded) {
 }
 
 function friendlyFailure(error) {
-  const technical = error instanceof Error ? error.message : String(error);
+  const technical = error instanceof Error
+    ? `${error.name}: ${error.message}${error.stack ? `\n${error.stack}` : ""}`
+    : String(error);
   const lower = technical.toLowerCase();
 
   if (lower.includes("failed to fetch") || lower.includes("network")) {
     return {
-      userMessage: "The model files could not be downloaded. Check the internet connection, disable restrictive extensions, and retry.",
+      userMessage: "The model files could not be downloaded. Check the connection, disable restrictive browser extensions, and retry.",
       technical,
     };
   }
 
-  if (lower.includes("memory") || lower.includes("allocation") || lower.includes("out of bounds")) {
+  if (
+    lower.includes("memory") ||
+    lower.includes("allocation") ||
+    lower.includes("out of bounds") ||
+    lower.includes("device lost")
+  ) {
     return {
-      userMessage: "The browser did not have enough GPU or system memory for this model. Close other tabs and applications, restart Chrome or Edge, and retry.",
+      userMessage: "The browser or GPU did not have enough available memory. Close other tabs and applications, restart Chrome or Edge, and retry.",
       technical,
     };
   }
 
-  if (lower.includes("webgpu") || lower.includes("adapter") || lower.includes("shader")) {
+  if (
+    lower.includes("webgpu") ||
+    lower.includes("adapter") ||
+    lower.includes("validation") ||
+    lower.includes("shader")
+  ) {
     return {
-      userMessage: "WebGPU could not initialize the model. Update Chrome or Edge and the graphics driver, then restart the browser.",
+      userMessage: "WebGPU could not complete this model run. Update Chrome or Edge and the graphics driver, restart the browser, and retry.",
       technical,
     };
   }
 
   return {
-    userMessage: "The model could not complete inference. Use the retry button, then check the technical details if the issue continues.",
+    userMessage: "The vision-language model could not complete inference. Open the technical details for the exact browser error.",
     technical,
   };
 }
 
 self.addEventListener("message", async (event) => {
   if (event.data?.type === "reset") {
+    processorPromise = null;
     modelPromise = null;
-    assetsPromise = null;
-    activeProfile = null;
     self.postMessage({ type: "reset-complete" });
     return;
   }
@@ -215,29 +159,68 @@ self.addEventListener("message", async (event) => {
   const overallStarted = performance.now();
 
   try {
-    const { question, imageBlob } = event.data;
-    const { processor, tokenizer, model, profile } = await loadModel();
+    const { question, imageDataUrl } = event.data;
+    if (!question || !imageDataUrl) {
+      throw new Error("Both an image and a question are required.");
+    }
 
-    postProgress("Preprocessing image", "Converting the upload into model-ready RGB pixels.", 94);
-    const image = (await RawImage.fromBlob(imageBlob)).rgb();
-    const visionInputs = await processor(image);
+    const { processor, model } = await loadRuntime();
 
-    const prompt = `<image>\n\nQuestion: ${question}\n\nAnswer:`;
-    const textInputs = tokenizer(prompt);
+    postProgress("Preprocessing image", "Preparing the image and chat prompt.", 95);
+    const image = await load_image(imageDataUrl);
+    const messages = [
+      {
+        role: "user",
+        content: [
+          { type: "image", image: imageDataUrl },
+          { type: "text", text: question },
+        ],
+      },
+    ];
 
-    postProgress("Generating answer", "Running the vision-language Transformer with WebGPU.", 97);
-    const inferenceStarted = performance.now();
-    const output = await model.generate({
-      ...textInputs,
-      ...visionInputs,
-      do_sample: false,
-      max_new_tokens: 64,
+    const text = processor.apply_chat_template(messages, {
+      add_generation_prompt: true,
+    });
+    const inputs = await processor(text, [image], {
+      do_image_splitting: false,
     });
 
-    const decoded = tokenizer.batch_decode(output, { skip_special_tokens: false })[0];
+    let streamedAnswer = "";
+    const streamer = new TextStreamer(processor.tokenizer, {
+      skip_prompt: true,
+      skip_special_tokens: true,
+      callback_function: (chunk) => {
+        streamedAnswer += chunk;
+      },
+    });
+
+    postProgress("Generating answer", "Running SmolVLM with WebGPU.", 98);
+    const inferenceStarted = performance.now();
+
+    const generation = await model.generate({
+      ...inputs,
+      do_sample: false,
+      repetition_penalty: 1.1,
+      max_new_tokens: MAX_NEW_TOKENS,
+      streamer,
+      return_dict_in_generate: true,
+    });
+
+    let answer = streamedAnswer.trim();
+    if (!answer && generation?.sequences) {
+      const decoded = processor.batch_decode(generation.sequences, {
+        skip_special_tokens: true,
+      });
+      answer = decoded?.[0] ?? "";
+      const questionIndex = answer.toLowerCase().lastIndexOf(question.toLowerCase());
+      if (questionIndex >= 0) {
+        answer = answer.slice(questionIndex + question.length);
+      }
+    }
+
+    answer = cleanAnswer(answer);
     const inferenceSeconds = (performance.now() - inferenceStarted) / 1000;
     const totalSeconds = (performance.now() - overallStarted) / 1000;
-    const answer = extractAnswer(decoded);
 
     self.postMessage({
       type: "result",
@@ -246,7 +229,7 @@ self.addEventListener("message", async (event) => {
       inferenceSeconds,
       totalSeconds,
       model: MODEL_ID,
-      backend: profile,
+      backend: "SmolVLM 256M · WebGPU fp32",
       confidenceLabel: "Not calibrated",
     });
   } catch (error) {

@@ -28,10 +28,9 @@ samples/yellow_triangle.png
 
 The Space is compute-free because inference runs in the visitor's browser.
 WebGPU and a large first-time model download are required. The app checks the
-WebGPU adapter, selects an official Moondream2 dtype profile, retries with a
-compatibility profile when needed, and displays useful failure details instead
-of leaving result cards blank. No Hugging Face token should be embedded in
-JavaScript.
+WebGPU adapter and follows the official SmolVLM-256M-Instruct processor, chat-template,
+and WebGPU generation flow. It also displays useful failure details instead of
+leaving result cards blank. No Hugging Face token should be embedded in JavaScript.
 
 ## GitHub Actions synchronization
 
