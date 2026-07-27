@@ -52,27 +52,36 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
           test -f space/README.md
           test -f space/index.html
           test -f space/src/main.js
           test -f space/src/model-worker.js
           test -f space/src/style.css
+
           grep -q "sdk: static" space/README.md
           grep -q "app_file: index.html" space/README.md
-          grep -q "Xenova/moondream2" space/src/model-worker.js
-          grep -q 'embed_tokens: "fp16"' space/src/model-worker.js
-          grep -q 'vision_encoder: "q8"' space/src/model-worker.js
-          grep -q 'decoder_model_merged: "q4"' space/src/model-worker.js
-          if grep -q 'embed_tokens: "int8"' space/src/model-worker.js; then
-            echo "Unsupported Moondream2 embed_tokens dtype detected."
+
+          grep -q "HuggingFaceTB/SmolVLM-256M-Instruct" space/src/model-worker.js
+          grep -q "AutoProcessor" space/src/model-worker.js
+          grep -q "AutoModelForVision2Seq" space/src/model-worker.js
+          grep -q "load_image" space/src/model-worker.js
+          grep -q 'dtype: "fp32"' space/src/model-worker.js
+          grep -q 'device: "webgpu"' space/src/model-worker.js
+
+          if grep -q "Xenova/moondream2" space/src/model-worker.js; then
+            echo "Old Moondream2 configuration is still present."
             exit 1
           fi
+
           grep -q "No prediction yet" space/index.html
           grep -q "errorPanel" space/index.html
+
       - name: Check JavaScript syntax
         run: |
           node --check space/src/main.js
           node --check space/src/model-worker.js
+
       - name: Check for accidentally committed large files
         shell: bash
         run: |
