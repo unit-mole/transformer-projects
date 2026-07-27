@@ -22,6 +22,15 @@ const els = {
   statDocuments: document.querySelector("#stat-documents"),
   statChunks: document.querySelector("#stat-chunks"),
   statAvgChunk: document.querySelector("#stat-avg-chunk"),
+  evaluationStatus: document.querySelector("#evaluation-status"),
+  metricRecall: document.querySelector("#metric-recall"),
+  metricRecallDetail: document.querySelector("#metric-recall-detail"),
+  metricMrr: document.querySelector("#metric-mrr"),
+  metricMrrDetail: document.querySelector("#metric-mrr-detail"),
+  metricCosine: document.querySelector("#metric-cosine"),
+  metricCosineDetail: document.querySelector("#metric-cosine-detail"),
+  metricLatency: document.querySelector("#metric-latency"),
+  metricLatencyDetail: document.querySelector("#metric-latency-detail"),
 };
 
 const state = {
@@ -35,9 +44,81 @@ const state = {
 const CACHE_PREFIX = "semantic-search-vectors";
 
 async function fetchJson(path) {
-  const response = await fetch(path, { cache: "no-cache" });
+  const response = await fetch(`${path}${path.includes("?") ? "&" : "?"}v=20260727-3`, { cache: "no-store" });
   if (!response.ok) throw new Error(`Could not load ${path}: HTTP ${response.status}`);
   return response.json();
+}
+
+async function fetchOptionalJson(path) {
+  try {
+    const response = await fetch(`${path}${path.includes("?") ? "&" : "?"}v=20260727-3`, { cache: "no-store" });
+    if (!response.ok) return null;
+    return await response.json();
+  } catch (error) {
+    console.warn(`Optional evaluation artifact unavailable: ${path}`, error);
+    return null;
+  }
+}
+
+function asPercent(value, digits = 1) {
+  return Number.isFinite(Number(value)) ? `${(Number(value) * 100).toFixed(digits)}%` : "Unavailable";
+}
+
+function asNumber(value, digits = 4) {
+  return Number.isFinite(Number(value)) ? Number(value).toFixed(digits) : "Unavailable";
+}
+
+async function loadEvaluationMetrics() {
+  const [recall, mrr, latency, cosine] = await Promise.all([
+    fetchOptionalJson("./data/recall_at_k_results.json"),
+    fetchOptionalJson("./data/mrr_results.json"),
+    fetchOptionalJson("./data/query_latency_results.json"),
+    fetchOptionalJson("./data/cosine_similarity_analysis.json"),
+  ]);
+
+  let completed = 0;
+
+  if (recall?.status === "completed") {
+    els.metricRecall.textContent = `R@1 ${asPercent(recall.recall_at_1)} · R@3 ${asPercent(recall.recall_at_3)}`;
+    els.metricRecallDetail.textContent = `R@5 ${asPercent(recall.recall_at_5)} · R@10 ${asPercent(recall.recall_at_10)} · ${recall.query_count ?? "?"} queries`;
+    completed += 1;
+  } else {
+    els.metricRecall.textContent = "Not available";
+    els.metricRecallDetail.textContent = "Run evaluate_search.py and copy the resulting JSON into web/data.";
+  }
+
+  if (mrr?.status === "completed") {
+    els.metricMrr.textContent = asNumber(mrr.mrr, 4);
+    els.metricMrrDetail.textContent = "Mean reciprocal rank across the verified evaluation query set.";
+    completed += 1;
+  } else {
+    els.metricMrr.textContent = "Not available";
+    els.metricMrrDetail.textContent = "Run evaluate_search.py and copy the resulting JSON into web/data.";
+  }
+
+  if (latency?.status === "completed" && Array.isArray(latency.results) && latency.results.length) {
+    const representative = latency.results.find((item) => Number(item.top_k) === 5) || latency.results[0];
+    els.metricLatency.textContent = `${Number(representative.average_ms).toFixed(2)} ms average`;
+    els.metricLatencyDetail.textContent = `Top-${representative.top_k} · min ${Number(representative.minimum_ms).toFixed(2)} ms · max ${Number(representative.maximum_ms).toFixed(2)} ms · ${representative.measurements} runs`;
+    completed += 1;
+  } else {
+    els.metricLatency.textContent = "Not available";
+    els.metricLatencyDetail.textContent = "Run benchmark_latency.py and copy the resulting JSON into web/data.";
+  }
+
+  if (cosine?.status === "completed") {
+    const mean = cosine.mean_top_score ?? cosine.average_top_score ?? cosine.mean_similarity;
+    els.metricCosine.textContent = Number.isFinite(Number(mean)) ? `${Number(mean).toFixed(3)} mean score` : "Analysis completed";
+    els.metricCosineDetail.textContent = cosine.summary || cosine.note || "Review the cosine analysis artifact for score distributions and error cases.";
+    completed += 1;
+  } else {
+    els.metricCosine.textContent = "Pending manual review";
+    els.metricCosineDetail.textContent = "Recall, MRR, and latency are verified. Cosine false-positive analysis has not yet been completed.";
+  }
+
+  els.evaluationStatus.textContent = completed
+    ? `${completed} evaluation artifact${completed === 1 ? "" : "s"} loaded from static JSON. Values shown below are generated results, not placeholders.`
+    : "No completed evaluation artifacts were found. Run the offline evaluation and copy the JSON outputs into web/data.";
 }
 
 function cacheKey() {
@@ -235,6 +316,7 @@ async function initialize() {
     state.metadata = metadata;
     populateFilters();
     updateStats();
+    await loadEvaluationMetrics();
     await initializeVectors(embeddingPayload);
   } catch (error) {
     console.error(error);

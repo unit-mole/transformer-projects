@@ -6,9 +6,10 @@
   <meta name="description" content="Browser-based semantic search over ML portfolio documentation using Sentence-BERT and Transformers.js." />
   <meta name="theme-color" content="#08111f" />
   <title>Document Semantic Search · Sentence-BERT</title>
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./style.css?v=20260727-3" />
 </head>
 <body>
+  <!-- Project 07 evaluation UI build: 2026-07-27-v3 -->
   <a class="skip-link" href="#search-panel">Skip to search</a>
   <header class="topbar">
     <a class="brand" href="https://unit-mole.github.io/transformer-projects/" aria-label="Transformer Projects demo hub">
@@ -113,12 +114,33 @@
 
     <section id="evaluation" class="content-section shell">
       <p class="eyebrow">EVALUATION</p>
-      <h2>Metrics without invented results</h2>
+      <h2>Verified evaluation results</h2>
+      <p class="evaluation-note" id="evaluation-status">Loading evaluation artifacts from <code>data/*.json</code>…</p>
       <div class="evaluation-grid">
-        <article><h3>Recall@K</h3><p>Checks whether a relevant document or chunk appears within the top K results.</p><strong>Run offline evaluation</strong></article>
-        <article><h3>MRR</h3><p>Rewards systems that place the first relevant result near the top of the ranking.</p><strong>Run offline evaluation</strong></article>
-        <article><h3>Cosine analysis</h3><p>Inspects score distributions, weak matches, and high-similarity false positives.</p><strong>Human review required</strong></article>
-        <article><h3>Query latency</h3><p>The live app reports query embedding, ranking, and total browser latency.</p><strong>Measured per search</strong></article>
+        <article>
+          <h3>Recall@K</h3>
+          <p>Checks whether a relevant document or chunk appears within the top K results.</p>
+          <strong class="metric-value" id="metric-recall">Loading…</strong>
+          <span class="metric-detail" id="metric-recall-detail">Waiting for recall_at_k_results.json</span>
+        </article>
+        <article>
+          <h3>MRR</h3>
+          <p>Rewards systems that place the first relevant result near the top of the ranking.</p>
+          <strong class="metric-value" id="metric-mrr">Loading…</strong>
+          <span class="metric-detail" id="metric-mrr-detail">Waiting for mrr_results.json</span>
+        </article>
+        <article>
+          <h3>Cosine analysis</h3>
+          <p>Inspects score distributions, weak matches, and high-similarity false positives.</p>
+          <strong class="metric-value" id="metric-cosine">Pending review</strong>
+          <span class="metric-detail" id="metric-cosine-detail">No completed cosine analysis artifact was found.</span>
+        </article>
+        <article>
+          <h3>Query latency</h3>
+          <p>Python evaluation reports end-to-end embedding and ranking latency; live searches also report browser latency.</p>
+          <strong class="metric-value" id="metric-latency">Loading…</strong>
+          <span class="metric-detail" id="metric-latency-detail">Waiting for query_latency_results.json</span>
+        </article>
       </div>
     </section>
 
@@ -133,6 +155,7 @@
     <div><a href="https://github.com/unit-mole/transformer-projects">Repository</a><a href="https://unit-mole.github.io/transformer-projects/">All demos</a></div>
   </footer>
 
-  <script type="module" src="./app.js"></script>
+  <script defer src="./metrics.js?v=20260727-3"></script>
+  <script type="module" src="./app.js?v=20260727-3"></script>
 </body>
 </html>

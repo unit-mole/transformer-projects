@@ -181,3 +181,7 @@ http://localhost:8000/07-document-semantic-search-sentence-bert/
 ### The model does not load
 
 The application automatically labels and uses its keyword fallback when the Transformers.js CDN or browser model cannot load. Check browser developer tools for network, CSP, WebAssembly, or storage errors.
+
+## Verified metrics deployment
+
+The static app loads completed evaluation artifacts from `web/data/` through `metrics.js`. Run `python scripts/export_browser_data.py` after evaluation, then `python scripts/sync_docs_site.py` so the same JSON files are committed under `docs/07-document-semantic-search-sentence-bert/data/`.

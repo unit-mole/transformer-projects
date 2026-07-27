@@ -7,7 +7,6 @@ on:
     paths:
       - "07-document-semantic-search-sentence-bert/**"
       - "docs/07-document-semantic-search-sentence-bert/**"
-      - "docs/.nojekyll"
       - ".github/workflows/07-document-semantic-search-sentence-bert.yml"
 
   pull_request:
@@ -16,7 +15,6 @@ on:
     paths:
       - "07-document-semantic-search-sentence-bert/**"
       - "docs/07-document-semantic-search-sentence-bert/**"
-      - "docs/.nojekyll"
       - ".github/workflows/07-document-semantic-search-sentence-bert.yml"
 
   workflow_dispatch:
@@ -53,12 +51,12 @@ jobs:
 
       - name: Check JavaScript syntax
         run: |
-          node --check 07-document-semantic-search-sentence-bert/web/app.js
-          node --check 07-document-semantic-search-sentence-bert/web/search.js
-          node --check 07-document-semantic-search-sentence-bert/web/embeddings.js
-          node --check docs/07-document-semantic-search-sentence-bert/app.js
-          node --check docs/07-document-semantic-search-sentence-bert/search.js
-          node --check docs/07-document-semantic-search-sentence-bert/embeddings.js
+          for root in 07-document-semantic-search-sentence-bert/web docs/07-document-semantic-search-sentence-bert; do
+            node --check "$root/app.js"
+            node --check "$root/metrics.js"
+            node --check "$root/search.js"
+            node --check "$root/embeddings.js"
+          done
 
       - name: Validate required static files and JSON
         run: |
@@ -74,6 +72,7 @@ jobs:
               "index.html",
               "style.css",
               "app.js",
+              "metrics.js",
               "search.js",
               "embeddings.js",
               "metadata.json",
@@ -82,6 +81,11 @@ jobs:
               "data/embeddings.json",
               "data/evaluation_queries.json",
               "data/metadata.json",
+              "data/model_metrics.json",
+              "data/recall_at_k_results.json",
+              "data/mrr_results.json",
+              "data/query_latency_results.json",
+              "data/cosine_similarity_analysis.json",
           ]
 
           for root in roots:
@@ -89,13 +93,24 @@ jobs:
               if missing:
                   raise SystemExit(f"Missing files under {root}: {missing}")
 
+              html = (root / "index.html").read_text(encoding="utf-8")
+              for marker in ("Verified evaluation results", "metric-recall", "metrics.js"):
+                  if marker not in html:
+                      raise SystemExit(f"Missing evaluation UI marker {marker!r} in {root / 'index.html'}")
+
               for path in sorted((root / "data").glob("*.json")):
                   with path.open(encoding="utf-8") as handle:
                       json.load(handle)
               with (root / "metadata.json").open(encoding="utf-8") as handle:
                   json.load(handle)
 
-          print("Required browser files and JSON artifacts are valid.")
+          recall = json.loads((roots[0] / "data/recall_at_k_results.json").read_text())
+          mrr = json.loads((roots[0] / "data/mrr_results.json").read_text())
+          latency = json.loads((roots[0] / "data/query_latency_results.json").read_text())
+          assert recall["status"] == "completed"
+          assert mrr["status"] == "completed"
+          assert latency["status"] == "completed"
+          print("Required browser files, evaluation UI, and JSON artifacts are valid.")
           PY
 
       - name: Verify main-docs deployment mirror

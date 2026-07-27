@@ -99,6 +99,10 @@ input:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgb
 .evaluation-grid h3 { margin-top: 0; }
 .evaluation-grid p { min-height: 92px; color: var(--muted); line-height: 1.55; }
 .evaluation-grid strong { color: #93c5fd; font-size: .82rem; }
+.evaluation-note { margin: 8px 0 0; color: #9fb0c9; }
+.evaluation-note code { color: #bfdbfe; }
+.evaluation-grid .metric-value { display: block; color: #bfdbfe; font-size: 1.05rem; line-height: 1.45; font-variant-numeric: tabular-nums; }
+.evaluation-grid .metric-detail { display: block; margin-top: 8px; color: #8294af; font-size: .78rem; line-height: 1.5; }
 .notice { margin-top: 22px; padding: 28px; border: 1px solid rgba(250, 204, 21, .28); border-radius: 18px; background: rgba(113, 63, 18, .13); }
 .notice h2 { font-size: 1.45rem; }
 .notice p { margin-bottom: 0; color: #d6cdb4; line-height: 1.7; }
