@@ -16,15 +16,26 @@ https://unit-mole.github.io/transformer-projects/
 
 ## Important one-time GitHub setting
 
-GitHub Pages must be enabled once before `actions/configure-pages` can read the Pages site configuration.
+GitHub Pages is a repository-level service and must exist before `actions/configure-pages` can read it. A workflow file cannot create the Pages site with the default `GITHUB_TOKEN`.
+
+Choose either method below once:
+
+### Method A — GitHub interface
 
 1. Open the `unit-mole/transformer-projects` repository.
-2. Select **Settings**.
-3. In the left sidebar, select **Pages**.
-4. Under **Build and deployment**, set **Source** to **GitHub Actions**.
-5. Return to **Actions** and rerun the failed workflow, or push the corrected workflow.
+2. Select **Settings → Pages**.
+3. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+4. Save the setting.
 
-A `Get Pages site failed: Not Found` error means this one-time repository setting has not yet been completed. The default `GITHUB_TOKEN` cannot enable Pages automatically.
+### Method B — GitHub CLI
+
+After `gh auth login`, run:
+
+```cmd
+gh api --method POST repos/unit-mole/transformer-projects/pages -f build_type=workflow 2>nul || gh api --method PUT repos/unit-mole/transformer-projects/pages -f build_type=workflow
+```
+
+A `Get Pages site failed: Not Found` error means the Pages site still has not been enabled. Replacing the YAML alone cannot correct that repository-level 404.
 
 ## Files that must be pushed
 

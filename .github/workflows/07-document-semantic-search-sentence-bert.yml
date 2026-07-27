@@ -2,14 +2,12 @@ name: 07 Document Semantic Search Sentence BERT CI and Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
     paths:
       - "07-document-semantic-search-sentence-bert/**"
       - ".github/workflows/07-document-semantic-search-sentence-bert.yml"
   pull_request:
-    branches:
-      - main
+    branches: [main]
     paths:
       - "07-document-semantic-search-sentence-bert/**"
       - ".github/workflows/07-document-semantic-search-sentence-bert.yml"
@@ -32,10 +30,10 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
           cache: pip
@@ -103,10 +101,18 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      # One-time repository setup is required:
-      # Settings -> Pages -> Build and deployment -> Source: GitHub Actions
+      - name: Verify GitHub Pages is enabled
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if ! gh api "repos/${GITHUB_REPOSITORY}/pages" >/dev/null 2>&1; then
+            echo "::error title=GitHub Pages is not enabled::Enable Pages once in Settings > Pages > Source > GitHub Actions, or run: gh api --method POST repos/${GITHUB_REPOSITORY}/pages -f build_type=workflow"
+            exit 1
+          fi
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
