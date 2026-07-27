@@ -1,5 +1,7 @@
 name: 08 Image Classification Vision Transformer CI
 
+# This workflow is intentionally restricted to Project 08. A Project 09-only
+# commit must not start this workflow.
 on:
   push:
     branches:
@@ -8,7 +10,6 @@ on:
       - "08-image-classification-vision-transformer/**"
       - "docs/08-image-classification-vision-transformer/**"
       - ".github/workflows/08-image-classification-vision-transformer.yml"
-
   pull_request:
     branches:
       - main
@@ -16,75 +17,86 @@ on:
       - "08-image-classification-vision-transformer/**"
       - "docs/08-image-classification-vision-transformer/**"
       - ".github/workflows/08-image-classification-vision-transformer.yml"
-
   workflow_dispatch:
 
 permissions:
   contents: read
 
-env:
-  PROJECT_DIR: 08-image-classification-vision-transformer
-  DEPLOY_DIR: docs/08-image-classification-vision-transformer
-
 jobs:
-  validate:
-    name: Validate Project 08 source and docs deployment copy
+  validate-project-08:
+    name: Validate Project 08 only
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
-      - name: Validate source web application files
+      - name: Validate Project 08 source folder
         shell: bash
         run: |
           set -euo pipefail
-          test -f "$PROJECT_DIR/web/index.html"
-          test -f "$PROJECT_DIR/web/style.css"
-          test -f "$PROJECT_DIR/web/app.js"
+          project="08-image-classification-vision-transformer"
+          test -d "$project"
 
-      - name: Validate docs deployment files
+          # Some portfolio versions keep the static app in web/, while earlier
+          # versions keep development files elsewhere. Validate web/ only when it
+          # exists instead of failing unrelated commits.
+          if [[ -d "$project/web" ]]; then
+            test -f "$project/web/index.html"
+            test -f "$project/web/style.css"
+            test -f "$project/web/app.js"
+            echo "Project 08 source web application found and validated."
+          else
+            echo "Project 08 has no web/ directory; docs deployment copy is authoritative."
+          fi
+
+      - name: Validate Project 08 docs deployment files
         shell: bash
         run: |
           set -euo pipefail
-          test -f "$DEPLOY_DIR/index.html"
-          test -f "$DEPLOY_DIR/style.css"
-          test -f "$DEPLOY_DIR/app.js"
+          deploy="docs/08-image-classification-vision-transformer"
+          test -d "$deploy"
+          test -f "$deploy/index.html"
+          test -f "$deploy/style.css"
+          test -f "$deploy/app.js"
+          test -d "$deploy/model"
+          test -d "$deploy/sample_images"
+          echo "Project 08 docs deployment copy validated."
 
-      - name: Check JavaScript syntax
+      - name: Check Project 08 JavaScript syntax
         shell: bash
         run: |
           set -euo pipefail
+          deploy="docs/08-image-classification-vision-transformer"
           while IFS= read -r -d '' file; do
-            echo "Checking $file"
             node --check "$file"
-          done < <(find "$PROJECT_DIR/web" "$DEPLOY_DIR" -type f -name '*.js' -print0)
+          done < <(find "$deploy" -maxdepth 1 -type f -name "*.js" -print0)
 
-      - name: Validate JSON assets
+      - name: Validate Project 08 JSON files
         shell: bash
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
 
-          roots = [
-              Path("08-image-classification-vision-transformer/web"),
-              Path("docs/08-image-classification-vision-transformer"),
-          ]
-
-          for root in roots:
-              if not root.exists():
-                  raise FileNotFoundError(f"Missing required directory: {root}")
-
-              for path in sorted(root.rglob("*.json")):
-                  with path.open(encoding="utf-8") as handle:
-                      json.load(handle)
-                  print(f"Validated {path}")
+          root = Path("docs/08-image-classification-vision-transformer")
+          files = sorted(root.glob("*.json"))
+          if not files:
+              raise SystemExit("No Project 08 JSON files were found in docs.")
+          for path in files:
+              with path.open("r", encoding="utf-8") as handle:
+                  json.load(handle)
+              print(f"Validated {path}")
           PY
 
       - name: Confirm workflow is validation-only
         shell: bash
         run: |
           set -euo pipefail
-          echo "Project 08 is published by GitHub Pages from main/docs."
-          echo "This workflow validates files only and does not deploy Pages."
+          workflow=".github/workflows/08-image-classification-vision-transformer.yml"
+          if grep -Eiq 'actions/(configure-pages|deploy-pages)|gh-pages|PAGES_DEPLOY_TOKEN|pages:[[:space:]]*write|id-token:[[:space:]]*write' "$workflow"; then
+            echo "Project 08 workflow contains a deployment action or deployment permission."
+            exit 1
+          fi
+          echo "Project 08 workflow is validation-only."

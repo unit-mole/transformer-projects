@@ -2,12 +2,15 @@ name: 09 Vision Language Image Text Retrieval CLIP CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - "09-vision-language-image-text-retrieval-clip/**"
       - "docs/09-vision-language-image-text-retrieval-clip/**"
       - ".github/workflows/09-vision-language-image-text-retrieval-clip.yml"
   pull_request:
+    branches:
+      - main
     paths:
       - "09-vision-language-image-text-retrieval-clip/**"
       - "docs/09-vision-language-image-text-retrieval-clip/**"
@@ -19,17 +22,24 @@ permissions:
 
 jobs:
   test-and-validate:
+    name: Test and validate Project 09
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     defaults:
       run:
+        shell: bash
         working-directory: 09-vision-language-image-text-retrieval-clip
 
+    env:
+      PYTHONPATH: ${{ github.workspace }}/09-vision-language-image-text-retrieval-clip
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
+      - name: Check out repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: pip
@@ -38,10 +48,10 @@ jobs:
       - name: Install lightweight test dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python -m pip install -r requirements.txt
 
       - name: Run Python tests
-        run: pytest -q
+        run: python -m pytest -q
 
       - name: Validate source gallery and browser assets
         run: |
@@ -57,5 +67,5 @@ jobs:
       - name: Reject repository-root static asset paths
         run: python scripts/check_relative_paths.py
 
-      - name: Confirm validation-only Pages workflow
+      - name: Confirm validation-only workflow
         run: python scripts/check_validation_workflow.py
