@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Static browser-based multimodal visual question answering demo." />
   <title>Multimodal Visual Question Answering Transformer</title>
-  <link rel="stylesheet" href="./src/style.css" />
+  <link rel="stylesheet" href="./src/style.css?v=2.0.0" />
 </head>
 <body>
   <header class="hero">
@@ -13,27 +13,41 @@
       <div class="eyebrow">Transformer Project 06 · Static Hugging Face Space</div>
       <h1>Multimodal Visual Question Answering</h1>
       <p class="hero__copy">
-        Ask a natural-language question about an image. Inference runs locally
-        in your browser using Transformers.js, ONNX Runtime Web, and WebGPU.
+        Upload an image, ask a natural-language question, and run a vision-language
+        Transformer directly in the browser with Transformers.js and WebGPU.
       </p>
       <div class="badges">
-        <span>Vision-language model</span><span>WebGPU</span><span>No Python server</span>
+        <span>Moondream2 VLM</span><span>WebGPU</span><span>ONNX</span><span>No Python server</span>
       </div>
     </div>
   </header>
 
   <main class="layout">
     <section class="notice notice--warning">
-      <strong>Large first download:</strong> the browser model is approximately
-      1+ GB in its selected quantized components. Use Chrome or Edge on a
-      desktop with WebGPU and a stable connection. Model files are cached by the browser.
+      <strong>Large first download:</strong> the browser model is downloaded only
+      when you request the first answer. The files are cached afterward. Use a
+      current desktop version of Chrome or Edge with a stable connection.
     </section>
 
     <section class="notice">
-      <strong>Privacy and responsible use:</strong> do not upload personal
-      photos, IDs, medical images, confidential workplace images, or copyrighted
-      material without permission. Answers can be wrong and must not be used for
-      high-stakes decisions.
+      <strong>Privacy and responsible use:</strong> do not upload personal photos,
+      IDs, medical images, confidential workplace images, or copyrighted material
+      without permission. Answers can be wrong and must not be used for high-stakes decisions.
+    </section>
+
+    <section class="runtime-strip" aria-label="Runtime diagnostics">
+      <div>
+        <span>Browser runtime</span>
+        <strong id="browserStatus" data-state="loading">Checking WebGPU…</strong>
+      </div>
+      <div>
+        <span>Model state</span>
+        <strong id="modelStatus">Not loaded yet</strong>
+      </div>
+      <div>
+        <span>Model</span>
+        <strong>Xenova/moondream2</strong>
+      </div>
     </section>
 
     <section class="card workspace">
@@ -84,9 +98,9 @@
         </div>
 
         <button id="askButton" class="primary" disabled>Load model and answer</button>
-        <button id="cancelButton" class="secondary" hidden>Cancel</button>
+        <button id="cancelButton" class="secondary" hidden>Cancel current run</button>
 
-        <div class="status">
+        <div class="status" aria-live="polite">
           <div class="status__row"><span id="statusDot" class="dot"></span><strong id="statusText">Waiting for an image and question</strong></div>
           <progress id="progressBar" value="0" max="100"></progress>
           <div id="progressDetail" class="muted">The model loads only after you click the button.</div>
@@ -94,27 +108,47 @@
       </div>
     </section>
 
-    <section class="results">
+    <section id="errorPanel" class="error-panel" hidden aria-live="assertive">
+      <div>
+        <span class="error-panel__eyebrow">Inference troubleshooting</span>
+        <h2>Model run did not complete</h2>
+        <p id="errorMessage"></p>
+        <details>
+          <summary>Show technical details</summary>
+          <pre id="errorTechnical"></pre>
+        </details>
+      </div>
+      <div class="error-panel__actions">
+        <button id="retryButton" class="secondary secondary--compact">Reset model and retry</button>
+        <button id="copyErrorButton" class="secondary secondary--compact">Copy error details</button>
+      </div>
+    </section>
+
+    <section class="results" aria-label="Prediction results">
       <article class="metric metric--answer">
         <span>Predicted answer</span>
-        <strong id="answerOutput">—</strong>
+        <strong id="answerOutput">No prediction yet</strong>
+        <small>The generated answer will appear here.</small>
       </article>
       <article class="metric">
         <span>Confidence proxy</span>
-        <strong id="confidenceOutput">N/A</strong>
-        <small>Not exposed reliably by this generative browser model.</small>
+        <strong id="confidenceOutput">Not generated yet</strong>
+        <small>This generative model does not expose a calibrated probability.</small>
       </article>
       <article class="metric">
         <span>Question type</span>
-        <strong id="questionTypeOutput">—</strong>
+        <strong id="questionTypeOutput">Detected after submission</strong>
+        <small>Rule-based portfolio diagnostic.</small>
       </article>
       <article class="metric">
         <span>Answer type</span>
-        <strong id="answerTypeOutput">—</strong>
+        <strong id="answerTypeOutput">Detected after generation</strong>
+        <small>Yes/no, number, or open-ended text.</small>
       </article>
       <article class="metric">
         <span>Inference latency</span>
-        <strong id="latencyOutput">—</strong>
+        <strong id="latencyOutput">Measured after generation</strong>
+        <small>Excludes most first-time model download time.</small>
       </article>
     </section>
 
@@ -122,9 +156,10 @@
       <article class="card prose">
         <h2>How the static deployment works</h2>
         <ol>
-          <li>The image stays in the browser and is converted into model-ready pixels.</li>
+          <li>The uploaded image stays in the browser and is converted to RGB pixels.</li>
           <li>The question is normalized without removing meaning-bearing words.</li>
-          <li>Quantized Moondream2 ONNX components are downloaded from the Hugging Face Hub.</li>
+          <li>Compatible quantized Moondream2 ONNX components load from Hugging Face.</li>
+          <li>The app selects an fp16 profile when supported and a compatibility profile otherwise.</li>
           <li>WebGPU performs vision-language generation and returns the answer.</li>
         </ol>
       </article>
@@ -133,7 +168,7 @@
         <p>
           The model can miss small objects, miscount, hallucinate, struggle with
           OCR, or answer ambiguous questions incorrectly. Browser performance
-          varies by hardware, driver, memory, and network speed.
+          varies by hardware, graphics driver, memory, network speed, and WebGPU support.
         </p>
       </article>
     </section>
@@ -144,6 +179,6 @@
     <a href="https://github.com/unit-mole/transformer-projects" target="_blank" rel="noreferrer">GitHub repository</a>
   </footer>
 
-  <script type="module" src="./src/main.js"></script>
+  <script type="module" src="./src/main.js?v=2.0.0"></script>
 </body>
 </html>

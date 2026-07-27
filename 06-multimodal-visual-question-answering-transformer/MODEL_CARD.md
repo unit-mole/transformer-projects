@@ -15,8 +15,10 @@
 - **Model:** `Xenova/moondream2`
 - **Architecture:** browser-compatible vision-language generative model
 - **Runtime:** Transformers.js, ONNX Runtime Web, WebGPU
-- **Quantization:** int8 embedding, q4 vision encoder, q4f16 decoder
-- **Confidence:** not displayed because a reliable calibrated probability is not exposed by this implementation
+- **Preferred WebGPU profile:** fp16 embedding, fp16 vision encoder, q4 decoder
+- **Compatibility WebGPU profile:** fp32 embedding, q8 vision encoder, q4 decoder
+- **Confidence:** shown as `Not calibrated`; a reliable calibrated probability is not exposed by this implementation
+- **Reliability behavior:** WebGPU preflight, automatic precision fallback, retryable worker reset, and populated failure states
 
 ## Intended use
 

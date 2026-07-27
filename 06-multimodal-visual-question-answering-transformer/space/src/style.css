@@ -86,3 +86,83 @@ footer a { color: #b9c4ff; }
   .metric--answer { grid-column: auto; }
   footer { flex-direction: column; }
 }
+
+/* Project 06 reliability and diagnostics upgrade */
+[hidden] { display: none !important; }
+.runtime-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin: 16px 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--line);
+}
+.runtime-strip > div {
+  min-height: 82px;
+  padding: 16px;
+  background: rgba(13,27,45,.94);
+}
+.runtime-strip span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.runtime-strip strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+.runtime-strip strong[data-state="ready"] { color: var(--brand-2); }
+.runtime-strip strong[data-state="loading"] { color: var(--warning); }
+.runtime-strip strong[data-state="error"] { color: var(--danger); }
+.error-panel {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: start;
+  margin: 18px 0;
+  padding: 20px;
+  border: 1px solid rgba(251,113,133,.45);
+  border-radius: 16px;
+  background: rgba(127,29,29,.22);
+}
+.error-panel__eyebrow {
+  color: #fda4af;
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.error-panel h2 { margin: 6px 0 8px; font-size: 1.2rem; }
+.error-panel p { margin: 0 0 12px; color: #fecdd3; line-height: 1.55; }
+.error-panel details { color: var(--muted); }
+.error-panel summary { cursor: pointer; font-weight: 700; }
+.error-panel pre {
+  max-width: 760px;
+  max-height: 220px;
+  overflow: auto;
+  margin: 10px 0 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #050b14;
+  color: #fda4af;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.error-panel__actions { display: grid; gap: 8px; min-width: 190px; }
+.secondary--compact { width: auto; margin-top: 0; padding: 10px 12px; }
+.metric strong { line-height: 1.25; }
+.metric small { line-height: 1.45; }
+@media (max-width: 900px) {
+  .runtime-strip { grid-template-columns: 1fr; }
+  .error-panel { grid-template-columns: 1fr; }
+  .error-panel__actions { grid-template-columns: 1fr 1fr; min-width: 0; }
+}
+@media (max-width: 560px) {
+  .error-panel__actions { grid-template-columns: 1fr; }
+}

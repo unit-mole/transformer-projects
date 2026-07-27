@@ -30,8 +30,10 @@ Python ViLT server. Its browser demo therefore uses the ONNX-compatible
 Moondream2 model with Transformers.js and WebGPU.
 
 The browser app does **not** fabricate a confidence value. It displays
-`N/A` because the selected generative browser path does not expose a reliable,
-calibrated confidence probability in this implementation.
+`Not calibrated` after a successful generation because the selected generative
+browser path does not expose a reliable calibrated probability. Before a run,
+and whenever a run fails, every result card displays an explicit state instead
+of an empty value.
 
 ## What changed from the provided notebook
 
@@ -47,7 +49,7 @@ This project preserves that notebook as a legacy reference while adding:
 - VQA-style consensus evaluation;
 - question and answer categorization;
 - latency and failure-analysis utilities;
-- a browser-only vision-language demo;
+- a browser-only vision-language demo with WebGPU preflight checks and automatic dtype fallback;
 - Static Space metadata and automated GitHub-to-Hugging-Face synchronization;
 - tests, model card, dataset card, and privacy documentation.
 
@@ -56,9 +58,11 @@ This project preserves that notebook as a legacy reference while adding:
 **Planned Space:**  
 `https://huggingface.co/spaces/anmol-unitmole/06-multimodal-visual-question-answering-transformer`
 
-The first browser model download is large—approximately 1+ GB for the selected
-quantized components—and requires a modern desktop browser with WebGPU. Model
-files are downloaded from the Hugging Face Hub and cached by the browser.
+The first browser model download is large and requires a modern desktop browser
+with WebGPU. Model files are downloaded from the Hugging Face Hub and cached by
+the browser. The app uses only dtype combinations documented for Moondream2:
+`fp16/fp16/q4` when `shader-f16` is available, and `fp32/q8/q4` as a
+compatibility profile. Failed loads are reset so the visitor can retry.
 
 ## Responsible use and image privacy
 
@@ -151,6 +155,8 @@ python -m http.server 8000
 ```
 
 Open `http://localhost:8000` in a current desktop version of Chrome or Edge.
+If the server is started one directory above `space/`, open
+`http://localhost:8000/space/` instead.
 
 ## Deploy to a Hugging Face Static Space
 

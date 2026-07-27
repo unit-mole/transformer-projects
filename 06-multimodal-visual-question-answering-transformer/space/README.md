@@ -19,7 +19,9 @@ it. The model runs in the browser through Transformers.js and WebGPU; the
 Static Space does not run a Python server.
 
 The first model load is large and can take several minutes. A modern
-WebGPU-capable Chromium browser and a stable connection are recommended.
+WebGPU-capable Chromium browser and a stable connection are recommended. The
+app uses a documented fp16 profile when supported and an fp32/q8 compatibility
+profile otherwise. Failed runs show troubleshooting details and can be retried.
 
 **Responsible use:** This educational demo can return incorrect, biased, or
 misleading answers. Do not upload private, confidential, medical, identity,

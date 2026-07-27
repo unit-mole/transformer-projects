@@ -9,12 +9,25 @@
     "model_id": "Xenova/moondream2",
     "task": "image-text-to-text / visual question answering",
     "runtime": "Transformers.js + ONNX Runtime Web + WebGPU",
-    "dtype": {
-      "embed_tokens": "int8",
-      "vision_encoder": "q4",
-      "decoder_model_merged": "q4f16"
+    "role": "fully static browser demo",
+    "dtype_profiles": {
+      "preferred_webgpu": {
+        "embed_tokens": "fp16",
+        "vision_encoder": "fp16",
+        "decoder_model_merged": "q4"
+      },
+      "compatibility_webgpu": {
+        "embed_tokens": "fp32",
+        "vision_encoder": "q8",
+        "decoder_model_merged": "q4"
+      }
     },
-    "role": "fully static browser demo"
+    "reliability_notes": [
+      "The app checks for a WebGPU adapter before loading the model.",
+      "The fp16 profile is used only when shader-f16 is supported.",
+      "A compatibility profile is attempted automatically when required.",
+      "Failed model loads are reset so the user can retry without refreshing the page."
+    ]
   },
   "question_preprocessing": {
     "whitespace_normalization": true,

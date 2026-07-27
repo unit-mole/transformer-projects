@@ -26,8 +26,8 @@ jobs:
       run:
         working-directory: 06-multimodal-visual-question-answering-transformer
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
           cache: pip
@@ -47,7 +47,7 @@ jobs:
       run:
         working-directory: 06-multimodal-visual-question-answering-transformer
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Validate required Static Space files
         shell: bash
         run: |
@@ -60,6 +60,15 @@ jobs:
           grep -q "sdk: static" space/README.md
           grep -q "app_file: index.html" space/README.md
           grep -q "Xenova/moondream2" space/src/model-worker.js
+          grep -q 'embed_tokens: "fp16"' space/src/model-worker.js
+          grep -q 'vision_encoder: "q8"' space/src/model-worker.js
+          grep -q 'decoder_model_merged: "q4"' space/src/model-worker.js
+          if grep -q 'embed_tokens: "int8"' space/src/model-worker.js; then
+            echo "Unsupported Moondream2 embed_tokens dtype detected."
+            exit 1
+          fi
+          grep -q "No prediction yet" space/index.html
+          grep -q "errorPanel" space/index.html
       - name: Check JavaScript syntax
         run: |
           node --check space/src/main.js
@@ -81,7 +90,7 @@ jobs:
       HF_SPACE_REPO: ${{ vars.HF_SPACE_REPO }}
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Check deployment configuration
         id: deployment
         shell: bash
