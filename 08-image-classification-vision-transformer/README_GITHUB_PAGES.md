@@ -1,113 +1,82 @@
-# GitHub Pages Deployment Guide
+# GitHub Pages Deployment — Project 08
 
-This project is designed as a static browser application. GitHub Pages serves only HTML, CSS, JavaScript, JSON, SVG, and optional local model assets; inference runs in the visitor's browser.
-
-## Recommended repository URL
+This project is a static browser application. GitHub Pages publishes the files from:
 
 ```text
-https://github.com/unit-mole/transformer-projects
+08-image-classification-vision-transformer/web/
 ```
 
-## Published project URL
+The deployment workflow is:
+
+```text
+.github/workflows/08-image-classification-vision-transformer.yml
+```
+
+## Required one-time repository setting
+
+Before the first successful deployment, enable GitHub Pages for the repository:
+
+1. Open `https://github.com/unit-mole/transformer-projects`.
+2. Select **Settings**.
+3. In the left sidebar, select **Pages**.
+4. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+5. Return to **Actions** and re-run the failed workflow, or push the corrected workflow.
+
+The `Get Pages site failed: Not Found` message occurs when the repository has not yet been enabled for GitHub Pages. This is a repository setting, not a Python, JavaScript, or model error.
+
+## Deployment behavior
+
+The corrected workflow:
+
+- validates Project 08;
+- builds one combined GitHub Pages artifact;
+- publishes Projects 07, 08, and 09 under separate subpaths when their `web/index.html` files exist;
+- preserves the other GitHub Pages projects instead of replacing the whole site with only Project 08;
+- uses current Node.js 24-compatible action versions where available;
+- deploys Project 08 at:
 
 ```text
 https://unit-mole.github.io/transformer-projects/08-image-classification-vision-transformer/
 ```
 
-## Deployment architecture
+## Local browser test
 
-The workflow `.github/workflows/08-image-classification-vision-transformer.yml`:
+From the repository root:
 
-1. Runs tests and validates required files.
-2. Creates `_site/`.
-3. Copies `pages/` to the root of `_site/`.
-4. Copies `08-image-classification-vision-transformer/web/` to `_site/08-image-classification-vision-transformer/`.
-5. Uploads `_site/` as the GitHub Pages artifact.
-6. Deploys on pushes to `main`.
-
-This allows future browser projects to be added as sibling subdirectories.
-
-## One-time GitHub configuration
-
-1. Push the repository to GitHub.
-2. Open **Settings → Pages**.
-3. Under **Build and deployment**, select **GitHub Actions** as the source.
-4. Open the **Actions** tab and run or re-run `08 Image Classification Vision Transformer CI and Pages`.
-5. Wait for the deploy job to complete.
-6. Open the deployment URL shown in the workflow summary.
-
-## Test locally before publishing
-
-```bash
-cd 08-image-classification-vision-transformer/web
+```cmd
+cd 08-image-classification-vision-transformer\web
 python -m http.server 8000
 ```
 
-Open `http://localhost:8000` and verify:
-
-- the model status changes from `Not loaded` to `Ready`;
-- the first model download completes;
-- uploaded and sample images render;
-- top-k predictions appear;
-- latency is shown;
-- the patch-sensitivity map runs;
-- the browser console has no 404/CORS errors.
-
-## Default directly deployable model
-
-`web/metadata.json` points to:
+Open:
 
 ```text
-onnx-community/vit-tiny-patch16-224-ONNX
+http://localhost:8000
 ```
 
-Transformers.js downloads a quantized ONNX file and its configuration from the Hugging Face Hub. This avoids committing a large binary to ordinary Git history and makes the static project work immediately after Pages deployment.
+Do not open `index.html` directly with a `file://` URL because browser module loading and model requests may be blocked.
 
-## Use your own fine-tuned model
+## Troubleshooting
 
-1. Train/fine-tune the model in Python.
-2. Export it with `scripts/convert_to_onnx.py` or Optimum.
-3. Convert the repository to a Transformers.js-compatible local folder, including `config.json`, `preprocessor_config.json`, and the `onnx/` directory.
-4. Copy that folder under `web/model/`.
-5. Update `web/metadata.json`:
+### Configure Pages fails with `Not Found`
 
-```json
-{
-  "browser_model": {
-    "source": "local",
-    "model_id": "./model",
-    "dtype": "q8"
-  }
-}
+Set **Settings → Pages → Source → GitHub Actions**, then re-run the workflow.
+
+### Validation passes but deployment fails
+
+The application files are valid. Check the repository Pages source and the workflow permissions:
+
+```yaml
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 ```
 
-6. In `web/inference.js`, set `env.allowLocalModels = true` and `env.localModelPath = './'` if your exported folder requires local-model resolution.
-7. Test with `python -m http.server` before pushing.
+### Project 07 or Project 09 disappears
 
-Do not commit oversized model files without checking GitHub's file limits. Prefer quantization and Git LFS when appropriate.
+GitHub Pages deploys one artifact for the entire repository. Use the corrected combined-site workflow, which copies all available GitHub Pages projects into the same `_site` artifact.
 
-## Common problems
+### The deployed page loads but inference does not
 
-### `Failed to fetch metadata.json`
-
-Run through an HTTP server instead of opening the file directly. Confirm that `metadata.json` is beside `index.html`.
-
-### Model download stalls
-
-Check the browser network panel, disable restrictive extensions for the test, and retry. The first load is slower; later loads may use browser cache.
-
-### WebGPU error
-
-The code automatically retries with WebAssembly. WebGPU is an acceleration option, not a deployment requirement.
-
-### 404 under the Pages subdirectory
-
-Use relative paths beginning with `./`, not root-absolute paths beginning with `/`. This project already follows that rule.
-
-### Changes do not appear
-
-Confirm that the Pages source is GitHub Actions, verify the deploy job succeeded, then hard-refresh or clear the site cache.
-
-### Model labels do not match the final dataset
-
-Replace the default ImageNet starter model with the actual fine-tuned checkpoint and update model/dataset cards. Do not simply replace `class_names.json` while leaving a different classification head in the model.
+Open the browser developer console and check blocked network requests, model CDN access, WebAssembly support, and content-security restrictions.
