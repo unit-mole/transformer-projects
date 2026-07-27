@@ -1,0 +1,78 @@
+{
+  "status": "measured",
+  "image": "web\\sample_images\\dog_running.png",
+  "predictions": [
+    {
+      "label": "cat",
+      "similarity": 0.2826926112174988,
+      "relative_score": 0.7133800589083177,
+      "rank": 1
+    },
+    {
+      "label": "dog",
+      "similarity": 0.27337419986724854,
+      "relative_score": 0.280949007619436,
+      "rank": 2
+    },
+    {
+      "label": "person",
+      "similarity": 0.2225000411272049,
+      "relative_score": 0.0017345661271442327,
+      "rank": 3
+    },
+    {
+      "label": "bicycle",
+      "similarity": 0.22091080248355865,
+      "relative_score": 0.0014796912437897184,
+      "rank": 4
+    },
+    {
+      "label": "mountain",
+      "similarity": 0.21676993370056152,
+      "relative_score": 0.0009779923497213975,
+      "rank": 5
+    },
+    {
+      "label": "food",
+      "similarity": 0.20712478458881378,
+      "relative_score": 0.0003727794420065503,
+      "rank": 6
+    },
+    {
+      "label": "car",
+      "similarity": 0.20587699115276337,
+      "relative_score": 0.0003290493017406883,
+      "rank": 7
+    },
+    {
+      "label": "forest",
+      "similarity": 0.2056799679994583,
+      "relative_score": 0.00032262971664562035,
+      "rank": 8
+    },
+    {
+      "label": "beach",
+      "similarity": 0.20355159044265747,
+      "relative_score": 0.0002607774917903137,
+      "rank": 9
+    },
+    {
+      "label": "truck",
+      "similarity": 0.19173265993595123,
+      "relative_score": 7.997982946312767e-05,
+      "rank": 10
+    },
+    {
+      "label": "building",
+      "similarity": 0.1895318627357483,
+      "relative_score": 6.418019995120361e-05,
+      "rank": 11
+    },
+    {
+      "label": "flower",
+      "similarity": 0.18689167499542236,
+      "relative_score": 4.928776999351457e-05,
+      "rank": 12
+    }
+  ]
+}

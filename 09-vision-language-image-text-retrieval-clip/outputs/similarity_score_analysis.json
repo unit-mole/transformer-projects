@@ -1,4 +1,10 @@
 {
-  "status": "not_run",
-  "summary": null
+  "status": "measured",
+  "count": 10,
+  "minimum": 0.2459488958120346,
+  "maximum": 0.3150741457939148,
+  "mean": 0.2845849022269249,
+  "median": 0.2918563485145569,
+  "standard_deviation": 0.019748433633539817,
+  "top_margin": 0.01740926504135132
 }

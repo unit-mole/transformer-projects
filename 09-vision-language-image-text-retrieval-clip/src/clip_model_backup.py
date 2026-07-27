@@ -36,9 +36,7 @@ class ClipEncoder:
             for start in range(0, len(values), batch_size):
                 inputs = self.processor(text=values[start:start + batch_size], return_tensors="pt", padding=True, truncation=True).to(self.device)
                 features = self.model.get_text_features(**inputs)
-                if not isinstance(features, self._torch.Tensor):
-                    features = features.pooler_output
-                rows.append(features.detach().float().cpu().numpy())
+                rows.append(features.detach().cpu().numpy())
         return self._normalize(np.concatenate(rows, axis=0))
 
     def encode_images(self, paths: Iterable[str | Path], batch_size: int = 16) -> np.ndarray:
@@ -50,7 +48,5 @@ class ClipEncoder:
                 images = [Image.open(path).convert("RGB") for path in values[start:start + batch_size]]
                 inputs = self.processor(images=images, return_tensors="pt").to(self.device)
                 features = self.model.get_image_features(**inputs)
-                if not isinstance(features, self._torch.Tensor):
-                    features = features.pooler_output
-                rows.append(features.detach().float().cpu().numpy())
+                rows.append(features.detach().cpu().numpy())
         return self._normalize(np.concatenate(rows, axis=0))

@@ -1,4 +1,4 @@
 {
-  "status": "not_run",
-  "recall_at_10": null
+  "status": "measured",
+  "recall_at_10": 1.0
 }
