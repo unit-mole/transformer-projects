@@ -1,6 +1,6 @@
 # GitHub Pages Deployment — Project 08
 
-This project is a static browser application. GitHub Pages publishes the files from:
+Project 08 is a fully static browser application. GitHub Pages publishes the files from:
 
 ```text
 08-image-classification-vision-transformer/web/
@@ -12,28 +12,52 @@ The deployment workflow is:
 .github/workflows/08-image-classification-vision-transformer.yml
 ```
 
-## Required one-time repository setting
+## Why the previous workflow failed
 
-Before the first successful deployment, enable GitHub Pages for the repository:
+The project validation passed, but `actions/configure-pages` returned:
 
-1. Open `https://github.com/unit-mole/transformer-projects`.
-2. Select **Settings**.
-3. In the left sidebar, select **Pages**.
-4. Under **Build and deployment**, set **Source** to **GitHub Actions**.
-5. Return to **Actions** and re-run the failed workflow, or push the corrected workflow.
+```text
+Get Pages site failed: Not Found
+```
 
-The `Get Pages site failed: Not Found` message occurs when the repository has not yet been enabled for GitHub Pages. This is a repository setting, not a Python, JavaScript, or model error.
+That response means the repository did not yet have a GitHub Pages site. The normal workflow token cannot create the first Pages site. The corrected workflow therefore uses `enablement: true` with a separate fine-grained personal access token.
 
-## Deployment behavior
+## Required one-time token setup
 
-The corrected workflow:
+Create a fine-grained personal access token for only this repository:
 
-- validates Project 08;
-- builds one combined GitHub Pages artifact;
-- publishes Projects 07, 08, and 09 under separate subpaths when their `web/index.html` files exist;
-- preserves the other GitHub Pages projects instead of replacing the whole site with only Project 08;
-- uses current Node.js 24-compatible action versions where available;
-- deploys Project 08 at:
+1. Open GitHub **Settings** for your account.
+2. Open **Developer settings → Personal access tokens → Fine-grained tokens**.
+3. Create a token with repository access limited to `unit-mole/transformer-projects`.
+4. Under repository permissions, set:
+   - **Administration: Read and write**
+   - **Pages: Read and write**
+5. Copy the token.
+6. Open `unit-mole/transformer-projects → Settings → Secrets and variables → Actions`.
+7. Create a new repository secret named exactly:
+
+```text
+PAGES_DEPLOY_TOKEN
+```
+
+8. Paste the token as the secret value.
+
+Do not place the token in a code file, commit, README, terminal screenshot, or Git history.
+
+## What the corrected workflow does
+
+The workflow now:
+
+- validates the Project 08 Python and browser files;
+- checks that `PAGES_DEPLOY_TOKEN` is available;
+- creates/enables the repository Pages site when it does not yet exist;
+- configures Pages for a GitHub Actions deployment;
+- builds one combined static site artifact;
+- preserves available browser demos for Projects 07, 08, and 09;
+- uploads the Pages artifact;
+- deploys through the official `github-pages` environment.
+
+Project 08 will be published at:
 
 ```text
 https://unit-mole.github.io/transformer-projects/08-image-classification-vision-transformer/
@@ -54,29 +78,18 @@ Open:
 http://localhost:8000
 ```
 
-Do not open `index.html` directly with a `file://` URL because browser module loading and model requests may be blocked.
+Do not open `index.html` directly with a `file://` URL because browser module loading and model requests can be blocked.
 
 ## Troubleshooting
 
-### Configure Pages fails with `Not Found`
+### Missing `PAGES_DEPLOY_TOKEN`
 
-Set **Settings → Pages → Source → GitHub Actions**, then re-run the workflow.
+The workflow will now stop with a direct message telling you to add the repository secret. Create the fine-grained token and add it with the exact secret name.
 
-### Validation passes but deployment fails
+### Token exists but enablement returns 403
 
-The application files are valid. Check the repository Pages source and the workflow permissions:
+Edit the fine-grained token and confirm that it is authorized for `unit-mole/transformer-projects` with both **Administration: Read and write** and **Pages: Read and write**.
 
-```yaml
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-```
+### Validation passes but model inference fails in the browser
 
-### Project 07 or Project 09 disappears
-
-GitHub Pages deploys one artifact for the entire repository. Use the corrected combined-site workflow, which copies all available GitHub Pages projects into the same `_site` artifact.
-
-### The deployed page loads but inference does not
-
-Open the browser developer console and check blocked network requests, model CDN access, WebAssembly support, and content-security restrictions.
+Open the browser developer console and inspect model CDN requests, WebAssembly support, WebGPU availability, and content-security restrictions.

@@ -79,8 +79,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Configure GitHub Pages
+      - name: Verify Pages enablement token
+        shell: bash
+        env:
+          PAGES_DEPLOY_TOKEN: ${{ secrets.PAGES_DEPLOY_TOKEN }}
+        run: |
+          if [ -z "${PAGES_DEPLOY_TOKEN}" ]; then
+            echo "::error title=Missing PAGES_DEPLOY_TOKEN::Create a fine-grained personal access token with Administration: write and Pages: write for this repository, then save it as the repository Actions secret PAGES_DEPLOY_TOKEN."
+            exit 1
+          fi
+
+      - name: Enable and configure GitHub Pages
+        id: pages
         uses: actions/configure-pages@v6
+        with:
+          enablement: true
+          token: ${{ secrets.PAGES_DEPLOY_TOKEN }}
 
       - name: Build combined static site
         shell: bash
