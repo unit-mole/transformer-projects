@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browser-based CLIP image-text retrieval and zero-shot classification deployed on GitHub Pages.">
+  <title>CLIP Image-Text Retrieval | Transformer Project 09</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top"><span class="brand-mark">09</span><span>Transformer Projects</span></a>
+    <nav><a href="#demo">Demo</a><a href="#architecture">Architecture</a><a href="#evaluation">Evaluation</a><a href="https://github.com/unit-mole/transformer-projects" target="_blank" rel="noreferrer">GitHub ↗</a></nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Browser-based multimodal AI · GitHub Pages</p>
+        <h1>Search images with natural language using <span>CLIP</span></h1>
+        <p class="lead">A static, backend-free portfolio application for image-text retrieval and zero-shot image classification using quantized ONNX inference in the browser.</p>
+        <div class="hero-actions"><a class="button primary" href="#demo">Open live demo</a><a class="button secondary" href="https://github.com/unit-mole/transformer-projects/tree/main/09-vision-language-image-text-retrieval-clip" target="_blank" rel="noreferrer">View source</a></div>
+        <div class="status-card"><span class="status-dot"></span><div><strong id="model-status" data-tone="neutral">Initializing static gallery…</strong><small id="runtime-detail">Transformers.js + ONNX Runtime Web</small></div></div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="embedding-card image-card"><span>IMAGE</span><div class="vector">[0.12, −0.03, 0.44, …]</div></div>
+        <div class="similarity-line"><span>cosine similarity</span></div>
+        <div class="embedding-card text-card"><span>TEXT</span><div>“a red car on a road”</div></div>
+      </div>
+    </section>
+
+    <section class="stat-strip" aria-label="Project statistics">
+      <div><strong id="gallery-count">—</strong><span>safe gallery images</span></div>
+      <div><strong id="category-count">—</strong><span>visual categories</span></div>
+      <div><strong id="embedding-dim">—</strong><span>embedding dimensions</span></div>
+      <div><strong>0</strong><span>backend servers</span></div>
+    </section>
+
+    <section class="notice"><strong>Responsible use:</strong> This educational demo may return biased, incomplete, or incorrect results. Similarity is not probability. Do not upload private, confidential, sensitive, medical, identity, workplace, or copyrighted images.</section>
+
+    <section id="demo" class="demo-section">
+      <div class="section-heading"><p class="eyebrow">Interactive demo</p><h2>One CLIP model, two multimodal workflows</h2></div>
+      <div class="tabs" role="tablist">
+        <button class="tab-button" aria-selected="true" data-target="retrieval-panel">Text-to-image retrieval</button>
+        <button class="tab-button" aria-selected="false" data-target="classification-panel">Zero-shot classification</button>
+      </div>
+
+      <section id="retrieval-panel" class="tab-panel">
+        <div class="control-card">
+          <label for="search-query">Describe the image you want to find</label>
+          <div class="search-row"><input id="search-query" type="text" value="a red car on a road" maxlength="240" autocomplete="off"><button id="search-button" class="button primary">Search with CLIP</button></div>
+          <div class="sample-row"><span>Try:</span><button class="sample-query" data-query="a dog running in grass">dog running</button><button class="sample-query" data-query="snowy mountains reflected in a lake">mountain lake</button><button class="sample-query" data-query="a city skyline glowing at night">city at night</button><button class="sample-query" data-query="colorful food on a plate">food plate</button></div>
+          <div class="range-row"><label for="top-k">Top results: <strong id="top-k-value">6</strong></label><input id="top-k" type="range" min="1" max="12" value="6"></div>
+          <div id="retrieval-message" class="message" hidden></div>
+        </div>
+        <div class="result-summary"><div><span>Mode</span><strong id="retrieval-mode">Gallery preview</strong></div><div><span>Query latency</span><strong id="retrieval-latency">—</strong></div><div><span>Metric</span><strong>Cosine similarity</strong></div></div>
+        <div id="results-grid" class="results-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="classification-panel" class="tab-panel" hidden>
+        <div class="classification-layout">
+          <div class="control-card upload-card">
+            <label for="image-upload">Upload a safe demo image</label>
+            <div class="upload-zone"><input id="image-upload" type="file" accept="image/png,image/jpeg,image/webp"><div id="upload-placeholder"><strong>PNG, JPEG, or WebP</strong><span>Processed locally in your browser · maximum 10 MB</span></div><img id="upload-preview" alt="Uploaded preview" hidden></div>
+            <label for="candidate-labels">Candidate labels</label>
+            <textarea id="candidate-labels" rows="4">dog, cat, car, truck, bicycle, mountain, beach, forest, food, flower</textarea>
+            <button id="classify-button" class="button primary full">Run zero-shot classification</button>
+            <div id="classification-message" class="message" hidden></div>
+          </div>
+          <div class="prediction-card">
+            <div class="prediction-heading"><div><span>Prediction</span><strong id="prediction-summary">Upload an image to begin</strong></div><div><span>Latency</span><strong id="classification-latency">—</strong></div></div>
+            <div class="table-wrap"><table><thead><tr><th>Rank</th><th>Label and prompt</th><th>Similarity</th><th>Relative score</th></tr></thead><tbody id="prediction-body"><tr><td colspan="4" class="empty-cell">No predictions yet.</td></tr></tbody></table></div>
+            <p class="fine-print">Relative scores are softmax-normalized only across the candidate labels shown. They are not calibrated confidence values.</p>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="architecture" class="content-section">
+      <div class="section-heading"><p class="eyebrow">Architecture</p><h2>Static hosting with real browser inference</h2></div>
+      <div class="architecture-grid">
+        <article><span>01</span><h3>Static gallery</h3><p>Safe PNG assets, captions, tags, and metadata are served directly by GitHub Pages.</p></article>
+        <article><span>02</span><h3>CLIP encoders</h3><p>The text and vision encoders load as quantized ONNX models through Transformers.js while the site itself is published from <code>main/docs</code>.</p></article>
+        <article><span>03</span><h3>Shared embeddings</h3><p>Images and natural-language queries are represented in the same 512-dimensional space.</p></article>
+        <article><span>04</span><h3>Client-side ranking</h3><p>Cosine similarity, top-k ranking, latency, and UI rendering all run in JavaScript.</p></article>
+      </div>
+    </section>
+
+    <section id="evaluation" class="content-section muted-section">
+      <div class="section-heading"><p class="eyebrow">Evaluation framework</p><h2>Metrics are measured, never invented</h2></div>
+      <div class="metrics-grid"><article><strong>Recall@1</strong><span>Not run</span><p>Correct image appears first.</p></article><article><strong>Recall@5</strong><span>Not run</span><p>Correct image appears in top five.</p></article><article><strong>Recall@10</strong><span>Not run</span><p>Correct image appears in top ten.</p></article><article><strong>Latency</strong><span>Measured live</span><p>Browser query and classification time.</p></article></div>
+      <p class="section-note">Run the included Python evaluation scripts after generating gallery embeddings. The output JSON files start with null metrics to prevent false claims.</p>
+    </section>
+
+    <section class="content-section two-column">
+      <article><p class="eyebrow">Model details</p><h2 id="model-name">CLIP ViT-B/32</h2><p>CLIP learns aligned image and text representations. Higher cosine similarity generally indicates stronger alignment, but does not guarantee semantic correctness.</p></article>
+      <article><p class="eyebrow">Limitations</p><h2>Human review remains necessary</h2><p>Prompt wording, gallery coverage, quantization, browser resources, and model bias can affect results. This demo is not suitable for consequential decisions.</p></article>
+    </section>
+  </main>
+
+  <footer><div><strong>Project 09 · CLIP Image-Text Retrieval</strong><span>Quality Data Scientist → Applied ML / AI portfolio</span></div><div><a href="https://github.com/unit-mole/transformer-projects" target="_blank" rel="noreferrer">GitHub</a><a href="https://github.com/unit-mole/transformer-projects/tree/main/09-vision-language-image-text-retrieval-clip#readme" target="_blank" rel="noreferrer">Documentation</a></div></footer>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

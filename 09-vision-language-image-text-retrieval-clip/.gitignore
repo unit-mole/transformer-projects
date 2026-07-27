@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.ipynb_checkpoints/
+data/raw/
+data/full_dataset/
+models/**/*.onnx
+models/**/*.ort
+web/model/**/*.onnx
+web/model/**/*.ort
+outputs/*.png
+outputs/*.npy
+outputs/*.npz
+.DS_Store
+Thumbs.db
+
+# Repository deployment copy is managed by scripts/sync_docs.py
+# (Do not ignore the docs copy; it must be committed for main/docs Pages publishing.)

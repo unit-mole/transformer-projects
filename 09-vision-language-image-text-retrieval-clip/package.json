@@ -1,0 +1,20 @@
+{
+  "name": "vision-language-image-text-retrieval-clip",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Static GitHub Pages CLIP retrieval and zero-shot classification demo published from main/docs",
+  "scripts": {
+    "serve": "npx http-server web -p 8000 -c-1",
+    "serve:docs": "npx http-server ../docs/09-vision-language-image-text-retrieval-clip -p 8000 -c-1",
+    "sync:docs": "python scripts/sync_docs.py",
+    "check:docs": "python scripts/sync_docs.py --check",
+    "check:paths": "python scripts/check_relative_paths.py",
+    "validate:web": "node scripts/validate_web_assets.mjs --target web",
+    "validate:docs": "node scripts/validate_web_assets.mjs --target docs",
+    "validate": "npm run validate:web && npm run check:docs && npm run validate:docs && npm run check:paths"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

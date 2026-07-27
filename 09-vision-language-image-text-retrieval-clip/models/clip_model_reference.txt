@@ -1,0 +1,2 @@
+Base model: openai/clip-vit-base-patch32
+Browser model: Xenova/clip-vit-base-patch32

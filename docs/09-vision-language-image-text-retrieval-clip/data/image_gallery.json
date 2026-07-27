@@ -1,0 +1,186 @@
+{
+  "dataset": "clip-safe-synthetic-gallery-v1",
+  "version": "1.0.0",
+  "images": [
+    {
+      "image_id": "img_001",
+      "image_path": "./sample_images/dog_running.png",
+      "caption": "A brown dog running across green grass under a blue sky.",
+      "category": "animals",
+      "tags": [
+        "dog",
+        "running",
+        "grass",
+        "outdoors"
+      ],
+      "source": "original synthetic project asset",
+      "license_note": "Repository license applies",
+      "embedding_id": "emb_img_001"
+    },
+    {
+      "image_id": "img_002",
+      "image_path": "./sample_images/red_car.png",
+      "caption": "A bright red car driving along a paved road.",
+      "category": "vehicles",
+      "tags": [
+        "red car",
+        "road",
+        "driving",
+        "vehicle"
+      ],
+      "source": "original synthetic project asset",
+      "license_note": "Repository license applies",
+      "embedding_id": "emb_img_002"
+    },
+    {
+      "image_id": "img_003",
+      "image_path": "./sample_images/people_table.png",
+      "caption": "Three people sitting together around a table.",
+      "category": "people",
+      "tags": [
+        "people",
+        "table",
+        "meeting",
+        "sitting"
+      ],
+      "source": "original synthetic project asset",
+      "license_note": "Repository license applies",
+      "embedding_id": "emb_img_003"
+    },
+    {
+      "image_id": "img_004",
+      "image_path": "./sample_images/mountain_lake.png",
+      "caption": "Snowy mountains reflected in a calm blue lake.",
+      "category": "landscapes",
+      "tags": [
+        "mountain",
+        "lake",
+        "snow",
+        "landscape"
+      ],
+      "source": "original synthetic project asset",
+      "license_note": "Repository license applies",
+      "embedding_id": "emb_img_004"
+    },
+    {
+      "image_id": "img_005",
+      "image_path": "./sample_images/bicycle_rider.png",
+      "caption": "A person riding a bicycle on a sunny path.",
+      "category": "sports",
+      "tags": [
+        "bicycle",
+        "rider",
+        "cycling",
+        "path"
+      ],
+      "source": "original synthetic project asset",
+      "license_note": "Repository license applies",
+      "embedding_id": "emb_img_005"
+    },
+    {
+      "image_id": "img_006",
+      "image_path": "./sample_images/food_plate.png",
+      "caption": "Colorful vegetables and food arranged on a white plate.",
+      "category": "food",
+      "tags": [
+        "food",
+        "plate",
+        "vegetables",
+        "meal"
+      ],
+      "source": "original synthetic project asset",
+      "license_note": "Repository license applies",
+      "embedding_id": "emb_img_006"
+    },
+    {
+      "image_id": "img_007",
+      "image_path": "./sample_images/city_night.png",
+      "caption": "A city skyline glowing with lights at night.",
+      "category": "city",
+      "tags": [
+        "city",
+        "night",
+        "buildings",
+        "lights"
+      ],
+      "source": "original synthetic project asset",
+      "license_note": "Repository license applies",
+      "embedding_id": "emb_img_007"
+    },
+    {
+      "image_id": "img_008",
+      "image_path": "./sample_images/beach.png",
+      "caption": "A quiet sandy beach beside a blue ocean.",
+      "category": "landscapes",
+      "tags": [
+        "beach",
+        "ocean",
+        "sand",
+        "coast"
+      ],
+      "source": "original synthetic project asset",
+      "license_note": "Repository license applies",
+      "embedding_id": "emb_img_008"
+    },
+    {
+      "image_id": "img_009",
+      "image_path": "./sample_images/forest.png",
+      "caption": "Tall green trees in a peaceful forest.",
+      "category": "nature",
+      "tags": [
+        "forest",
+        "trees",
+        "green",
+        "nature"
+      ],
+      "source": "original synthetic project asset",
+      "license_note": "Repository license applies",
+      "embedding_id": "emb_img_009"
+    },
+    {
+      "image_id": "img_010",
+      "image_path": "./sample_images/flower.png",
+      "caption": "A pink flower blooming against green leaves.",
+      "category": "nature",
+      "tags": [
+        "flower",
+        "pink",
+        "plant",
+        "leaves"
+      ],
+      "source": "original synthetic project asset",
+      "license_note": "Repository license applies",
+      "embedding_id": "emb_img_010"
+    },
+    {
+      "image_id": "img_011",
+      "image_path": "./sample_images/cat_window.png",
+      "caption": "A cat sitting beside a bright window.",
+      "category": "animals",
+      "tags": [
+        "cat",
+        "window",
+        "sitting",
+        "pet"
+      ],
+      "source": "original synthetic project asset",
+      "license_note": "Repository license applies",
+      "embedding_id": "emb_img_011"
+    },
+    {
+      "image_id": "img_012",
+      "image_path": "./sample_images/truck_road.png",
+      "caption": "A blue truck traveling on a country road.",
+      "category": "vehicles",
+      "tags": [
+        "truck",
+        "road",
+        "blue",
+        "vehicle"
+      ],
+      "source": "original synthetic project asset",
+      "license_note": "Repository license applies",
+      "embedding_id": "emb_img_012"
+    }
+  ]
+}

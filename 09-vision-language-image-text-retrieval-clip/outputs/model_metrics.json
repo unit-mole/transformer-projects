@@ -1,0 +1,8 @@
+{
+  "status": "not_run",
+  "recall_at_1": null,
+  "recall_at_5": null,
+  "recall_at_10": null,
+  "average_query_latency_ms": null,
+  "note": "Run scripts/generate_image_embeddings.py and scripts/evaluate_retrieval.py. No metrics are invented."
+}

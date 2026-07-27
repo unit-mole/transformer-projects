@@ -1,0 +1,9 @@
+{
+  "model_id": "Xenova/clip-vit-base-patch32",
+  "dtype": "q8",
+  "dimension": 512,
+  "normalized": true,
+  "generated": false,
+  "vectors": [],
+  "note": "Run scripts/generate_image_embeddings.py to populate this file, or allow the browser demo to generate and cache the small gallery on first use."
+}

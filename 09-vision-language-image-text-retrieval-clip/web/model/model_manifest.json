@@ -1,0 +1,8 @@
+{
+  "mode": "remote-browser-compatible-model",
+  "model_id": "Xenova/clip-vit-base-patch32",
+  "dtype": "q8",
+  "local_assets_included": false,
+  "reason": "Large ONNX binaries are not bundled in the portfolio archive. Transformers.js downloads browser-compatible quantized assets and caches them in the browser.",
+  "optional_local_path": "./model/"
+}

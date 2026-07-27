@@ -1,0 +1,43 @@
+{
+  "project_name": "09-vision-language-image-text-retrieval-clip",
+  "model_id": "Xenova/clip-vit-base-patch32",
+  "base_model": "openai/clip-vit-base-patch32",
+  "dtype": "q8",
+  "device": "wasm",
+  "embedding_dimension": 512,
+  "similarity_metric": "cosine_similarity",
+  "prompt_template": "a photo of a {label}",
+  "image_preprocessing": {
+    "processor": "model preprocessor_config through Transformers.js AutoProcessor",
+    "color_mode": "RGB",
+    "size": 224,
+    "crop": "center crop managed by CLIP processor",
+    "mean": [
+      0.48145466,
+      0.4578275,
+      0.40821073
+    ],
+    "std": [
+      0.26862954,
+      0.26130258,
+      0.27577711
+    ]
+  },
+  "text_preprocessing": {
+    "trim": true,
+    "collapse_whitespace": true,
+    "max_tokens": 77,
+    "tokenizer": "CLIP tokenizer from model repository"
+  },
+  "gallery_strategy": "precomputed embeddings when present; otherwise live browser generation and local cache",
+  "fallback": "caption TF-IDF baseline, explicitly labeled",
+  "responsible_use": "Educational portfolio demo only. Do not use for sensitive or consequential decisions.",
+  "deployment": {
+    "platform": "GitHub Pages",
+    "repository_source": "main",
+    "publishing_folder": "/docs",
+    "project_path": "docs/09-vision-language-image-text-retrieval-clip/",
+    "live_url": "https://unit-mole.github.io/transformer-projects/09-vision-language-image-text-retrieval-clip/",
+    "asset_path_policy": "relative paths only"
+  }
+}

@@ -1,0 +1,13 @@
+image_id,image_path,category,source,license_note,embedding_id
+img_001,./sample_images/dog_running.png,animals,original synthetic project asset,Repository license applies,emb_img_001
+img_002,./sample_images/red_car.png,vehicles,original synthetic project asset,Repository license applies,emb_img_002
+img_003,./sample_images/people_table.png,people,original synthetic project asset,Repository license applies,emb_img_003
+img_004,./sample_images/mountain_lake.png,landscapes,original synthetic project asset,Repository license applies,emb_img_004
+img_005,./sample_images/bicycle_rider.png,sports,original synthetic project asset,Repository license applies,emb_img_005
+img_006,./sample_images/food_plate.png,food,original synthetic project asset,Repository license applies,emb_img_006
+img_007,./sample_images/city_night.png,city,original synthetic project asset,Repository license applies,emb_img_007
+img_008,./sample_images/beach.png,landscapes,original synthetic project asset,Repository license applies,emb_img_008
+img_009,./sample_images/forest.png,nature,original synthetic project asset,Repository license applies,emb_img_009
+img_010,./sample_images/flower.png,nature,original synthetic project asset,Repository license applies,emb_img_010
+img_011,./sample_images/cat_window.png,animals,original synthetic project asset,Repository license applies,emb_img_011
+img_012,./sample_images/truck_road.png,vehicles,original synthetic project asset,Repository license applies,emb_img_012

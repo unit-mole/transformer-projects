@@ -1,0 +1,61 @@
+name: 09 Vision Language Image Text Retrieval CLIP CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "09-vision-language-image-text-retrieval-clip/**"
+      - "docs/09-vision-language-image-text-retrieval-clip/**"
+      - ".github/workflows/09-vision-language-image-text-retrieval-clip.yml"
+  pull_request:
+    paths:
+      - "09-vision-language-image-text-retrieval-clip/**"
+      - "docs/09-vision-language-image-text-retrieval-clip/**"
+      - ".github/workflows/09-vision-language-image-text-retrieval-clip.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 09-vision-language-image-text-retrieval-clip
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: 09-vision-language-image-text-retrieval-clip/requirements.txt
+
+      - name: Install lightweight test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Python tests
+        run: pytest -q
+
+      - name: Validate source gallery and browser assets
+        run: |
+          python scripts/prepare_gallery.py
+          python scripts/export_browser_assets.py
+          node scripts/validate_web_assets.mjs --target web
+
+      - name: Verify docs deployment copy is synchronized
+        run: |
+          python scripts/sync_docs.py --check
+          node scripts/validate_web_assets.mjs --target docs
+
+      - name: Reject repository-root static asset paths
+        run: python scripts/check_relative_paths.py
+
+      - name: Confirm validation-only Pages workflow
+        run: python scripts/check_validation_workflow.py

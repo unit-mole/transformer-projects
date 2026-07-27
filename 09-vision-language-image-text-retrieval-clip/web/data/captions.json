@@ -1,0 +1,52 @@
+{
+  "captions": [
+    {
+      "image_id": "img_001",
+      "caption": "A brown dog running across green grass under a blue sky."
+    },
+    {
+      "image_id": "img_002",
+      "caption": "A bright red car driving along a paved road."
+    },
+    {
+      "image_id": "img_003",
+      "caption": "Three people sitting together around a table."
+    },
+    {
+      "image_id": "img_004",
+      "caption": "Snowy mountains reflected in a calm blue lake."
+    },
+    {
+      "image_id": "img_005",
+      "caption": "A person riding a bicycle on a sunny path."
+    },
+    {
+      "image_id": "img_006",
+      "caption": "Colorful vegetables and food arranged on a white plate."
+    },
+    {
+      "image_id": "img_007",
+      "caption": "A city skyline glowing with lights at night."
+    },
+    {
+      "image_id": "img_008",
+      "caption": "A quiet sandy beach beside a blue ocean."
+    },
+    {
+      "image_id": "img_009",
+      "caption": "Tall green trees in a peaceful forest."
+    },
+    {
+      "image_id": "img_010",
+      "caption": "A pink flower blooming against green leaves."
+    },
+    {
+      "image_id": "img_011",
+      "caption": "A cat sitting beside a bright window."
+    },
+    {
+      "image_id": "img_012",
+      "caption": "A blue truck traveling on a country road."
+    }
+  ]
+}

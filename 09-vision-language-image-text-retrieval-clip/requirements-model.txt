@@ -1,0 +1,7 @@
+-r requirements.txt
+torch>=2.3
+transformers>=4.45
+huggingface-hub>=0.24
+optimum[onnxruntime]>=1.22
+onnx>=1.16
+onnxruntime>=1.19

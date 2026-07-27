@@ -1,0 +1,74 @@
+{
+  "queries": [
+    {
+      "query": "a dog running in grass",
+      "relevant_image_ids": [
+        "img_001"
+      ],
+      "notes": "Dog outdoors or running."
+    },
+    {
+      "query": "a red car on a road",
+      "relevant_image_ids": [
+        "img_002"
+      ],
+      "notes": "Red passenger car on a road."
+    },
+    {
+      "query": "people sitting at a table",
+      "relevant_image_ids": [
+        "img_003"
+      ],
+      "notes": "Group seated around a table."
+    },
+    {
+      "query": "a mountain landscape with a lake",
+      "relevant_image_ids": [
+        "img_004"
+      ],
+      "notes": "Mountains and water."
+    },
+    {
+      "query": "someone riding a bicycle",
+      "relevant_image_ids": [
+        "img_005"
+      ],
+      "notes": "Cycling scene."
+    },
+    {
+      "query": "food on a plate",
+      "relevant_image_ids": [
+        "img_006"
+      ],
+      "notes": "Prepared meal or vegetables on a plate."
+    },
+    {
+      "query": "a city scene at night",
+      "relevant_image_ids": [
+        "img_007"
+      ],
+      "notes": "Night skyline or illuminated buildings."
+    },
+    {
+      "query": "a sandy beach by the ocean",
+      "relevant_image_ids": [
+        "img_008"
+      ],
+      "notes": "Beach or coastal scene."
+    },
+    {
+      "query": "green trees in a forest",
+      "relevant_image_ids": [
+        "img_009"
+      ],
+      "notes": "Forest scene."
+    },
+    {
+      "query": "a pink flower",
+      "relevant_image_ids": [
+        "img_010"
+      ],
+      "notes": "Pink blossom."
+    }
+  ]
+}

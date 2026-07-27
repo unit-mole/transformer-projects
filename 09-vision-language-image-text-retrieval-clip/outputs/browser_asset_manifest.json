@@ -1,0 +1,18 @@
+{
+  "valid": true,
+  "asset_count": 12,
+  "assets": [
+    "index.html",
+    "style.css",
+    "app.js",
+    "clip_preprocessing.js",
+    "clip_inference.js",
+    "retrieval.js",
+    "zero_shot.js",
+    "metadata.json",
+    "zero_shot_labels.json",
+    "data/image_gallery.json",
+    "data/image_embeddings.json",
+    "data/captions.json"
+  ]
+}

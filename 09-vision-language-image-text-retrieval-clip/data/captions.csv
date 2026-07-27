@@ -1,0 +1,13 @@
+image_id,image_path,caption,category,tags
+img_001,sample_images/dog_running.png,A brown dog running across green grass under a blue sky.,animals,dog|running|grass|outdoors
+img_002,sample_images/red_car.png,A bright red car driving along a paved road.,vehicles,red car|road|driving|vehicle
+img_003,sample_images/people_table.png,Three people sitting together around a table.,people,people|table|meeting|sitting
+img_004,sample_images/mountain_lake.png,Snowy mountains reflected in a calm blue lake.,landscapes,mountain|lake|snow|landscape
+img_005,sample_images/bicycle_rider.png,A person riding a bicycle on a sunny path.,sports,bicycle|rider|cycling|path
+img_006,sample_images/food_plate.png,Colorful vegetables and food arranged on a white plate.,food,food|plate|vegetables|meal
+img_007,sample_images/city_night.png,A city skyline glowing with lights at night.,city,city|night|buildings|lights
+img_008,sample_images/beach.png,A quiet sandy beach beside a blue ocean.,landscapes,beach|ocean|sand|coast
+img_009,sample_images/forest.png,Tall green trees in a peaceful forest.,nature,forest|trees|green|nature
+img_010,sample_images/flower.png,A pink flower blooming against green leaves.,nature,flower|pink|plant|leaves
+img_011,sample_images/cat_window.png,A cat sitting beside a bright window.,animals,cat|window|sitting|pet
+img_012,sample_images/truck_road.png,A blue truck traveling on a country road.,vehicles,truck|road|blue|vehicle
