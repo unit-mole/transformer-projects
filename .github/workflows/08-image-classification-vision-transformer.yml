@@ -1,36 +1,30 @@
-name: 08 Image Classification Vision Transformer CI and Pages
+name: 08 Image Classification Vision Transformer CI
 
 on:
   push:
     branches: [main]
     paths:
-      - "07-document-semantic-search-sentence-bert/**"
       - "08-image-classification-vision-transformer/**"
-      - "09-vision-language-image-text-retrieval-clip/**"
-      - "pages/**"
+      - "docs/**"
       - ".github/workflows/08-image-classification-vision-transformer.yml"
   pull_request:
     paths:
       - "08-image-classification-vision-transformer/**"
+      - "docs/**"
       - ".github/workflows/08-image-classification-vision-transformer.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: transformer-projects-github-pages
+  group: project-08-validation-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   validate:
-    name: Validate Project 08
+    name: Validate Project 08 and Pages Files
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: 08-image-classification-vision-transformer
 
     steps:
       - name: Checkout repository
@@ -44,120 +38,50 @@ jobs:
           cache-dependency-path: 08-image-classification-vision-transformer/requirements.txt
 
       - name: Install lightweight requirements
+        working-directory: 08-image-classification-vision-transformer
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
 
-      - name: Validate static browser files
+      - name: Validate project browser application
         run: |
-          test -f web/index.html
-          test -f web/style.css
-          test -f web/app.js
-          test -f web/inference.js
-          test -f web/image_preprocessing.js
-          test -f web/attention.js
-          test -f web/metadata.json
-          test -f web/class_names.json
-          test -f data/class_names.json
-          python -m json.tool web/metadata.json > /dev/null
-          python -m json.tool web/class_names.json > /dev/null
-          python -m json.tool data/class_names.json > /dev/null
+          test -f 08-image-classification-vision-transformer/web/index.html
+          test -f 08-image-classification-vision-transformer/web/style.css
+          test -f 08-image-classification-vision-transformer/web/app.js
+          test -f 08-image-classification-vision-transformer/web/inference.js
+          test -f 08-image-classification-vision-transformer/web/image_preprocessing.js
+          test -f 08-image-classification-vision-transformer/web/attention.js
+          test -f 08-image-classification-vision-transformer/web/metadata.json
+          test -f 08-image-classification-vision-transformer/web/class_names.json
+          python -m json.tool 08-image-classification-vision-transformer/web/metadata.json > /dev/null
+          python -m json.tool 08-image-classification-vision-transformer/web/class_names.json > /dev/null
+
+      - name: Validate GitHub Pages publishing folder
+        run: |
+          test -f docs/.nojekyll
+          test -f docs/index.html
+          test -f docs/08-image-classification-vision-transformer/index.html
+          test -f docs/08-image-classification-vision-transformer/style.css
+          test -f docs/08-image-classification-vision-transformer/app.js
+          test -f docs/08-image-classification-vision-transformer/inference.js
+          test -f docs/08-image-classification-vision-transformer/image_preprocessing.js
+          test -f docs/08-image-classification-vision-transformer/attention.js
+          test -f docs/08-image-classification-vision-transformer/metadata.json
+          test -f docs/08-image-classification-vision-transformer/class_names.json
+          python -m json.tool docs/08-image-classification-vision-transformer/metadata.json > /dev/null
+          python -m json.tool docs/08-image-classification-vision-transformer/class_names.json > /dev/null
+
+      - name: Check deployed copy matches project web folder
+        run: |
+          diff -qr \
+            --exclude=.nojekyll \
+            08-image-classification-vision-transformer/web \
+            docs/08-image-classification-vision-transformer
 
       - name: Validate Python modules
+        working-directory: 08-image-classification-vision-transformer
         run: python -m compileall -q src scripts
 
       - name: Run tests
+        working-directory: 08-image-classification-vision-transformer
         run: python -m pytest -q
-
-  build-pages:
-    name: Build GitHub Pages Artifact
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-    needs: validate
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Verify Pages enablement token
-        shell: bash
-        env:
-          PAGES_DEPLOY_TOKEN: ${{ secrets.PAGES_DEPLOY_TOKEN }}
-        run: |
-          if [ -z "${PAGES_DEPLOY_TOKEN}" ]; then
-            echo "::error title=Missing PAGES_DEPLOY_TOKEN::Create a fine-grained personal access token with Administration: write and Pages: write for this repository, then save it as the repository Actions secret PAGES_DEPLOY_TOKEN."
-            exit 1
-          fi
-
-      - name: Enable and configure GitHub Pages
-        id: pages
-        uses: actions/configure-pages@v6
-        with:
-          enablement: true
-          token: ${{ secrets.PAGES_DEPLOY_TOKEN }}
-
-      - name: Build combined static site
-        shell: bash
-        run: |
-          set -euo pipefail
-          rm -rf _site
-          mkdir -p _site
-
-          if [ -f pages/index.html ]; then
-            cp -R pages/. _site/
-          else
-            cat > _site/index.html <<'HTML'
-          <!doctype html>
-          <html lang="en">
-          <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>Transformer Projects</title>
-          </head>
-          <body>
-            <main>
-              <h1>Transformer Projects</h1>
-              <p>Static browser-based AI demonstrations deployed with GitHub Pages.</p>
-              <p><a href="./08-image-classification-vision-transformer/">Open Project 08: Vision Transformer Image Classification</a></p>
-            </main>
-          </body>
-          </html>
-          HTML
-          fi
-
-          for project in \
-            07-document-semantic-search-sentence-bert \
-            08-image-classification-vision-transformer \
-            09-vision-language-image-text-retrieval-clip
-          do
-            if [ -f "$project/web/index.html" ]; then
-              mkdir -p "_site/$project"
-              cp -R "$project/web/." "_site/$project/"
-              echo "Included $project"
-            else
-              echo "Skipped $project because $project/web/index.html is not present"
-            fi
-          done
-
-          test -f _site/index.html
-          test -f _site/08-image-classification-vision-transformer/index.html
-          touch _site/.nojekyll
-
-      - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: _site
-
-  deploy:
-    name: Deploy GitHub Pages
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-    needs: build-pages
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4

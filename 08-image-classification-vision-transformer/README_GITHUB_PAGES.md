@@ -1,95 +1,69 @@
 # GitHub Pages Deployment — Project 08
 
-Project 08 is a fully static browser application. GitHub Pages publishes the files from:
+## Deployment method used
+
+This project is published from the repository's `main` branch and `/docs` folder. It does **not** use `actions/configure-pages`, `actions/deploy-pages`, a personal access token, or an Actions secret.
+
+The browser application remains in:
 
 ```text
 08-image-classification-vision-transformer/web/
 ```
 
-The deployment workflow is:
+The deployable copy is stored in:
 
 ```text
-.github/workflows/08-image-classification-vision-transformer.yml
+docs/08-image-classification-vision-transformer/
 ```
 
-## Why the previous workflow failed
+## Required one-time GitHub setting
 
-The project validation passed, but `actions/configure-pages` returned:
+After pushing the files, open the repository and configure:
 
 ```text
-Get Pages site failed: Not Found
+Settings
+→ Pages
+→ Build and deployment
+→ Source: Deploy from a branch
+→ Branch: main
+→ Folder: /docs
+→ Save
 ```
 
-That response means the repository did not yet have a GitHub Pages site. The normal workflow token cannot create the first Pages site. The corrected workflow therefore uses `enablement: true` with a separate fine-grained personal access token.
+This setting creates the GitHub Pages site. It cannot be created by ordinary repository files alone.
 
-## Required one-time token setup
-
-Create a fine-grained personal access token for only this repository:
-
-1. Open GitHub **Settings** for your account.
-2. Open **Developer settings → Personal access tokens → Fine-grained tokens**.
-3. Create a token with repository access limited to `unit-mole/transformer-projects`.
-4. Under repository permissions, set:
-   - **Administration: Read and write**
-   - **Pages: Read and write**
-5. Copy the token.
-6. Open `unit-mole/transformer-projects → Settings → Secrets and variables → Actions`.
-7. Create a new repository secret named exactly:
-
-```text
-PAGES_DEPLOY_TOKEN
-```
-
-8. Paste the token as the secret value.
-
-Do not place the token in a code file, commit, README, terminal screenshot, or Git history.
-
-## What the corrected workflow does
-
-The workflow now:
-
-- validates the Project 08 Python and browser files;
-- checks that `PAGES_DEPLOY_TOKEN` is available;
-- creates/enables the repository Pages site when it does not yet exist;
-- configures Pages for a GitHub Actions deployment;
-- builds one combined static site artifact;
-- preserves available browser demos for Projects 07, 08, and 09;
-- uploads the Pages artifact;
-- deploys through the official `github-pages` environment.
-
-Project 08 will be published at:
+## Live URL
 
 ```text
 https://unit-mole.github.io/transformer-projects/08-image-classification-vision-transformer/
 ```
 
-## Local browser test
+## Updating the browser application
+
+After changing files in `08-image-classification-vision-transformer/web/`, copy the same files into `docs/08-image-classification-vision-transformer/` before committing. The validation workflow checks that both folders match.
+
+Windows CMD example from the repository root:
+
+```cmd
+rmdir /s /q "docs\08-image-classification-vision-transformer"
+mkdir "docs\08-image-classification-vision-transformer"
+xcopy /e /i /y "08-image-classification-vision-transformer\web\*" "docs\08-image-classification-vision-transformer\"
+```
+
+## Local test
 
 From the repository root:
 
 ```cmd
-cd 08-image-classification-vision-transformer\web
-python -m http.server 8000
+python -m http.server 8000 --directory docs
 ```
 
 Open:
 
 ```text
-http://localhost:8000
+http://localhost:8000/08-image-classification-vision-transformer/
 ```
 
-Do not open `index.html` directly with a `file://` URL because browser module loading and model requests can be blocked.
+## Why the previous workflows failed
 
-## Troubleshooting
-
-### Missing `PAGES_DEPLOY_TOKEN`
-
-The workflow will now stop with a direct message telling you to add the repository secret. Create the fine-grained token and add it with the exact secret name.
-
-### Token exists but enablement returns 403
-
-Edit the fine-grained token and confirm that it is authorized for `unit-mole/transformer-projects` with both **Administration: Read and write** and **Pages: Read and write**.
-
-### Validation passes but model inference fails in the browser
-
-Open the browser developer console and inspect model CDN requests, WebAssembly support, WebGPU availability, and content-security restrictions.
+The previous workflows called `actions/configure-pages` before the repository had a Pages site. GitHub returned `404 Not Found`. A later workflow required a custom `PAGES_DEPLOY_TOKEN`, so it intentionally stopped when that secret was missing. This branch-based `/docs` deployment removes both dependencies.
