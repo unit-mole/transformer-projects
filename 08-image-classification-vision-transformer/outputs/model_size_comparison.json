@@ -1,0 +1,5 @@
+{
+  "vision_transformer_size_mb": 21.104485511779785,
+  "resnet18_size_mb": 42.73231029510498,
+  "difference_vit_minus_resnet_mb": -21.627824783325195
+}

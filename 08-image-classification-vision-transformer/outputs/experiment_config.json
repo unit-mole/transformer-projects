@@ -1,0 +1,23 @@
+{
+  "project_name": "08-image-classification-vision-transformer",
+  "dataset_name": "CIFAR-10",
+  "seed": 42,
+  "number_of_classes": 10,
+  "original_image_size": 32,
+  "model_image_size": 224,
+  "training_images": 45000,
+  "validation_images": 5000,
+  "test_images": 10000,
+  "vit_batch_size": 128,
+  "resnet_batch_size": 128,
+  "num_workers": 0,
+  "vit_model_name": "facebook/deit-tiny-patch16-224",
+  "resnet_model_name": "resnet18",
+  "vit_epochs": 10,
+  "resnet_epochs": 15,
+  "vit_learning_rate": 3e-05,
+  "resnet_learning_rate": 0.0003,
+  "weight_decay": 0.0001,
+  "mixed_precision": true,
+  "device": "cuda"
+}

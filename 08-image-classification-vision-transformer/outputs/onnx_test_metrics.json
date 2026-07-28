@@ -1,0 +1,12 @@
+{
+  "model": "Vision Transformer ONNX",
+  "dataset": "CIFAR-10",
+  "test_images": 10000,
+  "accuracy": 0.9645,
+  "macro_f1": 0.9644255025970839,
+  "correct_predictions": 9645,
+  "incorrect_predictions": 355,
+  "primary_execution_provider": "CUDAExecutionProvider",
+  "evaluation_seconds": 1.5056469000992365,
+  "images_per_second": 6641.663459965882
+}

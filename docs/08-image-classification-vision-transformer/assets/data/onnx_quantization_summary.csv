@@ -1,0 +1,2 @@
+model_key,model,precision,model_size_mb,accuracy,macro_f1,correct_predictions,average_confidence,prediction_agreement_with_fp32,prediction_disagreements,accuracy_drop_from_fp32,macro_f1_drop_from_fp32,size_reduction_percent,mean_absolute_logit_difference,maximum_absolute_logit_difference,average_cpu_latency_ms,p95_cpu_latency_ms,accepted_for_browser_candidate,selected_for_browser
+fp32_original,FP32 Original,float32,23.316097259521484,0.9646,0.9645258284945332,9646,0.8922622799873352,1.0,0,0.0,0.0,0.0,0.0,0.0,9.23921500245342,14.016294977045616,True,True

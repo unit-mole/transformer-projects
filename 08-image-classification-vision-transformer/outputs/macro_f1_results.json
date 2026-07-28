@@ -1,0 +1,6 @@
+{
+  "dataset": "CIFAR-10 test set",
+  "vision_transformer_macro_f1": 0.9644255025970839,
+  "resnet18_macro_f1": 0.9625738757862015,
+  "difference_vit_minus_resnet": 0.0018516268108824674
+}

@@ -1,0 +1,12 @@
+{
+  "method": "attention_rollout",
+  "model": "DeiT-tiny / ViT CIFAR-10 classifier",
+  "head_fusion": "mean",
+  "residual_connection": "identity_matrix_addition",
+  "row_normalization": true,
+  "source_token": "classification_token",
+  "correct_examples_per_class": 1,
+  "maximum_incorrect_examples": 10,
+  "overlay_alpha": 0.5,
+  "save_raw_attention_masks": true
+}

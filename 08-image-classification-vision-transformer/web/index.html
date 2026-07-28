@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browser-based Vision Transformer image classification with ONNX Runtime Web, top-k probabilities, latency, and patch sensitivity.">
+  <title>Vision Transformer Image Classifier</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Project home"><span>08</span> Vision Transformer</a>
+    <nav><a href="#demo">Demo</a><a href="#explainability">Explainability</a><a href="#comparison">Comparison</a><a href="#limitations">Limitations</a></nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">BROWSER AI · GITHUB PAGES · ONNX</p>
+        <h1>Image classification with a compact Vision Transformer</h1>
+        <p class="lede">Upload a safe image and run inference entirely in your browser. Inspect the top-five class probabilities, client-side latency, and a real patch-occlusion sensitivity map.</p>
+        <div class="hero-actions"><a class="button primary" href="#demo">Try the classifier</a><a class="button secondary" id="repo-link" href="https://github.com/unit-mole/transformer-projects">View repository</a></div>
+      </div>
+      <aside class="status-card">
+        <p class="label">Runtime status</p>
+        <strong id="model-status">Not loaded</strong>
+        <p id="status-detail">The model loads only when you request a prediction.</p>
+        <dl><div><dt>Execution</dt><dd id="device-value">Browser</dd></div><div><dt>Backend</dt><dd>No server</dd></div><div><dt>Input</dt><dd>224 × 224 RGB</dd></div></dl>
+      </aside>
+    </section>
+
+    <section class="notice" role="note">
+      <strong>Responsible-use and privacy notice</strong>
+      <p>Use only safe, non-sensitive images. Do not upload personal photos, IDs, confidential workplace images, medical images, or copyrighted material without permission. Predictions and confidence scores may be wrong and must not be used for high-impact decisions.</p>
+    </section>
+
+    <section id="demo" class="section">
+      <div class="section-heading"><p class="eyebrow">LIVE DEMO</p><h2>Run client-side inference</h2><p>The first run downloads a quantized model from the Hugging Face Hub and may take longer. Your selected image is processed locally by this application.</p></div>
+      <div class="demo-grid">
+        <article class="panel input-panel">
+          <h3>1. Choose an image</h3>
+          <label class="drop-zone" id="drop-zone" for="image-input">
+            <input id="image-input" type="file" accept="image/jpeg,image/png,image/webp,image/bmp">
+            <span class="drop-icon">＋</span><strong>Upload or drop an image</strong><small>JPEG, PNG, WebP or BMP · maximum 10 MB</small>
+          </label>
+          <div class="sample-wrap"><p class="label">Safe synthetic samples</p><div id="sample-gallery" class="sample-gallery"></div></div>
+          <button class="button primary full" id="predict-button" disabled>Run Vision Transformer</button>
+          <p class="inline-message" id="input-message" aria-live="polite"></p>
+        </article>
+
+        <article class="panel preview-panel">
+          <h3>2. Preview</h3>
+          <div class="image-stage"><img id="image-preview" alt="Selected image preview"><div id="image-placeholder">Select an image to begin</div><canvas id="sensitivity-canvas" aria-label="Patch sensitivity overlay"></canvas></div>
+          <div class="file-meta"><span id="file-name">No file selected</span><span id="file-size">—</span></div>
+        </article>
+
+        <article class="panel result-panel">
+          <div class="result-head"><h3>3. Prediction</h3><span class="pill" id="latency-pill">Latency —</span></div>
+          <div id="empty-result" class="empty-result">Top predictions will appear here.</div>
+          <div id="prediction-result" hidden>
+            <p class="label">Top class</p><p class="top-label" id="top-label">—</p><p class="confidence" id="top-confidence">—</p>
+            <div id="probability-bars" class="probability-bars"></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="explainability" class="section split-section">
+      <div><p class="eyebrow">EXPLAINABILITY</p><h2>Patch sensitivity, honestly labeled</h2><p>The deployed ONNX classification graph does not expose raw transformer attention. This demo therefore masks image regions, reruns the model, and measures how much the selected class score changes.</p><p class="callout"><strong>This is not raw attention.</strong> It is a real perturbation-based sensitivity test. Genuine class-token attention rollout can be generated in Python from a compatible checkpoint using the included script.</p><button class="button secondary" id="sensitivity-button" disabled>Generate patch-sensitivity map</button><p id="sensitivity-status" class="inline-message" aria-live="polite"></p></div>
+      <div class="explain-card"><h3>How the live map works</h3><ol><li>Divide the image into a 4 × 4 grid.</li><li>Mask one patch at a time.</li><li>Run a new model prediction.</li><li>Compare the selected class score with the original score.</li><li>Overlay larger score reductions as stronger sensitivity.</li></ol><p>Sixteen additional inferences are required, so this step can take time on CPU/WASM.</p></div>
+    </section>
+
+    <section id="comparison" class="section">
+      <div class="section-heading"><p class="eyebrow">MODEL COMPARISON</p><h2>ViT versus CNN / ResNet</h2><p>Values remain intentionally blank until both checkpoints are evaluated on the same split and benchmarked in the same environment.</p></div>
+      <div class="table-wrap"><table><thead><tr><th>Model</th><th>Accuracy</th><th>Macro F1</th><th>Parameters</th><th>Average latency</th><th>Status</th></tr></thead><tbody><tr><td>Vision Transformer</td><td>—</td><td>—</td><td>—</td><td>Per prediction above</td><td><span class="status pending">Evaluation pending</span></td></tr><tr><td>CNN / ResNet baseline</td><td>—</td><td>—</td><td>—</td><td>—</td><td><span class="status pending">Checkpoint required</span></td></tr></tbody></table></div>
+    </section>
+
+    <section class="section metric-grid"><article><span>Model family</span><strong>Tiny ViT</strong><p>Patch-based self-attention architecture.</p></article><article><span>Runtime</span><strong>ONNX Web</strong><p>Transformers.js with WebGPU preference and WASM fallback.</p></article><article><span>Label space</span><strong>ImageNet-1k</strong><p>Starter deployment; replace for CIFAR-10 claims.</p></article><article><span>Published metrics</span><strong>None invented</strong><p>Run the evaluation scripts with real checkpoints.</p></article></section>
+
+    <section id="limitations" class="section split-section">
+      <div><p class="eyebrow">LIMITATIONS</p><h2>What reviewers should know</h2><ul class="clean-list"><li>The starter predicts ImageNet labels, not CIFAR-10 labels.</li><li>First load requires public model assets from the Hugging Face Hub.</li><li>Latency depends on device, browser, cache, and execution provider.</li><li>Confidence is not guaranteed to be calibrated.</li><li>Patch sensitivity is not proof of model reasoning.</li></ul></div>
+      <div class="explain-card"><h3>Portfolio upgrade path</h3><p>Fine-tune the compact model on CIFAR-10 or Intel scenes, export a quantized ONNX checkpoint, validate Python-versus-browser parity, generate real attention rollout, and compare against the prior ResNet project.</p><a class="text-link" href="https://github.com/unit-mole/transformer-projects/tree/main/08-image-classification-vision-transformer">Read the technical documentation →</a></div>
+    </section>
+  </main>
+
+  <footer><p>Project 08 · Transformer Portfolio · Static GitHub Pages deployment</p><p>Educational demonstration only.</p></footer>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

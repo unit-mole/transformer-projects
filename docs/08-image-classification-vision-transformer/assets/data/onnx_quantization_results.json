@@ -1,0 +1,207 @@
+{
+  "status": "completed",
+  "completed_utc": "2026-07-27T20:38:21.273830+00:00",
+  "configuration": {
+    "quantization_method": "dynamic",
+    "candidate_types": [
+      "QUInt8",
+      "QInt8"
+    ],
+    "operators_to_quantize": [
+      "MatMul",
+      "Gemm"
+    ],
+    "per_channel_requested": true,
+    "reduce_range": false,
+    "validation_dataset": "CIFAR-10 test set",
+    "validation_images": 10000,
+    "dynamic_batch_tests": [
+      1,
+      7,
+      32
+    ],
+    "latency_warmup_iterations": 30,
+    "latency_timed_iterations": 200,
+    "execution_provider": "CPUExecutionProvider",
+    "acceptance_thresholds": {
+      "minimum_prediction_agreement": 0.995,
+      "maximum_accuracy_drop": 0.003,
+      "maximum_macro_f1_drop": 0.003,
+      "minimum_size_reduction": 0.4
+    }
+  },
+  "fp32_original": {
+    "display_name": "FP32 Original",
+    "precision": "float32",
+    "model_path": "models\\onnx_model\\model.onnx",
+    "model_size_mb": 23.316097259521484,
+    "sha256": "de9f83e4ac94c2c66f8a06f11dcc96f6b099059117f1b505bd576112a96a0ef2",
+    "accuracy": 0.9646,
+    "macro_f1": 0.9645258284945332,
+    "correct_predictions": 9646,
+    "incorrect_predictions": 354,
+    "average_confidence": 0.8922622799873352,
+    "native_cpu_latency": {
+      "average_latency_ms": 9.23921500245342,
+      "median_latency_ms": 8.681600011186674,
+      "p90_latency_ms": 11.750049999682233,
+      "p95_latency_ms": 14.016294977045616,
+      "p99_latency_ms": 16.62199001933913,
+      "minimum_latency_ms": 6.144600047264248,
+      "maximum_latency_ms": 23.177600000053644,
+      "estimated_images_per_second": 108.23430342669326,
+      "warmup_iterations": 30,
+      "timed_iterations": 200
+    }
+  },
+  "fp32_optimization": {
+    "status": "passed",
+    "validated_images": 512,
+    "prediction_agreement": 1.0,
+    "maximum_absolute_logit_difference": 0.0,
+    "mean_absolute_logit_difference": 0.0,
+    "dynamic_batch_results": {
+      "1": {
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ],
+        "output_shape": [
+          1,
+          10
+        ],
+        "passed": true
+      },
+      "7": {
+        "input_shape": [
+          7,
+          3,
+          224,
+          224
+        ],
+        "output_shape": [
+          7,
+          10
+        ],
+        "passed": true
+      },
+      "32": {
+        "input_shape": [
+          32,
+          3,
+          224,
+          224
+        ],
+        "output_shape": [
+          32,
+          10
+        ],
+        "passed": true
+      }
+    },
+    "error": null
+  },
+  "quantization_attempts": {
+    "quantized_uint8": {
+      "status": "failed",
+      "candidate_name": "Dynamic QUInt8",
+      "per_channel": null,
+      "error": "InferenceError('[ShapeInferenceError] Inferred shape and existing shape differ in dimension 0: (192) vs (10)')",
+      "attempts": [
+        {
+          "per_channel": true,
+          "error": "InferenceError('[ShapeInferenceError] Inferred shape and existing shape differ in dimension 0: (192) vs (10)')"
+        },
+        {
+          "per_channel": false,
+          "error": "InferenceError('[ShapeInferenceError] Inferred shape and existing shape differ in dimension 0: (192) vs (10)')"
+        }
+      ]
+    },
+    "quantized_int8": {
+      "status": "failed",
+      "candidate_name": "Dynamic QInt8",
+      "per_channel": null,
+      "error": "InferenceError('[ShapeInferenceError] Inferred shape and existing shape differ in dimension 0: (192) vs (10)')",
+      "attempts": [
+        {
+          "per_channel": true,
+          "error": "InferenceError('[ShapeInferenceError] Inferred shape and existing shape differ in dimension 0: (192) vs (10)')"
+        },
+        {
+          "per_channel": false,
+          "error": "InferenceError('[ShapeInferenceError] Inferred shape and existing shape differ in dimension 0: (192) vs (10)')"
+        }
+      ]
+    }
+  },
+  "quantized_results": {},
+  "latency_scope": "Native ONNX Runtime CPU benchmark; not browser latency",
+  "latency_results": {
+    "fp32_original": {
+      "average_latency_ms": 9.23921500245342,
+      "median_latency_ms": 8.681600011186674,
+      "p90_latency_ms": 11.750049999682233,
+      "p95_latency_ms": 14.016294977045616,
+      "p99_latency_ms": 16.62199001933913,
+      "minimum_latency_ms": 6.144600047264248,
+      "maximum_latency_ms": 23.177600000053644,
+      "estimated_images_per_second": 108.23430342669326,
+      "warmup_iterations": 30,
+      "timed_iterations": 200
+    },
+    "fp32_optimized": {
+      "average_latency_ms": 12.548825499834493,
+      "median_latency_ms": 12.331250007264316,
+      "p90_latency_ms": 15.73334002168849,
+      "p95_latency_ms": 17.098350037122145,
+      "p99_latency_ms": 18.86343798541926,
+      "minimum_latency_ms": 6.668200017884374,
+      "maximum_latency_ms": 41.72009998001158,
+      "estimated_images_per_second": 79.68873262387696,
+      "warmup_iterations": 30,
+      "timed_iterations": 200
+    }
+  },
+  "browser_selection": {
+    "selection_status": "completed",
+    "selected_utc": "2026-07-27T20:38:21.236206+00:00",
+    "selected_model_key": "fp32_original",
+    "selected_source_file": "model.onnx",
+    "browser_model_file": "model_browser.onnx",
+    "precision": "float32",
+    "selection_reason": "No quantized model satisfied all acceptance criteria, so the accepted FP32 model was retained.",
+    "model_size_mb": 23.316097259521484,
+    "sha256": "de9f83e4ac94c2c66f8a06f11dcc96f6b099059117f1b505bd576112a96a0ef2",
+    "quantized_model_selected": false,
+    "recommended_browser_provider": "webgpu_with_wasm_fallback",
+    "candidate_results": {
+      "fp32_original": {
+        "display_name": "FP32 Original",
+        "precision": "float32",
+        "model_path": "models\\onnx_model\\model.onnx",
+        "model_size_mb": 23.316097259521484,
+        "sha256": "de9f83e4ac94c2c66f8a06f11dcc96f6b099059117f1b505bd576112a96a0ef2",
+        "accuracy": 0.9646,
+        "macro_f1": 0.9645258284945332,
+        "correct_predictions": 9646,
+        "incorrect_predictions": 354,
+        "average_confidence": 0.8922622799873352,
+        "native_cpu_latency": {
+          "average_latency_ms": 9.23921500245342,
+          "median_latency_ms": 8.681600011186674,
+          "p90_latency_ms": 11.750049999682233,
+          "p95_latency_ms": 14.016294977045616,
+          "p99_latency_ms": 16.62199001933913,
+          "minimum_latency_ms": 6.144600047264248,
+          "maximum_latency_ms": 23.177600000053644,
+          "estimated_images_per_second": 108.23430342669326,
+          "warmup_iterations": 30,
+          "timed_iterations": 200
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "method_name": "Vision Transformer attention rollout",
+  "description": "Attention heads are averaged at every transformer layer. Identity matrices are added to include residual connections. The normalized attention matrices are multiplied across layers. The final classification-token attention to image patches is resized to 224x224.",
+  "head_fusion": "mean",
+  "number_of_transformer_layers": 12,
+  "number_of_attention_heads": 3,
+  "number_of_tokens": 197,
+  "number_of_image_patches": 196,
+  "patch_grid": [
+    14,
+    14
+  ],
+  "model_input_dimensions": [
+    224,
+    224
+  ],
+  "interpretation_notice": "Attention rollout is an interpretability visualization of attention propagation. It should not be presented as proof of causal model reasoning."
+}

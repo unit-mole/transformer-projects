@@ -1,0 +1,100 @@
+{
+  "status": "completed",
+  "benchmark_scope": "Local PyTorch GPU inference benchmark; not browser latency",
+  "dataset": "CIFAR-10",
+  "batch_size": 1,
+  "image_dimensions": [
+    224,
+    224
+  ],
+  "warmup_iterations": 100,
+  "timed_iterations": 1000,
+  "mixed_precision": true,
+  "precision": "torch.float16",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "vision_transformer": {
+    "model": "DeiT-tiny fine-tuned on CIFAR-10",
+    "gpu_forward_latency": {
+      "number_of_measurements": 1000,
+      "average_latency_ms": 5.515623907566071,
+      "minimum_latency_ms": 3.829375982284546,
+      "maximum_latency_ms": 15.385503768920898,
+      "median_latency_ms": 4.976944208145142,
+      "p90_latency_ms": 7.178336048126221,
+      "p95_latency_ms": 9.134969997406005,
+      "p99_latency_ms": 13.319188232421874,
+      "standard_deviation_ms": 1.8211331533081887,
+      "images_per_second": 181.30315205651485
+    },
+    "gpu_prediction_pipeline_latency": {
+      "number_of_measurements": 1000,
+      "average_latency_ms": 5.360192064285278,
+      "minimum_latency_ms": 3.9266879558563232,
+      "maximum_latency_ms": 16.160127639770508,
+      "median_latency_ms": 4.367952108383179,
+      "p90_latency_ms": 7.279449796676636,
+      "p95_latency_ms": 9.477243185043331,
+      "p99_latency_ms": 14.813276023864745,
+      "standard_deviation_ms": 2.007233015494748,
+      "images_per_second": 186.56047917815403
+    },
+    "python_end_to_end_latency": {
+      "number_of_measurements": 1000,
+      "average_latency_ms": 5.688765299622901,
+      "minimum_latency_ms": 3.961100010201335,
+      "maximum_latency_ms": 15.338399971369654,
+      "median_latency_ms": 4.976999975042418,
+      "p90_latency_ms": 8.460660011041911,
+      "p95_latency_ms": 9.901539987185966,
+      "p99_latency_ms": 12.78120703587774,
+      "standard_deviation_ms": 1.9487071180047424,
+      "images_per_second": 175.78506887360749
+    },
+    "peak_allocated_gpu_memory_mb": 499.79736328125
+  },
+  "resnet18": {
+    "model": "ResNet-18 fine-tuned on CIFAR-10",
+    "gpu_forward_latency": {
+      "number_of_measurements": 1000,
+      "average_latency_ms": 2.0777850556373596,
+      "minimum_latency_ms": 1.468832015991211,
+      "maximum_latency_ms": 6.276832103729248,
+      "median_latency_ms": 1.6893920302391052,
+      "p90_latency_ms": 3.157977652549744,
+      "p95_latency_ms": 3.9115790843963616,
+      "p99_latency_ms": 5.3646412515640245,
+      "standard_deviation_ms": 0.8094481461227224,
+      "images_per_second": 481.28173666801666
+    },
+    "gpu_prediction_pipeline_latency": {
+      "number_of_measurements": 1000,
+      "average_latency_ms": 2.1172726051807405,
+      "minimum_latency_ms": 1.5372480154037476,
+      "maximum_latency_ms": 7.1196160316467285,
+      "median_latency_ms": 1.7463200092315674,
+      "p90_latency_ms": 3.044864106178284,
+      "p95_latency_ms": 3.9139614939689626,
+      "p99_latency_ms": 5.737345814704895,
+      "standard_deviation_ms": 0.8193173022977457,
+      "images_per_second": 472.3057378407988
+    },
+    "python_end_to_end_latency": {
+      "number_of_measurements": 1000,
+      "average_latency_ms": 2.2282410007319413,
+      "minimum_latency_ms": 1.5888999914750457,
+      "maximum_latency_ms": 6.605700007639825,
+      "median_latency_ms": 1.8356500077061355,
+      "p90_latency_ms": 3.281770017929375,
+      "p95_latency_ms": 3.953189952881075,
+      "p99_latency_ms": 5.826365009415895,
+      "standard_deviation_ms": 0.8139920175283822,
+      "images_per_second": 448.7844895015917
+    },
+    "peak_allocated_gpu_memory_mb": 507.99267578125
+  },
+  "comparison": {
+    "average_gpu_forward_difference_ms_vit_minus_resnet": 3.4378388519287113,
+    "vit_to_resnet_forward_latency_ratio": 2.6545690530410306,
+    "faster_model_by_average_gpu_forward_latency": "ResNet-18"
+  }
+}

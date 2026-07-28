@@ -35,3 +35,14 @@ venv/
 Thumbs.db
 .vscode/
 .idea/
+
+# Project 08 local and temporary files
+08-image-classification-vision-transformer/.venv/
+08-image-classification-vision-transformer/.ipynb_checkpoints/
+08-image-classification-vision-transformer/**/__pycache__/
+08-image-classification-vision-transformer/data/raw/
+08-image-classification-vision-transformer/data/cifar-10-batches-py/
+08-image-classification-vision-transformer/data/cifar-10-python.tar.gz
+08-image-classification-vision-transformer/outputs/checkpoints/
+08-image-classification-vision-transformer/backups/
+08-image-classification-vision-transformer/browser_test_images/

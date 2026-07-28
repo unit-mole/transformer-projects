@@ -1,0 +1,2 @@
+image_index,actual_class_id,actual_class,pytorch_predicted_class_id,pytorch_predicted_class,pytorch_confidence,onnx_predicted_class_id,onnx_predicted_class,onnx_confidence,predictions_agree,pytorch_correct,onnx_correct,maximum_absolute_logit_difference,mean_absolute_logit_difference,absolute_confidence_difference
+47,9,truck,0,airplane,0.30305603,8,ship,0.30346712,False,False,False,0.00225067138671875,0.0010274667292833328,0.00041109324

@@ -1,0 +1,566 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-07-27T20:46:41.587820+00:00",
+  "project": {
+    "project_number": 8,
+    "slug": "08-image-classification-vision-transformer",
+    "title": "Image Classification with Vision Transformer",
+    "task": "CIFAR-10 image classification",
+    "deployment": "Static GitHub Pages browser inference",
+    "privacy": "Images are processed locally in the visitor's browser."
+  },
+  "dataset": {
+    "name": "CIFAR-10",
+    "classes": [
+      "airplane",
+      "automobile",
+      "bird",
+      "cat",
+      "deer",
+      "dog",
+      "frog",
+      "horse",
+      "ship",
+      "truck"
+    ],
+    "number_of_classes": 10,
+    "training_images": 45000,
+    "validation_images": 5000,
+    "test_images": 10000,
+    "model_input_size": [
+      224,
+      224
+    ]
+  },
+  "browser_model": {
+    "model_url": "assets/models/model_browser.onnx",
+    "config_url": "assets/models/browser_model_config.json",
+    "labels_url": "assets/models/labels.json",
+    "preprocessor_url": "assets/models/preprocessor_config.json",
+    "input_name": "pixel_values",
+    "output_name": "logits",
+    "precision": "float32",
+    "model_size_mb": 23.316097259521484,
+    "sha256": "de9f83e4ac94c2c66f8a06f11dcc96f6b099059117f1b505bd576112a96a0ef2",
+    "execution_provider_priority": [
+      "webgpu",
+      "wasm"
+    ],
+    "selection_reason": "No quantized model satisfied all acceptance criteria, so the accepted FP32 model was retained.",
+    "dynamic_batch_size": true
+  },
+  "test_results": {
+    "vision_transformer": {
+      "correct_predictions": 9645,
+      "incorrect_predictions": 355,
+      "accuracy": 0.9645,
+      "macro_f1": 0.9644255025970839
+    },
+    "resnet18": {
+      "correct_predictions": 9627,
+      "incorrect_predictions": 373,
+      "accuracy": 0.9627,
+      "macro_f1": 0.9625738757862015
+    },
+    "prediction_agreement": {
+      "both_correct": 9430,
+      "both_incorrect": 158,
+      "vit_only_correct": 215,
+      "resnet_only_correct": 197
+    },
+    "accuracy_difference_vit_minus_resnet": 0.0018000000000000238,
+    "macro_f1_difference_vit_minus_resnet": 0.0018516268108824674
+  },
+  "model_metrics": {
+    "evaluation_status": "completed",
+    "dataset": "CIFAR-10",
+    "split": "official untouched test set",
+    "test_images": 10000,
+    "class_names": [
+      "airplane",
+      "automobile",
+      "bird",
+      "cat",
+      "deer",
+      "dog",
+      "frog",
+      "horse",
+      "ship",
+      "truck"
+    ],
+    "vision_transformer": {
+      "model_name": "facebook/deit-tiny-patch16-224 fine-tuned on CIFAR-10",
+      "model_class": "ViTForImageClassification",
+      "test_loss": 0.19413297271728516,
+      "accuracy": 0.9645,
+      "macro_precision": 0.9644710838639134,
+      "macro_recall": 0.9644999999999999,
+      "macro_f1": 0.9644255025970839,
+      "weighted_f1": 0.9644255025970838,
+      "average_confidence": 0.8922668099403381,
+      "evaluation_seconds": 5.900593900005333,
+      "throughput_images_per_second": 1694.7446595148604,
+      "test_images": 10000,
+      "total_parameters": 5526346,
+      "trainable_parameters": 5526346,
+      "saved_model_size_mb": 21.104485511779785
+    },
+    "resnet18": {
+      "model_name": "ResNet-18 ImageNet pretrained and fine-tuned on CIFAR-10",
+      "model_class": "ResNet",
+      "test_loss": 0.2083448143005371,
+      "accuracy": 0.9627,
+      "macro_precision": 0.962610530786802,
+      "macro_recall": 0.9626999999999999,
+      "macro_f1": 0.9625738757862015,
+      "weighted_f1": 0.9625738757862018,
+      "average_confidence": 0.8675100803375244,
+      "evaluation_seconds": 5.922037199954502,
+      "throughput_images_per_second": 1688.6081026436018,
+      "test_images": 10000,
+      "total_parameters": 11181642,
+      "trainable_parameters": 11181642,
+      "saved_model_size_mb": 42.73231029510498
+    },
+    "onnx_vision_transformer": {
+      "accuracy": 0.9645,
+      "macro_f1": 0.9644255025970839,
+      "prediction_agreement_with_pytorch": 0.9999,
+      "model_size_mb": 23.316097259521484,
+      "execution_provider": "CUDAExecutionProvider",
+      "exporter_used": "torch.export-based Dynamo exporter",
+      "parity_status": "review_required",
+      "original_automated_parity_status": "review_required",
+      "deployment_review_status": "accepted_with_minor_numerical_variance",
+      "deployment_accepted": true,
+      "prediction_disagreements": 1
+    },
+    "onnx_optimization_and_quantization": {
+      "status": "completed",
+      "selected_browser_model": "model_browser.onnx",
+      "selected_source_model": "model.onnx",
+      "selected_precision": "float32",
+      "selected_model_size_mb": 23.316097259521484,
+      "selection_reason": "No quantized model satisfied all acceptance criteria, so the accepted FP32 model was retained.",
+      "summary_file": "outputs\\onnx_quantization_results.json"
+    }
+  },
+  "model_comparison": [
+    {
+      "model": "Vision Transformer",
+      "architecture": "DeiT-tiny / ViT",
+      "test_loss": 0.1941329727172851,
+      "test_accuracy": 0.9645,
+      "macro_precision": 0.9644710838639134,
+      "macro_recall": 0.9645,
+      "macro_f1": 0.964425502597084,
+      "weighted_f1": 0.9644255025970838,
+      "parameters": 5526346,
+      "model_size_mb": 21.104485511779785,
+      "evaluation_seconds": 5.900593900005333,
+      "throughput_images_per_second": 1694.7446595148604,
+      "average_latency_ms": 5.515623907566071,
+      "latency_status": "completed_local_gpu_benchmark",
+      "minimum_latency_ms": 3.829375982284546,
+      "maximum_latency_ms": 15.385503768920898,
+      "median_latency_ms": 4.976944208145142,
+      "p95_latency_ms": 9.134969997406005,
+      "latency_precision": "torch.float16",
+      "latency_batch_size": 1
+    },
+    {
+      "model": "ResNet-18",
+      "architecture": "Convolutional neural network",
+      "test_loss": 0.2083448143005371,
+      "test_accuracy": 0.9627,
+      "macro_precision": 0.962610530786802,
+      "macro_recall": 0.9627,
+      "macro_f1": 0.9625738757862016,
+      "weighted_f1": 0.9625738757862018,
+      "parameters": 11181642,
+      "model_size_mb": 42.73231029510498,
+      "evaluation_seconds": 5.922037199954502,
+      "throughput_images_per_second": 1688.6081026436018,
+      "average_latency_ms": 2.0777850556373596,
+      "latency_status": "completed_local_gpu_benchmark",
+      "minimum_latency_ms": 1.468832015991211,
+      "maximum_latency_ms": 6.276832103729248,
+      "median_latency_ms": 1.6893920302391052,
+      "p95_latency_ms": 3.9115790843963616,
+      "latency_precision": "torch.float16",
+      "latency_batch_size": 1
+    }
+  ],
+  "native_gpu_latency": {
+    "status": "completed",
+    "benchmark_scope": "Local PyTorch GPU inference benchmark; not browser latency",
+    "dataset": "CIFAR-10",
+    "batch_size": 1,
+    "image_dimensions": [
+      224,
+      224
+    ],
+    "warmup_iterations": 100,
+    "timed_iterations": 1000,
+    "mixed_precision": true,
+    "precision": "torch.float16",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "vision_transformer": {
+      "model": "DeiT-tiny fine-tuned on CIFAR-10",
+      "gpu_forward_latency": {
+        "number_of_measurements": 1000,
+        "average_latency_ms": 5.515623907566071,
+        "minimum_latency_ms": 3.829375982284546,
+        "maximum_latency_ms": 15.385503768920898,
+        "median_latency_ms": 4.976944208145142,
+        "p90_latency_ms": 7.178336048126221,
+        "p95_latency_ms": 9.134969997406005,
+        "p99_latency_ms": 13.319188232421874,
+        "standard_deviation_ms": 1.8211331533081887,
+        "images_per_second": 181.30315205651485
+      },
+      "gpu_prediction_pipeline_latency": {
+        "number_of_measurements": 1000,
+        "average_latency_ms": 5.360192064285278,
+        "minimum_latency_ms": 3.9266879558563232,
+        "maximum_latency_ms": 16.160127639770508,
+        "median_latency_ms": 4.367952108383179,
+        "p90_latency_ms": 7.279449796676636,
+        "p95_latency_ms": 9.477243185043331,
+        "p99_latency_ms": 14.813276023864745,
+        "standard_deviation_ms": 2.007233015494748,
+        "images_per_second": 186.56047917815403
+      },
+      "python_end_to_end_latency": {
+        "number_of_measurements": 1000,
+        "average_latency_ms": 5.688765299622901,
+        "minimum_latency_ms": 3.961100010201335,
+        "maximum_latency_ms": 15.338399971369654,
+        "median_latency_ms": 4.976999975042418,
+        "p90_latency_ms": 8.460660011041911,
+        "p95_latency_ms": 9.901539987185966,
+        "p99_latency_ms": 12.78120703587774,
+        "standard_deviation_ms": 1.9487071180047424,
+        "images_per_second": 175.78506887360749
+      },
+      "peak_allocated_gpu_memory_mb": 499.79736328125
+    },
+    "resnet18": {
+      "model": "ResNet-18 fine-tuned on CIFAR-10",
+      "gpu_forward_latency": {
+        "number_of_measurements": 1000,
+        "average_latency_ms": 2.0777850556373596,
+        "minimum_latency_ms": 1.468832015991211,
+        "maximum_latency_ms": 6.276832103729248,
+        "median_latency_ms": 1.6893920302391052,
+        "p90_latency_ms": 3.157977652549744,
+        "p95_latency_ms": 3.9115790843963616,
+        "p99_latency_ms": 5.3646412515640245,
+        "standard_deviation_ms": 0.8094481461227224,
+        "images_per_second": 481.28173666801666
+      },
+      "gpu_prediction_pipeline_latency": {
+        "number_of_measurements": 1000,
+        "average_latency_ms": 2.1172726051807405,
+        "minimum_latency_ms": 1.5372480154037476,
+        "maximum_latency_ms": 7.1196160316467285,
+        "median_latency_ms": 1.7463200092315674,
+        "p90_latency_ms": 3.044864106178284,
+        "p95_latency_ms": 3.9139614939689626,
+        "p99_latency_ms": 5.737345814704895,
+        "standard_deviation_ms": 0.8193173022977457,
+        "images_per_second": 472.3057378407988
+      },
+      "python_end_to_end_latency": {
+        "number_of_measurements": 1000,
+        "average_latency_ms": 2.2282410007319413,
+        "minimum_latency_ms": 1.5888999914750457,
+        "maximum_latency_ms": 6.605700007639825,
+        "median_latency_ms": 1.8356500077061355,
+        "p90_latency_ms": 3.281770017929375,
+        "p95_latency_ms": 3.953189952881075,
+        "p99_latency_ms": 5.826365009415895,
+        "standard_deviation_ms": 0.8139920175283822,
+        "images_per_second": 448.7844895015917
+      },
+      "peak_allocated_gpu_memory_mb": 507.99267578125
+    },
+    "comparison": {
+      "average_gpu_forward_difference_ms_vit_minus_resnet": 3.4378388519287113,
+      "vit_to_resnet_forward_latency_ratio": 2.6545690530410306,
+      "faster_model_by_average_gpu_forward_latency": "ResNet-18"
+    }
+  },
+  "onnx_export": {
+    "checker_passed": true,
+    "dynamic_batch_validation_passed": true,
+    "exporter_used": "torch.export-based Dynamo exporter",
+    "model_size_mb": 23.316097259521484
+  },
+  "onnx_parity": {
+    "original_status": "review_required",
+    "deployment_review_status": "accepted_with_minor_numerical_variance",
+    "deployment_accepted": true,
+    "observed_results": {
+      "prediction_agreement": 0.9999,
+      "prediction_disagreements": 1,
+      "accuracy_difference_onnx_minus_pytorch": 0.0,
+      "macro_f1_difference_onnx_minus_pytorch": -6.307457673937478e-07,
+      "maximum_absolute_logit_difference": 0.01800394058227539,
+      "mean_absolute_logit_difference": 0.0003678688798099756,
+      "average_confidence_difference": 7.042493234621361e-05
+    }
+  },
+  "attention_rollout": {
+    "status": "completed",
+    "correct_examples_generated": 10,
+    "incorrect_examples_generated": 10,
+    "transformer_layers": 12,
+    "attention_heads": 3,
+    "patch_grid_size": [
+      14,
+      14
+    ],
+    "interpretation_notice": "Attention rollout is an interpretability visualization of attention propagation. It should not be presented as proof of causal model reasoning.",
+    "correct_grid_url": "assets/images/attention/attention_rollout_correct_grid.png",
+    "incorrect_grid_url": "assets/images/attention/attention_rollout_incorrect_grid.png",
+    "examples": [
+      {
+        "selection_type": "correct",
+        "image_index": 5585,
+        "actual_class_id": 0,
+        "actual_class": "airplane",
+        "predicted_class_id": 0,
+        "predicted_class": "airplane",
+        "confidence": 0.943749725818634,
+        "prediction_correct": true,
+        "image_url": "assets/images/attention/correct/correct_index_5585_actual_airplane_predicted_airplane.png"
+      },
+      {
+        "selection_type": "correct",
+        "image_index": 363,
+        "actual_class_id": 1,
+        "actual_class": "automobile",
+        "predicted_class_id": 1,
+        "predicted_class": "automobile",
+        "confidence": 0.9435024857521056,
+        "prediction_correct": true,
+        "image_url": "assets/images/attention/correct/correct_index_363_actual_automobile_predicted_automobile.png"
+      },
+      {
+        "selection_type": "correct",
+        "image_index": 1955,
+        "actual_class_id": 2,
+        "actual_class": "bird",
+        "predicted_class_id": 2,
+        "predicted_class": "bird",
+        "confidence": 0.954767882823944,
+        "prediction_correct": true,
+        "image_url": "assets/images/attention/correct/correct_index_1955_actual_bird_predicted_bird.png"
+      },
+      {
+        "selection_type": "correct",
+        "image_index": 9375,
+        "actual_class_id": 3,
+        "actual_class": "cat",
+        "predicted_class_id": 3,
+        "predicted_class": "cat",
+        "confidence": 0.9779370427131652,
+        "prediction_correct": true,
+        "image_url": "assets/images/attention/correct/correct_index_9375_actual_cat_predicted_cat.png"
+      },
+      {
+        "selection_type": "correct",
+        "image_index": 2648,
+        "actual_class_id": 4,
+        "actual_class": "deer",
+        "predicted_class_id": 4,
+        "predicted_class": "deer",
+        "confidence": 0.9485703706741332,
+        "prediction_correct": true,
+        "image_url": "assets/images/attention/correct/correct_index_2648_actual_deer_predicted_deer.png"
+      },
+      {
+        "selection_type": "correct",
+        "image_index": 4777,
+        "actual_class_id": 5,
+        "actual_class": "dog",
+        "predicted_class_id": 5,
+        "predicted_class": "dog",
+        "confidence": 0.9556296467781068,
+        "prediction_correct": true,
+        "image_url": "assets/images/attention/correct/correct_index_4777_actual_dog_predicted_dog.png"
+      },
+      {
+        "selection_type": "correct",
+        "image_index": 8171,
+        "actual_class_id": 6,
+        "actual_class": "frog",
+        "predicted_class_id": 6,
+        "predicted_class": "frog",
+        "confidence": 0.936870813369751,
+        "prediction_correct": true,
+        "image_url": "assets/images/attention/correct/correct_index_8171_actual_frog_predicted_frog.png"
+      },
+      {
+        "selection_type": "correct",
+        "image_index": 5795,
+        "actual_class_id": 7,
+        "actual_class": "horse",
+        "predicted_class_id": 7,
+        "predicted_class": "horse",
+        "confidence": 0.9421977400779724,
+        "prediction_correct": true,
+        "image_url": "assets/images/attention/correct/correct_index_5795_actual_horse_predicted_horse.png"
+      },
+      {
+        "selection_type": "correct",
+        "image_index": 1242,
+        "actual_class_id": 8,
+        "actual_class": "ship",
+        "predicted_class_id": 8,
+        "predicted_class": "ship",
+        "confidence": 0.9399847388267516,
+        "prediction_correct": true,
+        "image_url": "assets/images/attention/correct/correct_index_1242_actual_ship_predicted_ship.png"
+      },
+      {
+        "selection_type": "correct",
+        "image_index": 3957,
+        "actual_class_id": 9,
+        "actual_class": "truck",
+        "predicted_class_id": 9,
+        "predicted_class": "truck",
+        "confidence": 0.9397190809249878,
+        "prediction_correct": true,
+        "image_url": "assets/images/attention/correct/correct_index_3957_actual_truck_predicted_truck.png"
+      },
+      {
+        "selection_type": "incorrect",
+        "image_index": 1001,
+        "actual_class_id": 0,
+        "actual_class": "airplane",
+        "predicted_class_id": 8,
+        "predicted_class": "ship",
+        "confidence": 0.9215958714485168,
+        "prediction_correct": false,
+        "image_url": "assets/images/attention/incorrect/incorrect_index_1001_actual_airplane_predicted_ship.png"
+      },
+      {
+        "selection_type": "incorrect",
+        "image_index": 3560,
+        "actual_class_id": 1,
+        "actual_class": "automobile",
+        "predicted_class_id": 9,
+        "predicted_class": "truck",
+        "confidence": 0.9167275428771972,
+        "prediction_correct": false,
+        "image_url": "assets/images/attention/incorrect/incorrect_index_3560_actual_automobile_predicted_truck.png"
+      },
+      {
+        "selection_type": "incorrect",
+        "image_index": 4646,
+        "actual_class_id": 2,
+        "actual_class": "bird",
+        "predicted_class_id": 3,
+        "predicted_class": "cat",
+        "confidence": 0.9442197680473328,
+        "prediction_correct": false,
+        "image_url": "assets/images/attention/incorrect/incorrect_index_4646_actual_bird_predicted_cat.png"
+      },
+      {
+        "selection_type": "incorrect",
+        "image_index": 1163,
+        "actual_class_id": 3,
+        "actual_class": "cat",
+        "predicted_class_id": 5,
+        "predicted_class": "dog",
+        "confidence": 0.9490989446640016,
+        "prediction_correct": false,
+        "image_url": "assets/images/attention/incorrect/incorrect_index_1163_actual_cat_predicted_dog.png"
+      },
+      {
+        "selection_type": "incorrect",
+        "image_index": 9910,
+        "actual_class_id": 4,
+        "actual_class": "deer",
+        "predicted_class_id": 7,
+        "predicted_class": "horse",
+        "confidence": 0.929781436920166,
+        "prediction_correct": false,
+        "image_url": "assets/images/attention/incorrect/incorrect_index_9910_actual_deer_predicted_horse.png"
+      },
+      {
+        "selection_type": "incorrect",
+        "image_index": 3235,
+        "actual_class_id": 5,
+        "actual_class": "dog",
+        "predicted_class_id": 3,
+        "predicted_class": "cat",
+        "confidence": 0.9476867914199828,
+        "prediction_correct": false,
+        "image_url": "assets/images/attention/incorrect/incorrect_index_3235_actual_dog_predicted_cat.png"
+      },
+      {
+        "selection_type": "incorrect",
+        "image_index": 4744,
+        "actual_class_id": 6,
+        "actual_class": "frog",
+        "predicted_class_id": 0,
+        "predicted_class": "airplane",
+        "confidence": 0.9207118153572084,
+        "prediction_correct": false,
+        "image_url": "assets/images/attention/incorrect/incorrect_index_4744_actual_frog_predicted_airplane.png"
+      },
+      {
+        "selection_type": "incorrect",
+        "image_index": 5690,
+        "actual_class_id": 7,
+        "actual_class": "horse",
+        "predicted_class_id": 4,
+        "predicted_class": "deer",
+        "confidence": 0.9142541289329528,
+        "prediction_correct": false,
+        "image_url": "assets/images/attention/incorrect/incorrect_index_5690_actual_horse_predicted_deer.png"
+      },
+      {
+        "selection_type": "incorrect",
+        "image_index": 3653,
+        "actual_class_id": 8,
+        "actual_class": "ship",
+        "predicted_class_id": 0,
+        "predicted_class": "airplane",
+        "confidence": 0.9123768210411072,
+        "prediction_correct": false,
+        "image_url": "assets/images/attention/incorrect/incorrect_index_3653_actual_ship_predicted_airplane.png"
+      },
+      {
+        "selection_type": "incorrect",
+        "image_index": 3450,
+        "actual_class_id": 9,
+        "actual_class": "truck",
+        "predicted_class_id": 1,
+        "predicted_class": "automobile",
+        "confidence": 0.935177445411682,
+        "prediction_correct": false,
+        "image_url": "assets/images/attention/incorrect/incorrect_index_3450_actual_truck_predicted_automobile.png"
+      }
+    ]
+  },
+  "chart_urls": {
+    "vit_confusion_matrix": "assets/images/charts/vit_confusion_matrix.png",
+    "vit_normalized_confusion_matrix": "assets/images/charts/vit_confusion_matrix_normalized.png",
+    "resnet_confusion_matrix": "assets/images/charts/resnet_confusion_matrix.png",
+    "resnet_normalized_confusion_matrix": "assets/images/charts/resnet_confusion_matrix_normalized.png",
+    "model_comparison": "assets/images/charts/vit_vs_cnn_comparison.png",
+    "latency_comparison": "assets/images/charts/vit_vs_cnn_latency_comparison.png",
+    "parameter_comparison": "assets/images/charts/parameter_count_comparison.png",
+    "quantization_size_comparison": "assets/images/charts/onnx_quantization_size_comparison.png"
+  },
+  "limitations": [
+    "The model predicts only the ten CIFAR-10 classes.",
+    "Natural photographs outside the CIFAR-10 distribution may produce unreliable predictions.",
+    "Browser inference speed depends on the visitor's device and browser.",
+    "Attention rollout is an interpretability visualization and not proof of causal reasoning."
+  ]
+}

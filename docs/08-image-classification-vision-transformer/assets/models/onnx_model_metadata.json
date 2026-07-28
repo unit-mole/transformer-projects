@@ -1,0 +1,43 @@
+{
+  "model_name": "DeiT-tiny / ViT CIFAR-10 classifier",
+  "format": "ONNX",
+  "model_file": "model.onnx",
+  "exporter_used": "torch.export-based Dynamo exporter",
+  "dataset": "CIFAR-10",
+  "class_names": [
+    "airplane",
+    "automobile",
+    "bird",
+    "cat",
+    "deer",
+    "dog",
+    "frog",
+    "horse",
+    "ship",
+    "truck"
+  ],
+  "number_of_classes": 10,
+  "parameters": 5526346,
+  "file_size_mb": 23.316097259521484,
+  "sha256": "de9f83e4ac94c2c66f8a06f11dcc96f6b099059117f1b505bd576112a96a0ef2",
+  "opset_version": 18,
+  "dynamic_batch_size": true,
+  "onnx_checker_passed": true,
+  "parity_status": "review_required",
+  "onnx_test_accuracy": 0.9645,
+  "onnx_test_macro_f1": 0.9644255025970839,
+  "original_automated_parity_status": "review_required",
+  "deployment_review_status": "accepted_with_minor_numerical_variance",
+  "deployment_accepted": true,
+  "prediction_agreement_with_pytorch": 0.9999,
+  "prediction_disagreements": 1,
+  "optimization_and_quantization": {
+    "status": "completed",
+    "optimized_fp32_model": "model_optimized_fp32.onnx",
+    "quantized_uint8_model": null,
+    "quantized_int8_model": null,
+    "selected_browser_model": "model_browser.onnx",
+    "selected_precision": "float32",
+    "selection_reason": "No quantized model satisfied all acceptance criteria, so the accepted FP32 model was retained."
+  }
+}

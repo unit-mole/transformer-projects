@@ -1,0 +1,16 @@
+{
+  "runtime_source": "model config",
+  "classes": [],
+  "training_framework_classes": [
+    "airplane",
+    "automobile",
+    "bird",
+    "cat",
+    "deer",
+    "dog",
+    "frog",
+    "horse",
+    "ship",
+    "truck"
+  ]
+}

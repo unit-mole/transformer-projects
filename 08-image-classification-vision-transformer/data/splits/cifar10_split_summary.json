@@ -1,0 +1,9 @@
+{
+  "dataset": "CIFAR-10",
+  "seed": 42,
+  "method": "stratified train_test_split",
+  "training_images": 45000,
+  "validation_images": 5000,
+  "test_images": 10000,
+  "split_file": "data\\splits\\cifar10_split_indices.npz"
+}

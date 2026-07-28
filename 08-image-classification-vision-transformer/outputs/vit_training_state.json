@@ -1,0 +1,7 @@
+{
+  "status": "training_completed",
+  "best_epoch": 10,
+  "best_validation_accuracy": 0.9698,
+  "best_validation_macro_f1": 0.9697510473975155,
+  "saved_model_directory": "models\\vit_model"
+}

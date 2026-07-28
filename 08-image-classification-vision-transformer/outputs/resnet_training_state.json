@@ -1,0 +1,6 @@
+{
+  "status": "training_completed",
+  "best_epoch": 15,
+  "best_validation_accuracy": 0.9674,
+  "best_validation_macro_f1": 0.9672819971850017
+}

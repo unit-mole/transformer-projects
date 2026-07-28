@@ -1,0 +1,39 @@
+{
+  "selection_status": "completed",
+  "selected_utc": "2026-07-27T20:38:21.236206+00:00",
+  "selected_model_key": "fp32_original",
+  "selected_source_file": "model.onnx",
+  "browser_model_file": "model_browser.onnx",
+  "precision": "float32",
+  "selection_reason": "No quantized model satisfied all acceptance criteria, so the accepted FP32 model was retained.",
+  "model_size_mb": 23.316097259521484,
+  "sha256": "de9f83e4ac94c2c66f8a06f11dcc96f6b099059117f1b505bd576112a96a0ef2",
+  "quantized_model_selected": false,
+  "recommended_browser_provider": "webgpu_with_wasm_fallback",
+  "candidate_results": {
+    "fp32_original": {
+      "display_name": "FP32 Original",
+      "precision": "float32",
+      "model_path": "models\\onnx_model\\model.onnx",
+      "model_size_mb": 23.316097259521484,
+      "sha256": "de9f83e4ac94c2c66f8a06f11dcc96f6b099059117f1b505bd576112a96a0ef2",
+      "accuracy": 0.9646,
+      "macro_f1": 0.9645258284945332,
+      "correct_predictions": 9646,
+      "incorrect_predictions": 354,
+      "average_confidence": 0.8922622799873352,
+      "native_cpu_latency": {
+        "average_latency_ms": 9.23921500245342,
+        "median_latency_ms": 8.681600011186674,
+        "p90_latency_ms": 11.750049999682233,
+        "p95_latency_ms": 14.016294977045616,
+        "p99_latency_ms": 16.62199001933913,
+        "minimum_latency_ms": 6.144600047264248,
+        "maximum_latency_ms": 23.177600000053644,
+        "estimated_images_per_second": 108.23430342669326,
+        "warmup_iterations": 30,
+        "timed_iterations": 200
+      }
+    }
+  }
+}

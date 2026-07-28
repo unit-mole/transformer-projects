@@ -1,0 +1,41 @@
+{
+  "status": "review_required",
+  "dataset": "CIFAR-10",
+  "test_images": 10000,
+  "exporter_used": "torch.export-based Dynamo exporter",
+  "dynamo_failure_message": null,
+  "onnx_model": "models\\onnx_model\\model.onnx",
+  "opset_version": 18,
+  "onnx_runtime_version": "1.28.0",
+  "execution_providers": [
+    "CUDAExecutionProvider",
+    "CPUExecutionProvider"
+  ],
+  "pytorch": {
+    "accuracy": 0.9645,
+    "macro_f1": 0.9644261333428513,
+    "evaluation_seconds": 1.4795095997978933
+  },
+  "onnx_runtime": {
+    "accuracy": 0.9645,
+    "macro_f1": 0.9644255025970839,
+    "evaluation_seconds": 1.5056469000992365
+  },
+  "parity": {
+    "prediction_agreement": 0.9999,
+    "prediction_disagreements": 1,
+    "accuracy_difference_onnx_minus_pytorch": 0.0,
+    "macro_f1_difference_onnx_minus_pytorch": -6.307457673937478e-07,
+    "maximum_absolute_logit_difference": 0.01800394058227539,
+    "mean_absolute_logit_difference": 0.0003678688798099756,
+    "median_per_image_maximum_difference": 0.0007224231958389282,
+    "p95_per_image_maximum_difference": 0.0023422850295901233,
+    "average_confidence_difference": 7.042493234621361e-05
+  },
+  "checks": {
+    "prediction_agreement_passed": true,
+    "accuracy_difference_passed": true,
+    "mean_logit_difference_passed": false,
+    "maximum_logit_difference_passed": true
+  }
+}

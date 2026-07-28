@@ -1,0 +1,40 @@
+{
+  "dataset_name": "CIFAR-10",
+  "dataset_provider": "torchvision.datasets.CIFAR10",
+  "number_of_classes": 10,
+  "class_names": [
+    "airplane",
+    "automobile",
+    "bird",
+    "cat",
+    "deer",
+    "dog",
+    "frog",
+    "horse",
+    "ship",
+    "truck"
+  ],
+  "original_image_dimensions": [
+    32,
+    32
+  ],
+  "model_input_dimensions": [
+    224,
+    224
+  ],
+  "training_images": 45000,
+  "validation_images": 5000,
+  "test_images": 10000,
+  "split_seed": 42,
+  "split_method": "stratified",
+  "normalization_mean": [
+    0.5,
+    0.5,
+    0.5
+  ],
+  "normalization_std": [
+    0.5,
+    0.5,
+    0.5
+  ]
+}

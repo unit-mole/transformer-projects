@@ -1,0 +1,35 @@
+{
+  "base_model": "facebook/deit-tiny-patch16-224",
+  "loaded_python_class": "ViTForImageClassification",
+  "configuration_model_type": "vit",
+  "task": "CIFAR-10 image classification",
+  "number_of_classes": 10,
+  "class_names": [
+    "airplane",
+    "automobile",
+    "bird",
+    "cat",
+    "deer",
+    "dog",
+    "frog",
+    "horse",
+    "ship",
+    "truck"
+  ],
+  "total_parameters": 5526346,
+  "trainable_parameters": 5526346,
+  "input_size": [
+    224,
+    224
+  ],
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "pretrained_backbone_loaded": true,
+  "unexpected_keys": [],
+  "missing_keys": [],
+  "mismatched_keys": [
+    "classifier.bias",
+    "classifier.weight"
+  ],
+  "status": "correctly_initialized_for_fine_tuning"
+}

@@ -1,0 +1,25 @@
+# Project 08 — Training, Evaluation and ONNX Dependencies
+#
+# CUDA-enabled PyTorch installation used for the RTX 5090:
+# python -m pip install torch==2.12.1 torchvision==0.27.1 --index-url https://download.pytorch.org/whl/cu130
+#
+# PyTorch is documented above instead of being reinstalled from this file.
+# This prevents pip from accidentally replacing the CUDA build with a CPU build.
+
+transformers>=4.40,<5
+accelerate>=0.28,<2
+safetensors>=0.4,<1
+huggingface-hub>=0.23,<2
+scikit-learn>=1.4,<2
+pandas>=2.2,<3
+numpy>=1.26,<3
+matplotlib>=3.8,<4
+Pillow>=10,<12
+tqdm>=4.66,<5
+onnx>=1.16,<2
+onnxscript>=0.1,<1
+onnxruntime-gpu>=1.18,<2
+notebook>=7,<8
+jupyterlab>=4,<5
+ipykernel>=6,<7
+ipywidgets>=8,<9

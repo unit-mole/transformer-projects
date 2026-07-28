@@ -1,0 +1,29 @@
+{
+  "quantization_method": "dynamic",
+  "candidate_types": [
+    "QUInt8",
+    "QInt8"
+  ],
+  "operators_to_quantize": [
+    "MatMul",
+    "Gemm"
+  ],
+  "per_channel_requested": true,
+  "reduce_range": false,
+  "validation_dataset": "CIFAR-10 test set",
+  "validation_images": 10000,
+  "dynamic_batch_tests": [
+    1,
+    7,
+    32
+  ],
+  "latency_warmup_iterations": 30,
+  "latency_timed_iterations": 200,
+  "execution_provider": "CPUExecutionProvider",
+  "acceptance_thresholds": {
+    "minimum_prediction_agreement": 0.995,
+    "maximum_accuracy_drop": 0.003,
+    "maximum_macro_f1_drop": 0.003,
+    "minimum_size_reduction": 0.4
+  }
+}

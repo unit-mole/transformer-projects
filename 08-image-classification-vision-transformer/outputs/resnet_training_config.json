@@ -1,0 +1,31 @@
+{
+  "model_name": "resnet18",
+  "pretrained_weights": "IMAGENET1K_V1",
+  "dataset": "CIFAR-10",
+  "number_of_classes": 10,
+  "class_names": [
+    "airplane",
+    "automobile",
+    "bird",
+    "cat",
+    "deer",
+    "dog",
+    "frog",
+    "horse",
+    "ship",
+    "truck"
+  ],
+  "epochs": 15,
+  "batch_size": 128,
+  "backbone_learning_rate": 0.0001,
+  "classifier_learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "label_smoothing": 0.1,
+  "warmup_ratio": 0.1,
+  "gradient_clip_norm": 1.0,
+  "early_stopping_patience": 4,
+  "mixed_precision": true,
+  "run_mode": "fresh",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 5090"
+}

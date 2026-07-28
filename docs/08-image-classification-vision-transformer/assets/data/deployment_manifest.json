@@ -1,0 +1,595 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-07-27T20:46:42.216765+00:00",
+  "project": "08-image-classification-vision-transformer",
+  "asset_file_count": 64,
+  "total_asset_size_bytes": 35420601,
+  "total_asset_size_mb": 33.779717445373535,
+  "largest_file": {
+    "relative_path": "assets/models/model_browser.onnx",
+    "filename": "model_browser.onnx",
+    "extension": ".onnx",
+    "mime_type": "application/octet-stream",
+    "size_bytes": 24448700,
+    "size_mb": 23.316097259521484,
+    "sha256": "de9f83e4ac94c2c66f8a06f11dcc96f6b099059117f1b505bd576112a96a0ef2"
+  },
+  "files": [
+    {
+      "relative_path": "assets/data/app_data.json",
+      "filename": "app_data.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 21751,
+      "size_mb": 0.020743370056152344,
+      "sha256": "9b8e8f2bd8ae907b9bbf7a446a8572b3e74b57312a0baf650402fab57c9e37b9"
+    },
+    {
+      "relative_path": "assets/data/attention_rollout_metadata.csv",
+      "filename": "attention_rollout_metadata.csv",
+      "extension": ".csv",
+      "mime_type": "application/vnd.ms-excel",
+      "size_bytes": 5705,
+      "size_mb": 0.005440711975097656,
+      "sha256": "b3908d15294ccf4755530e607612d1583073de4685b94c0497d586e250371104"
+    },
+    {
+      "relative_path": "assets/data/attention_rollout_method.json",
+      "filename": "attention_rollout_method.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 781,
+      "size_mb": 0.0007448196411132812,
+      "sha256": "5910fdb30316a0b2336dad3a6be8f2175ad744d5d4dbc3110e21425eba8ba830"
+    },
+    {
+      "relative_path": "assets/data/attention_rollout_summary.json",
+      "filename": "attention_rollout_summary.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 17569,
+      "size_mb": 0.016755104064941406,
+      "sha256": "7eca6316262e8f5cf0f7257946539aa68c8b491e7f62bc34254e5ccbba13d9ed"
+    },
+    {
+      "relative_path": "assets/data/deployment_config.json",
+      "filename": "deployment_config.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 1043,
+      "size_mb": 0.0009946823120117188,
+      "sha256": "3896bb76c0cad4a812e38915175505e3e0f90d5c35038f0e735cdfafca4a02c1"
+    },
+    {
+      "relative_path": "assets/data/model_metrics.json",
+      "filename": "model_metrics.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 2630,
+      "size_mb": 0.0025081634521484375,
+      "sha256": "ca66fc8a784061542fdbdd7655f2acef555611ed1e8166bb28066c89c2dbf3a3"
+    },
+    {
+      "relative_path": "assets/data/onnx_export_summary.json",
+      "filename": "onnx_export_summary.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 1601,
+      "size_mb": 0.0015268325805664062,
+      "sha256": "6bf73509df0770892068f1e35656615f13357d76f42cd22ba600b680b159e0f6"
+    },
+    {
+      "relative_path": "assets/data/onnx_parity_results.json",
+      "filename": "onnx_parity_results.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 1374,
+      "size_mb": 0.0013103485107421875,
+      "sha256": "d98e902a92835123a478e5ebd619a4b1e29ebe027123d634ef494f01b19c72e9"
+    },
+    {
+      "relative_path": "assets/data/onnx_parity_review.json",
+      "filename": "onnx_parity_review.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 1837,
+      "size_mb": 0.0017518997192382812,
+      "sha256": "3566fd22ca34b6452df24afdac61c5d65565c72b6a4dbefa55c7ecb923ab0801"
+    },
+    {
+      "relative_path": "assets/data/onnx_quantization_results.json",
+      "filename": "onnx_quantization_results.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 6841,
+      "size_mb": 0.006524085998535156,
+      "sha256": "226103e906e6da96a1bfa03565ed4484d5c25f747daa95a9a409701747e541a7"
+    },
+    {
+      "relative_path": "assets/data/onnx_quantization_summary.csv",
+      "filename": "onnx_quantization_summary.csv",
+      "extension": ".csv",
+      "mime_type": "application/vnd.ms-excel",
+      "size_bytes": 562,
+      "size_mb": 0.0005359649658203125,
+      "sha256": "6dc960bd51e02f435ec6b7e5fbea8aa0dbf92a0eed4f18047d3fb66955a356b8"
+    },
+    {
+      "relative_path": "assets/data/resnet_classification_report.csv",
+      "filename": "resnet_classification_report.csv",
+      "extension": ".csv",
+      "mime_type": "application/vnd.ms-excel",
+      "size_bytes": 810,
+      "size_mb": 0.0007724761962890625,
+      "sha256": "82189f79c6f382b11f22c8128a18c4e1fb10cb65d4fb0d9f23fe3a7942f1e87e"
+    },
+    {
+      "relative_path": "assets/data/test_evaluation_summary.json",
+      "filename": "test_evaluation_summary.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 696,
+      "size_mb": 0.00066375732421875,
+      "sha256": "6f60b58c35b7bc381c2b664b3fe229cb304964ac945f090b73fa10065ab14fa8"
+    },
+    {
+      "relative_path": "assets/data/vit_classification_report.csv",
+      "filename": "vit_classification_report.csv",
+      "extension": ".csv",
+      "mime_type": "application/vnd.ms-excel",
+      "size_bytes": 810,
+      "size_mb": 0.0007724761962890625,
+      "sha256": "987f2f645ec8fc9a3afa0bfa8fc6ec13ebaa1e671bca2b780751084bb658761f"
+    },
+    {
+      "relative_path": "assets/data/vit_vs_cnn_comparison.json",
+      "filename": "vit_vs_cnn_comparison.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 1671,
+      "size_mb": 0.0015935897827148438,
+      "sha256": "1e175b28be00623b6d3cb1b4865ce5527464295bb43e7d97e1aab0fb8abdd261"
+    },
+    {
+      "relative_path": "assets/data/vit_vs_cnn_latency_results.json",
+      "filename": "vit_vs_cnn_latency_results.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 3904,
+      "size_mb": 0.00372314453125,
+      "sha256": "ce1d6a3ac54404a86e5d69bf52031e3ea94b3a92309cb89cde14d10ac10f07e2"
+    },
+    {
+      "relative_path": "assets/images/attention/attention_rollout_correct_grid.png",
+      "filename": "attention_rollout_correct_grid.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 1040349,
+      "size_mb": 0.9921541213989258,
+      "sha256": "106a7d9502b0591f90db4641f74e74d59d453c7452d3fa0696887abb1322a78e"
+    },
+    {
+      "relative_path": "assets/images/attention/attention_rollout_incorrect_grid.png",
+      "filename": "attention_rollout_incorrect_grid.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 1032349,
+      "size_mb": 0.9845247268676758,
+      "sha256": "50b74a737fe22d09cd8cf0c60c5e54ca270f55b1d232e5fda9e5c03dee505953"
+    },
+    {
+      "relative_path": "assets/images/attention/correct/correct_index_1242_actual_ship_predicted_ship.png",
+      "filename": "correct_index_1242_actual_ship_predicted_ship.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 280336,
+      "size_mb": 0.2673492431640625,
+      "sha256": "82445f98e6399cba247ff5d8bd8dd2fa015b4fc810384e0f442db5f2a558bf7b"
+    },
+    {
+      "relative_path": "assets/images/attention/correct/correct_index_1955_actual_bird_predicted_bird.png",
+      "filename": "correct_index_1955_actual_bird_predicted_bird.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 269776,
+      "size_mb": 0.2572784423828125,
+      "sha256": "777203f16ff27f6a7eec53237ddfe0e97147fb9ca246568c3848dda9e5ec4495"
+    },
+    {
+      "relative_path": "assets/images/attention/correct/correct_index_2648_actual_deer_predicted_deer.png",
+      "filename": "correct_index_2648_actual_deer_predicted_deer.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 263909,
+      "size_mb": 0.25168323516845703,
+      "sha256": "a760b07fa0798d56be0b198ab901fb0ea3026dc531bcac8db771de09a788c817"
+    },
+    {
+      "relative_path": "assets/images/attention/correct/correct_index_363_actual_automobile_predicted_automobile.png",
+      "filename": "correct_index_363_actual_automobile_predicted_automobile.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 275050,
+      "size_mb": 0.26230812072753906,
+      "sha256": "b8daf049e296e77079b2a33a5b438f855b36c01d3401c78451427b4a68f302f0"
+    },
+    {
+      "relative_path": "assets/images/attention/correct/correct_index_3957_actual_truck_predicted_truck.png",
+      "filename": "correct_index_3957_actual_truck_predicted_truck.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 255770,
+      "size_mb": 0.24392127990722656,
+      "sha256": "00afe83065428558f0f2aa69f75f441b342e3cf21a1b3ab95e279ae3382d6867"
+    },
+    {
+      "relative_path": "assets/images/attention/correct/correct_index_4777_actual_dog_predicted_dog.png",
+      "filename": "correct_index_4777_actual_dog_predicted_dog.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 302385,
+      "size_mb": 0.2883768081665039,
+      "sha256": "985b68ebf891fb5a8b169b108c855945574396d2cba27806b88805912e0f7443"
+    },
+    {
+      "relative_path": "assets/images/attention/correct/correct_index_5585_actual_airplane_predicted_airplane.png",
+      "filename": "correct_index_5585_actual_airplane_predicted_airplane.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 299993,
+      "size_mb": 0.28609561920166016,
+      "sha256": "2fcbe8c89b0065c414647d16f674ac82a8f3712bbc319ae236c4591fd0e36b6f"
+    },
+    {
+      "relative_path": "assets/images/attention/correct/correct_index_5795_actual_horse_predicted_horse.png",
+      "filename": "correct_index_5795_actual_horse_predicted_horse.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 269900,
+      "size_mb": 0.2573966979980469,
+      "sha256": "4c04aeee87c7c5978fbd85732eed90b77d11bbc60e1f4e8f8b9914b9c9e56748"
+    },
+    {
+      "relative_path": "assets/images/attention/correct/correct_index_8171_actual_frog_predicted_frog.png",
+      "filename": "correct_index_8171_actual_frog_predicted_frog.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 309513,
+      "size_mb": 0.29517459869384766,
+      "sha256": "c4331222f9a810049c61f553a54e8f217132452830f823ff99e68d2abccaaea6"
+    },
+    {
+      "relative_path": "assets/images/attention/correct/correct_index_9375_actual_cat_predicted_cat.png",
+      "filename": "correct_index_9375_actual_cat_predicted_cat.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 294243,
+      "size_mb": 0.2806119918823242,
+      "sha256": "2ec0d006f986eff966c48312a8e59c4171056fbbbe029cc1c8f4eafdf780504d"
+    },
+    {
+      "relative_path": "assets/images/attention/incorrect/incorrect_index_1001_actual_airplane_predicted_ship.png",
+      "filename": "incorrect_index_1001_actual_airplane_predicted_ship.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 252325,
+      "size_mb": 0.24063587188720703,
+      "sha256": "75bf9b8b448f7386a9e40adc0163a6f6d77697a40d5c79e736e54b6a244c5b31"
+    },
+    {
+      "relative_path": "assets/images/attention/incorrect/incorrect_index_1163_actual_cat_predicted_dog.png",
+      "filename": "incorrect_index_1163_actual_cat_predicted_dog.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 291148,
+      "size_mb": 0.2776603698730469,
+      "sha256": "daae9cc0b3bd074e67d65cf3200b10cf629288a45243604562641e106d1dc7d1"
+    },
+    {
+      "relative_path": "assets/images/attention/incorrect/incorrect_index_3235_actual_dog_predicted_cat.png",
+      "filename": "incorrect_index_3235_actual_dog_predicted_cat.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 273248,
+      "size_mb": 0.260589599609375,
+      "sha256": "db433326024df599e77547ad73a388c60e53c1e657be241e6d513aab1ed744e8"
+    },
+    {
+      "relative_path": "assets/images/attention/incorrect/incorrect_index_3450_actual_truck_predicted_automobile.png",
+      "filename": "incorrect_index_3450_actual_truck_predicted_automobile.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 271531,
+      "size_mb": 0.25895214080810547,
+      "sha256": "f555d79113945278f3f389d83c861a2570320b801d187e00dff46706280e271a"
+    },
+    {
+      "relative_path": "assets/images/attention/incorrect/incorrect_index_3560_actual_automobile_predicted_truck.png",
+      "filename": "incorrect_index_3560_actual_automobile_predicted_truck.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 300529,
+      "size_mb": 0.2866067886352539,
+      "sha256": "93b465e545d89347f61f4a48c7c64d36c732922678d201518f7e4a0ab4ab898f"
+    },
+    {
+      "relative_path": "assets/images/attention/incorrect/incorrect_index_3653_actual_ship_predicted_airplane.png",
+      "filename": "incorrect_index_3653_actual_ship_predicted_airplane.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 262084,
+      "size_mb": 0.24994277954101562,
+      "sha256": "378d359fc8df4047286a4b87b0f144eb36d9ecde46ccc85615357280f408d4ec"
+    },
+    {
+      "relative_path": "assets/images/attention/incorrect/incorrect_index_4646_actual_bird_predicted_cat.png",
+      "filename": "incorrect_index_4646_actual_bird_predicted_cat.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 251761,
+      "size_mb": 0.2400979995727539,
+      "sha256": "09574faef98aaf337610cc6501d58ba25f6adf9e360ac80b9cd3f19f2fc0e75f"
+    },
+    {
+      "relative_path": "assets/images/attention/incorrect/incorrect_index_4744_actual_frog_predicted_airplane.png",
+      "filename": "incorrect_index_4744_actual_frog_predicted_airplane.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 262935,
+      "size_mb": 0.25075435638427734,
+      "sha256": "f051ba32ed18e4c887cc6b98f923439544ed883068bb2c0e755e2aa27e2af242"
+    },
+    {
+      "relative_path": "assets/images/attention/incorrect/incorrect_index_5690_actual_horse_predicted_deer.png",
+      "filename": "incorrect_index_5690_actual_horse_predicted_deer.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 297341,
+      "size_mb": 0.2835664749145508,
+      "sha256": "72931a06965a580b10175fc65edf7b0ff8ed8916cd74e715f9a52a8d21c88d58"
+    },
+    {
+      "relative_path": "assets/images/attention/incorrect/incorrect_index_9910_actual_deer_predicted_horse.png",
+      "filename": "incorrect_index_9910_actual_deer_predicted_horse.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 299040,
+      "size_mb": 0.285186767578125,
+      "sha256": "ad035b91c476416f9bd9cadb642e7cec4304cc1078a14f28fbd324f134417be5"
+    },
+    {
+      "relative_path": "assets/images/charts/class_distribution.png",
+      "filename": "class_distribution.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 76556,
+      "size_mb": 0.07300949096679688,
+      "sha256": "8f6e9d1e34783dbd7ec1466f915f7b8dd49dda2caa3b846ed229ebbbc917692e"
+    },
+    {
+      "relative_path": "assets/images/charts/onnx_parity_logit_difference.png",
+      "filename": "onnx_parity_logit_difference.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 56898,
+      "size_mb": 0.05426216125488281,
+      "sha256": "aa75505b6053a6c7c1fc563b833c0c7f1327f8596adab820dd123dbf3a747115"
+    },
+    {
+      "relative_path": "assets/images/charts/onnx_quantization_latency_comparison.png",
+      "filename": "onnx_quantization_latency_comparison.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 68776,
+      "size_mb": 0.06558990478515625,
+      "sha256": "f85079f49af829474135ec1f45d0d52363d90dd007efe1bbcfdf93901dabcfa4"
+    },
+    {
+      "relative_path": "assets/images/charts/onnx_quantization_metrics_comparison.png",
+      "filename": "onnx_quantization_metrics_comparison.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 53757,
+      "size_mb": 0.05126667022705078,
+      "sha256": "dd89fb329fabd2750137e9d7c467dc3ed5115ac63a684efc17cb47602c053fcc"
+    },
+    {
+      "relative_path": "assets/images/charts/onnx_quantization_size_comparison.png",
+      "filename": "onnx_quantization_size_comparison.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 39085,
+      "size_mb": 0.03727436065673828,
+      "sha256": "d684a39cd7b13ffee9639081951ee86878f19f1ad2d6cec3a0d8b3d372cf550f"
+    },
+    {
+      "relative_path": "assets/images/charts/parameter_count_comparison.png",
+      "filename": "parameter_count_comparison.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 50119,
+      "size_mb": 0.047797203063964844,
+      "sha256": "d55cfdf8903a0ff0fe7883de6a07f5fdbc3348fe98bd075cc925c270f24e0ff7"
+    },
+    {
+      "relative_path": "assets/images/charts/resnet_confusion_matrix.png",
+      "filename": "resnet_confusion_matrix.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 124697,
+      "size_mb": 0.11892032623291016,
+      "sha256": "dd3c9e173d8209a891fe505313812c199a32cf05e3c365737529e77f281731d0"
+    },
+    {
+      "relative_path": "assets/images/charts/resnet_confusion_matrix_normalized.png",
+      "filename": "resnet_confusion_matrix_normalized.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 130739,
+      "size_mb": 0.12468242645263672,
+      "sha256": "268da3455f5d8bc0b88d904fb7a9765f26d280ffe6536f82232c0f69ccefc46e"
+    },
+    {
+      "relative_path": "assets/images/charts/resnet_training_loss_curve.png",
+      "filename": "resnet_training_loss_curve.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 80048,
+      "size_mb": 0.0763397216796875,
+      "sha256": "abe85c576e360b41eb577c79f6db701fa7b6af39bf434c06abd89c62dde9921d"
+    },
+    {
+      "relative_path": "assets/images/charts/resnet_training_metrics_curve.png",
+      "filename": "resnet_training_metrics_curve.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 89327,
+      "size_mb": 0.0851888656616211,
+      "sha256": "b599490895bbd7a320ff1753261e30e854e17c9e5bfe7f44154a40faeab5d82e"
+    },
+    {
+      "relative_path": "assets/images/charts/sample_input_images.png",
+      "filename": "sample_input_images.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 1866357,
+      "size_mb": 1.7798967361450195,
+      "sha256": "894d5ad7e79157b3778835e694826b279e7d9b1de17174bc78b01337f301d065"
+    },
+    {
+      "relative_path": "assets/images/charts/vit_confusion_matrix.png",
+      "filename": "vit_confusion_matrix.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 124499,
+      "size_mb": 0.11873149871826172,
+      "sha256": "77d92ba56fbecd6d06c90716158f0e0e2b5d866106df1ab99ed89950064ee957"
+    },
+    {
+      "relative_path": "assets/images/charts/vit_confusion_matrix_normalized.png",
+      "filename": "vit_confusion_matrix_normalized.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 130605,
+      "size_mb": 0.12455463409423828,
+      "sha256": "f2d2419d1548b167d00d27bc5b099a3b5b15d45f49357cf7712c9d2dde6abdad"
+    },
+    {
+      "relative_path": "assets/images/charts/vit_training_loss_curve.png",
+      "filename": "vit_training_loss_curve.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 76055,
+      "size_mb": 0.07253170013427734,
+      "sha256": "09c7494a3bb2bc0a8a46951bd11150a404693c62edf78d0c9441a9514878a8cb"
+    },
+    {
+      "relative_path": "assets/images/charts/vit_training_metrics_curve.png",
+      "filename": "vit_training_metrics_curve.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 87671,
+      "size_mb": 0.08360958099365234,
+      "sha256": "1fcdb8b3ab5b3b60701d479f44696d87710e2f361493bdbf15391c25937c42d8"
+    },
+    {
+      "relative_path": "assets/images/charts/vit_vs_cnn_comparison.png",
+      "filename": "vit_vs_cnn_comparison.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 57170,
+      "size_mb": 0.05452156066894531,
+      "sha256": "8612f6d48e06484a7796ce65bf101c4c33e96c186418372f3ce1ac760565d914"
+    },
+    {
+      "relative_path": "assets/images/charts/vit_vs_cnn_latency_comparison.png",
+      "filename": "vit_vs_cnn_latency_comparison.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 61680,
+      "size_mb": 0.0588226318359375,
+      "sha256": "335534b21a2443e961d8da936fe2ef3f023d465160481faf03c7a4cb0768d818"
+    },
+    {
+      "relative_path": "assets/images/charts/vit_vs_cnn_latency_distribution.png",
+      "filename": "vit_vs_cnn_latency_distribution.png",
+      "extension": ".png",
+      "mime_type": "image/png",
+      "size_bytes": 66724,
+      "size_mb": 0.06363296508789062,
+      "sha256": "8ddf22b1598ef49ddc4a67020362132b7228f6fd66f8c2b33d7633541f990d87"
+    },
+    {
+      "relative_path": "assets/models/browser_model_config.json",
+      "filename": "browser_model_config.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 1358,
+      "size_mb": 0.0012950897216796875,
+      "sha256": "6efc80e54e758f0cd7cc86568839bda59185d7465eaa052764020b9a0e22c38d"
+    },
+    {
+      "relative_path": "assets/models/browser_model_selection.json",
+      "filename": "browser_model_selection.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 1607,
+      "size_mb": 0.0015325546264648438,
+      "sha256": "3b718e8eb1446b74b9e7fe28255a72e4429bb4be6c851140c3740e9b62eb9a43"
+    },
+    {
+      "relative_path": "assets/models/class_names.json",
+      "filename": "class_names.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 173,
+      "size_mb": 0.00016498565673828125,
+      "sha256": "f8e1bef21e50b82aa6659b683b52cd4355a63647382c84cedf68f48c20c4e0b2"
+    },
+    {
+      "relative_path": "assets/models/config.json",
+      "filename": "config.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 1033,
+      "size_mb": 0.0009851455688476562,
+      "sha256": "332d6a2b72e0cbcf66fa0cdc5d917f4ebb93f77f9f106e592b2c5d3509fadb23"
+    },
+    {
+      "relative_path": "assets/models/labels.json",
+      "filename": "labels.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 123,
+      "size_mb": 0.00011730194091796875,
+      "sha256": "32325c0b676b80df6dd58c449beebecf4a85d061db2f3529e1c68f3c58e95aa3"
+    },
+    {
+      "relative_path": "assets/models/model_browser.onnx",
+      "filename": "model_browser.onnx",
+      "extension": ".onnx",
+      "mime_type": "application/octet-stream",
+      "size_bytes": 24448700,
+      "size_mb": 23.316097259521484,
+      "sha256": "de9f83e4ac94c2c66f8a06f11dcc96f6b099059117f1b505bd576112a96a0ef2"
+    },
+    {
+      "relative_path": "assets/models/onnx_model_metadata.json",
+      "filename": "onnx_model_metadata.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 1397,
+      "size_mb": 0.0013322830200195312,
+      "sha256": "af6b9fbeba311505864460d2960057a9009bd406c7491bf6b8aa26f5f57a7c27"
+    },
+    {
+      "relative_path": "assets/models/preprocessor_config.json",
+      "filename": "preprocessor_config.json",
+      "extension": ".json",
+      "mime_type": "application/json",
+      "size_bytes": 347,
+      "size_mb": 0.00033092498779296875,
+      "sha256": "439af8297dfeaec6291666c66420f3616206713593f28921e394922915c2c851"
+    }
+  ]
+}

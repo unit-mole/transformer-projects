@@ -1,0 +1,2 @@
+review_status,deployment_accepted,test_images,prediction_agreement,prediction_disagreements,accuracy_difference,macro_f1_difference,maximum_logit_difference,mean_logit_difference,average_confidence_difference,failed_original_checks
+accepted_with_minor_numerical_variance,True,10000,0.9999,1,0.0,-6.307457673937478e-07,0.01800394058227539,0.0003678688798099756,7.042493234621361e-05,mean_logit_difference_passed

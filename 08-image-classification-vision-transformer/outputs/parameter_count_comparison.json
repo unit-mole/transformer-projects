@@ -1,0 +1,6 @@
+{
+  "vision_transformer_parameters": 5526346,
+  "resnet18_parameters": 11181642,
+  "difference_vit_minus_resnet": -5655296,
+  "vit_parameter_ratio_to_resnet": 0.4942338522374442
+}

@@ -1,0 +1,43 @@
+{
+  "review_status": "accepted_with_minor_numerical_variance",
+  "reviewed_utc": "2026-07-27T20:30:33.023344+00:00",
+  "model": "models\\onnx_model\\model.onnx",
+  "dataset": "CIFAR-10",
+  "test_images": 10000,
+  "original_automated_status": "review_required",
+  "failed_original_checks": [
+    "mean_logit_difference_passed"
+  ],
+  "review_summary": "The FP32 ONNX model is accepted for the next deployment stage. It preserves test accuracy and macro F1, with one prediction difference across 10,000 test images.",
+  "observed_results": {
+    "prediction_agreement": 0.9999,
+    "prediction_disagreements": 1,
+    "accuracy_difference_onnx_minus_pytorch": 0.0,
+    "macro_f1_difference_onnx_minus_pytorch": -6.307457673937478e-07,
+    "maximum_absolute_logit_difference": 0.01800394058227539,
+    "mean_absolute_logit_difference": 0.0003678688798099756,
+    "average_confidence_difference": 7.042493234621361e-05
+  },
+  "deployment_acceptance_thresholds": {
+    "minimum_prediction_agreement": 0.9999,
+    "maximum_prediction_disagreements": 1,
+    "maximum_accuracy_difference": 0.0001,
+    "maximum_macro_f1_difference": 0.0001,
+    "maximum_mean_logit_difference": 0.001,
+    "maximum_absolute_logit_difference": 0.02,
+    "maximum_average_confidence_difference": 0.001
+  },
+  "deployment_checks": {
+    "onnx_model_exists": true,
+    "prediction_agreement_acceptable": true,
+    "prediction_disagreement_count_acceptable": true,
+    "accuracy_difference_acceptable": true,
+    "macro_f1_difference_acceptable": true,
+    "mean_logit_difference_acceptable": true,
+    "maximum_logit_difference_acceptable": true,
+    "average_confidence_difference_acceptable": true,
+    "all_values_are_finite": true
+  },
+  "deployment_accepted": true,
+  "next_stage": "onnx_optimization_and_quantization"
+}

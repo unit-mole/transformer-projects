@@ -1,0 +1,25 @@
+{
+  "status": "test_evaluation_completed",
+  "dataset": "CIFAR-10",
+  "test_images": 10000,
+  "vision_transformer": {
+    "correct_predictions": 9645,
+    "incorrect_predictions": 355,
+    "accuracy": 0.9645,
+    "macro_f1": 0.9644255025970839
+  },
+  "resnet18": {
+    "correct_predictions": 9627,
+    "incorrect_predictions": 373,
+    "accuracy": 0.9627,
+    "macro_f1": 0.9625738757862015
+  },
+  "prediction_agreement": {
+    "both_correct": 9430,
+    "both_incorrect": 158,
+    "vit_only_correct": 215,
+    "resnet_only_correct": 197
+  },
+  "accuracy_difference_vit_minus_resnet": 0.0018000000000000238,
+  "macro_f1_difference_vit_minus_resnet": 0.0018516268108824674
+}
