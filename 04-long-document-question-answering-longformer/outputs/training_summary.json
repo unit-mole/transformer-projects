@@ -1,0 +1,44 @@
+{
+  "status": "completed",
+  "base_model_id": "valhalla/longformer-base-4096-finetuned-squadv1",
+  "saved_model_path": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\04-long-document-question-answering-longformer\\models\\qasper-longformer",
+  "profile": {
+    "name": "high-vram",
+    "train_examples": null,
+    "validation_examples": null,
+    "max_length": 3072,
+    "stride": 384,
+    "epochs": 2.0,
+    "learning_rate": 1e-05,
+    "train_batch_size": 1,
+    "eval_batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "save_steps": 200,
+    "logging_steps": 25
+  },
+  "seed": 42,
+  "cuda_available": true,
+  "gpu_name": "NVIDIA GeForce RTX 5090",
+  "bf16": true,
+  "fp16": false,
+  "training_duration_seconds": 432.16304820001824,
+  "training_loss": 4.296871501620453,
+  "global_steps": 202,
+  "best_model_checkpoint": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\04-long-document-question-answering-longformer\\models\\qasper-longformer\\checkpoint-202",
+  "best_metric": 4.139431476593018,
+  "train_features": {
+    "source_examples": 803,
+    "training_features": 803,
+    "dropped_without_answer_window": 0,
+    "max_length": 3072,
+    "stride": 384
+  },
+  "validation_features": {
+    "source_examples": 419,
+    "training_features": 419,
+    "dropped_without_answer_window": 0,
+    "max_length": 3072,
+    "stride": 384
+  },
+  "fine_tuned_by_this_project": true
+}

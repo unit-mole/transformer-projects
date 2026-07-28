@@ -1,0 +1,46 @@
+experiment:
+  seed: 42
+  profile: portfolio
+  run_fine_tuning: true
+  evaluation_examples: 120
+
+models:
+  bert_truncated:
+    id: deepset/bert-base-cased-squad2
+    strategy: truncate
+    max_length: 512
+  longformer_base:
+    id: valhalla/longformer-base-4096-finetuned-squadv1
+    strategy: sliding
+    max_length: 2048
+    stride: 256
+  longformer_fine_tuned:
+    path: models/qasper-longformer
+    strategy: sliding
+    max_length: 2048
+    stride: 256
+
+dataset:
+  name: QASPER
+  version: "0.3"
+  subset: contiguous extractive answers only
+  source: official AllenAI QASPER archives
+  license: CC BY 4.0
+
+metrics:
+  - exact_match
+  - token_f1
+  - evidence_recovered
+  - evidence_token_recall
+  - latency_seconds
+  - peak_gpu_memory_mb
+  - context_length_analysis
+  - answer_position_analysis
+  - confidence_proxy_association
+
+outputs:
+  update_readme: true
+  update_model_card: true
+  save_csv: true
+  save_json: true
+  save_png: true

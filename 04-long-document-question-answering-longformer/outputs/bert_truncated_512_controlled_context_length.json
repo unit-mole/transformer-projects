@@ -1,0 +1,57 @@
+[
+  {
+    "model_name": "BERT truncated 512",
+    "controlled_target_tokens": 384,
+    "examples": 12,
+    "exact_match": 0.4166666666666667,
+    "token_f1": 0.5696649029982364,
+    "evidence_recovered": 0.8333333333333334,
+    "evidence_token_recall": 0.9037037037037038,
+    "average_latency_seconds": 0.020591975000570528,
+    "average_windows": 1.0
+  },
+  {
+    "model_name": "BERT truncated 512",
+    "controlled_target_tokens": 768,
+    "examples": 12,
+    "exact_match": 0.08333333333333333,
+    "token_f1": 0.08950617283950617,
+    "evidence_recovered": 0.16666666666666666,
+    "evidence_token_recall": 0.27483828629114954,
+    "average_latency_seconds": 0.02036956666658322,
+    "average_windows": 1.0
+  },
+  {
+    "model_name": "BERT truncated 512",
+    "controlled_target_tokens": 1536,
+    "examples": 12,
+    "exact_match": 0.08333333333333333,
+    "token_f1": 0.14773763911694945,
+    "evidence_recovered": 0.16666666666666666,
+    "evidence_token_recall": 0.3438101394225293,
+    "average_latency_seconds": 0.02243222499479695,
+    "average_windows": 1.0
+  },
+  {
+    "model_name": "BERT truncated 512",
+    "controlled_target_tokens": 3072,
+    "examples": 12,
+    "exact_match": 0.08333333333333333,
+    "token_f1": 0.10275835275835277,
+    "evidence_recovered": 0.08333333333333333,
+    "evidence_token_recall": 0.2376230463147804,
+    "average_latency_seconds": 0.025531658340090264,
+    "average_windows": 1.0
+  },
+  {
+    "model_name": "BERT truncated 512",
+    "controlled_target_tokens": 4608,
+    "examples": 12,
+    "exact_match": 0.08333333333333333,
+    "token_f1": 0.1048951048951049,
+    "evidence_recovered": 0.08333333333333333,
+    "evidence_token_recall": 0.2992065754834572,
+    "average_latency_seconds": 0.028508583335982014,
+    "average_windows": 1.0
+  }
+]

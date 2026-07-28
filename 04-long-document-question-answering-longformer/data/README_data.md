@@ -35,3 +35,16 @@ Do not commit the full dataset or restricted documents to GitHub.
 Never upload confidential quality reports, CAPA records, complaint
 investigations, SOPs, technical manuals, copyrighted reports, or documents
 containing personally identifiable information to a public Hugging Face Space.
+
+## QASPER evaluation data
+
+The portfolio-grade evaluation workflow downloads QASPER v0.3 from the official
+AllenAI-hosted archives at runtime. It retains only answerable questions with a
+contiguous extractive span found in the reconstructed paper text. Free-form,
+yes/no, unanswerable, unresolved, and non-contiguous multi-span annotations are
+not silently converted into span labels.
+
+Generated raw and processed QASPER files are excluded from Git. Commit only the
+small dataset summary and model-evaluation artifacts created under `outputs/`.
+QASPER is documented as CC BY 4.0 in its dataset card; retain attribution in
+portfolio documentation.

@@ -1,0 +1,57 @@
+[
+  {
+    "model_name": "Longformer QASPER fine-tuned",
+    "controlled_target_tokens": 384,
+    "examples": 12,
+    "exact_match": 0.5,
+    "token_f1": 0.6670454545454545,
+    "evidence_recovered": 0.8333333333333334,
+    "evidence_token_recall": 0.9037037037037038,
+    "average_latency_seconds": 0.07243051666591782,
+    "average_windows": 1.0
+  },
+  {
+    "model_name": "Longformer QASPER fine-tuned",
+    "controlled_target_tokens": 768,
+    "examples": 12,
+    "exact_match": 0.5,
+    "token_f1": 0.6670454545454545,
+    "evidence_recovered": 0.8333333333333334,
+    "evidence_token_recall": 0.9037037037037038,
+    "average_latency_seconds": 0.07527149165495454,
+    "average_windows": 1.0
+  },
+  {
+    "model_name": "Longformer QASPER fine-tuned",
+    "controlled_target_tokens": 1536,
+    "examples": 12,
+    "exact_match": 0.25,
+    "token_f1": 0.42843434343434345,
+    "evidence_recovered": 0.6666666666666666,
+    "evidence_token_recall": 0.7766862170087977,
+    "average_latency_seconds": 0.07720827500937351,
+    "average_windows": 1.0
+  },
+  {
+    "model_name": "Longformer QASPER fine-tuned",
+    "controlled_target_tokens": 3072,
+    "examples": 12,
+    "exact_match": 0.25,
+    "token_f1": 0.4398148148148148,
+    "evidence_recovered": 0.6666666666666666,
+    "evidence_token_recall": 0.7799663299663299,
+    "average_latency_seconds": 0.16716532500868198,
+    "average_windows": 2.0
+  },
+  {
+    "model_name": "Longformer QASPER fine-tuned",
+    "controlled_target_tokens": 4608,
+    "examples": 12,
+    "exact_match": 0.25,
+    "token_f1": 0.4398148148148148,
+    "evidence_recovered": 0.6666666666666666,
+    "evidence_token_recall": 0.7818602693602693,
+    "average_latency_seconds": 0.2461085750013202,
+    "average_windows": 3.0
+  }
+]

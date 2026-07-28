@@ -1,0 +1,7 @@
+category,examples
+long-context-failure,122
+answer-overlap-wrong-evidence,26
+incorrect-answer,21
+wrong-span-correct-evidence,15
+exact-and-grounded,12
+partial-but-grounded,4

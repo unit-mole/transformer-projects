@@ -36,8 +36,9 @@ jobs:
           cache-dependency-path: |
             04-long-document-question-answering-longformer/requirements.txt
             04-long-document-question-answering-longformer/requirements-dev.txt
+            04-long-document-question-answering-longformer/requirements-evaluation.txt
 
-      - name: Install Python dependencies
+      - name: Install lightweight CI dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements-dev.txt
@@ -53,6 +54,46 @@ jobs:
           python -c "import app; print('Gradio app import passed')"
           python -c "from src.inference_pipeline import LongDocumentQAPipeline; print('Inference pipeline import passed')"
           python -c "from src.document_loader import load_document; from src.evidence_highlighting import highlight_answer_in_paragraph; print('Document/evidence imports passed')"
+          python -c "from src.qasper_dataset import flatten_qasper_split; from src.advanced_evaluation import token_f1; print('QASPER/evaluation imports passed')"
+
+      - name: Validate notebook and evaluation artifact structure
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import nbformat
+
+          required = [
+              Path("notebooks/complete_longformer_training_evaluation_pipeline.ipynb"),
+              Path("configs/evaluation_config.yaml"),
+              Path("requirements-evaluation.txt"),
+              Path("scripts/check_gpu.py"),
+              Path("scripts/prepare_qasper_dataset.py"),
+              Path("scripts/fine_tune_longformer_qasper.py"),
+              Path("scripts/evaluate_qasper_benchmarks.py"),
+              Path("scripts/run_complete_evaluation.py"),
+              Path("scripts/push_finetuned_model_to_hub.py"),
+              Path("MODEL_CARD_QASPER_FINETUNED.md"),
+              Path("outputs/qasper_dataset_summary.json"),
+              Path("outputs/training_summary.json"),
+              Path("outputs/baseline_comparison.json"),
+              Path("outputs/evaluation_manifest.json"),
+              Path("outputs/controlled_context_length_comparison.json"),
+              Path("outputs/EVALUATION_REPORT.md"),
+          ]
+          missing = [str(path) for path in required if not path.exists()]
+          if missing:
+              raise SystemExit(f"Missing required Project 04 files: {missing}")
+
+          notebook = nbformat.read(required[0], as_version=4)
+          if len(notebook.cells) < 15:
+              raise SystemExit("Complete evaluation notebook is unexpectedly small.")
+
+          for path in required:
+              if path.suffix == ".json":
+                  json.loads(path.read_text(encoding="utf-8"))
+          print("Notebook and evaluation artifact structure passed")
+          PY
 
   browser-validation:
     runs-on: ubuntu-latest

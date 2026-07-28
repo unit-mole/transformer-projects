@@ -1,0 +1,8 @@
+{
+  "status": "completed",
+  "examples": 200,
+  "spearman_confidence_vs_f1": 0.07645591982219313,
+  "mean_confidence_exact": 0.6600015662733916,
+  "mean_confidence_incorrect": 0.504804961010203,
+  "note": "Confidence is an uncalibrated start/end probability proxy. The analysis measures association with correctness, not probability calibration."
+}

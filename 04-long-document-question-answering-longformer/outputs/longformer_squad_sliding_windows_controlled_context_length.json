@@ -1,0 +1,57 @@
+[
+  {
+    "model_name": "Longformer SQuAD sliding windows",
+    "controlled_target_tokens": 384,
+    "examples": 12,
+    "exact_match": 0.3333333333333333,
+    "token_f1": 0.4934343434343434,
+    "evidence_recovered": 0.75,
+    "evidence_token_recall": 0.8358024691358025,
+    "average_latency_seconds": 0.06816069167204357,
+    "average_windows": 1.0
+  },
+  {
+    "model_name": "Longformer SQuAD sliding windows",
+    "controlled_target_tokens": 768,
+    "examples": 12,
+    "exact_match": 0.25,
+    "token_f1": 0.4136738906088751,
+    "evidence_recovered": 0.5833333333333334,
+    "evidence_token_recall": 0.729773994424532,
+    "average_latency_seconds": 0.07133218333668385,
+    "average_windows": 1.0
+  },
+  {
+    "model_name": "Longformer SQuAD sliding windows",
+    "controlled_target_tokens": 1536,
+    "examples": 12,
+    "exact_match": 0.0,
+    "token_f1": 0.13654970760233917,
+    "evidence_recovered": 0.25,
+    "evidence_token_recall": 0.45772529887152297,
+    "average_latency_seconds": 0.08053487500001211,
+    "average_windows": 1.0
+  },
+  {
+    "model_name": "Longformer SQuAD sliding windows",
+    "controlled_target_tokens": 3072,
+    "examples": 12,
+    "exact_match": 0.16666666666666666,
+    "token_f1": 0.3242424242424242,
+    "evidence_recovered": 0.4166666666666667,
+    "evidence_token_recall": 0.5802561217227383,
+    "average_latency_seconds": 0.15887252500397153,
+    "average_windows": 2.0
+  },
+  {
+    "model_name": "Longformer SQuAD sliding windows",
+    "controlled_target_tokens": 4608,
+    "examples": 12,
+    "exact_match": 0.08333333333333333,
+    "token_f1": 0.1414141414141414,
+    "evidence_recovered": 0.25,
+    "evidence_token_recall": 0.4190843997467528,
+    "average_latency_seconds": 0.23718954166785503,
+    "average_windows": 3.0
+  }
+]

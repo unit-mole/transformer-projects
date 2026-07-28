@@ -1,0 +1,32 @@
+[
+  {
+    "context_length_bucket": "1025-2048",
+    "examples": 3,
+    "exact_match": 0.0,
+    "token_f1": 0.0,
+    "evidence_recovered": 0.6666666666666666,
+    "evidence_token_recall": 0.6233766233766234,
+    "average_latency_seconds": 0.024035500013269484,
+    "average_windows": 1.0
+  },
+  {
+    "context_length_bucket": "2049-4096",
+    "examples": 58,
+    "exact_match": 0.017241379310344827,
+    "token_f1": 0.07090165558131342,
+    "evidence_recovered": 0.2413793103448276,
+    "evidence_token_recall": 0.426375097082093,
+    "average_latency_seconds": 0.02590774137482593,
+    "average_windows": 1.0
+  },
+  {
+    "context_length_bucket": "4097+",
+    "examples": 139,
+    "exact_match": 0.014388489208633094,
+    "token_f1": 0.07639438935291108,
+    "evidence_recovered": 0.2589928057553957,
+    "evidence_token_recall": 0.4034315797735956,
+    "average_latency_seconds": 0.029936266905986605,
+    "average_windows": 1.0
+  }
+]

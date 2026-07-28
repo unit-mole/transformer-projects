@@ -1,0 +1,17 @@
+{
+  "status": "completed",
+  "model_name": "Longformer SQuAD sliding windows",
+  "examples": 200,
+  "exact_match": 0.06,
+  "token_f1": 0.16157914224641423,
+  "evidence_recovered": 0.3,
+  "evidence_token_recall": 0.4588296618391169,
+  "average_latency_seconds": 0.25616708650166403,
+  "median_latency_seconds": 0.25164694999693893,
+  "p95_latency_seconds": 0.4064437099703352,
+  "throughput_examples_per_second": 3.903702125266995,
+  "average_confidence_proxy": 0.5141167573259944,
+  "average_window_count": 3.28,
+  "peak_gpu_memory_mb": 768.369140625,
+  "answers_beyond_512_examples": 169
+}

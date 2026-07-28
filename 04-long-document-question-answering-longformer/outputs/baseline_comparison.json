@@ -1,0 +1,41 @@
+[
+  {
+    "model_name": "BERT truncated 512",
+    "examples": 200,
+    "exact_match": 0.015,
+    "token_f1": 0.07365558071885409,
+    "evidence_recovered": 0.26,
+    "evidence_token_recall": 0.4133843754471053,
+    "average_latency_seconds": 0.028679482998559252,
+    "p95_latency_seconds": 0.03750500498281326,
+    "throughput_examples_per_second": 34.86813203885984,
+    "peak_gpu_memory_mb": 457.69970703125,
+    "average_window_count": 1.0
+  },
+  {
+    "model_name": "Longformer SQuAD sliding windows",
+    "examples": 200,
+    "exact_match": 0.06,
+    "token_f1": 0.16157914224641423,
+    "evidence_recovered": 0.3,
+    "evidence_token_recall": 0.4588296618391169,
+    "average_latency_seconds": 0.25616708650166403,
+    "p95_latency_seconds": 0.4064437099703352,
+    "throughput_examples_per_second": 3.903702125266995,
+    "peak_gpu_memory_mb": 768.369140625,
+    "average_window_count": 3.28
+  },
+  {
+    "model_name": "Longformer QASPER fine-tuned",
+    "examples": 200,
+    "exact_match": 0.125,
+    "token_f1": 0.26664085976583785,
+    "evidence_recovered": 0.49,
+    "evidence_token_recall": 0.6014359159875786,
+    "average_latency_seconds": 0.26518189649854323,
+    "p95_latency_seconds": 0.44097381501051114,
+    "throughput_examples_per_second": 3.7709964865776326,
+    "peak_gpu_memory_mb": 768.369140625,
+    "average_window_count": 3.28
+  }
+]

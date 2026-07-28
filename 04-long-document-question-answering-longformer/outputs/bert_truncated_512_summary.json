@@ -1,0 +1,17 @@
+{
+  "status": "completed",
+  "model_name": "BERT truncated 512",
+  "examples": 200,
+  "exact_match": 0.015,
+  "token_f1": 0.07365558071885409,
+  "evidence_recovered": 0.26,
+  "evidence_token_recall": 0.4133843754471053,
+  "average_latency_seconds": 0.028679482998559252,
+  "median_latency_seconds": 0.028056300012394786,
+  "p95_latency_seconds": 0.03750500498281326,
+  "throughput_examples_per_second": 34.86813203885984,
+  "average_confidence_proxy": 0.3984128254384213,
+  "average_window_count": 1.0,
+  "peak_gpu_memory_mb": 457.69970703125,
+  "answers_beyond_512_examples": 170
+}

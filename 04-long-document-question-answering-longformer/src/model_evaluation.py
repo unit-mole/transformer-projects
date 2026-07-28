@@ -15,7 +15,7 @@ from .document_chunking import context_length_bucket
 from .text_preprocessing import normalize_text
 
 
-_ARTICLES = re.compile(r"(a|an|the)", flags=re.IGNORECASE)
+_ARTICLES = re.compile(r"\b(a|an|the)\b", flags=re.IGNORECASE)
 _PUNCT_TABLE = str.maketrans("", "", string.punctuation)
 
 

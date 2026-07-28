@@ -1,0 +1,17 @@
+{
+  "status": "completed",
+  "dataset": "QASPER v0.3",
+  "task_subset": "contiguous extractive answers only",
+  "train_examples": 803,
+  "validation_examples": 419,
+  "train_papers": 495,
+  "validation_papers": 220,
+  "train_average_characters": 25557.616438356163,
+  "validation_average_characters": 23519.937947494032,
+  "seed": 42,
+  "source_urls": [
+    "https://qasper-dataset.s3.us-west-2.amazonaws.com/qasper-train-dev-v0.3.tgz",
+    "https://qasper-dataset.s3.us-west-2.amazonaws.com/qasper-test-and-evaluator-v0.3.tgz"
+  ],
+  "license": "CC BY 4.0"
+}

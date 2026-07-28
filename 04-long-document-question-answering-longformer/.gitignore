@@ -4,11 +4,8 @@ __pycache__/
 .ipynb_checkpoints/
 .venv/
 .env
-outputs/*
-!outputs/README.md
-!outputs/model_metrics.json
-!outputs/manual_error_analysis.md
-!outputs/qa_examples.csv
+# Keep generated evaluation JSON, CSV, Markdown, and PNG artifacts tracked.
+# Only transient trainer checkpoints and runtime logs are ignored below.
 models/long_document_qa_model/*
 !models/long_document_qa_model/.gitkeep
 models/tokenizer/*
@@ -20,3 +17,14 @@ models/tokenizer/*
 *.onnx
 data/private/
 data/raw/
+
+# Project 04 QASPER training/evaluation data and local model weights
+data/raw/qasper/
+data/processed/qasper/
+models/qasper-longformer/
+models/**/checkpoint-*/
+outputs/training/checkpoint-*/
+outputs/training/runs/
+**/.cache/
+wandb/
+runs/
