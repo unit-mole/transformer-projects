@@ -1,0 +1,38 @@
+name: 02 Deploy to Hugging Face Static Space
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "02-neural-machine-translation-transformer/web/**"
+      - ".github/workflows/02-neural-machine-translation-transformer-huggingface.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: project-02-hugging-face-space
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Sync Static Space
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Sync Project 02 web app to Hugging Face
+        uses: huggingface/hub-sync@v0.1.0
+        with:
+          github_repo_id: ${{ github.repository }}
+          huggingface_repo_id: anmol-unitmole/english-hindi-neural-machine-translation
+          hf_token: ${{ secrets.HF_TOKEN_PROJECT_02 }}
+          repo_type: space
+          space_sdk: static
+          private: false
+          subdirectory: 02-neural-machine-translation-transformer/web
