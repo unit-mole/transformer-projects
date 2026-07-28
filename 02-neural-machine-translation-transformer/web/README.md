@@ -8,7 +8,7 @@ app_file: index.html
 pinned: false
 license: mit
 fullWidth: true
-short_description: Real English↔Hindi MarianMT inference in the browser with Transformers.js.
+short_description: English-Hindi Transformer translation and evaluation
 ---
 
 # English–Hindi Neural Machine Translation — Static Space
