@@ -7,7 +7,7 @@ sdk: static
 app_file: index.html
 pinned: false
 license: mit
-short_description: Browser VQA with SmolVLM, confidence diagnostics, and a 60-pair evaluation lab.
+short_description: Browser VQA with SmolVLM and 60-pair evaluation.
 models:
   - HuggingFaceTB/SmolVLM-256M-Instruct
 tags:
