@@ -1,759 +1,861 @@
----
-title: Long Document QA Longformer
-emoji: 📄
-colorFrom: blue
-colorTo: green
-sdk: gradio
-sdk_version: 6.20.0
-python_version: "3.11"
-app_file: app.py
-pinned: false
-license: mit
-models:
-  - valhalla/longformer-base-4096-finetuned-squadv1
----
+# Long-Document Question Answering with Longformer
 
-# 04 — Long-Document Question Answering with Longformer
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.x-ee4c2c.svg)](https://pytorch.org/)
+[![Hugging Face Transformers](https://img.shields.io/badge/Hugging%20Face-Transformers-yellow.svg)](https://huggingface.co/docs/transformers/)
+[![Longformer](https://img.shields.io/badge/Architecture-Longformer-5b5bd6.svg)](https://huggingface.co/docs/transformers/model_doc/longformer)
+[![Transformers.js](https://img.shields.io/badge/Transformers.js-Browser%20Inference-ffca28.svg)](https://huggingface.co/docs/transformers.js/)
+[![Hugging Face Space](https://img.shields.io/badge/Hugging%20Face-Live%20Static%20Space-2ea44f.svg)](https://huggingface.co/spaces/anmol-unitmole/long-document-question-answering-longformer)
+[![Model Hub](https://img.shields.io/badge/Model%20Hub-QASPER%20Longformer-orange.svg)](https://huggingface.co/anmol-unitmole/longformer-qasper-document-qa)
+[![Project 04 CI](https://github.com/unit-mole/transformer-projects/actions/workflows/04-long-document-question-answering-longformer.yml/badge.svg)](https://github.com/unit-mole/transformer-projects/actions/workflows/04-long-document-question-answering-longformer.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../LICENSE)
 
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](#local-setup)
-[![Hugging Face](https://img.shields.io/badge/Hugging%20Face-Transformers-yellow.svg)](#model-selection)
-[![Gradio](https://img.shields.io/badge/Demo-Gradio-orange.svg)](#gradio-application)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](../LICENSE)
+An end-to-end **Document AI and long-document question-answering project** that fine-tunes a Longformer model on an extractive subset of **QASPER**, compares it against truncated BERT and the original Longformer checkpoint, evaluates answer quality and evidence grounding, and publishes a free browser-based Transformer demonstration through Hugging Face Static Spaces.
 
-A portfolio-ready Document AI application that accepts a long document, answers
-a focused question with a Longformer extractive QA checkpoint, and returns:
-
-- the predicted answer;
-- an honestly labelled **model confidence proxy**;
-- the supporting paragraph;
-- highlighted answer evidence;
-- paragraph and character-offset information;
-- document length, token-window count, and inference latency.
-
-**Live Hugging Face demo:**  
-`https://huggingface.co/spaces/<YOUR_USERNAME>/long-document-qa-longformer`
-
-**Base model:**  
-`https://huggingface.co/valhalla/longformer-base-4096-finetuned-squadv1`
-
-**Free browser demo:**  
-`https://huggingface.co/spaces/<YOUR_USERNAME>/long-document-qa-browser`
+**Status:** Portfolio-ready, evaluated, model published, and live application deployed  
+**Live application:** [Open the Long-Document QA Static Space](https://huggingface.co/spaces/anmol-unitmole/long-document-question-answering-longformer)  
+**Fine-tuned model:** [Open the QASPER Longformer model repository](https://huggingface.co/anmol-unitmole/longformer-qasper-document-qa)  
+**Primary stack:** Python · PyTorch · Longformer · Hugging Face Transformers · QASPER · Transformers.js · ONNX Runtime · JavaScript · GitHub Actions · Hugging Face Spaces
 
 ---
 
-## Recommended dual-deployment architecture
+## Responsible Use
 
-Project 04 now keeps the Longformer Python implementation and adds a separate
-free browser deployment baseline:
+This project is intended for education, technical learning, experimentation, and portfolio demonstration.
 
-| Layer | Model and runtime | Purpose |
-|---|---|---|
-| GitHub project | Longformer, PyTorch, Python | Full ML engineering, evaluation, tests, notebooks, and reproducibility |
-| Gradio / ZeroGPU Space | Longformer checkpoint | Primary live demonstration when compute eligibility is available |
-| Static Space | DistilBERT QA ONNX through Transformers.js | Free browser demo with chunk retrieval, evidence mapping, and diagnostics |
-
-The Static Space performs genuine Transformer inference, but it does **not**
-claim to execute Longformer. It uses
-`Xenova/distilbert-base-cased-distilled-squad` as a transparent browser
-baseline because Longformer and BigBird are not currently listed as supported
-Transformers.js architectures. See
-[`PROJECT_04_DEPLOYMENT_ROADMAP.md`](PROJECT_04_DEPLOYMENT_ROADMAP.md) and
-[`web/README.md`](web/README.md).
+- The model may return incomplete, incorrect, unsupported, or misleading answers.
+- The confidence value is an **uncalibrated model proxy**, not a guaranteed probability of correctness.
+- Highlighted text may be incomplete or may not fully support the predicted answer.
+- Do not use the system as the sole basis for legal, medical, financial, academic, regulatory, safety-critical, official, or business-critical decisions.
+- Do not upload private, confidential, copyrighted, proprietary, sensitive, regulated, or personally identifiable documents to the public application.
+- Human review of the predicted answer and supporting evidence is required.
 
 ---
 
-## Responsible-use notice
+## Business Problem
 
-> This project is for educational and portfolio demonstration only. The model
-> may return incomplete, incorrect, unsupported, or misleading answers. The
-> confidence value is a model-based proxy and does not guarantee correctness.
-> Highlighted evidence can be incomplete. Do not use outputs as the sole basis
-> for legal, medical, financial, safety-critical, academic, official, regulated,
-> or business-critical decisions. Do not upload private, confidential,
-> proprietary, copyrighted, sensitive, or personally identifiable documents to
-> a public demo. Human review is required.
+Important information is often buried inside long research papers, quality reports, policies, SOPs, technical manuals, CAPA records, complaint investigations, supplier reports, and case histories. Manual review is time-consuming, repetitive, and difficult to scale.
+
+This project answers:
+
+> Given a long document and a focused question, can a Transformer locate a relevant answer span, recover the supporting evidence, and communicate its result transparently?
+
+The system returns:
+
+- Predicted answer
+- Model confidence proxy
+- Supporting paragraph
+- Highlighted evidence
+- Document and context statistics
+- Number of processed windows or chunks
+- Inference latency
+- Model and deployment disclosure
 
 ---
 
-## Strict project pattern
+## Project Objective
+
+Build a professional long-document QA solution that can:
+
+1. Load TXT, Markdown, CSV, PDF, pasted text, and safe sample documents.
+2. Normalize and validate document text without silently inventing content.
+3. Process documents that exceed a standard BERT context window.
+4. Fine-tune Longformer on a reproducible extractive subset of QASPER.
+5. Compare truncated BERT, the original Longformer checkpoint, and the project-fine-tuned Longformer.
+6. Measure Exact Match, token-level F1, evidence recovery, evidence-token recall, latency, and context-length behavior.
+7. Return answer spans with supporting paragraphs and highlighted evidence.
+8. Save reproducible JSON, CSV, Markdown, and PNG evaluation artifacts.
+9. Publish the fine-tuned Longformer model through Hugging Face Model Hub.
+10. Deploy a free browser-based Transformer QA application through a Hugging Face Static Space.
+11. Validate the Python and browser layers through GitHub Actions.
+12. Present the project honestly for Data Science, Machine Learning, NLP, Document AI, and Applied AI roles.
+
+---
+
+## Project Pattern
 
 | Item | Implementation |
 |---|---|
 | Project number | 04 |
 | Project name | `04-long-document-question-answering-longformer` |
-| Application | Upload, paste, or select a long document and ask questions |
+| Application | Upload, paste, or select a document and ask a question |
+| Core evaluated model | QASPER-fine-tuned Longformer |
+| Live browser model | DistilBERT QA through Transformers.js and ONNX Runtime |
 | Required outputs | Answer, confidence proxy, supporting paragraph, highlighted evidence |
-| Model | Longformer QA checkpoint |
-| Data | Safe synthetic reports; optional public long-document QA data |
-| Evaluation | Exact Match, token F1, evidence recall, context-length analysis, latency |
-| Deployment | GitHub + optional Gradio/ZeroGPU + free Static Space |
-
----
-
-## Why this project matters
-
-Long-document question answering is useful when information is buried inside
-research papers, policies, manuals, reports, case histories, CAPA records,
-complaint investigations, supplier reviews, or technical documents. A useful
-system must do more than return a string: it should show **where the answer came
-from**, communicate uncertainty, and remain stable when the document is longer
-than one model input window.
-
-This project is especially relevant to a Quality Data Scientist because the
-same architecture can support safe prototypes for:
-
-- retrieving evidence from GCS case histories;
-- finding ownership and due dates in CAPA reports;
-- answering questions from SOPs and technical manuals;
-- locating root-cause statements in investigation records;
-- searching supplier-quality reports;
-- building an evidence-grounded quality knowledge base.
-
-The public demo uses only synthetic or user-provided non-sensitive documents.
-
----
-
-## What the supplied notebook originally contained
-
-The uploaded notebook titled **LongDocQA 360**:
-
-- generated synthetic documents;
-- loaded a small SQuAD subset when available;
-- repeated SQuAD contexts to imitate longer text;
-- chunked by words and ranked chunks with TF-IDF;
-- defaulted to a sentence-overlap heuristic;
-- optionally used `distilbert-base-cased-distilled-squad`;
-- produced Streamlit code and exported files.
-
-It did **not** use Longformer by default, did not implement tokenizer-aware
-long-context windows, did not map answer offsets to evidence, and did not meet
-the requested Gradio/Hugging Face structure. The full audit is documented in
-[`CHANGELOG_FROM_ORIGINAL.md`](CHANGELOG_FROM_ORIGINAL.md), and the original
-notebook is preserved under `notebooks/archive/`.
-
----
-
-## Model selection
-
-### Selected checkpoint
-
-```text
-valhalla/longformer-base-4096-finetuned-squadv1
-```
-
-### Why it was selected
-
-- Longformer is designed for longer sequences than standard BERT-style models.
-- The checkpoint has an extractive QA head and was already fine-tuned on SQuAD v1.
-- It supports approximately 4,096 tokens in one input window.
-- It can be loaded directly with `AutoTokenizer` and
-  `AutoModelForQuestionAnswering`.
-- The base-size model is more feasible for a portfolio CPU demo than a large
-  Longformer checkpoint.
-
-### Fine-tuning honesty
-
-This repository **does not claim that Anmol fine-tuned this model**. It uses a
-published checkpoint and adds a professional inference, evidence, evaluation,
-testing, and deployment layer. A future QASPER or quality-document fine-tuning
-experiment can be added separately and documented with actual training records.
-
----
-
-## Longformer and long-context handling
-
-Longformer combines local sliding-window attention with selected global
-attention. For question answering, this project marks question tokens for global
-attention so they can interact with the full available context.
-
-The checkpoint can process approximately 4,096 tokens, but the public CPU demo
-defaults to **2,048 tokens per runtime window** to reduce memory use and latency.
-
-For documents longer than the selected runtime window:
-
-1. the tokenizer receives the question and complete normalized document;
-2. `truncation="only_second"` preserves the question;
-3. `return_overflowing_tokens=True` creates overlapping document windows;
-4. `stride` controls repeated context between windows;
-5. the QA model produces start and end logits for every window;
-6. invalid, special-token, and overlong spans are removed;
-7. the strongest valid span across all windows is selected;
-8. tokenizer offsets map the answer back to the original normalized document.
-
-This design avoids pretending that a very long document fits inside a single
-model call.
-
----
-
-## End-to-end workflow
-
-```text
-TXT / Markdown / CSV / PDF / pasted text
-                │
-                ▼
-        Safe document loading
-                │
-                ▼
-  Unicode and whitespace normalization
-                │
-                ▼
- Question + overlapping token windows
-                │
-                ▼
- Longformer extractive QA inference
-                │
-                ▼
- Best valid answer span across windows
-                │
-                ▼
- Character-offset evidence mapping
-                │
-                ▼
- Answer + confidence proxy + paragraph
- + highlighted evidence + diagnostics
-```
-
----
-
-## Document loading
-
-Supported formats:
-
-| Format | Behavior |
-|---|---|
-| `.txt` | UTF-8, UTF-8 with BOM, then Windows-1252 fallback |
-| `.md` | Same text handling while preserving paragraph boundaries |
-| `.csv` | Uses `text`, `content`, `document`, `context`, `paragraph`, or similar text columns |
-| `.pdf` | Uses `pypdf` for selectable text |
-| pasted text | Treated as an in-memory document |
-
-Safety and reliability checks include:
-
-- unsupported-extension rejection;
-- maximum upload size;
-- empty-file handling;
-- no-readable-text handling;
-- maximum document character limit;
-- safe sample filename handling;
-- clear message for scanned PDFs that require OCR.
-
-OCR is intentionally excluded to keep the public demo lightweight and avoid
-unreliable extraction.
-
----
-
-## Answer extraction
-
-The model returns start and end logits for each token. The extraction module:
-
-- limits candidate positions to context tokens;
-- searches top start and end positions;
-- enforces `end >= start`;
-- enforces a maximum answer-token length;
-- rejects empty or invalid character offsets;
-- creates one best candidate per window;
-- selects the highest raw span score across windows.
-
-The returned character offsets are used for evidence mapping and highlighting.
-
----
-
-## Confidence proxy
-
-The application calculates an uncalibrated confidence proxy using the geometric
-mean of the selected start-token and end-token probabilities inside the valid
-context tokens of the chosen window.
-
-This value:
-
-- is useful for relative inspection;
-- is **not** a calibrated probability that the answer is correct;
-- can be high for an incorrect answer;
-- can be low for a correct answer;
-- must be reviewed together with the supporting paragraph.
-
-Very low values generate a visible warning.
-
----
-
-## Supporting paragraph and highlighted evidence
-
-The normalized document is split into paragraphs with character offsets. The
-selected answer span is located inside the paragraph containing its start
-offset. The application then:
-
-- returns that paragraph;
-- reports the paragraph index;
-- highlights the exact answer characters;
-- reports an honest message if the span cannot be mapped;
-- never creates synthetic evidence for a missing span.
+| Dataset | QASPER v0.3 contiguous-extractive subset |
+| Evaluation | Exact Match, token F1, evidence recovery, evidence-token recall, latency, context-length analysis |
+| Deployment | Hugging Face Model Hub + free Hugging Face Static Space |
 
 ---
 
 ## Dataset
 
-The committed dataset is deliberately small and safe:
+The training and evaluation pipeline uses **QASPER v0.3**, a question-answering dataset built from NLP research papers.
 
-- `quality_capa_report.txt`
-- `supplier_quality_report.txt`
-- `longformer_overview.md`
-- `sample_questions.csv`
-- `sample_qa_pairs.csv`
+Because the selected model uses extractive start and end token positions, the preparation pipeline keeps examples with **contiguous extractive answer spans** and valid evidence offsets. Yes/no, unanswerable, purely abstractive, and invalid-offset examples are excluded from this specific training objective rather than being incorrectly forced into extractive labels.
 
-All sample documents are synthetic portfolio content. They do not contain
-employer, customer, patient, proprietary, or personal data.
+| Property | Value |
+|---|---|
+| Task | Long-document extractive question answering |
+| Dataset | QASPER v0.3 |
+| Project subset | Contiguous extractive answers only |
+| Training examples | 803 |
+| Validation examples | 419 |
+| Final benchmark examples | 200 |
+| Training papers | 495 |
+| Validation papers | 220 |
+| Average training-document length | Approximately 25,558 characters |
+| Average validation-document length | Approximately 23,520 characters |
+| Dataset license | CC BY 4.0 |
+| Random seed | 42 |
 
-The evaluation schema includes:
+The complete QASPER dataset and generated local caches are not committed to GitHub. The repository contains preparation scripts, metadata, evaluation artifacts, and safe synthetic sample documents.
+
+---
+
+## Tools and Technologies
+
+| Area | Technology |
+|---|---|
+| Language | Python, JavaScript, HTML, CSS |
+| Deep learning | PyTorch |
+| Transformer library | Hugging Face Transformers |
+| Core architecture | Longformer |
+| Baseline architecture | BERT |
+| Browser model | DistilBERT extractive QA |
+| Dataset | QASPER v0.3 |
+| Data analysis | pandas, NumPy |
+| Evaluation | Custom EM/F1/evidence metrics, scikit-learn, Matplotlib |
+| Document processing | pypdf, CSV and text loaders |
+| Browser inference | Transformers.js, ONNX Runtime Web |
+| Interface | Static HTML, CSS, JavaScript |
+| Testing | pytest, JavaScript unit tests, import and structure validation |
+| Automation | GitHub Actions |
+| Model hosting | Hugging Face Model Hub |
+| Application hosting | Hugging Face Static Spaces |
+| Model format | Hugging Face Transformers + Safetensors |
+
+---
+
+## End-to-End Project Workflow
 
 ```text
-example_id
-document_name
-question
-answer
-reference_evidence
-reference_paragraph_index
-source_type
+QASPER papers, questions, answers, and evidence
+                    │
+                    ▼
+       Extractive-subset preparation
+                    │
+                    ▼
+     Answer offsets and evidence validation
+                    │
+                    ▼
+ Question + long-document tokenization
+                    │
+                    ▼
+ Overlapping Longformer training windows
+                    │
+                    ▼
+ QASPER fine-tuning with BF16 on GPU
+                    │
+                    ▼
+ BERT and base-Longformer baselines
+                    │
+                    ▼
+ 200-example benchmark evaluation
+                    │
+                    ▼
+ EM, F1, evidence, latency, context analysis
+                    │
+                    ▼
+ JSON, CSV, Markdown, and PNG artifacts
+                    │
+                    ▼
+ Hugging Face fine-tuned model repository
+                    │
+                    ▼
+ Browser-compatible Transformer QA demo
+                    │
+                    ▼
+ GitHub Actions validation and Static Space deployment
 ```
 
-For a larger study, use a documented public dataset such as a QASPER subset,
-subject to its license and practical compute requirements. Do not commit a large
-or restricted full dataset.
+---
+
+## Longformer Architecture
+
+Longformer extends standard Transformer encoders with a combination of:
+
+- **Local sliding-window attention** for efficient token-to-neighbor interaction
+- **Global attention** for selected tokens that need access to the full context
+- Longer input support than standard 512-token BERT-style models
+
+For question answering, the question tokens receive global attention while the document tokens use sparse local attention.
+
+```text
+Question tokens
+      │
+      ├── Global attention
+      │
+Long document tokens
+      │
+      ├── Sparse sliding-window attention
+      │
+      ▼
+Longformer encoder representations
+      │
+      ▼
+Question-answering head
+      │
+      ├── Start-token logits
+      └── End-token logits
+      │
+      ▼
+Best valid answer span
+```
+
+### Selected base checkpoint
+
+```text
+valhalla/longformer-base-4096-finetuned-squadv1
+```
+
+The checkpoint already contains a question-answering head trained on SQuAD. This project then performs genuine additional fine-tuning on the prepared QASPER extractive subset.
+
+---
+
+## Fine-Tuning Strategy
+
+The final publishable experiment used the high-VRAM profile.
+
+| Configuration | Value |
+|---|---:|
+| Training examples | 803 |
+| Validation examples | 419 |
+| Maximum training length | 3,072 tokens |
+| Window stride | 384 tokens |
+| Epochs | 2 |
+| Learning rate | `1e-5` |
+| Training batch size | 1 |
+| Evaluation batch size | 1 |
+| Gradient accumulation | 8 steps |
+| Precision | BF16 |
+| GPU | NVIDIA GeForce RTX 5090 |
+| Global optimization steps | 202 |
+| Training duration | Approximately 432 seconds |
+| Final training loss | 4.2969 |
+| Validation loss used for selection | 4.1394 |
+| Fine-tuned by this project | Yes |
+
+The model weights are hosted separately on Hugging Face Model Hub rather than committed directly to GitHub.
+
+---
+
+## Long-Context Handling
+
+The system handles long documents through tokenizer-aware overlapping windows.
+
+1. The question and normalized document are tokenized together.
+2. `truncation="only_second"` preserves the question and windows the document.
+3. Overlapping context windows reduce boundary-related answer loss.
+4. Each window is processed independently by the QA model.
+5. Invalid, special-token, and overlong candidate spans are removed.
+6. The strongest valid answer span across all windows is selected.
+7. Character offsets map the answer back to the original normalized document.
+8. The supporting paragraph is selected and the answer evidence is highlighted.
+
+The final benchmark processed an average of **3.28 Longformer windows per example**, while the truncated BERT baseline processed only the first 512-token view.
+
+---
+
+## Model Results
+
+The final benchmark contains **200 extractive QASPER validation examples**.
+
+| Model | Exact Match | Token F1 | Evidence Recovery | Evidence Token Recall |
+|---|---:|---:|---:|---:|
+| BERT truncated to 512 | 1.50% | 7.37% | 26.00% | 41.34% |
+| Base Longformer + sliding windows | 6.00% | 16.16% | 30.00% | 45.88% |
+| **QASPER-fine-tuned Longformer** | **12.50%** | **26.66%** | **49.00%** | **60.14%** |
+
+### Improvement over the original Longformer checkpoint
+
+| Metric | Base Longformer | Fine-tuned Longformer | Absolute improvement |
+|---|---:|---:|---:|
+| Exact Match | 6.00% | 12.50% | **+6.50 points** |
+| Token F1 | 16.16% | 26.66% | **+10.50 points** |
+| Evidence Recovery | 30.00% | 49.00% | **+19.00 points** |
+| Evidence Token Recall | 45.88% | 60.14% | **+14.26 points** |
+
+The fine-tuned model outperformed both baselines across every answer-quality and evidence-grounding metric.
+
+These results should be interpreted as **measurable improvement**, not production-level accuracy. QASPER contains technical questions and long scientific documents, and Exact Match gives no partial credit when a predicted answer differs from the reference wording.
+
+---
+
+## Latency and Throughput
+
+| Model | Average latency | Throughput | Average windows | Peak GPU memory |
+|---|---:|---:|---:|---:|
+| BERT truncated to 512 | 0.0287 s | 34.87 examples/s | 1.00 | 457.70 MB |
+| Base Longformer + windows | 0.2562 s | 3.90 examples/s | 3.28 | 768.37 MB |
+| QASPER-fine-tuned Longformer | 0.2652 s | 3.77 examples/s | 3.28 | 768.37 MB |
+
+The BERT baseline is faster because it reads only a truncated context. Longformer is slower but provides access to substantially more of the document and achieves stronger answer and evidence metrics.
+
+In the final benchmark, approximately **169 of 200 examples** contained answers beyond the first 512-token region, demonstrating why a long-context strategy matters.
 
 ---
 
 ## Evaluation
 
-The code implements the required metrics.
+The evaluation pipeline supports:
 
-### Exact Match
+- Exact Match
+- Multi-reference token-level F1
+- Binary evidence recovery
+- Continuous evidence-token recall
+- Mean latency
+- Median latency
+- 95th-percentile latency
+- Throughput
+- Peak GPU-memory usage
+- Number of document windows
+- Confidence-proxy analysis
+- Answer-position analysis
+- Context-length analysis
+- Controlled-context evaluation
+- Per-example prediction exports
+- Error-category summaries
+- Manual error analysis
 
-Checks whether the normalized prediction exactly equals the normalized reference
-answer.
+### Why multiple metrics matter
 
-### Token-level F1
+- **Exact Match** measures whether the normalized prediction exactly matches a reference answer.
+- **Token F1** gives partial credit based on overlapping answer tokens.
+- **Evidence Recovery** checks whether the predicted supporting evidence sufficiently overlaps the reference evidence.
+- **Evidence Token Recall** measures how much of the reference evidence token content was recovered.
+- **Latency** shows the computational cost of processing long contexts.
+- **Context-length analysis** reveals whether quality changes as documents become longer.
+- **Answer-position analysis** demonstrates whether long-context models recover answers that occur beyond BERT's truncation boundary.
 
-Provides partial credit for overlapping normalized answer tokens.
+---
 
-### Evidence recall
+## Context-Length Analysis
 
-Checks whether the predicted supporting paragraph contains or sufficiently
-covers the reference evidence.
-
-### Context-length analysis
-
-Groups examples into:
+The controlled evaluation includes approximate context lengths around:
 
 ```text
-0–512
-513–1024
-1025–2048
-2049–4096
-4097+
+384 tokens
+768 tokens
+1,536 tokens
+3,072 tokens
+4,608 tokens
 ```
 
-For each available bucket, the script summarizes:
+The evaluation records:
 
-- example count;
-- Exact Match;
-- token F1;
-- evidence recall;
-- average latency.
+- Exact Match by context length
+- Token F1 by context length
+- Evidence recovery by context length
+- Evidence-token recall by context length
+- Average latency by context length
+- Number of processed windows
+- Truncation and answer-position behavior
 
-### Manual error analysis
+Documents that exceed one Longformer window are processed through overlapping windows and best-span aggregation.
 
-The evaluation script creates actual examples for review, including weak answer
-overlap, missed evidence, low confidence, windowing notes, and errors.
+---
 
-### Results policy
+## Answer Extraction and Evidence Grounding
 
-No metric is invented. The committed `outputs/model_metrics.json` is marked
-`not_run`. Generate real results with:
+The QA head produces start and end logits for every token. The extraction pipeline:
 
-```bash
-python scripts/preprocess_documents.py
-python scripts/evaluate_model.py
-python scripts/run_context_analysis.py
+- Restricts candidate positions to document-context tokens
+- Ranks likely start and end locations
+- Enforces valid start/end ordering
+- Rejects empty and overlong spans
+- Rejects special-token and question-token positions
+- Selects one candidate per window
+- Chooses the highest-scoring valid answer across windows
+- Maps token offsets back to document character offsets
+
+The final response contains:
+
+- Predicted answer
+- Confidence proxy
+- Supporting paragraph
+- Highlighted answer span
+- Paragraph or section information when available
+- Document token and window statistics
+- Inference latency
+
+The application does not invent highlighted evidence when the answer span cannot be mapped reliably.
+
+---
+
+## Confidence Proxy
+
+The confidence value is derived from model start/end scores for the selected answer span.
+
+It is useful for relative inspection, but it is **not calibrated** and should not be interpreted as a guaranteed probability that the answer is correct.
+
+A high value can accompany an incorrect answer, while a low value can accompany a correct answer. The predicted answer must always be reviewed together with the supporting evidence.
+
+---
+
+## Live Browser Demo
+
+The deployed application performs real Transformer inference inside the visitor's browser.
+
+### Live Application
+
+[![Open Live Demo](https://img.shields.io/badge/Open-Live%20Long--Document%20QA%20Demo-2ea44f?style=for-the-badge)](https://huggingface.co/spaces/anmol-unitmole/long-document-question-answering-longformer)
+
+### Fine-Tuned Longformer Model
+
+[![Open Model Repository](https://img.shields.io/badge/Open-QASPER%20Longformer%20Model-orange?style=for-the-badge)](https://huggingface.co/anmol-unitmole/longformer-qasper-document-qa)
+
+### Application Overview
+
+![Long-Document QA project homepage](images/01-project-homepage.png)
+
+*Live Project 04 interface showing the Transformer portfolio positioning, deployment links, and project technologies.*
+
+### QASPER Evaluation Results
+
+![QASPER evaluation results](images/02-qasper-evaluation-results.png)
+
+*Final 200-example comparison of truncated BERT, base Longformer, and the QASPER-fine-tuned Longformer.*
+
+### Question-Answering Demonstration
+
+![Question-answering result](images/demo_result_for_question.png)
+
+*Browser-based document QA example displaying the predicted answer, confidence proxy, supporting paragraph, and highlighted evidence.*
+
+### Core Model and Browser Model Disclosure
+
+![Core model versus browser model](images/06-core-vs-browser-model-comparison.png)
+
+*Transparent comparison between the evaluated Python Longformer model and the browser-compatible DistilBERT model used by the free Static Space.*
+
+---
+
+## Core Model Versus Live Browser Model
+
+The free Static Space and the evaluated Python project use different Transformer models for practical deployment reasons.
+
+| Component | Evaluated Python project | Live Static Space |
+|---|---|---|
+| Model | `anmol-unitmole/longformer-qasper-document-qa` | `Xenova/distilbert-base-cased-distilled-squad` |
+| Architecture | Longformer | DistilBERT |
+| Context strategy | Sparse attention + sliding windows | Retrieval over overlapping short chunks |
+| Runtime | Python / PyTorch | Visitor browser / ONNX Runtime |
+| Purpose | Training, benchmarking, long-context evaluation | Free interactive portfolio demonstration |
+
+The Static Space performs genuine Transformer inference, but it does **not** claim to execute Longformer. The separately published Longformer is the trained and evaluated core model.
+
+---
+
+## Browser Inference Workflow
+
+```text
+User selects, uploads, or pastes a document
+                  │
+                  ▼
+       Browser validates and parses text
+                  │
+                  ▼
+      Document is split into overlapping chunks
+                  │
+                  ▼
+ Candidate chunks are ranked for the question
+                  │
+                  ▼
+DistilBERT QA runs through Transformers.js / ONNX
+                  │
+                  ▼
+ Best answer candidate is selected
+                  │
+                  ▼
+ Supporting paragraph and evidence are mapped
+                  │
+                  ▼
+Answer + confidence proxy + evidence + diagnostics
+```
+
+The public browser application requires no Python inference server and no paid Hugging Face compute.
+
+---
+
+## Supported Document Inputs
+
+| Input | Behavior |
+|---|---|
+| `.txt` | Plain-text extraction |
+| `.md` | Markdown text extraction while retaining paragraph structure |
+| `.csv` | Attempts to identify a usable text/content/document column |
+| `.pdf` | Selectable-text extraction in the Python application |
+| Pasted text | Direct in-memory document input |
+| Sample documents | Safe synthetic quality, CAPA, supplier, and Longformer examples |
+
+Scanned image-only PDFs require OCR and are not supported by the lightweight public demo.
+
+---
+
+## Hugging Face Model Repository
+
+The genuine fine-tuned Longformer is published at:
+
+```text
+https://huggingface.co/anmol-unitmole/longformer-qasper-document-qa
+```
+
+The repository contains:
+
+- `model.safetensors`
+- Model configuration
+- Tokenizer configuration and vocabulary
+- Complete model card
+- Base-model attribution
+- QASPER training details
+- Final evaluation metrics
+- Baseline comparison
+- Context-length analysis
+- Intended-use and limitation documentation
+
+The model can be loaded through the Transformers API:
+
+```python
+from transformers import AutoModelForQuestionAnswering, AutoTokenizer
+
+MODEL_ID = "anmol-unitmole/longformer-qasper-document-qa"
+
+tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+model = AutoModelForQuestionAnswering.from_pretrained(MODEL_ID)
 ```
 
 ---
 
-## Gradio application
+## Model and Evaluation Artifacts
 
-The Gradio interface includes:
+| Artifact | Purpose |
+|---|---|
+| `models/fine_tuned_longformer_metadata.json` | Fine-tuned model configuration and provenance |
+| `outputs/training_summary.json` | Final training configuration and performance summary |
+| `outputs/baseline_comparison.json` | Main three-model benchmark results |
+| `outputs/baseline_comparison.csv` | Tabular benchmark export |
+| `outputs/evaluation_manifest.json` | Evaluation completion and generated-file manifest |
+| `outputs/context_length_analysis.json` | Performance grouped by document length |
+| `outputs/answer_position_analysis.json` | Performance grouped by answer location |
+| `outputs/confidence_analysis.json` | Confidence-proxy behavior |
+| `outputs/latency_benchmark.json` | Inference latency and throughput |
+| `outputs/*_qa_examples.csv` | Per-example predictions and references |
+| `outputs/*_error_categories.csv` | Automated error-category summaries |
+| `outputs/manual_error_analysis.md` | Human-readable error-analysis framework |
+| `outputs/EVALUATION_REPORT.md` | Generated final evaluation report |
+| `outputs/*.png` | Benchmark and diagnostic plots |
 
-- document upload;
-- sample document selector;
-- pasted text input;
-- question input;
-- runtime context-window slider;
-- overlap/stride slider;
-- answer output;
-- model confidence proxy;
-- supporting paragraph;
-- highlighted evidence;
-- document and model diagnostics;
-- responsible-use disclaimer;
-- model, evaluation, and limitation tabs;
-- GitHub, Space, and model placeholders.
-
-The model is lazy-loaded on the first inference request. The app does not train
-a model during startup.
-
----
-
-## Folder structure
-
-```text
-04-long-document-question-answering-longformer/
-│
-├── app.py
-├── gradio_app.py
-├── README.md
-├── README_HUGGINGFACE.md
-├── MODEL_CARD.md
-├── DEPLOYMENT_HUGGINGFACE.md
-├── PORTFOLIO_POSITIONING.md
-├── CHANGELOG_FROM_ORIGINAL.md
-├── requirements.txt
-├── requirements-dev.txt
-├── Dockerfile
-├── .dockerignore
-├── .gitignore
-├── .env.example
-├── pyproject.toml
-├── pytest.ini
-│
-├── configs/
-│   └── config.yaml
-├── data/
-│   ├── sample_documents/
-│   ├── sample_questions.csv
-│   ├── sample_qa_pairs.csv
-│   └── README_data.md
-├── notebooks/
-│   ├── long_document_question_answering_longformer.ipynb
-│   ├── evidence_recall_context_length_analysis.ipynb
-│   └── archive/
-├── src/
-│   ├── config.py
-│   ├── schemas.py
-│   ├── data_preprocessing.py
-│   ├── document_loader.py
-│   ├── text_preprocessing.py
-│   ├── document_chunking.py
-│   ├── qa_model.py
-│   ├── answer_extraction.py
-│   ├── confidence_scoring.py
-│   ├── evidence_highlighting.py
-│   ├── inference_pipeline.py
-│   ├── model_evaluation.py
-│   ├── context_length_analysis.py
-│   └── visualization.py
-├── scripts/
-│   ├── preprocess_documents.py
-│   ├── evaluate_model.py
-│   ├── run_context_analysis.py
-│   └── run_gradio.py
-├── models/
-│   ├── model_metadata.json
-│   ├── README.md
-│   ├── long_document_qa_model/
-│   └── tokenizer/
-├── outputs/
-├── images/
-└── tests/
-```
-
-The root repository workflow is stored at:
-
-```text
-.github/workflows/04-long-document-question-answering-longformer.yml
-```
+Large local model checkpoints, raw QASPER downloads, caches, virtual environments, and generated dependency folders are excluded from normal Git tracking.
 
 ---
 
-## Local setup
+## Run the Python Project Locally
 
-### 1. Open the repository
+### 1. Open the project
 
-```bash
-cd transformer-models-projects
-cd 04-long-document-question-answering-longformer
+```bat
+cd transformer-projects\04-long-document-question-answering-longformer
 ```
 
-Your local parent folder may be named `transformer-projects`; Git functionality
-does not depend on the Windows folder name.
+### 2. Create and activate a virtual environment
 
-### 2. Create a virtual environment
+**Windows**
 
-Windows PowerShell:
-
-```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
+```bat
+py -3.12 -m venv .venv
+.venv\Scripts\activate
 ```
 
-macOS/Linux:
+**macOS / Linux**
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 ```
 
 ### 3. Install dependencies
 
+Install a CUDA-enabled PyTorch build appropriate for the machine, then run:
+
 ```bash
 python -m pip install --upgrade pip
-pip install -r requirements.txt
+python -m pip install -r requirements.txt -r requirements-evaluation.txt
 ```
 
-### 4. Run the app
+### 4. Verify GPU support
+
+```bash
+python scripts/check_gpu.py
+```
+
+### 5. Run a smoke experiment
+
+```bash
+python scripts/run_complete_evaluation.py --profile smoke --examples 20
+```
+
+### 6. Run the portfolio experiment
+
+```bash
+python scripts/run_complete_evaluation.py --profile portfolio --examples 120
+```
+
+### 7. Run the high-VRAM experiment
+
+```bash
+python scripts/run_complete_evaluation.py --profile high-vram --examples 200
+```
+
+### 8. Run tests
+
+```bash
+python -m pytest tests -q
+```
+
+### 9. Run the Python application locally
 
 ```bash
 python app.py
 ```
 
-Open the local Gradio URL shown in the terminal.
+---
 
-### 5. Run evaluation
+## Run the Prebuilt Static Website Locally
+
+The ready-to-serve site can be opened without installing Node.js:
 
 ```bash
-python scripts/preprocess_documents.py
-python scripts/evaluate_model.py
-python scripts/run_context_analysis.py
+python -m http.server 8000 --directory hf-space-ready
 ```
 
-### 6. Run tests
+Open:
+
+```text
+http://localhost:8000
+```
+
+The first browser inference may take longer because the ONNX Transformer model must be downloaded and cached.
+
+---
+
+## Optional Browser Source Development
+
+The source frontend is stored under `web/`.
 
 ```bash
-pip install -r requirements-dev.txt
-pytest
+cd web
+npm install
+npm test
+npm run build
 ```
 
----
-
-## Hugging Face Spaces deployment
-
-1. Create a new Hugging Face Space.
-2. Select **Gradio** as the SDK.
-3. Use Python 3.11.
-4. Place this project folder's contents at the Space repository root.
-5. Confirm that `app.py`, `requirements.txt`, and `README.md` are at the root.
-6. Replace `<YOUR_USERNAME>` placeholders.
-7. Set optional Space variables from `.env.example`.
-8. Commit and wait for the dependency build and checkpoint download.
-9. Test all sample documents.
-10. Add the live Space URL to this README and the root portfolio README.
-
-See [`DEPLOYMENT_HUGGINGFACE.md`](DEPLOYMENT_HUGGINGFACE.md) for complete steps.
-
-### Current hosting eligibility
-
-As of July 2026, Hugging Face documentation states that Static Spaces are free
-for everyone, while creating compute-backed Gradio or Docker Spaces generally
-requires a paid plan. Free personal accounts in good standing may host up to two
-Gradio Spaces using ZeroGPU. Because this is a Python/PyTorch Longformer app, it
-requires compute and is not a pure Static Space. Check current eligibility
-before deployment.
+The final static output can then be prepared for credit-free deployment.
 
 ---
 
-## Docker
+## Deployment
 
-```bash
-docker build -t long-document-qa-longformer .
-docker run --rm -p 7860:7860 long-document-qa-longformer
+### GitHub
+
+- **Repository:** `unit-mole/transformer-projects`
+- **Branch:** `main`
+- **Project folder:** `04-long-document-question-answering-longformer/`
+- **Workflow:** `.github/workflows/04-long-document-question-answering-longformer.yml`
+
+### Hugging Face Model Hub
+
+- **Model repository:** `anmol-unitmole/longformer-qasper-document-qa`
+- **Model type:** Longformer for extractive question answering
+- **Model weights:** Safetensors
+- **Dataset:** QASPER extractive subset
+
+### Hugging Face Static Space
+
+- **Space:** `anmol-unitmole/long-document-question-answering-longformer`
+- **SDK:** Static
+- **Live browser model:** DistilBERT QA through Transformers.js
+- **Server-side model compute:** None
+- **Python backend:** Not required
+
+The GitHub Actions workflow validates the Python project, validates the browser application, prepares the prebuilt static website, and deploys the finished files without requiring paid Hugging Face build credits.
+
+---
+
+## Project Structure
+
+```text
+transformer-projects/
+├── .github/
+│   └── workflows/
+│       └── 04-long-document-question-answering-longformer.yml
+│
+└── 04-long-document-question-answering-longformer/
+    ├── configs/
+    │   ├── config.yaml
+    │   └── evaluation_config.yaml
+    ├── data/
+    │   ├── sample_documents/
+    │   ├── sample_qa_pairs.csv
+    │   ├── sample_questions.csv
+    │   └── README_data.md
+    ├── hf-space-ready/
+    │   ├── evaluation/
+    │   ├── samples/
+    │   ├── app.js
+    │   ├── index.html
+    │   ├── README.md
+    │   └── styles.css
+    ├── images/
+    │   ├── 01-project-homepage.png
+    │   ├── 02-qasper-evaluation-results.png
+    │   ├── demo_result_for_question.png
+    │   └── 06-core-vs-browser-model-comparison.png
+    ├── models/
+    │   ├── fine_tuned_longformer_metadata.json
+    │   ├── model_metadata.json
+    │   └── README.md
+    ├── notebooks/
+    │   ├── complete_longformer_training_evaluation_pipeline.ipynb
+    │   ├── evidence_recall_context_length_analysis.ipynb
+    │   └── long_document_question_answering_longformer.ipynb
+    ├── outputs/
+    │   ├── training/
+    │   ├── EVALUATION_REPORT.md
+    │   ├── baseline_comparison.csv
+    │   ├── baseline_comparison.json
+    │   ├── context_length_analysis.json
+    │   ├── evaluation_manifest.json
+    │   ├── manual_error_analysis.md
+    │   └── generated charts and prediction files
+    ├── scripts/
+    │   ├── check_gpu.py
+    │   ├── evaluate_qasper_benchmarks.py
+    │   ├── fine_tune_longformer_qasper.py
+    │   ├── prepare_qasper_dataset.py
+    │   ├── push_finetuned_model_to_hub.py
+    │   └── run_complete_evaluation.py
+    ├── src/
+    │   ├── advanced_evaluation.py
+    │   ├── answer_extraction.py
+    │   ├── benchmark_models.py
+    │   ├── document_chunking.py
+    │   ├── document_loader.py
+    │   ├── evidence_highlighting.py
+    │   ├── inference_pipeline.py
+    │   ├── model_evaluation.py
+    │   ├── qa_model.py
+    │   ├── qasper_dataset.py
+    │   ├── qasper_training.py
+    │   └── results_reporting.py
+    ├── tests/
+    ├── web/
+    ├── app.py
+    ├── deploy_static_space.py
+    ├── EVALUATION_WORKFLOW.md
+    ├── MODEL_CARD.md
+    ├── MODEL_CARD_QASPER_FINETUNED.md
+    ├── README.md
+    ├── requirements.txt
+    └── requirements-evaluation.txt
 ```
-
-The first model download occurs when the first question is submitted.
-
----
-
-## GitHub Actions
-
-The workflow:
-
-- runs on project pushes and pull requests;
-- installs dependencies;
-- compiles Python files;
-- runs unit tests;
-- imports the Gradio app;
-- imports the inference pipeline;
-- imports document loading and evidence highlighting;
-- disables model loading in CI;
-- avoids training and dataset downloads.
-
----
-
-## Baseline comparison plan
-
-A future experiment can compare:
-
-| Approach | Expected role |
-|---|---|
-| Keyword paragraph retrieval + short QA | Simple lexical baseline |
-| BM25 retrieval + short QA | Stronger retrieve-then-read baseline |
-| Truncated BERT QA | Demonstrates short-context failure |
-| Longformer sliding-window QA | Current long-context approach |
-
-No baseline metric is shown until the implementations are executed on the same
-evaluation examples and hardware.
 
 ---
 
 ## Limitations
 
-- The model is extractive and cannot safely generate absent answers.
-- The checkpoint is SQuAD-oriented rather than quality-domain fine-tuned.
-- It lacks a reliable trained no-answer head.
-- Multiple similar spans can confuse evidence selection.
-- Window boundaries can reduce performance.
-- 4,096-token CPU inference may be slow.
-- Scanned PDFs are unsupported without OCR.
-- English is the primary model language.
-- Confidence is uncalibrated.
-- Normalized text, rather than original binary-page coordinates, is highlighted.
+- Exact Match and token-level F1 remain modest on difficult technical QASPER questions.
+- The model is limited to extractive answer spans and cannot reliably generate abstractive explanations.
+- QASPER is focused on scientific NLP papers and does not represent every business or quality-document domain.
+- Supporting-evidence retrieval can succeed even when the final answer span is incomplete.
+- Confidence scores are uncalibrated.
+- Longformer inference is slower than truncated BERT because multiple long-context windows are processed.
+- Very long documents may require several overlapping windows.
+- The live Static Space uses DistilBERT rather than the fine-tuned Longformer.
+- Browser performance varies by CPU, memory, browser, WebAssembly, WebGPU, and network speed.
+- Candidate-chunk retrieval in the browser can miss relevant context.
+- Scanned PDFs require OCR, which is not included in the lightweight deployment.
+- The system has not been validated for production or safety-critical use.
 
 ---
 
-## Future improvements
+## Future Improvements
 
-- Fine-tune Longformer or BigBird on QASPER or a safe quality-document dataset
-- Add a learned no-answer threshold using SQuAD 2.0-style supervision
-- Compare Longformer with BigBird and retrieve-then-read baselines
-- Add BM25 or dense paragraph retrieval for very large document collections
-- Add page-level PDF evidence references
-- Add calibrated confidence using validation data
-- Quantize or optimize the checkpoint for CPU latency
-- Add multilingual long-document QA
-- Add batch evaluation and experiment tracking
-- Export to ONNX if model support and performance are validated
-
----
-
-## Skills demonstrated
-
-Transformer architecture, Longformer, global/local attention, extractive
-question answering, long-context handling, tokenizer overflow, span extraction,
-confidence communication, evidence localization, document parsing, evaluation,
-error analysis, Gradio, Hugging Face Spaces, modular Python, testing, CI,
-Docker, data safety, and recruiter-friendly technical documentation.
+- Add calibrated confidence scores.
+- Add a stronger semantic retriever for browser candidate selection.
+- Evaluate larger and more diverse QASPER subsets.
+- Add domain evaluation using public quality, CAPA, SOP, and technical-report datasets.
+- Compare Longformer with BigBird, ModernBERT, and retrieval-augmented short-context QA.
+- Add explicit no-answer training and evaluation.
+- Add answerability classification.
+- Improve long-answer span extraction.
+- Add automated qualitative error summaries.
+- Add OCR as an optional local-only feature.
+- Experiment with quantization and distillation.
+- Convert a compatible long-context model to optimized ONNX when browser support permits.
+- Add browser integration and accessibility tests.
+- Add multilingual long-document QA.
+- Extend the project into an evidence-grounded quality-document RAG system.
 
 ---
 
-## Portfolio description
+## Skills Demonstrated
 
-> Built a deployment-ready Longformer document QA system that processes
-> uploaded long documents and returns grounded answer spans, a confidence proxy,
-> supporting paragraphs, highlighted evidence, and context-length evaluation.
-
+- Transformer architecture
+- Longformer sparse attention
+- Long-document question answering
+- Extractive QA fine-tuning
+- QASPER dataset preparation
+- Start/end span supervision
+- Long-context tokenization
+- Overlapping sliding windows
+- Global-attention handling
+- Evidence extraction and highlighting
+- Supporting-paragraph selection
+- Confidence-proxy design
+- Exact Match evaluation
+- Token-level F1 evaluation
+- Evidence recovery evaluation
+- Evidence-token recall
+- Context-length analysis
+- Answer-position analysis
+- Latency and throughput benchmarking
+- GPU training with BF16
+- Model artifact management
+- Hugging Face Model Hub publishing
+- Transformers.js browser inference
+- ONNX Runtime Web
+- Static web application development
+- Automated testing
+- GitHub Actions
+- Hugging Face Static Space deployment
+- Responsible AI communication
+- Portfolio-focused ML engineering
 
 ---
 
-# Portfolio-Grade QASPER Training and Evaluation Upgrade
+## Portfolio Positioning
 
-The project now includes the same notebook-driven, artifact-generating workflow
-used for the Vision Transformer portfolio project:
+**One-line description:** QASPER-fine-tuned Longformer system for long-document extractive question answering, evidence grounding, comparative evaluation, model publishing, and free browser deployment.
 
-```text
-notebooks/complete_longformer_training_evaluation_pipeline.ipynb
-```
+**Pinned repository description:** End-to-end Document AI portfolio project featuring QASPER preparation, Longformer fine-tuning, BERT and Longformer baselines, answer and evidence metrics, context-length analysis, Hugging Face Model Hub publishing, Transformers.js browser inference, and Static Space deployment.
 
-The notebook performs the complete experiment rather than displaying placeholder
-metrics. It downloads the official QASPER v0.3 data, constructs a contiguous
-extractive subset, optionally continues fine-tuning Longformer, runs real model
-inference, compares short-context BERT against long-context Longformer, and
-writes all publishable results into `outputs/`.
+This project connects naturally to a Quality Data Scientist background because the same workflow can support question answering over quality reports, GCS case histories, CAPA documents, root-cause investigations, SOPs, complaint records, technical manuals, supplier reports, and evidence-grounded quality knowledge systems.
 
-## Models compared
+---
 
-| Approach | Purpose |
-|---|---|
-| `deepset/bert-base-cased-squad2` with first-window truncation | Standard 512-token BERT baseline |
-| `valhalla/longformer-base-4096-finetuned-squadv1` with overlapping windows | Published long-context baseline |
-| `models/qasper-longformer/` | Checkpoint genuinely fine-tuned by this project after the notebook is run |
+## Author
 
-## Generated evaluation artifacts
+**Anmol Tripathi**
 
-```text
-outputs/
-├── qasper_dataset_summary.json
-├── training_summary.json
-├── training/training_history.json
-├── baseline_comparison.csv
-├── baseline_comparison.json
-├── evaluation_manifest.json
-├── EVALUATION_REPORT.md
-├── *_summary.json
-├── *_qa_examples.csv
-├── *_qa_examples.jsonl
-├── *_context_length.csv
-├── *_context_length.json
-├── *_answer_position.csv
-├── *_answer_position.json
-├── *_confidence_analysis.json
-├── *_error_categories.csv
-└── *.png
-```
-
-The generated report automatically updates marked result sections in this
-README and in `MODEL_CARD.md`. Raw QASPER archives, processed full data,
-checkpoints, and local model weights remain excluded from Git.
-
-## Recommended RTX execution
-
-```bash
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt -r requirements-evaluation.txt
-python scripts/check_gpu.py
-jupyter notebook notebooks/complete_longformer_training_evaluation_pipeline.ipynb
-```
-
-Run all notebook cells in order. The default `portfolio` profile uses mixed
-precision, gradient checkpointing, automatic batch-size recovery, and gradient
-accumulation so it can use an RTX GPU efficiently without assuming a specific
-VRAM capacity.
-
-<!-- PROJECT04_EVALUATION_RESULTS_START -->
-## Published evaluation results
-
-> These values are generated by `notebooks/complete_longformer_training_evaluation_pipeline.ipynb`. They should not be edited manually.
-
-**Dataset:** QASPER v0.3 — contiguous extractive answers only
-
-| Model / approach | Examples | Exact Match | Token F1 | Evidence recovered | Evidence token recall | Avg latency |
-|---|---:|---:|---:|---:|---:|---:|
-| BERT truncated 512 | 200 | 1.50% | 7.37% | 26.00% | 41.34% | 0.029 s |
-| Longformer SQuAD sliding windows | 200 | 6.00% | 16.16% | 30.00% | 45.88% | 0.256 s |
-| Longformer QASPER fine-tuned | 200 | 12.50% | 26.66% | 49.00% | 60.14% | 0.265 s |
-
-### Fine-tuning status
-
-The Longformer checkpoint was further fine-tuned by this project using the **high-vram** profile.
-
-- Training loss: `4.296871501620453`
-- Global steps: `202`
-- Training duration: `432.2` seconds
-- Saved model: `C:\Users\atripathi\OneDrive - Veralto\Desktop\AI Codes\GIT Projects\transformer-projects\04-long-document-question-answering-longformer\models\qasper-longformer`
-
-### Interpretation guardrails
-
-- Exact Match and Token F1 are calculated against all available contiguous extractive references.
-- Evidence recovery is reported both as a binary thresholded rate and continuous token recall.
-- The confidence value remains an uncalibrated model proxy and is not a probability of correctness.
-- QASPER includes answer types outside contiguous extractive QA; those are excluded and documented.
-<!-- PROJECT04_EVALUATION_RESULTS_END -->
-
-## Uploading the fine-tuned model
-
-After the notebook has produced actual training and evaluation artifacts:
-
-```bash
-python scripts/push_finetuned_model_to_hub.py --repo-id unit-mole/longformer-qasper-document-qa
-```
-
-The script uploads the locally fine-tuned checkpoint, tokenizer, model-card
-template, training summary, baseline comparison, controlled context-length
-results, and generated evaluation report. Do not run it before verifying the
-metrics and manual error analysis.
+Quality Data Scientist building a professional portfolio in Data Science, Machine Learning, Applied AI, Natural Language Processing, Transformer Models, Document AI, Generative AI, Analytics Engineering, and Quality Analytics.
