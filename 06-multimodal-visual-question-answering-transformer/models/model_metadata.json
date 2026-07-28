@@ -3,21 +3,50 @@
   "python_reference_model": {
     "model_id": "dandelin/vilt-b32-finetuned-vqa",
     "task": "visual-question-answering",
-    "role": "local reproducible inference and VQA-style evaluation"
+    "role": "local reproducible inference and classification-style VQA evaluation"
   },
   "static_space_model": {
     "model_id": "HuggingFaceTB/SmolVLM-256M-Instruct",
     "task": "image-text-to-text / visual question answering",
     "runtime": "Transformers.js + ONNX Runtime Web + WebGPU",
-    "role": "fully static browser demo",
     "dtype": "fp32",
-    "implementation": "Hugging Face official SmolVLM WebGPU processing and generation pattern",
-    "reliability_notes": [
-      "The app checks for a WebGPU adapter before loading the model.",
-      "Image inputs are converted to data URLs and loaded with the Transformers.js load_image helper.",
-      "The processor chat template and AutoModelForVision2Seq class match the official browser example.",
-      "Failed model workers are reset so the user can retry without reloading the page."
-    ]
+    "role": "fully static browser demo",
+    "generation": {
+      "do_sample": false,
+      "max_new_tokens": 64,
+      "output_scores": true,
+      "return_dict_in_generate": true
+    }
+  },
+  "answer_confidence": {
+    "display_label": "Answer confidence",
+    "fallback_display": "Not available for this generative model",
+    "proxy_name": "Generation confidence proxy",
+    "method": "Geometric mean of selected-token probabilities from processed generation scores",
+    "calibrated": false,
+    "disclaimer": "Token-generation scores are not calibrated as probabilities of factual correctness."
+  },
+  "browser_evaluation": {
+    "dataset": "60-pair synthetic portfolio VQA evaluation suite",
+    "record_count": 60,
+    "categories": {
+      "color": 10,
+      "object": 10,
+      "counting": 10,
+      "yes_no": 10,
+      "action_scene": 10,
+      "spatial": 10
+    },
+    "metrics": [
+      "overall accepted-answer accuracy",
+      "category-wise accuracy",
+      "answer failure rate",
+      "average latency",
+      "minimum latency",
+      "maximum latency",
+      "manual failure analysis"
+    ],
+    "official_vqa_v2_benchmark": false
   },
   "question_preprocessing": {
     "whitespace_normalization": true,
@@ -29,6 +58,6 @@
     "metadata_removed_for_repository_samples": true,
     "maximum_megapixels": 25
   },
-  "metrics_status": "not_evaluated",
-  "note": "Do not publish numerical metrics until scripts/evaluate_vqa.py has been run on a documented dataset."
+  "published_metrics_status": "not_evaluated",
+  "note": "Run the complete browser evaluation on documented hardware before publishing numerical portfolio metrics."
 }

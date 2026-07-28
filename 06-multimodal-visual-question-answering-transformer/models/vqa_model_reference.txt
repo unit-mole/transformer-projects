@@ -1,8 +1,14 @@
-Python evaluation model:
+Python reference model:
 dandelin/vilt-b32-finetuned-vqa
 
 Static Hugging Face Space browser model:
-Xenova/moondream2
+HuggingFaceTB/SmolVLM-256M-Instruct
 
-Model weights are loaded from the Hugging Face Hub and are not committed to
-this repository.
+Browser runtime:
+Transformers.js + ONNX Runtime Web + WebGPU fp32
+
+Answer-confidence diagnostic:
+Geometric mean of selected-token probabilities when generation scores are available.
+This proxy is not calibrated as a probability of factual correctness.
+
+Model weights are loaded from the Hugging Face Hub and are not committed to this repository.

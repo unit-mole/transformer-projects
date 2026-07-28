@@ -1,0 +1,61 @@
+id,image,question,accepted_answers,category
+color-01,./evaluation/images/geometry_01.png,What color is the circle?,"[""red""]",color
+object-01,./evaluation/images/geometry_01.png,What shape is on the left?,"[""square""]",object
+counting-01,./evaluation/images/geometry_01.png,How many shapes are visible?,"[""2"", ""two""]",counting
+yes-no-01,./evaluation/images/geometry_01.png,Is the circle red?,"[""yes""]",yes_no
+spatial-01,./evaluation/images/geometry_01.png,Which shape is to the right of the square?,"[""circle""]",spatial
+color-02,./evaluation/images/geometry_02.png,What color is the square?,"[""green""]",color
+object-02,./evaluation/images/geometry_02.png,What shape is on the left?,"[""triangle""]",object
+counting-02,./evaluation/images/geometry_02.png,How many shapes are visible?,"[""3"", ""three""]",counting
+yes-no-02,./evaluation/images/geometry_02.png,Is the triangle blue?,"[""no""]",yes_no
+spatial-02,./evaluation/images/geometry_02.png,Which shape is to the right of the triangle?,"[""square""]",spatial
+color-03,./evaluation/images/geometry_03.png,What color is the triangle?,"[""purple""]",color
+object-03,./evaluation/images/geometry_03.png,What shape is on the left?,"[""circle""]",object
+counting-03,./evaluation/images/geometry_03.png,How many shapes are visible?,"[""4"", ""four""]",counting
+yes-no-03,./evaluation/images/geometry_03.png,Is the circle orange?,"[""yes""]",yes_no
+spatial-03,./evaluation/images/geometry_03.png,Which shape is to the right of the circle?,"[""triangle""]",spatial
+color-04,./evaluation/images/geometry_04.png,What color is the star?,"[""yellow""]",color
+object-04,./evaluation/images/geometry_04.png,What shape is on the left?,"[""rectangle""]",object
+counting-04,./evaluation/images/geometry_04.png,How many shapes are visible?,"[""5"", ""five""]",counting
+yes-no-04,./evaluation/images/geometry_04.png,Is the star green?,"[""no""]",yes_no
+spatial-04,./evaluation/images/geometry_04.png,Which shape is to the right of the rectangle?,"[""star""]",spatial
+color-05,./evaluation/images/geometry_05.png,What color is the circle?,"[""blue""]",color
+object-05,./evaluation/images/geometry_05.png,What shape is on the left?,"[""star""]",object
+counting-05,./evaluation/images/geometry_05.png,How many shapes are visible?,"[""2"", ""two""]",counting
+yes-no-05,./evaluation/images/geometry_05.png,Is the circle blue?,"[""yes""]",yes_no
+spatial-05,./evaluation/images/geometry_05.png,Which shape is to the right of the star?,"[""circle""]",spatial
+color-06,./evaluation/images/geometry_06.png,What color is the triangle?,"[""orange""]",color
+object-06,./evaluation/images/geometry_06.png,What shape is on the left?,"[""square""]",object
+counting-06,./evaluation/images/geometry_06.png,How many shapes are visible?,"[""3"", ""three""]",counting
+yes-no-06,./evaluation/images/geometry_06.png,Is the square red?,"[""no""]",yes_no
+spatial-06,./evaluation/images/geometry_06.png,Which shape is to the right of the square?,"[""triangle""]",spatial
+color-07,./evaluation/images/geometry_07.png,What color is the rectangle?,"[""gray""]",color
+object-07,./evaluation/images/geometry_07.png,What shape is on the left?,"[""circle""]",object
+counting-07,./evaluation/images/geometry_07.png,How many shapes are visible?,"[""4"", ""four""]",counting
+yes-no-07,./evaluation/images/geometry_07.png,Is the rectangle gray?,"[""yes""]",yes_no
+spatial-07,./evaluation/images/geometry_07.png,Which shape is to the right of the circle?,"[""rectangle""]",spatial
+color-08,./evaluation/images/geometry_08.png,What color is the star?,"[""pink""]",color
+object-08,./evaluation/images/geometry_08.png,What shape is on the left?,"[""triangle""]",object
+counting-08,./evaluation/images/geometry_08.png,How many shapes are visible?,"[""5"", ""five""]",counting
+yes-no-08,./evaluation/images/geometry_08.png,Is the triangle yellow?,"[""no""]",yes_no
+spatial-08,./evaluation/images/geometry_08.png,Which shape is to the right of the triangle?,"[""star""]",spatial
+color-09,./evaluation/images/geometry_09.png,What color is the square?,"[""yellow""]",color
+object-09,./evaluation/images/geometry_09.png,What shape is on the left?,"[""rectangle""]",object
+counting-09,./evaluation/images/geometry_09.png,How many shapes are visible?,"[""2"", ""two""]",counting
+yes-no-09,./evaluation/images/geometry_09.png,Is the rectangle brown?,"[""yes""]",yes_no
+spatial-09,./evaluation/images/geometry_09.png,Which shape is to the right of the rectangle?,"[""square""]",spatial
+color-10,./evaluation/images/geometry_10.png,What color is the circle?,"[""purple""]",color
+object-10,./evaluation/images/geometry_10.png,What shape is on the left?,"[""star""]",object
+counting-10,./evaluation/images/geometry_10.png,How many shapes are visible?,"[""3"", ""three""]",counting
+yes-no-10,./evaluation/images/geometry_10.png,Is the circle orange?,"[""no""]",yes_no
+spatial-10,./evaluation/images/geometry_10.png,Which shape is to the right of the star?,"[""circle""]",spatial
+action-scene-01,./evaluation/images/action_01.png,What is the person holding?,"[""umbrella"", ""an umbrella""]",action_scene
+action-scene-02,./evaluation/images/action_02.png,What is the person doing?,"[""reading"", ""reading a book""]",action_scene
+action-scene-03,./evaluation/images/action_03.png,What is the person doing?,"[""riding a bicycle"", ""cycling"", ""riding a bike""]",action_scene
+action-scene-04,./evaluation/images/action_04.png,What is the dog doing?,"[""chasing a ball"", ""chasing the ball""]",action_scene
+action-scene-05,./evaluation/images/action_05.png,What is the bird doing?,"[""flying""]",action_scene
+action-scene-06,./evaluation/images/action_06.png,What is the car doing?,"[""driving"", ""driving on a road""]",action_scene
+action-scene-07,./evaluation/images/action_07.png,What is the boat doing?,"[""sailing"", ""sailing on water""]",action_scene
+action-scene-08,./evaluation/images/action_08.png,What is the person doing?,"[""kicking a ball"", ""kicking the ball""]",action_scene
+action-scene-09,./evaluation/images/action_09.png,What is the cat doing?,"[""sitting"", ""sitting on a chair""]",action_scene
+action-scene-10,./evaluation/images/action_10.png,What is the person doing?,"[""waving""]",action_scene

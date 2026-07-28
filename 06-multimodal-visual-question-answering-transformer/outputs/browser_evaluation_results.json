@@ -1,0 +1,6 @@
+{
+  "status": "not_evaluated",
+  "model": "HuggingFaceTB/SmolVLM-256M-Instruct",
+  "dataset": "60-pair synthetic portfolio VQA evaluation suite",
+  "instruction": "Run the Evaluation Lab in the Static Space, download the JSON report, review it, and replace this placeholder only if you want to publish the documented result."
+}

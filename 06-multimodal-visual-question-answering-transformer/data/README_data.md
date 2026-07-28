@@ -1,28 +1,33 @@
 # Data documentation
 
-The repository contains only three project-generated synthetic images and a
-small VQA-style CSV for smoke tests and interface examples. The images do not
-contain people or private information.
+This repository contains only safe project-generated images.
 
-The project is compatible with VQA v2-style records containing an image,
-question, multiple human answers, question type, and answer type. The full VQA
-v2 dataset is intentionally excluded because it is large and has its own usage
-terms. Download it from its official source only when running a documented
-evaluation.
+## Interactive smoke-test data
 
-## Public sample schema
+- 3 synthetic images
+- 3 VQA-style question-answer records
+- categories: color, number, and object
 
-- `image_id`
-- `image_path`
-- `question`
-- `answer`
-- `answers` — JSON list of reference answers
-- `question_type`
-- `answer_type`
-- `category`
-- `split`
-- `source`
+## Browser evaluation data
 
-Do not add personal photos, IDs, medical images, confidential workplace
-images, copyrighted images without permission, or images containing sensitive
-personal data.
+- 60 synthetic image-question pairs
+- 10 records each for color, object, counting, yes/no, action or scene, and spatial relationships
+- JSON and CSV formats
+- deterministic image-generation script
+- no real people, personal information, or private content
+
+Run:
+
+```bash
+python scripts/generate_synthetic_evaluation_set.py --check
+```
+
+to validate the committed dataset.
+
+The full VQA v2 dataset is intentionally excluded because it is large and has
+its own usage terms. The Python utilities remain compatible with VQA v2-style
+fields when a separately obtained dataset is used.
+
+Do not add personal photos, IDs, medical images, confidential workplace images,
+copyrighted images without permission, or images containing sensitive personal
+data.

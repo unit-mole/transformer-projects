@@ -1,0 +1,561 @@
+[
+  {
+    "id": "color-01",
+    "image": "./evaluation/images/geometry_01.png",
+    "question": "What color is the circle?",
+    "accepted_answers": [
+      "red"
+    ],
+    "category": "color"
+  },
+  {
+    "id": "object-01",
+    "image": "./evaluation/images/geometry_01.png",
+    "question": "What shape is on the left?",
+    "accepted_answers": [
+      "square"
+    ],
+    "category": "object"
+  },
+  {
+    "id": "counting-01",
+    "image": "./evaluation/images/geometry_01.png",
+    "question": "How many shapes are visible?",
+    "accepted_answers": [
+      "2",
+      "two"
+    ],
+    "category": "counting"
+  },
+  {
+    "id": "yes-no-01",
+    "image": "./evaluation/images/geometry_01.png",
+    "question": "Is the circle red?",
+    "accepted_answers": [
+      "yes"
+    ],
+    "category": "yes_no"
+  },
+  {
+    "id": "spatial-01",
+    "image": "./evaluation/images/geometry_01.png",
+    "question": "Which shape is to the right of the square?",
+    "accepted_answers": [
+      "circle"
+    ],
+    "category": "spatial"
+  },
+  {
+    "id": "color-02",
+    "image": "./evaluation/images/geometry_02.png",
+    "question": "What color is the square?",
+    "accepted_answers": [
+      "green"
+    ],
+    "category": "color"
+  },
+  {
+    "id": "object-02",
+    "image": "./evaluation/images/geometry_02.png",
+    "question": "What shape is on the left?",
+    "accepted_answers": [
+      "triangle"
+    ],
+    "category": "object"
+  },
+  {
+    "id": "counting-02",
+    "image": "./evaluation/images/geometry_02.png",
+    "question": "How many shapes are visible?",
+    "accepted_answers": [
+      "3",
+      "three"
+    ],
+    "category": "counting"
+  },
+  {
+    "id": "yes-no-02",
+    "image": "./evaluation/images/geometry_02.png",
+    "question": "Is the triangle blue?",
+    "accepted_answers": [
+      "no"
+    ],
+    "category": "yes_no"
+  },
+  {
+    "id": "spatial-02",
+    "image": "./evaluation/images/geometry_02.png",
+    "question": "Which shape is to the right of the triangle?",
+    "accepted_answers": [
+      "square"
+    ],
+    "category": "spatial"
+  },
+  {
+    "id": "color-03",
+    "image": "./evaluation/images/geometry_03.png",
+    "question": "What color is the triangle?",
+    "accepted_answers": [
+      "purple"
+    ],
+    "category": "color"
+  },
+  {
+    "id": "object-03",
+    "image": "./evaluation/images/geometry_03.png",
+    "question": "What shape is on the left?",
+    "accepted_answers": [
+      "circle"
+    ],
+    "category": "object"
+  },
+  {
+    "id": "counting-03",
+    "image": "./evaluation/images/geometry_03.png",
+    "question": "How many shapes are visible?",
+    "accepted_answers": [
+      "4",
+      "four"
+    ],
+    "category": "counting"
+  },
+  {
+    "id": "yes-no-03",
+    "image": "./evaluation/images/geometry_03.png",
+    "question": "Is the circle orange?",
+    "accepted_answers": [
+      "yes"
+    ],
+    "category": "yes_no"
+  },
+  {
+    "id": "spatial-03",
+    "image": "./evaluation/images/geometry_03.png",
+    "question": "Which shape is to the right of the circle?",
+    "accepted_answers": [
+      "triangle"
+    ],
+    "category": "spatial"
+  },
+  {
+    "id": "color-04",
+    "image": "./evaluation/images/geometry_04.png",
+    "question": "What color is the star?",
+    "accepted_answers": [
+      "yellow"
+    ],
+    "category": "color"
+  },
+  {
+    "id": "object-04",
+    "image": "./evaluation/images/geometry_04.png",
+    "question": "What shape is on the left?",
+    "accepted_answers": [
+      "rectangle"
+    ],
+    "category": "object"
+  },
+  {
+    "id": "counting-04",
+    "image": "./evaluation/images/geometry_04.png",
+    "question": "How many shapes are visible?",
+    "accepted_answers": [
+      "5",
+      "five"
+    ],
+    "category": "counting"
+  },
+  {
+    "id": "yes-no-04",
+    "image": "./evaluation/images/geometry_04.png",
+    "question": "Is the star green?",
+    "accepted_answers": [
+      "no"
+    ],
+    "category": "yes_no"
+  },
+  {
+    "id": "spatial-04",
+    "image": "./evaluation/images/geometry_04.png",
+    "question": "Which shape is to the right of the rectangle?",
+    "accepted_answers": [
+      "star"
+    ],
+    "category": "spatial"
+  },
+  {
+    "id": "color-05",
+    "image": "./evaluation/images/geometry_05.png",
+    "question": "What color is the circle?",
+    "accepted_answers": [
+      "blue"
+    ],
+    "category": "color"
+  },
+  {
+    "id": "object-05",
+    "image": "./evaluation/images/geometry_05.png",
+    "question": "What shape is on the left?",
+    "accepted_answers": [
+      "star"
+    ],
+    "category": "object"
+  },
+  {
+    "id": "counting-05",
+    "image": "./evaluation/images/geometry_05.png",
+    "question": "How many shapes are visible?",
+    "accepted_answers": [
+      "2",
+      "two"
+    ],
+    "category": "counting"
+  },
+  {
+    "id": "yes-no-05",
+    "image": "./evaluation/images/geometry_05.png",
+    "question": "Is the circle blue?",
+    "accepted_answers": [
+      "yes"
+    ],
+    "category": "yes_no"
+  },
+  {
+    "id": "spatial-05",
+    "image": "./evaluation/images/geometry_05.png",
+    "question": "Which shape is to the right of the star?",
+    "accepted_answers": [
+      "circle"
+    ],
+    "category": "spatial"
+  },
+  {
+    "id": "color-06",
+    "image": "./evaluation/images/geometry_06.png",
+    "question": "What color is the triangle?",
+    "accepted_answers": [
+      "orange"
+    ],
+    "category": "color"
+  },
+  {
+    "id": "object-06",
+    "image": "./evaluation/images/geometry_06.png",
+    "question": "What shape is on the left?",
+    "accepted_answers": [
+      "square"
+    ],
+    "category": "object"
+  },
+  {
+    "id": "counting-06",
+    "image": "./evaluation/images/geometry_06.png",
+    "question": "How many shapes are visible?",
+    "accepted_answers": [
+      "3",
+      "three"
+    ],
+    "category": "counting"
+  },
+  {
+    "id": "yes-no-06",
+    "image": "./evaluation/images/geometry_06.png",
+    "question": "Is the square red?",
+    "accepted_answers": [
+      "no"
+    ],
+    "category": "yes_no"
+  },
+  {
+    "id": "spatial-06",
+    "image": "./evaluation/images/geometry_06.png",
+    "question": "Which shape is to the right of the square?",
+    "accepted_answers": [
+      "triangle"
+    ],
+    "category": "spatial"
+  },
+  {
+    "id": "color-07",
+    "image": "./evaluation/images/geometry_07.png",
+    "question": "What color is the rectangle?",
+    "accepted_answers": [
+      "gray"
+    ],
+    "category": "color"
+  },
+  {
+    "id": "object-07",
+    "image": "./evaluation/images/geometry_07.png",
+    "question": "What shape is on the left?",
+    "accepted_answers": [
+      "circle"
+    ],
+    "category": "object"
+  },
+  {
+    "id": "counting-07",
+    "image": "./evaluation/images/geometry_07.png",
+    "question": "How many shapes are visible?",
+    "accepted_answers": [
+      "4",
+      "four"
+    ],
+    "category": "counting"
+  },
+  {
+    "id": "yes-no-07",
+    "image": "./evaluation/images/geometry_07.png",
+    "question": "Is the rectangle gray?",
+    "accepted_answers": [
+      "yes"
+    ],
+    "category": "yes_no"
+  },
+  {
+    "id": "spatial-07",
+    "image": "./evaluation/images/geometry_07.png",
+    "question": "Which shape is to the right of the circle?",
+    "accepted_answers": [
+      "rectangle"
+    ],
+    "category": "spatial"
+  },
+  {
+    "id": "color-08",
+    "image": "./evaluation/images/geometry_08.png",
+    "question": "What color is the star?",
+    "accepted_answers": [
+      "pink"
+    ],
+    "category": "color"
+  },
+  {
+    "id": "object-08",
+    "image": "./evaluation/images/geometry_08.png",
+    "question": "What shape is on the left?",
+    "accepted_answers": [
+      "triangle"
+    ],
+    "category": "object"
+  },
+  {
+    "id": "counting-08",
+    "image": "./evaluation/images/geometry_08.png",
+    "question": "How many shapes are visible?",
+    "accepted_answers": [
+      "5",
+      "five"
+    ],
+    "category": "counting"
+  },
+  {
+    "id": "yes-no-08",
+    "image": "./evaluation/images/geometry_08.png",
+    "question": "Is the triangle yellow?",
+    "accepted_answers": [
+      "no"
+    ],
+    "category": "yes_no"
+  },
+  {
+    "id": "spatial-08",
+    "image": "./evaluation/images/geometry_08.png",
+    "question": "Which shape is to the right of the triangle?",
+    "accepted_answers": [
+      "star"
+    ],
+    "category": "spatial"
+  },
+  {
+    "id": "color-09",
+    "image": "./evaluation/images/geometry_09.png",
+    "question": "What color is the square?",
+    "accepted_answers": [
+      "yellow"
+    ],
+    "category": "color"
+  },
+  {
+    "id": "object-09",
+    "image": "./evaluation/images/geometry_09.png",
+    "question": "What shape is on the left?",
+    "accepted_answers": [
+      "rectangle"
+    ],
+    "category": "object"
+  },
+  {
+    "id": "counting-09",
+    "image": "./evaluation/images/geometry_09.png",
+    "question": "How many shapes are visible?",
+    "accepted_answers": [
+      "2",
+      "two"
+    ],
+    "category": "counting"
+  },
+  {
+    "id": "yes-no-09",
+    "image": "./evaluation/images/geometry_09.png",
+    "question": "Is the rectangle brown?",
+    "accepted_answers": [
+      "yes"
+    ],
+    "category": "yes_no"
+  },
+  {
+    "id": "spatial-09",
+    "image": "./evaluation/images/geometry_09.png",
+    "question": "Which shape is to the right of the rectangle?",
+    "accepted_answers": [
+      "square"
+    ],
+    "category": "spatial"
+  },
+  {
+    "id": "color-10",
+    "image": "./evaluation/images/geometry_10.png",
+    "question": "What color is the circle?",
+    "accepted_answers": [
+      "purple"
+    ],
+    "category": "color"
+  },
+  {
+    "id": "object-10",
+    "image": "./evaluation/images/geometry_10.png",
+    "question": "What shape is on the left?",
+    "accepted_answers": [
+      "star"
+    ],
+    "category": "object"
+  },
+  {
+    "id": "counting-10",
+    "image": "./evaluation/images/geometry_10.png",
+    "question": "How many shapes are visible?",
+    "accepted_answers": [
+      "3",
+      "three"
+    ],
+    "category": "counting"
+  },
+  {
+    "id": "yes-no-10",
+    "image": "./evaluation/images/geometry_10.png",
+    "question": "Is the circle orange?",
+    "accepted_answers": [
+      "no"
+    ],
+    "category": "yes_no"
+  },
+  {
+    "id": "spatial-10",
+    "image": "./evaluation/images/geometry_10.png",
+    "question": "Which shape is to the right of the star?",
+    "accepted_answers": [
+      "circle"
+    ],
+    "category": "spatial"
+  },
+  {
+    "id": "action-scene-01",
+    "image": "./evaluation/images/action_01.png",
+    "question": "What is the person holding?",
+    "accepted_answers": [
+      "umbrella",
+      "an umbrella"
+    ],
+    "category": "action_scene"
+  },
+  {
+    "id": "action-scene-02",
+    "image": "./evaluation/images/action_02.png",
+    "question": "What is the person doing?",
+    "accepted_answers": [
+      "reading",
+      "reading a book"
+    ],
+    "category": "action_scene"
+  },
+  {
+    "id": "action-scene-03",
+    "image": "./evaluation/images/action_03.png",
+    "question": "What is the person doing?",
+    "accepted_answers": [
+      "riding a bicycle",
+      "cycling",
+      "riding a bike"
+    ],
+    "category": "action_scene"
+  },
+  {
+    "id": "action-scene-04",
+    "image": "./evaluation/images/action_04.png",
+    "question": "What is the dog doing?",
+    "accepted_answers": [
+      "chasing a ball",
+      "chasing the ball"
+    ],
+    "category": "action_scene"
+  },
+  {
+    "id": "action-scene-05",
+    "image": "./evaluation/images/action_05.png",
+    "question": "What is the bird doing?",
+    "accepted_answers": [
+      "flying"
+    ],
+    "category": "action_scene"
+  },
+  {
+    "id": "action-scene-06",
+    "image": "./evaluation/images/action_06.png",
+    "question": "What is the car doing?",
+    "accepted_answers": [
+      "driving",
+      "driving on a road"
+    ],
+    "category": "action_scene"
+  },
+  {
+    "id": "action-scene-07",
+    "image": "./evaluation/images/action_07.png",
+    "question": "What is the boat doing?",
+    "accepted_answers": [
+      "sailing",
+      "sailing on water"
+    ],
+    "category": "action_scene"
+  },
+  {
+    "id": "action-scene-08",
+    "image": "./evaluation/images/action_08.png",
+    "question": "What is the person doing?",
+    "accepted_answers": [
+      "kicking a ball",
+      "kicking the ball"
+    ],
+    "category": "action_scene"
+  },
+  {
+    "id": "action-scene-09",
+    "image": "./evaluation/images/action_09.png",
+    "question": "What is the cat doing?",
+    "accepted_answers": [
+      "sitting",
+      "sitting on a chair"
+    ],
+    "category": "action_scene"
+  },
+  {
+    "id": "action-scene-10",
+    "image": "./evaluation/images/action_10.png",
+    "question": "What is the person doing?",
+    "accepted_answers": [
+      "waving"
+    ],
+    "category": "action_scene"
+  }
+]

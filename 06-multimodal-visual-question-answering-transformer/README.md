@@ -4,67 +4,205 @@
 [![Static Space](https://img.shields.io/badge/Hugging%20Face-Static%20Space-FFD21E?logo=huggingface)](https://huggingface.co/spaces/anmol-unitmole/06-multimodal-visual-question-answering-transformer)
 [![License: MIT](https://img.shields.io/badge/Code%20License-MIT-yellow.svg)](../LICENSE)
 
-A portfolio-ready vision-language project that receives an image and a
-natural-language question, then predicts an answer using Transformer-based
-multimodal models.
+A portfolio-ready multimodal Transformer project that accepts an image and a
+natural-language question, generates an answer in the browser, reports an
+honest token-likelihood diagnostic, and includes a balanced 60-pair evaluation
+lab.
 
 ## Project pattern
 
 | Category | Implementation |
 |---|---|
 | Project number | 06 |
-| Application | Visual Question Answering |
-| User workflow | Upload image → ask question → receive answer, question type, answer type, and latency |
-| Local / evaluation model | `dandelin/vilt-b32-finetuned-vqa` |
-| Static browser demo model | `HuggingFaceTB/SmolVLM-256M-Instruct` through Transformers.js |
-| Dataset support | VQA v2-style subset plus safe synthetic samples |
-| Evaluation | VQA consensus accuracy, exact match, category analysis, failure analysis, latency |
-| Deployment | **Hugging Face Static Space** |
-
-## Why the architecture uses two model paths
-
-The local Python pipeline uses ViLT because it provides a compact,
-classification-style VQA head and exposes answer logits for an honest
-confidence proxy. The deployed Space is fully static, so it cannot run the
-Python ViLT server. Its browser demo therefore uses the ONNX-compatible
-SmolVLM-256M-Instruct model with Transformers.js and WebGPU.
-
-The browser app does **not** fabricate a confidence value. It displays
-`Not calibrated` after a successful generation because the selected generative
-browser path does not expose a reliable calibrated probability. Before a run,
-and whenever a run fails, every result card displays an explicit state instead
-of an empty value.
-
-## What changed from the provided notebook
-
-The supplied notebook was a useful multimodal image–text retrieval prototype:
-it generated synthetic shapes, loaded CIFAR-10 or digits, built TF-IDF and
-handcrafted image features, performed similarity search, and exported a
-Streamlit app. It was not a visual question-answering Transformer pipeline.
-
-This project preserves that notebook as a legacy reference while adding:
-
-- genuine image + question model inference;
-- ViLT preprocessing and answer-logit handling;
-- VQA-style consensus evaluation;
-- question and answer categorization;
-- latency and failure-analysis utilities;
-- a browser-only vision-language demo with WebGPU preflight checks and an official SmolVLM processing pipeline;
-- Static Space metadata and automated GitHub-to-Hugging-Face synchronization;
-- tests, model card, dataset card, and privacy documentation.
+| Application | Multimodal Visual Question Answering |
+| User workflow | Select image → ask question → receive answer, confidence diagnostic, type, and latency |
+| Static browser model | `HuggingFaceTB/SmolVLM-256M-Instruct` |
+| Local Python reference model | `dandelin/vilt-b32-finetuned-vqa` |
+| Browser runtime | Transformers.js + ONNX Runtime Web + WebGPU |
+| Evaluation suite | 60 synthetic image-question pairs, balanced across 6 categories |
+| Deployment | Hugging Face **Static Space** |
 
 ## Live demo
 
-**Planned Space:**  
+**Space page:**
 `https://huggingface.co/spaces/anmol-unitmole/06-multimodal-visual-question-answering-transformer`
 
-The first browser model download is large and requires a modern desktop browser
-with WebGPU. Model files are downloaded from the Hugging Face Hub and cached by
-the browser. The static app uses `AutoProcessor`, `AutoModelForVision2Seq`, the
-model chat template, and the stable WebGPU `fp32` setup used by Hugging Face's
-official SmolVLM browser example. Failed workers are reset so the visitor can retry.
+The first browser model download can take several minutes. Later runs reuse the
+browser cache. Use a current desktop version of Chrome or Edge with WebGPU.
 
-## Responsible use and image privacy
+## Browser answer-confidence design
+
+SmolVLM is a generative vision-language model. It does not provide a calibrated
+probability that an answer is factually correct.
+
+The website therefore uses the recruiter-friendly label:
+
+```text
+Answer confidence
+Not available for this generative model
+```
+
+with this explanation:
+
+```text
+Token-generation scores are not calibrated as probabilities of factual correctness.
+```
+
+When Transformers.js returns per-token generation scores, the app calculates a
+**generation confidence proxy** using the geometric mean of the selected-token
+probabilities. The displayed percentage is a decoding diagnostic only. It is
+not an accuracy probability, must not be used for high-stakes decisions, and
+must not be described as calibrated confidence.
+
+A genuinely calibrated confidence estimate would require a held-out labeled
+dataset, correctness labels, a calibration method such as temperature scaling
+or isotonic regression, and calibration metrics such as expected calibration
+error and Brier score.
+
+## Built-in 60-pair browser evaluation
+
+The Static Space includes an evaluation lab containing:
+
+- 10 color questions;
+- 10 object-identification questions;
+- 10 counting questions;
+- 10 yes/no questions;
+- 10 action or scene questions;
+- 10 spatial-relation questions.
+
+The browser runs all 60 records through the same SmolVLM WebGPU pipeline and
+calculates:
+
+- overall accepted-answer accuracy;
+- category-wise accuracy;
+- answer failure rate;
+- average inference latency;
+- minimum and maximum inference latency;
+- a downloadable JSON report;
+- a manual failure-analysis preview.
+
+This is a synthetic portfolio benchmark, not an official VQA v2 score. Do not
+publish numerical claims until the complete evaluation has been run on the
+intended browser and hardware.
+
+## Architecture
+
+The project intentionally maintains two model paths:
+
+1. **Static browser demo:** SmolVLM-256M-Instruct runs entirely in the visitor's
+   browser using Transformers.js, ONNX Runtime Web, and WebGPU.
+2. **Local Python reference:** ViLT supports reproducible classification-style
+   VQA inference, answer logits, and additional evaluation experiments.
+
+No training occurs when the Static Space starts, and model weights are not
+committed to GitHub.
+
+## What changed from the supplied notebook
+
+The supplied notebook was a multimodal image-text retrieval prototype based on
+synthetic images, TF-IDF, handcrafted visual features, similarity search, and a
+Streamlit export. This project preserves it as a legacy reference and adds:
+
+- genuine image-plus-question Transformer inference;
+- SmolVLM browser inference with WebGPU;
+- ViLT local reference inference;
+- non-empty prediction, confidence, type, latency, and failure states;
+- generation-score confidence diagnostics;
+- a 60-pair balanced evaluation dataset;
+- browser evaluation, category analysis, latency analysis, and JSON export;
+- tests, CI, model card, dataset card, privacy guidance, and Static Space deployment.
+
+## Repository structure
+
+```text
+06-multimodal-visual-question-answering-transformer/
+├── data/
+│   ├── evaluation/
+│   │   ├── images/
+│   │   ├── vqa_evaluation_60.csv
+│   │   └── vqa_evaluation_60.json
+│   ├── sample_images/
+│   ├── README_data.md
+│   ├── sample_questions.csv
+│   └── sample_vqa_pairs.csv
+├── models/
+├── notebooks/
+├── outputs/
+├── scripts/
+│   ├── generate_synthetic_evaluation_set.py
+│   └── ...
+├── space/
+│   ├── evaluation/
+│   ├── samples/
+│   ├── src/
+│   ├── README.md
+│   └── index.html
+├── src/vqa/
+├── tests/
+├── DATASET_CARD.md
+├── MODEL_CARD.md
+├── README_HUGGINGFACE.md
+├── requirements-ci.txt
+└── requirements.txt
+```
+
+## Run the Static Space locally
+
+```cmd
+cd /d "C:\Users\atripathi\OneDrive - Veralto\Desktop\AI Codes\GIT Projects\transformer-projects\06-multimodal-visual-question-answering-transformer\space"
+python -m http.server 8016
+```
+
+Open `http://localhost:8016/` in Chrome or Edge and perform a hard refresh with
+`Ctrl + Shift + R` after replacing JavaScript files.
+
+## Validate the committed evaluation suite
+
+```bash
+python scripts/generate_synthetic_evaluation_set.py --check
+pytest
+```
+
+To regenerate the safe synthetic images and 60-pair records:
+
+```bash
+python scripts/generate_synthetic_evaluation_set.py
+```
+
+## Local Python reference setup
+
+```bash
+python -m venv .venv
+pip install -r requirements.txt
+python scripts/prepare_sample_data.py
+python scripts/run_local_vilt.py data/sample_images/shapes_scene.png "What color is the circle?"
+python scripts/evaluate_vqa.py --limit 3
+python scripts/benchmark_latency.py --repeats 5
+```
+
+The committed output JSON files intentionally remain `not_evaluated`. Replace
+them only with results generated on a documented dataset, browser, device, and
+software configuration.
+
+## Hugging Face Static Space deployment
+
+1. Create a public Space named `06-multimodal-visual-question-answering-transformer`.
+2. Select **Static** and the **Blank** template.
+3. Upload the **contents** of `space/` to the root of the Space, not the outer
+   Project 06 folder.
+4. Confirm that the root Space README contains `sdk: static` and
+   `app_file: index.html`.
+5. Wait for the Space to rebuild after the commit.
+6. Test an interactive answer and the evaluation lab in Chrome or Edge.
+7. Add the live Space page link to this README and your portfolio.
+
+For automatic GitHub-to-Hugging-Face synchronization, configure:
+
+- GitHub Actions secret: `HF_TOKEN` with write access;
+- GitHub Actions variable: `HF_SPACE_REPO` with value
+  `anmol-unitmole/06-multimodal-visual-question-answering-transformer`.
+
+## Responsible use and privacy
 
 This project is for education and portfolio demonstration only. The model can
 produce incomplete, incorrect, biased, or misleading answers. Do not use it for
@@ -73,124 +211,15 @@ employment, insurance, or other high-stakes decisions.
 
 Do not upload private photographs, IDs, medical images, confidential workplace
 images, proprietary documents, or copyrighted images without permission.
-Public sample images in this repository are synthetic and contain no people.
-
-## Repository structure
-
-```text
-06-multimodal-visual-question-answering-transformer/
-├── data/
-│   ├── sample_images/
-│   ├── README_data.md
-│   ├── sample_questions.csv
-│   └── sample_vqa_pairs.csv
-├── models/
-│   ├── model_metadata.json
-│   └── vqa_model_reference.txt
-├── notebooks/
-│   ├── legacy_multimodal_image_text_understanding.ipynb
-│   └── multimodal_visual_question_answering_transformer.ipynb
-├── outputs/
-├── scripts/
-├── space/
-│   ├── README.md
-│   ├── index.html
-│   ├── samples/
-│   └── src/
-├── src/vqa/
-├── tests/
-├── DATASET_CARD.md
-├── MODEL_CARD.md
-├── README_HUGGINGFACE.md
-├── pyproject.toml
-├── requirements-ci.txt
-└── requirements.txt
-```
-
-## Local Python setup
-
-```bash
-cd 06-multimodal-visual-question-answering-transformer
-python -m venv .venv
-```
-
-Windows PowerShell:
-
-```powershell
-.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-python scripts/prepare_sample_data.py
-python scripts/run_local_vilt.py data/sample_images/shapes_scene.png "What color is the circle?"
-```
-
-macOS or Linux:
-
-```bash
-source .venv/bin/activate
-pip install -r requirements.txt
-python scripts/prepare_sample_data.py
-python scripts/run_local_vilt.py data/sample_images/shapes_scene.png "What color is the circle?"
-```
-
-## Evaluation
-
-```bash
-python scripts/evaluate_vqa.py --limit 3
-python scripts/benchmark_latency.py --repeats 5
-pytest
-```
-
-The committed output JSON files intentionally say `not_evaluated`. Replace them
-only after executing the scripts on a documented dataset and hardware
-configuration. Never invent portfolio metrics.
-
-## Run the static site locally
-
-Because the app uses JavaScript modules and browser security rules, serve it
-through a local HTTP server:
-
-```bash
-cd space
-python -m http.server 8000
-```
-
-Open `http://localhost:8000` in a current desktop version of Chrome or Edge.
-If the server is started one directory above `space/`, open
-`http://localhost:8000/space/` instead.
-
-## Deploy to a Hugging Face Static Space
-
-1. Create a Space named `06-multimodal-visual-question-answering-transformer`.
-2. Choose **Static** as the SDK and **Blank** as the template.
-3. Set the Space to Public.
-4. Copy the contents of the project `space/` folder into the root of the Space.
-5. Confirm that the Space README contains `sdk: static` and `app_file: index.html`.
-6. Wait for the Space to rebuild.
-7. Open the app in Chrome or Edge and test a safe sample image.
-8. Add the live URL to this README and the root repository README.
-
-For GitHub Actions deployment, create:
-
-- repository secret `HF_TOKEN` with Hugging Face write permission;
-- repository variable `HF_SPACE_REPO` with value  
-  `anmol-unitmole/06-multimodal-visual-question-answering-transformer`.
 
 ## Portfolio description
 
-**One line:** Browser-deployed multimodal VQA system that answers
-natural-language questions about images using ViLT, SmolVLM-256M-Instruct,
-Transformers.js, WebGPU, VQA-style evaluation, and failure analysis.
+**One line:** Browser-deployed multimodal VQA system using SmolVLM,
+Transformers.js, WebGPU, generation-confidence diagnostics, a balanced 60-pair
+evaluation lab, category analysis, latency benchmarking, and failure analysis.
 
 **Skills demonstrated:** multimodal AI, vision-language Transformers, VQA,
-image preprocessing, question preprocessing, ViLT, browser ONNX inference,
-Transformers.js, WebGPU, confidence interpretation, VQA consensus scoring,
-category analysis, latency benchmarking, responsible AI, testing, CI, and
+image preprocessing, question preprocessing, browser ONNX inference,
+Transformers.js, WebGPU, confidence interpretation, evaluation design,
+category-wise analysis, latency analysis, responsible AI, testing, CI, and
 Hugging Face Static Spaces.
-
-## Quality analytics connection
-
-The same architecture can support future quality workflows such as asking
-questions about inspection images, explaining visible defects, helping
-operators review product images, and combining visual evidence with
-text-based reasoning. It must still be validated carefully before any
-production or safety-critical use.

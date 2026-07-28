@@ -4,36 +4,80 @@
 
 - **Owner:** `anmol-unitmole`
 - **Space name:** `06-multimodal-visual-question-answering-transformer`
-- **Short description:** Browser-based visual question answering with a vision-language Transformer, Transformers.js, ONNX, and WebGPU.
+- **Short description:** Browser-based multimodal VQA with SmolVLM, WebGPU, generation-confidence diagnostics, and a 60-pair evaluation lab.
 - **License:** MIT
 - **SDK:** Static
 - **Template:** Blank
 - **Visibility:** Public
 
 Upload the **contents** of `space/` to the root of the Hugging Face Space. Do
-not upload the outer `space` directory as a nested folder.
+not upload the outer Project 06 folder or an extra nested `space` directory.
 
-## Required files in the Space root
+## Required Space structure
 
 ```text
 README.md
 index.html
-src/main.js
-src/model-worker.js
-src/style.css
-samples/shapes_scene.png
-samples/three_blocks.png
-samples/yellow_triangle.png
+samples/
+evaluation/
+│   ├── images/
+│   ├── vqa_evaluation_60.csv
+│   └── vqa_evaluation_60.json
+src/
+│   ├── main.js
+│   ├── model-worker.js
+│   └── style.css
 ```
 
-The Space is compute-free because inference runs in the visitor's browser.
-WebGPU and a large first-time model download are required. The app checks the
-WebGPU adapter and follows the official SmolVLM-256M-Instruct processor, chat-template,
-and WebGPU generation flow. It also displays useful failure details instead of
-leaving result cards blank. No Hugging Face token should be embedded in JavaScript.
+The root README metadata must include:
+
+```yaml
+---
+title: Multimodal Visual Question Answering Transformer
+emoji: 🖼️
+colorFrom: indigo
+colorTo: blue
+sdk: static
+app_file: index.html
+pinned: false
+license: mit
+models:
+  - HuggingFaceTB/SmolVLM-256M-Instruct
+---
+```
+
+## What the deployed site provides
+
+- image upload and safe sample images;
+- SmolVLM-256M-Instruct WebGPU inference;
+- predicted answer, question type, answer type, and latency;
+- generation confidence proxy when token scores are available;
+- explicit statement that token scores are not calibrated correctness probabilities;
+- 60-pair browser evaluation;
+- overall and category-wise accuracy;
+- answer failure rate and latency statistics;
+- downloadable JSON results and manual failure review.
 
 ## GitHub Actions synchronization
 
-Add repository secret `HF_TOKEN` and repository variable `HF_SPACE_REPO`.
-Pushing changes under Project 06 will validate Python utilities and static files,
-then synchronize the `space/` folder to the Space.
+Create these settings in the GitHub repository:
+
+- secret `HF_TOKEN`: a Hugging Face user access token with write permission;
+- variable `HF_SPACE_REPO`: `anmol-unitmole/06-multimodal-visual-question-answering-transformer`.
+
+A push affecting Project 06 validates the Python utilities, the balanced
+60-pair evaluation suite, JavaScript syntax, required Static Space files, and
+large-file limits. The final job synchronizes `space/` to the Hugging Face
+Space.
+
+## Final verification
+
+After the workflow succeeds:
+
+1. Open the Space page.
+2. Confirm the model name is `HuggingFaceTB/SmolVLM-256M-Instruct`.
+3. Run the Shapes example with `What color is the circle?`.
+4. Confirm an answer, answer-confidence diagnostic, and latency are populated.
+5. Run the 60-question evaluation once on the device you plan to document.
+6. Download the JSON report and save it under `outputs/` only after reviewing it.
+7. Add the Space page URL to GitHub and your portfolio.

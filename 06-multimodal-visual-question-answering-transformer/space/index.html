@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Static browser-based multimodal visual question answering demo." />
+  <meta name="description" content="Static browser-based multimodal visual question answering demo with generation-confidence diagnostics and a 60-pair evaluation lab." />
   <title>Multimodal Visual Question Answering Transformer</title>
-  <link rel="stylesheet" href="./src/style.css?v=3.0.0" />
+  <link rel="stylesheet" href="./src/style.css?v=4.0.0" />
 </head>
 <body>
   <header class="hero">
@@ -13,11 +13,11 @@
       <div class="eyebrow">Transformer Project 06 · Static Hugging Face Space</div>
       <h1>Multimodal Visual Question Answering</h1>
       <p class="hero__copy">
-        Upload an image, ask a natural-language question, and run a vision-language
-        Transformer directly in the browser with Transformers.js and WebGPU.
+        Upload an image, ask a natural-language question, and run a lightweight
+        vision-language Transformer directly in the browser with Transformers.js and WebGPU.
       </p>
       <div class="badges">
-        <span>SmolVLM 256M</span><span>WebGPU</span><span>ONNX</span><span>No Python server</span>
+        <span>SmolVLM 256M</span><span>WebGPU</span><span>ONNX</span><span>60-pair evaluation</span><span>No Python server</span>
       </div>
     </div>
   </header>
@@ -130,10 +130,10 @@
         <strong id="answerOutput">No prediction yet</strong>
         <small>The generated answer will appear here.</small>
       </article>
-      <article class="metric">
-        <span>Confidence proxy</span>
-        <strong id="confidenceOutput">Not generated yet</strong>
-        <small>This generative model does not expose a calibrated probability.</small>
+      <article class="metric metric--confidence">
+        <span>Answer confidence</span>
+        <strong id="confidenceOutput">Not available for this generative model</strong>
+        <small>Token-generation scores are not calibrated as probabilities of factual correctness.</small>
       </article>
       <article class="metric">
         <span>Question type</span>
@@ -152,6 +152,64 @@
       </article>
     </section>
 
+    <section class="notice confidence-note">
+      <strong>Generation confidence proxy:</strong> when the browser runtime exposes
+      per-token generation scores, the app reports the geometric mean of the selected-token
+      probabilities. This is a useful decoding diagnostic, but it is not an accuracy probability
+      and it has not been calibrated against a labeled validation dataset.
+    </section>
+
+    <section class="card evaluation-lab" id="evaluation">
+      <div class="evaluation-lab__header">
+        <div>
+          <div class="eyebrow">Browser evaluation lab</div>
+          <h2>Measure the model on 60 image-question pairs</h2>
+          <p>
+            Run a balanced synthetic portfolio evaluation with 10 questions each for color,
+            object identification, counting, yes/no, action or scene understanding, and spatial relationships.
+          </p>
+        </div>
+        <div class="evaluation-actions">
+          <button id="evaluationRunButton" class="primary">Run 60-question evaluation</button>
+          <button id="evaluationCancelButton" class="secondary" hidden>Cancel evaluation</button>
+          <button id="evaluationDownloadButton" class="secondary" disabled>Download JSON results</button>
+        </div>
+      </div>
+
+      <div class="evaluation-status" aria-live="polite">
+        <strong id="evaluationStatus">Evaluation has not been run</strong>
+        <progress id="evaluationProgress" value="0" max="100"></progress>
+        <span id="evaluationDetail">The suite runs locally in the browser and can take several minutes.</span>
+      </div>
+
+      <div class="evaluation-metrics">
+        <article><span>Overall accuracy</span><strong id="evaluationAccuracy">Not evaluated</strong><small>Correct answers ÷ all 60 questions.</small></article>
+        <article><span>Answer failure rate</span><strong id="evaluationFailureRate">Not evaluated</strong><small>Model or runtime failures ÷ all questions.</small></article>
+        <article><span>Average latency</span><strong id="evaluationAverageLatency">Not evaluated</strong><small>Mean successful warm-inference time.</small></article>
+        <article><span>Latency range</span><strong id="evaluationLatencyRange">Not evaluated</strong><small>Minimum to maximum successful latency.</small></article>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Category</th><th>Total</th><th>Correct</th><th>Failures</th><th>Accuracy</th></tr></thead>
+          <tbody id="evaluationTableBody">
+            <tr><td colspan="5">Run the evaluation to populate category-wise results.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <details class="failure-review">
+        <summary>Manual failure-analysis preview</summary>
+        <ol id="evaluationFailures"><li>No evaluation results are available yet.</li></ol>
+      </details>
+
+      <p class="evaluation-disclaimer">
+        <strong>Important:</strong> this is a safe synthetic portfolio benchmark, not an official VQA v2 score.
+        Use a larger held-out dataset and calibration metrics such as expected calibration error or Brier score
+        before making claims about real-world reliability.
+      </p>
+    </section>
+
     <section class="grid">
       <article class="card prose">
         <h2>How the static deployment works</h2>
@@ -159,16 +217,16 @@
           <li>The uploaded image stays in the browser and is converted to RGB pixels.</li>
           <li>The question is normalized without removing meaning-bearing words.</li>
           <li>SmolVLM-256M-Instruct ONNX components load from Hugging Face.</li>
-          <li>The app follows Hugging Face’s official SmolVLM WebGPU preprocessing and generation flow.</li>
-          <li>WebGPU performs vision-language generation and returns the answer.</li>
+          <li>The app follows Hugging Face’s SmolVLM WebGPU preprocessing and generation flow.</li>
+          <li>WebGPU performs vision-language generation and returns the answer and optional token-score diagnostics.</li>
         </ol>
       </article>
       <article class="card prose">
-        <h2>Limitations</h2>
+        <h2>Portfolio interpretation</h2>
         <p>
-          The model can miss small objects, miscount, hallucinate, struggle with
-          OCR, or answer ambiguous questions incorrectly. Browser performance
-          varies by hardware, graphics driver, memory, network speed, and WebGPU support.
+          This is a strong lightweight browser-deployable multimodal Transformer demonstration,
+          not a high-accuracy or high-stakes VQA system. Evaluate it across categories, preserve
+          failed examples, and report limitations alongside every metric.
         </p>
       </article>
     </section>
@@ -179,6 +237,6 @@
     <a href="https://github.com/unit-mole/transformer-projects" target="_blank" rel="noreferrer">GitHub repository</a>
   </footer>
 
-  <script type="module" src="./src/main.js?v=3.0.0"></script>
+  <script type="module" src="./src/main.js?v=4.0.0"></script>
 </body>
 </html>

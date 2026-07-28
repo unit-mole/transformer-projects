@@ -15,9 +15,17 @@ const MAX_NEW_TOKENS = 64;
 
 let processorPromise = null;
 let modelPromise = null;
+let activeRequest = { requestId: null, mode: "interactive" };
 
 function postProgress(status, detail = "", progress = 0) {
-  self.postMessage({ type: "progress", status, detail, progress });
+  self.postMessage({
+    type: "progress",
+    status,
+    detail,
+    progress,
+    requestId: activeRequest.requestId,
+    mode: activeRequest.mode,
+  });
 }
 
 function normalizeProgress(value) {
@@ -45,9 +53,7 @@ function reportDownload(info) {
 
 async function ensureWebGPU() {
   if (!("gpu" in navigator)) {
-    throw new Error(
-      "WebGPU is unavailable. Use a current desktop version of Chrome or Edge.",
-    );
+    throw new Error("WebGPU is unavailable. Use a current desktop version of Chrome or Edge.");
   }
 
   const adapter = await navigator.gpu.requestAdapter();
@@ -68,8 +74,6 @@ async function loadRuntime() {
     throw error;
   });
 
-  // This matches Hugging Face's official SmolVLM WebGPU example. The stable
-  // fp32 profile is intentionally used instead of experimental mixed dtypes.
   modelPromise ??= AutoModelForVision2Seq.from_pretrained(MODEL_ID, {
     dtype: "fp32",
     device: "webgpu",
@@ -101,6 +105,65 @@ function cleanAnswer(value) {
   }
 
   return answer;
+}
+
+function tensorData(tensor) {
+  if (!tensor) return null;
+  const data = tensor.data ?? tensor.cpuData ?? null;
+  return data && typeof data.length === "number" ? data : null;
+}
+
+function generationConfidenceFromScores(rawScores) {
+  try {
+    const scores = rawScores ? Array.from(rawScores) : [];
+    if (!scores.length) return null;
+
+    let summedLogProbability = 0;
+    let minimumTokenProbability = 1;
+    let tokenCount = 0;
+
+    for (const scoreTensor of scores) {
+      const values = tensorData(scoreTensor);
+      if (!values?.length) continue;
+
+      let maximum = -Infinity;
+      for (let index = 0; index < values.length; index += 1) {
+        const value = Number(values[index]);
+        if (Number.isFinite(value) && value > maximum) maximum = value;
+      }
+      if (!Number.isFinite(maximum)) continue;
+
+      let expSum = 0;
+      for (let index = 0; index < values.length; index += 1) {
+        const value = Number(values[index]);
+        if (Number.isFinite(value)) expSum += Math.exp(value - maximum);
+      }
+      if (!(expSum > 0) || !Number.isFinite(expSum)) continue;
+
+      // Greedy decoding selects the maximum processed score at each step.
+      const logProbability = -Math.log(expSum);
+      const probability = Math.exp(logProbability);
+      summedLogProbability += logProbability;
+      minimumTokenProbability = Math.min(minimumTokenProbability, probability);
+      tokenCount += 1;
+    }
+
+    if (!tokenCount) return null;
+    const geometricMean = Math.exp(summedLogProbability / tokenCount);
+    if (!Number.isFinite(geometricMean)) return null;
+
+    return {
+      available: true,
+      value: Math.max(0, Math.min(1, geometricMean)),
+      percentage: Math.max(0, Math.min(100, geometricMean * 100)),
+      tokenCount,
+      minimumTokenProbability: Math.max(0, Math.min(1, minimumTokenProbability)),
+      method: "Geometric mean of selected-token probabilities from processed generation scores",
+      calibrated: false,
+    };
+  } catch {
+    return null;
+  }
 }
 
 function friendlyFailure(error) {
@@ -157,6 +220,9 @@ self.addEventListener("message", async (event) => {
   if (event.data?.type !== "predict") return;
 
   const overallStarted = performance.now();
+  const requestId = event.data.requestId ?? null;
+  const mode = event.data.mode ?? "interactive";
+  activeRequest = { requestId, mode };
 
   try {
     const { question, imageDataUrl } = event.data;
@@ -186,7 +252,7 @@ self.addEventListener("message", async (event) => {
     });
 
     let streamedAnswer = "";
-    const streamer = new TextStreamer(processor.tokenizer, {
+    const createStreamer = () => new TextStreamer(processor.tokenizer, {
       skip_prompt: true,
       skip_special_tokens: true,
       callback_function: (chunk) => {
@@ -197,14 +263,42 @@ self.addEventListener("message", async (event) => {
     postProgress("Generating answer", "Running SmolVLM with WebGPU.", 98);
     const inferenceStarted = performance.now();
 
-    const generation = await model.generate({
+    const generationOptions = {
       ...inputs,
       do_sample: false,
       repetition_penalty: 1.1,
       max_new_tokens: MAX_NEW_TOKENS,
-      streamer,
       return_dict_in_generate: true,
-    });
+    };
+
+    let generation;
+    try {
+      generation = await model.generate({
+        ...generationOptions,
+        streamer: createStreamer(),
+        output_scores: true,
+      });
+    } catch (scoreError) {
+      const detail = String(scoreError?.message ?? scoreError).toLowerCase();
+      const scoreOutputUnsupported =
+        detail.includes("output_scores") ||
+        detail.includes("output scores") ||
+        detail.includes("unexpected keyword") ||
+        detail.includes("return_dict_in_generate");
+
+      if (!scoreOutputUnsupported) throw scoreError;
+
+      streamedAnswer = "";
+      postProgress(
+        "Generating answer",
+        "Token-score output is unavailable in this runtime; continuing without a confidence proxy.",
+        98,
+      );
+      generation = await model.generate({
+        ...generationOptions,
+        streamer: createStreamer(),
+      });
+    }
 
     let answer = streamedAnswer.trim();
     if (!answer && generation?.sequences) {
@@ -213,32 +307,37 @@ self.addEventListener("message", async (event) => {
       });
       answer = decoded?.[0] ?? "";
       const questionIndex = answer.toLowerCase().lastIndexOf(question.toLowerCase());
-      if (questionIndex >= 0) {
-        answer = answer.slice(questionIndex + question.length);
-      }
+      if (questionIndex >= 0) answer = answer.slice(questionIndex + question.length);
     }
 
     answer = cleanAnswer(answer);
+    const confidence = generationConfidenceFromScores(generation?.scores);
     const inferenceSeconds = (performance.now() - inferenceStarted) / 1000;
     const totalSeconds = (performance.now() - overallStarted) / 1000;
 
     self.postMessage({
       type: "result",
+      requestId,
+      mode,
       answer,
       question,
       inferenceSeconds,
       totalSeconds,
       model: MODEL_ID,
       backend: "SmolVLM 256M · WebGPU fp32",
-      confidenceLabel: "Not calibrated",
+      confidence,
     });
   } catch (error) {
     const failure = friendlyFailure(error);
     self.postMessage({
       type: "error",
+      requestId,
+      mode,
       error: failure.userMessage,
       technical: failure.technical,
       elapsedSeconds: (performance.now() - overallStarted) / 1000,
     });
+  } finally {
+    activeRequest = { requestId: null, mode: "interactive" };
   }
 });
