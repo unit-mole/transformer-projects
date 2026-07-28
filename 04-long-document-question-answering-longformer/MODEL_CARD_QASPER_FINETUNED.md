@@ -33,33 +33,34 @@ model predicts one contiguous span.
 
 ## Evaluation
 
-Copy the actual generated values from:
+The model was evaluated on 200 contiguous-extractive examples from the
+QASPER validation set.
 
-- `outputs/baseline_comparison.json`
-- `outputs/longformer_qasper_fine-tuned_summary.json`
-- `outputs/controlled_context_length_comparison.json`
-- `outputs/EVALUATION_REPORT.md`
+| Model | Exact Match | Token F1 | Evidence Recovery | Evidence Token Recall |
+|---|---:|---:|---:|---:|
+| BERT truncated to 512 tokens | 1.50% | 7.37% | 26.00% | 41.34% |
+| Base Longformer with sliding windows | 6.00% | 16.16% | 30.00% | 45.88% |
+| QASPER-fine-tuned Longformer | **12.50%** | **26.66%** | **49.00%** | **60.14%** |
 
-Do not publish placeholder values or the original base-model SQuAD metrics as
-results produced by this project.
+### Training configuration
 
-## Intended use
+- Training examples: 803
+- Validation examples: 419
+- Evaluation examples: 200
+- Maximum training length: 3,072 tokens
+- Sliding-window stride: 384 tokens
+- Training epochs: 2
+- Learning rate: 1e-5
+- Precision: BF16
+- GPU: NVIDIA GeForce RTX 5090
+- Fine-tuned by this project: Yes
 
-Educational and portfolio demonstrations of extractive question answering over
-scientific papers, reports, quality documents, SOPs, CAPA records, supplier
-reports, technical manuals, and related long documents.
+### Performance interpretation
 
-## Limitations
+The QASPER-fine-tuned Longformer outperformed both the truncated BERT baseline
+and the original SQuAD-fine-tuned Longformer checkpoint across Exact Match,
+token-level F1, evidence recovery, and evidence-token recall.
 
-- The model predicts extractive spans and cannot reliably answer questions that
-  require free-form synthesis, yes/no reasoning, or unsupported inference.
-- QASPER contains scientific NLP papers and does not directly represent every
-  quality or business-document domain.
-- The confidence value shown by the application is an uncalibrated proxy.
-- Answers and highlighted evidence require human review.
-
-## Responsible use
-
-Do not use the model as the sole basis for medical, legal, financial,
-safety-critical, regulatory, academic, official, or business-critical decisions.
-Do not submit private or confidential documents to a public Space.
+The model remains imperfect. Exact Match is a strict metric, and QASPER
+questions frequently contain long, technical, and semantically complex answers.
+The reported values should not be interpreted as production-level reliability.

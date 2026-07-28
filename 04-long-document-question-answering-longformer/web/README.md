@@ -2,7 +2,7 @@
 title: Long Document QA Browser
 emoji: 📄
 colorFrom: blue
-colorTo: teal
+colorTo: green
 sdk: static
 app_build_command: npm install --no-audit --no-fund && npm run build
 app_file: dist/index.html

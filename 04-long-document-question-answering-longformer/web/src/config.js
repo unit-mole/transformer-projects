@@ -1,15 +1,34 @@
 export const APP_CONFIG = Object.freeze({
   projectName: '04-long-document-question-answering-longformer',
+
+  // Transformer executed directly in the browser.
   browserModelId: 'Xenova/distilbert-base-cased-distilled-squad',
-  pythonModelId: 'valhalla/longformer-base-4096-finetuned-squadv1',
-  browserArchitecture: 'DistilBERT extractive QA deployment baseline',
-  pythonArchitecture: 'Longformer extractive QA core implementation',
+
+  // Fine-tuned Longformer produced and evaluated by the Python project.
+  pythonModelId: 'anmol-unitmole/longformer-qasper-document-qa',
+
+  browserArchitecture:
+    'DistilBERT extractive QA browser deployment baseline',
+
+  pythonArchitecture:
+    'QASPER-fine-tuned Longformer extractive QA implementation',
+
   defaultChunkWords: 260,
   defaultOverlapWords: 60,
   defaultCandidateChunks: 6,
   maximumDocumentCharacters: 1_000_000,
-  githubUrl: 'https://github.com/<YOUR_GITHUB_USERNAME>/transformer-projects/tree/main/04-long-document-question-answering-longformer',
-  gradioSpaceUrl: 'https://huggingface.co/spaces/<YOUR_HF_USERNAME>/long-document-qa-longformer',
-  staticSpaceUrl: 'https://huggingface.co/spaces/<YOUR_HF_USERNAME>/long-document-qa-browser',
-  modelCardUrl: 'https://github.com/<YOUR_GITHUB_USERNAME>/transformer-projects/blob/main/04-long-document-question-answering-longformer/MODEL_CARD.md',
+
+  githubUrl:
+    'https://github.com/unit-mole/transformer-projects/tree/main/04-long-document-question-answering-longformer',
+
+  // The interface currently expects this property name. It now links to
+  // the evaluated Longformer model rather than a paid Gradio Space.
+  gradioSpaceUrl:
+    'https://huggingface.co/anmol-unitmole/longformer-qasper-document-qa',
+
+  staticSpaceUrl:
+    'https://huggingface.co/spaces/anmol-unitmole/long-document-question-answering-longformer',
+
+  modelCardUrl:
+    'https://huggingface.co/anmol-unitmole/longformer-qasper-document-qa',
 });
