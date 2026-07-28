@@ -1,8 +1,8 @@
 {
   "status": "evaluated",
-  "dataset": "cfilt/iitb-english-hindi",
   "profile": "portfolio",
-  "selected_system": "fine_tuned",
+  "dataset": "cfilt/iitb-english-hindi",
+  "test_pairs_per_direction": 1000,
   "comparison": [
     {
       "system": "pretrained",
@@ -98,36 +98,5 @@
         "probability_candidate_better": 1.0
       }
     }
-  },
-  "manual_error_analysis": {
-    "status": "completed",
-    "reviewed_examples": 30,
-    "error_category_counts": {
-      "other": 9,
-      "named_entity": 6,
-      "missing_information": 4,
-      "number_or_date": 3,
-      "technical_terminology": 3,
-      "word_order": 2,
-      "good_translation": 2,
-      "under_translation": 1
-    },
-    "severity_counts": {
-      "high": 19,
-      "medium": 8,
-      "low": 3
-    },
-    "quality_counts": {
-      "weak": 21,
-      "acceptable": 7,
-      "good": 2
-    },
-    "mean_sentence_chrf": 12.0736,
-    "notes_completed": 30
-  },
-  "deployment_status": {
-    "python_fine_tuned_models": "ready locally",
-    "static_space_models": "pretrained quantized ONNX until a later export step",
-    "onnx_export_pending": true
   }
 }

@@ -1,0 +1,39 @@
+{
+  "status": "prepared",
+  "generated_at_utc": "2026-07-28T15:44:47.365370+00:00",
+  "dataset_id": "cfilt/iitb-english-hindi",
+  "dataset_revision": "main",
+  "resolved_dataset_sha": "321516f50bdcc1214fa75164c545478976ed84bd",
+  "license_note": "IIT Bombay corpus: non-commercial educational/research use; verify source licenses.",
+  "profile": "portfolio",
+  "seed": 42,
+  "splits": {
+    "train": 50000,
+    "validation": 520,
+    "test": 1000
+  },
+  "columns": [
+    "english",
+    "hindi"
+  ],
+  "environment": {
+    "python": "3.13.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+    "device": "cuda",
+    "gpu_name": "NVIDIA GeForce RTX 5090",
+    "gpu_memory_gb": 31.84,
+    "bf16_supported": true,
+    "torch": "2.13.0+cu132",
+    "transformers": "5.14.1",
+    "datasets": "4.8.5",
+    "sacrebleu": "2.6.0",
+    "pandas": "3.0.5",
+    "numpy": "2.5.1"
+  },
+  "files": {
+    "train": "outputs\\portfolio_evaluation\\datasets\\train_pairs.csv",
+    "validation": "outputs\\portfolio_evaluation\\datasets\\validation_pairs.csv",
+    "test": "outputs\\portfolio_evaluation\\datasets\\test_pairs.csv"
+  }
+}

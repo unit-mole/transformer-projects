@@ -1,13 +1,12 @@
 {
-  "status": "not_evaluated",
-  "en_hi": {
-    "average": null,
-    "minimum": null,
-    "maximum": null
+  "status": "evaluated",
+  "device_note": "Measured on the local evaluation machine; not the browser Static Space.",
+  "pretrained": {
+    "en_hi": 0.023225,
+    "hi_en": 0.020338
   },
-  "hi_en": {
-    "average": null,
-    "minimum": null,
-    "maximum": null
+  "fine_tuned": {
+    "en_hi": 0.02361,
+    "hi_en": 0.02253
   }
 }

@@ -1,0 +1,18 @@
+# Install a CUDA-enabled PyTorch build separately before using this file.
+# Keep this environment separate from the lightweight GitHub Actions environment.
+transformers==5.14.1
+datasets>=4.8,<5.0
+accelerate>=1.14,<2.0
+huggingface-hub>=1.5,<2.0
+sentencepiece>=0.2,<0.3
+sacremoses>=0.1,<0.2
+sacrebleu>=2.6,<3.0
+pandas>=2.3,<4.0
+numpy>=1.26,<3.0
+matplotlib>=3.10,<4.0
+PyYAML>=6.0,<7.0
+scikit-learn>=1.6,<2.0
+psutil>=7.0,<8.0
+tqdm>=4.67,<5.0
+jupyterlab>=4.4,<5.0
+ipywidgets>=8.1,<9.0

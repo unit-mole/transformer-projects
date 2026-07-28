@@ -1,0 +1,76 @@
+active_profile: portfolio
+seed: 42
+
+dataset:
+  id: cfilt/iitb-english-hindi
+  revision: main
+  translation_column: translation
+  english_key: en
+  hindi_key: hi
+  train_split: train
+  validation_split: validation
+  test_split: test
+  min_characters: 3
+  max_characters: 500
+  remove_duplicates: true
+
+models:
+  en_hi: Helsinki-NLP/opus-mt-en-hi
+  hi_en: Helsinki-NLP/opus-mt-hi-en
+
+profiles:
+  quick:
+    train_pairs: 5000
+    validation_pairs: 250
+    test_pairs: 250
+    epochs: 1
+    bootstrap_samples: 100
+    manual_review_examples: 20
+  portfolio:
+    train_pairs: 50000
+    validation_pairs: 520
+    test_pairs: 1000
+    epochs: 2
+    bootstrap_samples: 500
+    manual_review_examples: 30
+  full:
+    train_pairs: 100000
+    validation_pairs: 520
+    test_pairs: 2507
+    epochs: 3
+    bootstrap_samples: 1000
+    manual_review_examples: 50
+
+preprocessing:
+  max_source_length: 160
+  max_target_length: 160
+
+training:
+  learning_rate: 0.00003
+  weight_decay: 0.01
+  warmup_ratio: 0.05
+  label_smoothing_factor: 0.1
+  generation_num_beams: 4
+  gradient_checkpointing: true
+  early_stopping_patience: 1
+  logging_steps: 100
+  save_total_limit: 2
+  dataloader_num_workers: 0
+  auto_find_batch_size: false
+
+inference:
+  batch_size: auto
+  num_beams: 4
+  max_new_tokens: 160
+  warmup_batches: 1
+  use_fp16_on_cuda: true
+
+outputs:
+  root: outputs/portfolio_evaluation
+  model_root: models
+  web_metrics: web/data/evaluation-results.json
+  root_model_metrics: outputs/model_metrics.json
+  root_sacrebleu: outputs/sacrebleu_scores.json
+  root_chrf: outputs/chrf_scores.json
+  root_latency: outputs/translation_latency_results.json
+  root_comparison: outputs/model_comparison.csv

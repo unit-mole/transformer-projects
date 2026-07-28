@@ -43,3 +43,14 @@ The production path was rebuilt around:
 - unit tests, CI, model metadata, deployment docs, and responsible-use language.
 
 The original notebook is preserved under `notebooks/archive/` for traceability and should not be presented as the final model implementation.
+
+## Portfolio-grade evaluation upgrade
+
+- Added deterministic IIT Bombay train, validation, and held-out test preparation.
+- Added RTX-aware mixed-precision fine-tuning for both MarianMT directions.
+- Added pretrained-versus-fine-tuned evaluation on identical test pairs.
+- Added SacreBLEU signatures, chrF, chrF++, TER, latency percentiles, throughput, GPU-memory, and preservation diagnostics.
+- Added bootstrap confidence intervals and paired bootstrap model comparison.
+- Added a 30-example human error-analysis workflow.
+- Added automatic synchronization into root output JSON files and the Static Space evaluation JSON.
+- Kept model checkpoints, dataset exports, and full prediction files out of Git.

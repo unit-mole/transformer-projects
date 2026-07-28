@@ -1,5 +1,13 @@
 {
-  "status": "not_evaluated",
-  "en_hi": null,
-  "hi_en": null
+  "status": "evaluated",
+  "dataset": "cfilt/iitb-english-hindi",
+  "profile": "portfolio",
+  "pretrained": {
+    "en_hi": 32.1131,
+    "hi_en": 40.6827
+  },
+  "fine_tuned": {
+    "en_hi": 36.7752,
+    "hi_en": 41.5662
+  }
 }

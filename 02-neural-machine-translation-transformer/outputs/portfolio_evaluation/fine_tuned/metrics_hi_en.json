@@ -1,0 +1,55 @@
+{
+  "status": "evaluated",
+  "system": "fine_tuned",
+  "direction": "hi_en",
+  "model_ref": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\02-neural-machine-translation-transformer\\models\\fine_tuned_hi_en",
+  "examples": 1000,
+  "metrics": {
+    "sacrebleu": 14.0044,
+    "sacrebleu_signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.6.0",
+    "chrf": 41.5662,
+    "chrf_signature": "nrefs:1|case:mixed|eff:yes|nc:6|nw:0|space:no|version:2.6.0",
+    "chrf_plus_plus": 39.6603,
+    "chrf_plus_plus_signature": "nrefs:1|case:mixed|eff:yes|nc:6|nw:2|space:no|version:2.6.0",
+    "ter": 71.7204,
+    "ter_signature": "nrefs:1|case:lc|tok:tercom|norm:yes|punct:yes|asian:no|version:2.6.0"
+  },
+  "runtime": {
+    "system": "fine_tuned",
+    "direction": "hi_en",
+    "model_ref": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\02-neural-machine-translation-transformer\\models\\fine_tuned_hi_en",
+    "device": "cuda",
+    "batch_size": 16,
+    "sentences": 1000,
+    "total_inference_seconds": 22.52993,
+    "average_latency_seconds": 0.02253,
+    "median_latency_seconds": 0.021171,
+    "p95_latency_seconds": 0.033359,
+    "minimum_latency_seconds": 0.012787,
+    "maximum_latency_seconds": 0.059234,
+    "sentences_per_second": 44.3854,
+    "peak_gpu_memory_gb": 4.8408
+  },
+  "diagnostics": {
+    "exact_match_rate": 0.001,
+    "number_preservation_rate": 0.928,
+    "empty_output_rate": 0.0,
+    "average_expected_script_ratio": 1.0,
+    "average_prediction_reference_length_ratio": 0.959782
+  },
+  "bootstrap_confidence_intervals": {
+    "method": "paired sentence bootstrap resampling within one system",
+    "samples": 500,
+    "seed": 42,
+    "sacrebleu": {
+      "mean": 13.986,
+      "lower_95": 13.2041,
+      "upper_95": 14.781
+    },
+    "chrf": {
+      "mean": 41.5506,
+      "lower_95": 40.8661,
+      "upper_95": 42.2247
+    }
+  }
+}

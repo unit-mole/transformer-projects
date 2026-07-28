@@ -80,3 +80,17 @@
 - `web/tests/confidence.test.js`
 - `web/tests/csv.test.js`
 - `web/tests/language-detection.test.js`
+
+## Portfolio-grade evaluation upgrade
+
+```text
+configs/portfolio_evaluation.yaml
+requirements-evaluation.txt
+EVALUATION_WORKFLOW.md
+data/README_evaluation.md
+notebooks/03_portfolio_grade_marianmt_finetuning_evaluation.ipynb
+src/portfolio_evaluation.py
+scripts/run_portfolio_evaluation.py
+scripts/summarize_manual_error_analysis.py
+tests/test_portfolio_evaluation.py
+```

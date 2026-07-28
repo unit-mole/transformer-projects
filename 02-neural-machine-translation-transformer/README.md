@@ -170,3 +170,16 @@ Transformer architecture, MarianMT, multilingual NLP, English–Hindi translatio
 PyTorch, Hugging Face Transformers, Transformers.js, ONNX Runtime Web, browser
 workers, Unicode handling, SacreBLEU, chrF, latency analysis, batch processing,
 unit testing, CI, responsible AI and free static deployment.
+
+
+## Portfolio-Grade Fine-Tuning and Evaluation
+
+Project 02 includes a dedicated RTX GPU workflow that compares the original pretrained MarianMT models with direction-specific fine-tuned models on a deterministic held-out IIT Bombay English–Hindi test subset. The workflow reports SacreBLEU with its reproducibility signature, chrF, chrF++, TER, latency percentiles, throughput, GPU memory, preservation diagnostics, bootstrap confidence intervals, paired significance results, and human error analysis.
+
+Run:
+
+```cmd
+jupyter lab notebooks/03_portfolio_grade_marianmt_finetuning_evaluation.ipynb
+```
+
+See [`EVALUATION_WORKFLOW.md`](EVALUATION_WORKFLOW.md) for the complete process. Result files remain truthful placeholders until the notebook is executed locally. The Static Space continues to use pretrained quantized ONNX models until the fine-tuned checkpoints are converted in a later deployment step.

@@ -15,3 +15,18 @@ outputs/batch_*.csv
 web/node_modules/
 web/dist/
 .DS_Store
+
+# Portfolio-grade evaluation: keep aggregate results, exclude large/raw artifacts.
+outputs/portfolio_evaluation/datasets/
+outputs/portfolio_evaluation/pretrained/predictions_*.csv
+outputs/portfolio_evaluation/fine_tuned/predictions_*.csv
+outputs/portfolio_evaluation/training/**/checkpoint-*/
+outputs/portfolio_evaluation/training/**/*.pt
+outputs/portfolio_evaluation/training/**/*.pth
+**/*.safetensors
+.huggingface/
+.cache/huggingface/
+models/fine_tuned_en_hi/
+models/fine_tuned_hi_en/
+**/__pycache__/
+**/.ipynb_checkpoints/

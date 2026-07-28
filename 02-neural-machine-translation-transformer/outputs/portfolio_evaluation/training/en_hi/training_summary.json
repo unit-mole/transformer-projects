@@ -1,0 +1,31 @@
+{
+  "status": "trained",
+  "direction": "en_hi",
+  "base_model": "Helsinki-NLP/opus-mt-en-hi",
+  "output_dir": "models\\fine_tuned_en_hi",
+  "train_examples": 50000,
+  "validation_examples": 520,
+  "epochs_requested": 2,
+  "training_seconds": 629.135,
+  "best_checkpoint": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\02-neural-machine-translation-transformer\\outputs\\portfolio_evaluation\\training\\en_hi\\checkpoint-4168",
+  "best_metric": 35.0052,
+  "train_metrics": {
+    "train_runtime": 628.7333,
+    "train_samples_per_second": 159.05,
+    "train_steps_per_second": 6.629,
+    "total_flos": 1389513046228992.0,
+    "train_loss": 7.9441355377607294,
+    "epoch": 2.0
+  },
+  "hardware": {
+    "device": "cuda",
+    "gpu_name": "NVIDIA GeForce RTX 5090",
+    "gpu_memory_gb": 31.84,
+    "bf16_supported": true,
+    "recommended_train_batch_size": 12,
+    "recommended_eval_batch_size": 16,
+    "gradient_accumulation_steps": 2
+  },
+  "mixed_precision": "bf16",
+  "training_history": "outputs\\portfolio_evaluation\\training\\en_hi\\training_history.json"
+}

@@ -1,13 +1,48 @@
 {
-  "note": "Populate only after running the Python evaluation pipeline. Null values prevent fabricated metrics.",
+  "status": "evaluated",
+  "dataset": "cfilt/iitb-english-hindi",
+  "profile": "portfolio",
+  "evaluation_pairs_per_direction": 1000,
+  "selected_system": "fine_tuned",
+  "note": "Metrics were generated locally from the documented held-out test subset. Browser inference may differ slightly from Python inference because the Static Space uses quantized ONNX models.",
   "en_hi": {
-    "sacrebleu": null,
-    "chrf": null,
-    "average_latency_seconds": null
+    "sacrebleu": 12.5665,
+    "chrf": 36.7752,
+    "average_latency_seconds": 0.02361,
+    "pretrained_sacrebleu": 9.6561,
+    "pretrained_chrf": 32.1131
   },
   "hi_en": {
-    "sacrebleu": null,
-    "chrf": null,
-    "average_latency_seconds": null
+    "sacrebleu": 14.0044,
+    "chrf": 41.5662,
+    "average_latency_seconds": 0.02253,
+    "pretrained_sacrebleu": 13.3014,
+    "pretrained_chrf": 40.6827
+  },
+  "manual_error_analysis": {
+    "status": "completed",
+    "reviewed_examples": 30,
+    "error_category_counts": {
+      "other": 9,
+      "named_entity": 6,
+      "missing_information": 4,
+      "number_or_date": 3,
+      "technical_terminology": 3,
+      "word_order": 2,
+      "good_translation": 2,
+      "under_translation": 1
+    },
+    "severity_counts": {
+      "high": 19,
+      "medium": 8,
+      "low": 3
+    },
+    "quality_counts": {
+      "weak": 21,
+      "acceptable": 7,
+      "good": 2
+    },
+    "mean_sentence_chrf": 12.0736,
+    "notes_completed": 30
   }
 }

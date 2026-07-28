@@ -1,0 +1,26 @@
+{
+  "status": "completed",
+  "reviewed_examples": 30,
+  "error_category_counts": {
+    "other": 9,
+    "named_entity": 6,
+    "missing_information": 4,
+    "number_or_date": 3,
+    "technical_terminology": 3,
+    "word_order": 2,
+    "good_translation": 2,
+    "under_translation": 1
+  },
+  "severity_counts": {
+    "high": 19,
+    "medium": 8,
+    "low": 3
+  },
+  "quality_counts": {
+    "weak": 21,
+    "acceptable": 7,
+    "good": 2
+  },
+  "mean_sentence_chrf": 12.0736,
+  "notes_completed": 30
+}
