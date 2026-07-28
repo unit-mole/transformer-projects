@@ -1,0 +1,23 @@
+PROJECT 04 — FINAL CREDIT-FREE HUGGING FACE STATIC SPACE
+
+This package already contains the finished website. Hugging Face does not need
+to run npm, Vite, Node.js, Python, Gradio, or any paid build job.
+
+FASTEST DEPLOYMENT
+
+1. Extract this ZIP inside your Project 04 folder.
+2. Keep the existing .venv active, or activate it.
+3. Run:
+
+   python deploy_static_space.py
+
+4. Refresh:
+
+   https://huggingface.co/spaces/anmol-unitmole/long-document-question-answering-longformer
+
+The upload script removes the old source/build configuration and uploads only:
+README.md, index.html, app.js, styles.css, samples/, and evaluation/.
+
+The live browser application runs DistilBERT QA using Transformers.js.
+The separately linked QASPER-fine-tuned Longformer model remains the evaluated
+core model of Project 04.

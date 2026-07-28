@@ -1,0 +1,11 @@
+{
+  "dataset": "QASPER v0.3 contiguous extractive subset",
+  "evaluation_examples": 200,
+  "training_examples": 803,
+  "validation_examples": 419,
+  "models": [
+    {"name": "BERT truncated 512", "exact_match": 0.015, "token_f1": 0.0736555807, "evidence_recovered": 0.26, "evidence_token_recall": 0.4133843754},
+    {"name": "Longformer SQuAD sliding windows", "exact_match": 0.06, "token_f1": 0.1615791422, "evidence_recovered": 0.30, "evidence_token_recall": 0.4588296618},
+    {"name": "Longformer QASPER fine-tuned", "exact_match": 0.125, "token_f1": 0.2666408598, "evidence_recovered": 0.49, "evidence_token_recall": 0.6014359160}
+  ]
+}

@@ -1,0 +1,7 @@
+CAPA Investigation Summary — Reagent Bottle Leakage
+
+The complaint investigation reviewed bottle dimensions, cap torque, liner thickness, fill volume, storage temperature, and distribution handling. Leakage was concentrated in lots produced on the second packaging line during the night shift.
+
+Dimensional inspection confirmed that the bottle neck and cap met specification. Torque records were inconsistent because the capping machine sensor was drifting after extended operation. The root cause was identified as calibration drift in the cap-torque sensor combined with an inadequate preventive-maintenance interval.
+
+Corrective actions included replacing the sensor, shortening the calibration interval, adding an automated torque alarm, retraining night-shift operators, and monitoring the next ten production lots. No additional leakage was observed during the effectiveness period.

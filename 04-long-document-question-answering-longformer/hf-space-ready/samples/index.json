@@ -1,0 +1,7 @@
+{
+  "samples": [
+    {"name": "Supplier Quality Investigation", "file": "supplier_quality_report.txt", "question": "What corrective action was assigned to the supplier?"},
+    {"name": "CAPA Investigation Summary", "file": "quality_capa_report.txt", "question": "What was identified as the root cause?"},
+    {"name": "Longformer Architecture Overview", "file": "longformer_overview.md", "question": "How does Longformer reduce the cost of processing long documents?"}
+  ]
+}

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Browser-based long-document question answering with Transformers.js, evidence highlighting, and real Longformer benchmark results." />
+  <title>Long-Document QA | Transformer Project 04</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <section class="hero">
+      <div class="hero-topline">TRANSFORMER PORTFOLIO · PROJECT 04</div>
+      <h1>Long-Document Question Answering</h1>
+      <p class="hero-copy">An evidence-grounded Document AI system combining a QASPER-fine-tuned Longformer evaluation pipeline with a free, serverless browser QA demonstration.</p>
+      <div class="badge-row">
+        <span class="badge">Longformer</span><span class="badge">QASPER</span><span class="badge">Transformers.js</span><span class="badge">ONNX Runtime</span><span class="badge">Evidence Grounding</span>
+      </div>
+      <div class="link-row">
+        <a href="https://github.com/unit-mole/transformer-projects/tree/main/04-long-document-question-answering-longformer" target="_blank" rel="noreferrer">GitHub project</a>
+        <a href="https://huggingface.co/anmol-unitmole/longformer-qasper-document-qa" target="_blank" rel="noreferrer">Fine-tuned Longformer</a>
+        <a href="https://huggingface.co/spaces/anmol-unitmole/long-document-question-answering-longformer" target="_blank" rel="noreferrer">Static Space</a>
+      </div>
+    </section>
+
+    <section class="notice">
+      <strong>Transparent deployment:</strong> the live Static Space runs a browser-compatible DistilBERT QA Transformer over retrieved document chunks. The linked Longformer model is the separately trained and evaluated Python model.
+    </section>
+
+    <section class="card metrics-card">
+      <div class="section-heading">
+        <div><span class="section-kicker">REAL BENCHMARK</span><h2>QASPER evaluation results</h2></div>
+        <span class="metric-pill">200 evaluation examples</span>
+      </div>
+      <div class="metric-grid">
+        <div class="metric"><span>Exact Match</span><strong>12.50%</strong><small>Fine-tuned Longformer</small></div>
+        <div class="metric"><span>Token F1</span><strong>26.66%</strong><small>vs. 16.16% base Longformer</small></div>
+        <div class="metric"><span>Evidence Recovery</span><strong>49.00%</strong><small>vs. 30.00% base Longformer</small></div>
+        <div class="metric"><span>Evidence Token Recall</span><strong>60.14%</strong><small>vs. 45.88% base Longformer</small></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Model</th><th>Exact Match</th><th>Token F1</th><th>Evidence Recovery</th><th>Evidence Token Recall</th></tr></thead>
+          <tbody>
+            <tr><td>BERT truncated to 512</td><td>1.50%</td><td>7.37%</td><td>26.00%</td><td>41.34%</td></tr>
+            <tr><td>Base Longformer + windows</td><td>6.00%</td><td>16.16%</td><td>30.00%</td><td>45.88%</td></tr>
+            <tr class="best-row"><td>QASPER-fine-tuned Longformer</td><td>12.50%</td><td>26.66%</td><td>49.00%</td><td>60.14%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="workspace-grid">
+      <div class="stack">
+        <section class="card">
+          <div class="section-heading"><div><span class="section-kicker">STEP 1</span><h2>Provide a document</h2></div></div>
+          <label for="sampleSelect">Preloaded sample</label>
+          <select id="sampleSelect"><option value="">Choose a sample document</option></select>
+          <label for="fileInput">Upload TXT, Markdown, or CSV</label>
+          <input id="fileInput" type="file" accept=".txt,.md,.csv" />
+          <label for="documentText">Document text</label>
+          <textarea id="documentText" placeholder="Paste a non-sensitive report, policy, manual, or research excerpt."></textarea>
+          <div class="mini-grid">
+            <div><span>Source</span><strong id="sourceName">pasted-text</strong></div>
+            <div><span>Characters</span><strong id="inputCharacters">0</strong></div>
+            <div><span>Words</span><strong id="inputWords">0</strong></div>
+            <div><span>Privacy</span><strong>Browser only</strong></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="section-heading"><div><span class="section-kicker">STEP 2</span><h2>Ask a focused question</h2></div></div>
+          <label for="question">Question</label>
+          <textarea id="question" class="question-box" placeholder="Example: What corrective action was assigned to the supplier?"></textarea>
+          <div class="control-grid">
+            <div><label for="chunkWords">Chunk size</label><input id="chunkWords" type="number" min="120" max="420" step="20" value="260" /></div>
+            <div><label for="overlapWords">Overlap</label><input id="overlapWords" type="number" min="0" max="160" step="10" value="60" /></div>
+            <div><label for="candidateChunks">Candidates</label><input id="candidateChunks" type="number" min="1" max="12" value="6" /></div>
+            <div><label for="runtimeSelect">Runtime</label><select id="runtimeSelect"><option value="wasm">WASM / CPU</option><option value="webgpu">WebGPU</option></select></div>
+          </div>
+          <div class="button-row">
+            <button id="loadModelButton" class="secondary">Load model</button>
+            <button id="askButton" class="primary">Ask document</button>
+            <button id="resetButton" class="ghost">Reset</button>
+            <button id="exportButton" class="ghost" disabled>Download JSON</button>
+          </div>
+          <div class="progress-grid">
+            <div><span>Model</span><progress id="modelProgress" max="100" value="0"></progress><small id="modelProgressText">Not loaded</small></div>
+            <div><span>Inference</span><progress id="inferenceProgress" max="100" value="0"></progress><small id="inferenceProgressText">Not started</small></div>
+          </div>
+          <div id="statusMessage" class="status">Choose a sample, upload a document, or paste text to begin.</div>
+        </section>
+      </div>
+
+      <div class="stack">
+        <section class="card output-card">
+          <div class="section-heading"><div><span class="section-kicker">STEP 3</span><h2>Inspect grounded output</h2></div></div>
+          <div class="mini-grid">
+            <div><span>Total chunks</span><strong id="metricChunks">—</strong></div>
+            <div><span>QA candidates</span><strong id="metricEvaluated">—</strong></div>
+            <div><span>Latency</span><strong id="metricLatency">—</strong></div>
+            <div><span>Runtime</span><strong id="metricRuntime">—</strong></div>
+          </div>
+          <div class="output-block"><span>Answer</span><div id="answerOutput" class="answer-value">No answer generated yet.</div></div>
+          <div class="output-block"><span>Confidence proxy</span><div id="confidenceOutput">—</div></div>
+          <div class="output-block"><span>Supporting paragraph</span><div id="supportingOutput">No supporting paragraph selected yet.</div></div>
+          <div class="output-block"><span>Highlighted evidence</span><div id="evidenceOutput" class="evidence-empty">Highlighted evidence will appear here.</div></div>
+          <details><summary>Diagnostics and candidate answers</summary><pre id="diagnosticsOutput">{}</pre></details>
+        </section>
+
+        <section class="card">
+          <div class="section-heading"><div><span class="section-kicker">SYSTEM DESIGN</span><h2>Long-document processing flow</h2></div></div>
+          <div class="architecture">
+            <div>Document input</div><b>↓</b><div>Overlapping chunks</div><b>↓</b><div>Lexical candidate retrieval</div><b>↓</b><div>Browser Transformer QA</div><b>↓</b><div>Answer + supporting evidence</div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="card disclosure-card">
+      <div class="section-heading"><div><span class="section-kicker">MODEL DISCLOSURE</span><h2>Core model versus live browser model</h2></div></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Component</th><th>Evaluated Python project</th><th>Live Static Space</th></tr></thead>
+        <tbody>
+          <tr><td>Model</td><td>anmol-unitmole/longformer-qasper-document-qa</td><td>Xenova/distilbert-base-cased-distilled-squad</td></tr>
+          <tr><td>Context strategy</td><td>Longformer sparse attention + sliding windows</td><td>Retrieval over overlapping short chunks</td></tr>
+          <tr><td>Inference location</td><td>Python / PyTorch</td><td>Visitor browser / ONNX Runtime</td></tr>
+          <tr><td>Purpose</td><td>Training, benchmarking, long-context evaluation</td><td>Free interactive portfolio demonstration</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="responsible">
+      <strong>Responsible use:</strong> This educational demo can return incomplete or incorrect answers. The confidence value is an uncalibrated model score. Do not upload confidential, proprietary, sensitive, regulated, or personally identifiable documents. Always review the supporting evidence.
+    </section>
+    <footer>Project 04 · Long-Document Question Answering · Fine-tuned Longformer + browser deployment baseline</footer>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

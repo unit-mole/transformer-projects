@@ -1,0 +1,7 @@
+Supplier Quality Investigation — UV-Cured Sensor Labels
+
+A review of incoming inspection records showed intermittent label discoloration on a batch of optical sensor assemblies. The investigation compared resin formulation, printing parameters, packaging conditions, transportation temperature, and ultraviolet curing records.
+
+The evidence showed that the resin and ink formulation matched the approved specification. Packaging and transportation records were also within the approved limits. However, ultraviolet curing logs showed that the supplier shortened the curing cycle during a high-volume production week. The shortened exposure time caused incomplete polymerization and made the printed label more sensitive to humidity and cleaning agents.
+
+The supplier was assigned a corrective action to restore the validated ultraviolet curing duration, add an automated timer interlock, and retain electronic curing records for every production lot. The effectiveness check requires three consecutive conforming lots and verification during the next supplier audit.
