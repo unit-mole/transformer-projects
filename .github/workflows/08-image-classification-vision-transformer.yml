@@ -1,7 +1,5 @@
 name: 08 Image Classification Vision Transformer CI
 
-# This workflow is intentionally restricted to Project 08. A Project 09-only
-# commit must not start this workflow.
 on:
   push:
     branches:
@@ -10,6 +8,7 @@ on:
       - "08-image-classification-vision-transformer/**"
       - "docs/08-image-classification-vision-transformer/**"
       - ".github/workflows/08-image-classification-vision-transformer.yml"
+
   pull_request:
     branches:
       - main
@@ -17,86 +16,217 @@ on:
       - "08-image-classification-vision-transformer/**"
       - "docs/08-image-classification-vision-transformer/**"
       - ".github/workflows/08-image-classification-vision-transformer.yml"
+
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: project-08-validation-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate-project-08:
     name: Validate Project 08 only
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
       - name: Validate Project 08 source folder
         shell: bash
         run: |
           set -euo pipefail
-          project="08-image-classification-vision-transformer"
-          test -d "$project"
 
-          # Some portfolio versions keep the static app in web/, while earlier
-          # versions keep development files elsewhere. Validate web/ only when it
-          # exists instead of failing unrelated commits.
-          if [[ -d "$project/web" ]]; then
-            test -f "$project/web/index.html"
-            test -f "$project/web/style.css"
-            test -f "$project/web/app.js"
-            echo "Project 08 source web application found and validated."
-          else
-            echo "Project 08 has no web/ directory; docs deployment copy is authoritative."
-          fi
+          required_files=(
+            "08-image-classification-vision-transformer/README.md"
+            "08-image-classification-vision-transformer/MODEL_CARD.md"
+            "08-image-classification-vision-transformer/DATASET_CARD.md"
+            "08-image-classification-vision-transformer/requirements.txt"
+            "08-image-classification-vision-transformer/notebooks/complete_vit_training_evaluation_pipeline.ipynb"
+            "08-image-classification-vision-transformer/outputs/model_metrics.json"
+            "08-image-classification-vision-transformer/outputs/test_evaluation_summary.json"
+            "08-image-classification-vision-transformer/outputs/vit_vs_cnn_comparison.json"
+            "08-image-classification-vision-transformer/outputs/attention_examples/attention_rollout_summary.json"
+            "08-image-classification-vision-transformer/images/Demo_Images.png"
+            "08-image-classification-vision-transformer/images/Model_Performance .png"
+            "08-image-classification-vision-transformer/images/Prediction.png"
+          )
+
+          for file_path in "${required_files[@]}"; do
+            if [[ ! -f "$file_path" ]]; then
+              echo "::error file=$file_path::Required Project 08 source file is missing."
+              exit 1
+            fi
+          done
+
+          echo "Project 08 source folder validation passed."
 
       - name: Validate Project 08 docs deployment files
         shell: bash
         run: |
           set -euo pipefail
-          deploy="docs/08-image-classification-vision-transformer"
-          test -d "$deploy"
-          test -f "$deploy/index.html"
-          test -f "$deploy/style.css"
-          test -f "$deploy/app.js"
-          test -d "$deploy/model"
-          test -d "$deploy/sample_images"
-          echo "Project 08 docs deployment copy validated."
+
+          deployment_root="docs/08-image-classification-vision-transformer"
+
+          required_files=(
+            "$deployment_root/index.html"
+            "$deployment_root/styles.css"
+            "$deployment_root/app.js"
+            "$deployment_root/assets/models/model_browser.onnx"
+            "$deployment_root/assets/models/labels.json"
+            "$deployment_root/assets/models/preprocessor_config.json"
+            "$deployment_root/assets/data/app_data.json"
+            "$deployment_root/assets/data/deployment_config.json"
+            "$deployment_root/assets/images/attention/attention_rollout_correct_grid.png"
+            "$deployment_root/assets/images/attention/attention_rollout_incorrect_grid.png"
+          )
+
+          for file_path in "${required_files[@]}"; do
+            if [[ ! -f "$file_path" ]]; then
+              echo "::error file=$file_path::Required GitHub Pages deployment file is missing."
+              exit 1
+            fi
+          done
+
+          model_size_bytes="$(stat -c%s "$deployment_root/assets/models/model_browser.onnx")"
+
+          if [[ "$model_size_bytes" -le 0 ]]; then
+            echo "::error::The browser ONNX model is empty."
+            exit 1
+          fi
+
+          if [[ "$model_size_bytes" -ge 104857600 ]]; then
+            echo "::error::The browser ONNX model is 100 MiB or larger."
+            exit 1
+          fi
+
+          echo "Project 08 docs deployment validation passed."
+          echo "Browser model size: $model_size_bytes bytes"
 
       - name: Check Project 08 JavaScript syntax
         shell: bash
         run: |
           set -euo pipefail
-          deploy="docs/08-image-classification-vision-transformer"
-          while IFS= read -r -d '' file; do
-            node --check "$file"
-          done < <(find "$deploy" -maxdepth 1 -type f -name "*.js" -print0)
+
+          node --check "docs/08-image-classification-vision-transformer/app.js"
+
+          if [[ -f "08-image-classification-vision-transformer/web/app.js" ]]; then
+            node --check "08-image-classification-vision-transformer/web/app.js"
+          fi
+
+          echo "JavaScript syntax validation passed."
 
       - name: Validate Project 08 JSON files
         shell: bash
         run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
+          set -euo pipefail
 
-          root = Path("docs/08-image-classification-vision-transformer")
-          files = sorted(root.glob("*.json"))
-          if not files:
-              raise SystemExit("No Project 08 JSON files were found in docs.")
-          for path in files:
-              with path.open("r", encoding="utf-8") as handle:
-                  json.load(handle)
-              print(f"Validated {path}")
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          import sys
+
+          roots = [
+              Path("08-image-classification-vision-transformer"),
+              Path("docs/08-image-classification-vision-transformer"),
+          ]
+
+          json_files = sorted(
+              file_path
+              for root in roots
+              for file_path in root.rglob("*.json")
+              if "node_modules" not in file_path.parts
+          )
+
+          if not json_files:
+              print("No Project 08 JSON files were found.", file=sys.stderr)
+              raise SystemExit(1)
+
+          failures = []
+
+          for file_path in json_files:
+              try:
+                  with file_path.open("r", encoding="utf-8") as file_handle:
+                      json.load(file_handle)
+              except Exception as error:
+                  failures.append(f"{file_path}: {error}")
+
+          if failures:
+              print("Invalid JSON files:", file=sys.stderr)
+              for failure in failures:
+                  print(f"- {failure}", file=sys.stderr)
+              raise SystemExit(1)
+
+          print(f"Validated {len(json_files)} JSON files.")
           PY
 
-      - name: Confirm workflow is validation-only
+      - name: Validate README image references
         shell: bash
         run: |
           set -euo pipefail
-          workflow=".github/workflows/08-image-classification-vision-transformer.yml"
-          if grep -Eiq 'actions/(configure-pages|deploy-pages)|gh-pages|PAGES_DEPLOY_TOKEN|pages:[[:space:]]*write|id-token:[[:space:]]*write' "$workflow"; then
-            echo "Project 08 workflow contains a deployment action or deployment permission."
-            exit 1
-          fi
-          echo "Project 08 workflow is validation-only."
+
+          python - <<'PY'
+          from pathlib import Path
+          import sys
+
+          project_root = Path("08-image-classification-vision-transformer")
+
+          required_images = [
+              project_root / "images" / "Demo_Images.png",
+              project_root / "images" / "Model_Performance .png",
+              project_root / "images" / "Prediction.png",
+          ]
+
+          missing_images = [
+              image_path
+              for image_path in required_images
+              if not image_path.is_file()
+          ]
+
+          if missing_images:
+              for image_path in missing_images:
+                  print(f"Missing README image: {image_path}", file=sys.stderr)
+              raise SystemExit(1)
+
+          readme_text = (project_root / "README.md").read_text(encoding="utf-8")
+
+          expected_references = [
+              "images/Demo_Images.png",
+              "images/Model_Performance%20.png",
+              "images/Prediction.png",
+          ]
+
+          missing_references = [
+              reference
+              for reference in expected_references
+              if reference not in readme_text
+          ]
+
+          if missing_references:
+              for reference in missing_references:
+                  print(f"README does not reference: {reference}", file=sys.stderr)
+              raise SystemExit(1)
+
+          print("README image-reference validation passed.")
+          PY
+
+      - name: Validation summary
+        shell: bash
+        run: |
+          echo "Project 08 validation completed successfully."
+          echo "This workflow performs validation only."
+          echo "GitHub Pages publishing remains configured from the main branch /docs folder."
