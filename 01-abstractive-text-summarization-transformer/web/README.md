@@ -10,7 +10,7 @@ pinned: false
 license: mit
 models:
   - Xenova/distilbart-cnn-12-6
-short_description: Real browser-based DistilBART summarization with decoding controls, chunking, and latency metrics.
+short_description: Browser-based DistilBART summarization with Transformers.js
 ---
 
 # Abstractive Text Summarization Transformer
