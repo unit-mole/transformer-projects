@@ -25,8 +25,6 @@ concurrency:
 env:
   PROJECT_DIR: 01-abstractive-text-summarization-transformer
   WEB_DIR: 01-abstractive-text-summarization-transformer/web
-  # This destination is intentionally isolated and must never use the shared
-  # HF_SPACE_REPO variable that Project 06 currently uses.
   PROJECT_01_HF_SPACE_REPO: anmol-unitmole/01-abstractive-text-summarization-transformer
 
 jobs:
@@ -61,6 +59,7 @@ jobs:
       - name: Verify dependency compatibility pins
         shell: bash
         run: |
+          set -euo pipefail
           grep -Fx "gradio==5.49.1" requirements.txt
           grep -Fx "transformers==4.57.6" requirements.txt
           grep -Fx "huggingface-hub==0.36.2" requirements.txt
@@ -76,11 +75,12 @@ jobs:
       - name: Run unit tests
         run: python -m pytest -q
 
-      - name: Validate GPU benchmark files
+      - name: Validate benchmark files
         shell: bash
         run: |
           set -euo pipefail
-          files=(
+
+          required_files=(
             "requirements-training.txt"
             "configs/portfolio_experiment.yaml"
             "notebooks/complete_distilbart_training_evaluation_pipeline.ipynb"
@@ -93,9 +93,10 @@ jobs:
             "outputs/benchmark/latest/model_metrics.json"
             "outputs/benchmark/latest/PORTFOLIO_RESULTS.md"
           )
-          for file in "${files[@]}"; do
-            test -f "$file" || {
-              echo "::error file=$file::Required Project 01 benchmark file is missing."
+
+          for file_path in "${required_files[@]}"; do
+            test -f "$file_path" || {
+              echo "::error file=$file_path::Required Project 01 benchmark file is missing."
               exit 1
             }
           done
@@ -108,8 +109,8 @@ jobs:
               "notebooks/complete_distilbart_training_evaluation_pipeline.ipynb"
           )
           notebook = json.loads(notebook_path.read_text(encoding="utf-8"))
-          assert notebook["nbformat"] == 4
-          assert len(notebook["cells"]) >= 20
+          assert notebook.get("nbformat") == 4
+          assert len(notebook.get("cells", [])) >= 20
 
           for path in Path("outputs/benchmark/latest").glob("*.json"):
               json.loads(path.read_text(encoding="utf-8"))
@@ -118,7 +119,7 @@ jobs:
           print("Benchmark notebook and JSON files validated.")
           PY
 
-      - name: Validate inference and Gradio imports without model downloads
+      - name: Validate imports without model downloads
         run: |
           python -c "from src.inference_pipeline import summarize_text; print('Inference import passed')"
           python -c "import app; import gradio_app; print('Gradio app import passed')"
@@ -154,26 +155,30 @@ jobs:
       - name: Build browser application on GitHub
         run: npm run build
 
-      - name: Validate free Static Space output
+      - name: Validate generated browser files
         shell: bash
         run: |
           set -euo pipefail
 
-          test -f dist/index.html
-          test -f dist/evaluation-results.json
+          test -s dist/index.html
+          test -s dist/evaluation-results.json
 
-          grep -F "sdk: static" README.md
-          grep -F "app_file: index.html" README.md
-          grep -F "Xenova/distilbart-cnn-12-6" README.md
-
-          if grep -Fq "app_build_command:" README.md; then
-            echo "::error file=README.md::app_build_command would trigger a Hugging Face build. Project 01 must upload prebuilt files instead."
+          asset_count="$(find dist -type f | wc -l | tr -d ' ')"
+          if [[ "$asset_count" -lt 3 ]]; then
+            echo "::error::The Vite build produced too few deployment files."
+            find dist -maxdepth 3 -type f -print | sort
             exit 1
           fi
 
-          echo "Project 01 prebuilt Static Space validation passed."
+          if grep -Fq 'src="/src/' dist/index.html; then
+            echo "::error file=dist/index.html::The built HTML still references Vite source files."
+            exit 1
+          fi
 
-  sync-to-hugging-face:
+          echo "Generated browser bundle validated."
+          find dist -maxdepth 3 -type f -print | sort
+
+  deploy-project-01:
     name: Deploy isolated Project 01 Static Space
     needs:
       - test-python
@@ -188,23 +193,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Verify isolated Hugging Face destination
+      - name: Verify isolated deployment destination
         shell: bash
         run: |
           set -euo pipefail
+
           expected="anmol-unitmole/01-abstractive-text-summarization-transformer"
 
           if [[ "$PROJECT_01_HF_SPACE_REPO" != "$expected" ]]; then
-            echo "::error::Unsafe Hugging Face destination: $PROJECT_01_HF_SPACE_REPO"
+            echo "::error::Deployment blocked. Expected $expected but received $PROJECT_01_HF_SPACE_REPO."
             exit 1
           fi
 
           if [[ "$PROJECT_01_HF_SPACE_REPO" == *"/06-"* ]]; then
-            echo "::error::Project 01 must never deploy to a Project 06 Space."
+            echo "::error::Project 01 must never deploy to the Project 06 Space."
             exit 1
           fi
 
-          echo "Deployment destination verified: $PROJECT_01_HF_SPACE_REPO"
+          echo "Safe Project 01 destination: $PROJECT_01_HF_SPACE_REPO"
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
@@ -212,14 +218,14 @@ jobs:
           node-version: "22"
           package-manager-cache: false
 
-      - name: Build deployable frontend on GitHub
+      - name: Build deployment bundle on GitHub
         working-directory: 01-abstractive-text-summarization-transformer/web
         run: |
           npm install --no-audit --no-fund
           npm test
           npm run build
 
-      - name: Prepare prebuilt Hugging Face Space bundle
+      - name: Prepare prebuilt Hugging Face Space
         shell: bash
         run: |
           set -euo pipefail
@@ -228,27 +234,74 @@ jobs:
           mkdir -p _project01_hf_space
 
           cp -a "$WEB_DIR/dist/." _project01_hf_space/
-          cp "$WEB_DIR/README.md" _project01_hf_space/README.md
 
-          test -f _project01_hf_space/index.html
-          test -f _project01_hf_space/evaluation-results.json
-          test -f _project01_hf_space/README.md
+          cat > _project01_hf_space/README.md <<'SPACE_README'
+          ---
+          title: Abstractive Text Summarization Transformer
+          emoji: 📝
+          colorFrom: blue
+          colorTo: purple
+          sdk: static
+          app_file: index.html
+          pinned: false
+          license: mit
+          models:
+            - Xenova/distilbart-cnn-12-6
+          short_description: Browser-based DistilBART text summarization
+          ---
 
-          grep -F "sdk: static" _project01_hf_space/README.md
-          grep -F "app_file: index.html" _project01_hf_space/README.md
+          # Abstractive Text Summarization Transformer
 
-          if grep -Fq "app_build_command:" _project01_hf_space/README.md; then
-            echo "::error::Deployment README still contains app_build_command."
-            exit 1
-          fi
+          Real browser-based Transformer summarization using Transformers.js,
+          ONNX Runtime Web, and `Xenova/distilbart-cnn-12-6`.
 
-          if [[ -f _project01_hf_space/package.json ]]; then
-            echo "::error::Unbuilt source package was copied into the deployment bundle."
-            exit 1
-          fi
+          The frontend is prebuilt by GitHub Actions. Hugging Face directly
+          serves `index.html`; no paid Static Space build job is requested.
 
-          echo "Prebuilt Project 01 Space bundle:"
-          find _project01_hf_space -maxdepth 2 -type f -print | sort
+          Source: https://github.com/unit-mole/transformer-projects/tree/main/01-abstractive-text-summarization-transformer
+          SPACE_README
+
+          python - <<'PY'
+          from pathlib import Path
+
+          root = Path("_project01_hf_space")
+          required = [
+              root / "README.md",
+              root / "index.html",
+              root / "evaluation-results.json",
+          ]
+          missing = [str(path) for path in required if not path.is_file() or path.stat().st_size == 0]
+          if missing:
+              raise SystemExit("Missing or empty deployment files:\n" + "\n".join(missing))
+
+          readme = (root / "README.md").read_text(encoding="utf-8")
+          required_metadata = [
+              "sdk: static",
+              "app_file: index.html",
+              "short_description: Browser-based DistilBART text summarization",
+          ]
+          for value in required_metadata:
+              if value not in readme:
+                  raise SystemExit(f"Missing README metadata: {value}")
+
+          if "app_build_command:" in readme:
+              raise SystemExit("README must not contain app_build_command.")
+
+          if "dist/index.html" in readme:
+              raise SystemExit("README must point to root index.html, not dist/index.html.")
+
+          short_description = "Browser-based DistilBART text summarization"
+          if len(short_description) > 60:
+              raise SystemExit("short_description exceeds 60 characters.")
+
+          if (root / "package.json").exists():
+              raise SystemExit("Unbuilt source package was copied to the Space bundle.")
+
+          print("Prebuilt free Static Space bundle validated.")
+          PY
+
+          echo "Deployment bundle:"
+          find _project01_hf_space -maxdepth 3 -type f -print | sort
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -256,7 +309,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install Hugging Face Hub client
-        run: python -m pip install "huggingface-hub==0.36.2"
+        run: python -m pip install --upgrade "huggingface-hub>=0.36.2,<2.0"
 
       - name: Create or update Project 01 Hugging Face Space
         env:
@@ -281,21 +334,11 @@ jobs:
               raise SystemExit(
                   f"Deployment blocked. Expected {expected_repo}, received {repo_id}."
               )
+
           if not token:
               raise SystemExit(
                   "HF_TOKEN is missing under GitHub Settings > "
                   "Secrets and variables > Actions > Secrets."
-              )
-
-          required_files = [
-              deployment_folder / "README.md",
-              deployment_folder / "index.html",
-              deployment_folder / "evaluation-results.json",
-          ]
-          missing = [str(path) for path in required_files if not path.is_file()]
-          if missing:
-              raise SystemExit(
-                  "Missing prebuilt deployment files:\n" + "\n".join(missing)
               )
 
           api = HfApi(token=token)
@@ -306,12 +349,13 @@ jobs:
               private=False,
               exist_ok=True,
           )
+
           api.upload_folder(
               repo_id=repo_id,
               repo_type="space",
               folder_path=str(deployment_folder),
               path_in_repo=".",
-              delete_patterns="*",
+              delete_patterns=["*", "**/*"],
               commit_message=(
                   "Deploy isolated Project 01 prebuilt Static Space "
                   f"from GitHub {sha}"
@@ -319,7 +363,7 @@ jobs:
           )
 
           print(
-              "Project 01 Static Space synchronized: "
+              "Project 01 deployed successfully: "
               f"https://huggingface.co/spaces/{repo_id}"
           )
           PY
