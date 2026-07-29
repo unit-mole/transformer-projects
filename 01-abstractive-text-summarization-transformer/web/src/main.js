@@ -170,8 +170,13 @@ async function ensureModelLoaded() {
     elements.runtime.textContent = info.runtime.toUpperCase();
     elements.dtype.textContent = info.dtype;
   } catch (error) {
+    client.reset();
+    modelLoadedForRuntime = null;
     showError(error);
-    setStatus({ state: 'error', message: 'Model load failed' });
+    setStatus({
+      state: 'error',
+      message: 'Model load failed — retry with WASM / CPU',
+    });
     throw error;
   } finally {
     setBusy(false);

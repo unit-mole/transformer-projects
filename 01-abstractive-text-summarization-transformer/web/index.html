@@ -112,11 +112,13 @@
             <label class="control">
               <span>Runtime</span>
               <select id="runtime-select">
-                <option value="auto">Auto: WebGPU then WASM fallback</option>
-                <option value="webgpu">WebGPU</option>
-                <option value="wasm">WASM / CPU</option>
+                <option value="wasm" selected>Recommended: WASM / CPU (q8)</option>
+                <option value="webgpu">Experimental: WebGPU (q4, with WASM fallback)</option>
               </select>
-              <small>Changing runtime reloads the model.</small>
+              <small>
+                WASM is the reliable default. WebGPU is faster on some systems
+                but remains browser- and driver-dependent.
+              </small>
             </label>
 
             <label class="control">

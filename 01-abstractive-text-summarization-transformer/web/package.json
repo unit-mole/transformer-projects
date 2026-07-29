@@ -1,9 +1,9 @@
 {
   "name": "project-01-abstractive-summarization-static-space",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
-  "description": "Free Hugging Face Static Space for browser-based DistilBART abstractive summarization.",
+  "description": "Reliable free Static Space for browser-based DistilBART summarization with WASM-first inference and optional WebGPU.",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
@@ -12,7 +12,7 @@
     "check": "npm test && npm run build"
   },
   "dependencies": {
-    "@huggingface/transformers": "3.8.1"
+    "@huggingface/transformers": "4.2.0"
   },
   "devDependencies": {
     "vite": "6.4.3"

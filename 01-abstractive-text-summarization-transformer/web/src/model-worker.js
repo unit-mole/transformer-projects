@@ -1,7 +1,11 @@
 import { env, pipeline } from '@huggingface/transformers';
 import { normalizeText, splitIntoSentences } from './text-utils.js';
+import {
+  MODEL_ID,
+  buildRuntimePlan,
+  formatRuntimeError,
+} from './runtime-config.js';
 
-const MODEL_ID = 'Xenova/distilbart-cnn-12-6';
 const MAX_INPUT_TOKENS = 900;
 const TOKEN_OVERLAP_SENTENCES = 1;
 
@@ -13,15 +17,36 @@ let activeRuntime = null;
 let activeDtype = null;
 let loadPromise = null;
 
+function dtypeLabel(dtype) {
+  if (typeof dtype === 'string') return dtype;
+  if (dtype && typeof dtype === 'object') {
+    return Object.entries(dtype)
+      .map(([moduleName, value]) => `${moduleName}:${value}`)
+      .join(', ');
+  }
+  return 'default';
+}
+
 function postStatus(state, message) {
-  self.postMessage({ type: 'status', payload: { state, message, runtime: activeRuntime, dtype: activeDtype } });
+  self.postMessage({
+    type: 'status',
+    payload: {
+      state,
+      message,
+      runtime: activeRuntime,
+      dtype: activeDtype,
+    },
+  });
 }
 
 function normalizeProgress(info) {
   const progress = Number(info?.progress);
   const loaded = Number(info?.loaded);
   const total = Number(info?.total);
-  const normalizedReportedProgress = Number.isFinite(progress) && progress >= 0 && progress <= 1 ? progress * 100 : progress;
+  const normalizedReportedProgress =
+    Number.isFinite(progress) && progress >= 0 && progress <= 1
+      ? progress * 100
+      : progress;
   const ratio = Number.isFinite(normalizedReportedProgress)
     ? normalizedReportedProgress
     : Number.isFinite(loaded) && Number.isFinite(total) && total > 0
@@ -41,47 +66,94 @@ function supportsWebGPU() {
   return Boolean(self.navigator && 'gpu' in self.navigator);
 }
 
-function runtimePlan(preference) {
-  if (preference === 'wasm') return [{ device: 'wasm', dtype: 'q8' }];
-  if (preference === 'webgpu') {
-    return supportsWebGPU()
-      ? [{ device: 'webgpu', dtype: 'q4f16' }, { device: 'wasm', dtype: 'q8' }]
-      : [{ device: 'wasm', dtype: 'q8' }];
+async function disposePipeline() {
+  if (summarizer && typeof summarizer.dispose === 'function') {
+    try {
+      await summarizer.dispose();
+    } catch {
+      // A failed partial session may not be disposable. A fresh candidate
+      // is still attempted below.
+    }
   }
-  return supportsWebGPU()
-    ? [{ device: 'webgpu', dtype: 'q4f16' }, { device: 'wasm', dtype: 'q8' }]
-    : [{ device: 'wasm', dtype: 'q8' }];
+  summarizer = null;
 }
 
-async function loadModel(runtimePreference = 'auto') {
-  if (summarizer && activeRuntime) return { modelId: MODEL_ID, runtime: activeRuntime, dtype: activeDtype };
+async function loadModel(runtimePreference = 'wasm') {
+  if (summarizer && activeRuntime) {
+    return {
+      modelId: MODEL_ID,
+      runtime: activeRuntime,
+      dtype: activeDtype,
+    };
+  }
   if (loadPromise) return loadPromise;
 
   loadPromise = (async () => {
-    let lastError = null;
-    for (const candidate of runtimePlan(runtimePreference)) {
+    const candidates = buildRuntimePlan(
+      runtimePreference,
+      supportsWebGPU(),
+    );
+    const failures = [];
+
+    for (let index = 0; index < candidates.length; index += 1) {
+      const candidate = candidates[index];
+      activeRuntime = candidate.runtime;
+      activeDtype = dtypeLabel(candidate.pipelineOptions.dtype);
+
       try {
-        activeRuntime = candidate.device;
-        activeDtype = candidate.dtype;
-        postStatus('loading', `Loading ${MODEL_ID} with ${candidate.device.toUpperCase()}…`);
-        summarizer = await pipeline('summarization', MODEL_ID, {
-          device: candidate.device,
-          dtype: candidate.dtype,
-          progress_callback: (info) => {
-            self.postMessage({ type: 'progress', payload: normalizeProgress(info) });
+        postStatus(
+          'loading',
+          `Loading ${MODEL_ID} with ${candidate.label}…`,
+        );
+
+        summarizer = await pipeline(
+          'summarization',
+          MODEL_ID,
+          {
+            ...candidate.pipelineOptions,
+            progress_callback: (info) => {
+              self.postMessage({
+                type: 'progress',
+                payload: normalizeProgress(info),
+              });
+            },
           },
-        });
-        postStatus('ready', `Model ready on ${candidate.device.toUpperCase()} (${candidate.dtype}).`);
-        return { modelId: MODEL_ID, runtime: activeRuntime, dtype: activeDtype };
+        );
+
+        postStatus(
+          'ready',
+          `Model ready with ${candidate.label}.`,
+        );
+
+        return {
+          modelId: MODEL_ID,
+          runtime: activeRuntime,
+          dtype: activeDtype,
+        };
       } catch (error) {
-        lastError = error;
-        summarizer = null;
-        postStatus('fallback', `${candidate.device.toUpperCase()} load failed; trying a compatible fallback.`);
+        const reason = formatRuntimeError(error);
+        failures.push(`${candidate.label}: ${reason}`);
+        await disposePipeline();
+
+        const nextCandidate = candidates[index + 1];
+        if (nextCandidate) {
+          postStatus(
+            'fallback',
+            `${candidate.label} failed. Retrying with ${nextCandidate.label}…`,
+          );
+        }
       }
     }
+
     activeRuntime = null;
     activeDtype = null;
-    throw lastError ?? new Error('Unable to load the browser model.');
+    throw new Error(
+      [
+        'Unable to load the browser summarization model.',
+        ...failures,
+        'Reload the page, select WASM / CPU, and try again.',
+      ].join(' '),
+    );
   })();
 
   try {
