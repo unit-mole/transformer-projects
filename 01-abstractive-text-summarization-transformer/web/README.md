@@ -65,11 +65,19 @@ Generated summaries can omit context, distort details, or hallucinate. Do not pa
 
 ## Browser runtime reliability
 
-The deployed application defaults to the quantized WASM/q8 runtime because it
+The deployed application defaults to the quantized WASM/int8 runtime because it
 has the broadest browser compatibility. Visitors can explicitly select the
 experimental WebGPU/q4 runtime; if that model session fails, the application
-automatically attempts a clean WASM/q8 fallback.
+automatically attempts a clean WASM/int8 fallback.
 
 The frontend uses `@huggingface/transformers` 4.2.0. A low-level numeric error
 from a WebGPU model session is converted into a readable recovery message
 instead of being shown as an unexplained integer.
+
+
+## Explicit int8 compatibility fix
+
+The browser requests `encoder_model_int8.onnx` and
+`decoder_model_merged_int8.onnx` from the pinned model revision. It does not
+request the legacy `*_quantized.onnx` files selected by the `q8` alias.
+`uint8` is retained as an automatic second WASM fallback.
