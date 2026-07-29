@@ -1,6 +1,0 @@
-Base model: google/flan-t5-small
-Task: sequence-to-sequence language modeling
-Adapter method: LoRA through Hugging Face PEFT
-
-After training, upload the contents of models/lora_adapter/ to a Hugging Face model repository and set:
-ADAPTER_MODEL_ID=YOUR_HF_USERNAME/ml-ds-instruction-tuned-flan-t5-small-lora

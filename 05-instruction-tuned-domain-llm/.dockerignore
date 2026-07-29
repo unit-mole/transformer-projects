@@ -1,9 +1,0 @@
-.git
-.github
-.venv
-__pycache__
-.pytest_cache
-notebooks
-archive
-outputs/runs
-models/lora_adapter/*.safetensors
