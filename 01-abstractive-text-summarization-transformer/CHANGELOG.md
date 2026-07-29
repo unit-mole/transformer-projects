@@ -17,3 +17,7 @@
 - Added Static Space metadata and Vite build configuration.
 - Extended GitHub Actions to test/build the browser app and optionally synchronize it to Hugging Face.
 - Updated deployment documentation and model metadata without removing the Python/Gradio implementation.
+
+## RTX fine-tuning and benchmark upgrade
+
+Added the complete GPU notebook, deterministic benchmark, baselines, pretrained/fine-tuned comparison, optional LSTM import, actual metrics, error analysis, charts, artifact promotion, validation, and optional Model Hub publication.

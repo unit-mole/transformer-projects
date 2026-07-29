@@ -1,4 +1,30 @@
 {
-  "status": "not_run",
-  "message": "Run scripts/evaluate_model.py and commit only documented, reproducible results."
+  "Lead-3": {
+    "average_inference_seconds": 0.00018184559978544712,
+    "minimum_inference_seconds": 3.250001464039087e-05,
+    "maximum_inference_seconds": 0.0013791999663226306,
+    "p50_inference_seconds": 0.00014220000593923032,
+    "p95_inference_seconds": 0.0003773200180148702
+  },
+  "TextRank": {
+    "average_inference_seconds": 0.0013961485991021618,
+    "minimum_inference_seconds": 0.0007297999691218138,
+    "maximum_inference_seconds": 0.043037099996581674,
+    "p50_inference_seconds": 0.0011753000144381076,
+    "p95_inference_seconds": 0.002411869954084975
+  },
+  "Pretrained DistilBART": {
+    "average_inference_seconds": 0.3674417626002105,
+    "minimum_inference_seconds": 0.17728994999197312,
+    "maximum_inference_seconds": 0.6378339999937452,
+    "p50_inference_seconds": 0.3589698750001844,
+    "p95_inference_seconds": 0.4861193999822717
+  },
+  "Fine-tuned DistilBART": {
+    "average_inference_seconds": 0.3279529520003125,
+    "minimum_inference_seconds": 0.16924325001309626,
+    "maximum_inference_seconds": 0.5214949499932118,
+    "p50_inference_seconds": 0.32777082499524113,
+    "p95_inference_seconds": 0.4422134000051301
+  }
 }

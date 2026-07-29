@@ -1,0 +1,36 @@
+{
+  "status": "completed",
+  "dataset_id": "abisee/cnn_dailymail",
+  "dataset_config": "3.0.0",
+  "seed": 42,
+  "profile": "portfolio",
+  "splits": {
+    "train": {
+      "samples": 5000,
+      "average_article_words": 680.9054,
+      "median_article_words": 623.0,
+      "maximum_article_words": 1867,
+      "average_reference_words": 47.8386,
+      "median_reference_words": 45.0,
+      "maximum_reference_words": 326
+    },
+    "validation": {
+      "samples": 500,
+      "average_article_words": 652.8,
+      "median_article_words": 568.5,
+      "maximum_article_words": 1694,
+      "average_reference_words": 53.006,
+      "median_reference_words": 49.0,
+      "maximum_reference_words": 123
+    },
+    "test": {
+      "samples": 500,
+      "average_article_words": 681.554,
+      "median_article_words": 609.0,
+      "maximum_article_words": 1811,
+      "average_reference_words": 52.712,
+      "median_reference_words": 48.0,
+      "maximum_reference_words": 154
+    }
+  }
+}

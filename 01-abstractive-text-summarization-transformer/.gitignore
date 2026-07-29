@@ -12,3 +12,8 @@ models/transformer_summarization_model/*
 !models/transformer_summarization_model/.gitkeep
 models/tokenizer/*
 !models/tokenizer/.gitkeep
+# GPU benchmark local-only artifacts
+data/benchmark_cache/*
+!data/benchmark_cache/README.md
+models/distilbart_cnn_finetuned/
+outputs/trainer_checkpoints/

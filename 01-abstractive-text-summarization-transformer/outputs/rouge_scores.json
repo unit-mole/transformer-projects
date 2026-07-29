@@ -1,4 +1,22 @@
 {
-  "status": "not_run",
-  "message": "Run scripts/evaluate_model.py and commit only documented, reproducible results."
+  "Lead-3": {
+    "rouge1": 0.40076518941010086,
+    "rouge2": 0.17182690161792644,
+    "rougeL": 0.24680853909061093
+  },
+  "TextRank": {
+    "rouge1": 0.3489184828495337,
+    "rouge2": 0.13628509279985226,
+    "rougeL": 0.22889425496900612
+  },
+  "Pretrained DistilBART": {
+    "rouge1": 0.4469397317255777,
+    "rouge2": 0.21547613793782727,
+    "rougeL": 0.30815126077959687
+  },
+  "Fine-tuned DistilBART": {
+    "rouge1": 0.43860011590663983,
+    "rouge2": 0.2061527061994384,
+    "rougeL": 0.30032387469422633
+  }
 }

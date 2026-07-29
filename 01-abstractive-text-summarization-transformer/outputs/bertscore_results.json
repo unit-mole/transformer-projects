@@ -1,4 +1,22 @@
 {
-  "status": "not_run",
-  "message": "Run scripts/evaluate_model.py and commit only documented, reproducible results."
+  "Lead-3": {
+    "bertscore_precision": 0.21014608442783356,
+    "bertscore_recall": 0.24188987910747528,
+    "bertscore_f1": 0.22633183002471924
+  },
+  "TextRank": {
+    "bertscore_precision": 0.1663459688425064,
+    "bertscore_recall": 0.20301224291324615,
+    "bertscore_f1": 0.18498894572257996
+  },
+  "Pretrained DistilBART": {
+    "bertscore_precision": 0.28960245847702026,
+    "bertscore_recall": 0.33510076999664307,
+    "bertscore_f1": 0.31272417306900024
+  },
+  "Fine-tuned DistilBART": {
+    "bertscore_precision": 0.3362536132335663,
+    "bertscore_recall": 0.3462073504924774,
+    "bertscore_f1": 0.3415689170360565
+  }
 }

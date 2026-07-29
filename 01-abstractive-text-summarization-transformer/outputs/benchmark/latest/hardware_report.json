@@ -1,0 +1,13 @@
+{
+  "python": "3.13.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+  "cuda_available": true,
+  "torch_version": "2.12.1+cu132",
+  "cuda_runtime": "13.2",
+  "cudnn_version": 92000,
+  "gpu_count": 1,
+  "gpu_name": "NVIDIA GeForce RTX 5090",
+  "gpu_memory_gb": 31.84,
+  "bf16_supported": true
+}

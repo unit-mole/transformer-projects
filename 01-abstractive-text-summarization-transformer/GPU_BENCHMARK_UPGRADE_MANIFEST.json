@@ -1,0 +1,12 @@
+{
+  "status": "ready_to_run",
+  "notebook": "notebooks/complete_distilbart_training_evaluation_pipeline.ipynb",
+  "default_profile": {
+    "train": 5000,
+    "validation": 500,
+    "test": 500,
+    "epochs": 2
+  },
+  "actual_metrics_generated_here": false,
+  "reason": "The artifact environment has no user RTX GPU or internet model access. The notebook replaces not_run placeholders on the workstation."
+}

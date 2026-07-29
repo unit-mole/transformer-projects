@@ -1,0 +1,47 @@
+{
+  "status": "completed",
+  "run_id": "20260729T172001Z",
+  "completed_at": "2026-07-29T18:00:35.178681+00:00",
+  "profile": "portfolio",
+  "seed": 42,
+  "dataset": {
+    "id": "abisee/cnn_dailymail",
+    "config": "3.0.0",
+    "train_samples": 5000,
+    "validation_samples": 500,
+    "test_samples": 500
+  },
+  "models": {
+    "pretrained": "sshleifer/distilbart-cnn-12-6",
+    "fine_tuned": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\01-abstractive-text-summarization-transformer\\models\\distilbart_cnn_finetuned",
+    "hugging_face_model_repo": "anmol-unitmole/distilbart-cnn-dailymail-summarizer",
+    "static_browser_model": "Xenova/distilbart-cnn-12-6"
+  },
+  "generation": {
+    "max_source_tokens": 768,
+    "min_new_tokens": 30,
+    "max_new_tokens": 120,
+    "num_beams": 4,
+    "length_penalty": 2.0,
+    "no_repeat_ngram_size": 3,
+    "batch_size": 2
+  },
+  "hardware": {
+    "python": "3.13.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+    "cuda_available": true,
+    "torch_version": "2.12.1+cu132",
+    "cuda_runtime": "13.2",
+    "cudnn_version": 92000,
+    "gpu_count": 1,
+    "gpu_name": "NVIDIA GeForce RTX 5090",
+    "gpu_memory_gb": 31.84,
+    "bf16_supported": true
+  },
+  "lstm_comparison_included": false,
+  "notes": [
+    "Subset-specific benchmark, not a full-dataset leaderboard claim.",
+    "Static Space uses the base browser ONNX model unless separately converted."
+  ]
+}

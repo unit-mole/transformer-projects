@@ -1,0 +1,62 @@
+[
+  {
+    "model": "Lead-3",
+    "samples": 500,
+    "rouge1": 0.40076518941010086,
+    "rouge2": 0.17182690161792644,
+    "rougeL": 0.24680853909061093,
+    "bertscore_precision": 0.21014608442783356,
+    "bertscore_recall": 0.24188987910747528,
+    "bertscore_f1": 0.22633183002471924,
+    "average_inference_seconds": 0.00018184559978544712,
+    "p95_inference_seconds": 0.0003773200180148702,
+    "average_compression_ratio": 0.14676245725185674,
+    "average_reference_number_recall": 0.6422,
+    "average_hallucinated_number_count": 0.0
+  },
+  {
+    "model": "TextRank",
+    "samples": 500,
+    "rouge1": 0.3489184828495337,
+    "rouge2": 0.13628509279985226,
+    "rougeL": 0.22889425496900612,
+    "bertscore_precision": 0.1663459688425064,
+    "bertscore_recall": 0.20301224291324615,
+    "bertscore_f1": 0.18498894572257996,
+    "average_inference_seconds": 0.0013961485991021618,
+    "p95_inference_seconds": 0.002411869954084975,
+    "average_compression_ratio": 0.14943191896701155,
+    "average_reference_number_recall": 0.5449166666666667,
+    "average_hallucinated_number_count": 0.0
+  },
+  {
+    "model": "Pretrained DistilBART",
+    "samples": 500,
+    "rouge1": 0.4469397317255777,
+    "rouge2": 0.21547613793782727,
+    "rougeL": 0.30815126077959687,
+    "bertscore_precision": 0.28960245847702026,
+    "bertscore_recall": 0.33510076999664307,
+    "bertscore_f1": 0.31272417306900024,
+    "average_inference_seconds": 0.3674417626002105,
+    "p95_inference_seconds": 0.4861193999822717,
+    "average_compression_ratio": 0.12002797633616576,
+    "average_reference_number_recall": 0.7129388888888889,
+    "average_hallucinated_number_count": 0.024
+  },
+  {
+    "model": "Fine-tuned DistilBART",
+    "samples": 500,
+    "rouge1": 0.43860011590663983,
+    "rouge2": 0.2061527061994384,
+    "rougeL": 0.30032387469422633,
+    "bertscore_precision": 0.3362536132335663,
+    "bertscore_recall": 0.3462073504924774,
+    "bertscore_f1": 0.3415689170360565,
+    "average_inference_seconds": 0.3279529520003125,
+    "p95_inference_seconds": 0.4422134000051301,
+    "average_compression_ratio": 0.10148569322772792,
+    "average_reference_number_recall": 0.6775388888888889,
+    "average_hallucinated_number_count": 0.024
+  }
+]

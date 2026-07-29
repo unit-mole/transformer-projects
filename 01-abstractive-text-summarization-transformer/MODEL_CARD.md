@@ -87,3 +87,7 @@ print(result.to_dict())
 ## Deployment
 
 The Gradio app is launched through `app.py`. The project is prepared for Hugging Face Spaces and Docker. No model training occurs during startup; the base checkpoint is downloaded from the Hugging Face Hub on first inference.
+
+## Reproducible RTX benchmark
+
+The complete notebook evaluates the base and personally fine-tuned checkpoints on the same deterministic held-out subset. Results remain `not_run` until real GPU inference completes. Subset results must not be presented as full-dataset leaderboard results.

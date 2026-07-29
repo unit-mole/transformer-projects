@@ -65,6 +65,34 @@ jobs:
       - name: Run unit tests
         run: python -m pytest -q
 
+      - name: Validate GPU benchmark files
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(
+            "requirements-training.txt"
+            "configs/portfolio_experiment.yaml"
+            "notebooks/complete_distilbart_training_evaluation_pipeline.ipynb"
+            "src/benchmark_utils.py"
+            "scripts/check_gpu.py"
+            "scripts/validate_portfolio_outputs.py"
+            "tests/test_benchmark_utils.py"
+            "docs/GPU_FINE_TUNING_EVALUATION_GUIDE.md"
+            "outputs/benchmark/latest/benchmark_manifest.json"
+            "outputs/benchmark/latest/model_metrics.json"
+            "outputs/benchmark/latest/PORTFOLIO_RESULTS.md"
+          )
+          for file in "${files[@]}"; do test -f "$file" || exit 1; done
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          nb=json.loads(Path("notebooks/complete_distilbart_training_evaluation_pipeline.ipynb").read_text(encoding="utf-8"))
+          assert nb["nbformat"] == 4 and len(nb["cells"]) >= 20
+          for path in Path("outputs/benchmark/latest").glob("*.json"):
+              json.loads(path.read_text(encoding="utf-8"))
+          print("Benchmark notebook and JSON placeholders validated")
+          PY
+
       - name: Validate inference and Gradio imports without model downloads
         run: |
           python -c "from src.inference_pipeline import summarize_text; print('Inference import passed')"

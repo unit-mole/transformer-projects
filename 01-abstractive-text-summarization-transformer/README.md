@@ -316,3 +316,15 @@ See `docs/STATIC_SPACE_DEPLOYMENT.md` for the complete setup and troubleshooting
 ## Skills Demonstrated
 
 Transformer architecture, abstractive NLP, DistilBART, PyTorch, Hugging Face Transformers, Transformers.js, ONNX Runtime Web, WebGPU/WASM deployment, quantization, tokenization, beam search, long-document handling, ROUGE, BERTScore, latency analysis, baselines, error analysis, testing, GitHub Actions, browser workers, accessible frontend development, and free Hugging Face Static Space deployment.
+
+## Reproducible RTX fine-tuning and portfolio benchmark
+
+Run `notebooks/complete_distilbart_training_evaluation_pipeline.ipynb`. The default portfolio profile fine-tunes DistilBART on 5,000 CNN/DailyMail training examples, validates on 500, and evaluates on 500 unseen test examples. It generates actual Lead-3, TextRank, pretrained, fine-tuned, optional LSTM, ROUGE, BERTScore, latency, compression, numeric-risk, repetition, chart, and error-analysis artifacts. Until the notebook runs, benchmark JSON remains `status: not_run`.
+
+```bat
+python -m pip install -r requirements-training.txt
+python scripts\check_gpu.py
+jupyter lab
+```
+
+The Static Space still runs the browser-compatible base ONNX checkpoint, so its displayed metrics are populated from the matching pretrained benchmark row unless a fine-tuned ONNX model is separately exported.

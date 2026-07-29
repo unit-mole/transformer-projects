@@ -1,0 +1,47 @@
+experiment:
+  dataset_id: abisee/cnn_dailymail
+  dataset_config: 3.0.0
+  profile: portfolio
+  seed: 42
+  require_cuda: true
+
+profiles:
+  smoke: {train_samples: 200, validation_samples: 50, test_samples: 50, epochs: 1}
+  balanced: {train_samples: 2000, validation_samples: 200, test_samples: 200, epochs: 1}
+  portfolio: {train_samples: 5000, validation_samples: 500, test_samples: 500, epochs: 2}
+  portfolio_plus: {train_samples: 10000, validation_samples: 1000, test_samples: 500, epochs: 3}
+
+model:
+  base_model: sshleifer/distilbart-cnn-12-6
+  output_directory: models/distilbart_cnn_finetuned
+  max_source_tokens: 768
+  max_target_tokens: 128
+
+training:
+  learning_rate: 0.00002
+  train_batch_size: 1
+  evaluation_batch_size: 2
+  gradient_accumulation_steps: 8
+  weight_decay: 0.01
+  warmup_ratio: 0.05
+  generation_beams: 4
+  logging_steps: 25
+  save_total_limit: 2
+  gradient_checkpointing: true
+
+inference:
+  batch_size: 2
+  min_new_tokens: 30
+  max_new_tokens: 120
+  num_beams: 4
+  length_penalty: 2.0
+  no_repeat_ngram_size: 3
+
+metrics:
+  compute_bertscore: true
+  bertscore_model: roberta-large
+  bertscore_batch_size: 8
+
+publishing:
+  push_model_to_hub: false
+  hugging_face_model_repo: anmol-unitmole/distilbart-cnn-dailymail-summarizer
