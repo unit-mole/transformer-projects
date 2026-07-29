@@ -28,3 +28,8 @@ This project includes **82 self-authored, synthetic curriculum examples** create
 ## Limitations
 
 The dataset is intentionally compact. It is suitable for validating the training and deployment workflow, but a stronger production model would require a larger expert-reviewed corpus, broader phrasing, adversarial prompts, code execution checks, and more rigorous factual validation.
+
+
+## Expanded portfolio dataset
+
+Run `python scripts/build_extended_dataset.py` to rebuild `ml_ds_instruction_dataset_extended.jsonl` and `evaluation_prompts_extended.jsonl`. The generated dataset contains 401 public-safe examples with topic-grouped 323/42/36 train, validation, and test splits. `topic_group` prevents paraphrases of the same concept from crossing split boundaries. Generated statistics and validation results are stored in `outputs/extended_dataset_statistics.json` and `outputs/extended_dataset_validation_report.json`.

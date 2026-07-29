@@ -2,7 +2,7 @@
 
 ## Dataset summary
 
-A compact custom dataset of **82** self-authored instruction-response examples for adapting a small instruction model into an ML and Data Science Learning Assistant.
+A public-safe, self-authored and curated curriculum containing **401 instruction-response examples** for adapting a small instruction model into an ML and Data Science Learning Assistant. The original 82-example seed dataset is preserved, while `ml_ds_instruction_dataset_extended.jsonl` is the recommended training dataset.
 
 ## Purpose
 
@@ -10,50 +10,79 @@ The dataset supports concept explanations, algorithm comparisons, metric explana
 
 ## Format
 
-JSON Lines with `instruction`, optional `input`, `output`, category, difficulty, topic, source, reference answer, identifier, and split.
+JSON Lines with `instruction`, optional `input`, `output`, `response`, category, difficulty, topic, `topic_group`, source, reference answer, identifier, and split.
+
+## Statistics
+
+| Statistic | Value |
+|---|---:|
+| Examples | 401 |
+| Train / validation / test | 323 / 42 / 36 |
+| Capability categories | 9 |
+| Topic groups | 203 |
+| Unique topics | 205 |
+| Average prompt words | 7.79 |
+| Average response words | 43.84 |
+
+The exact generated statistics are saved in `outputs/extended_dataset_statistics.json`.
 
 ## Data sources
 
-All examples are newly authored synthetic curriculum content. No confidential quality reports, personal data, proprietary company text, or copyrighted textbook excerpts are included.
+All examples are newly authored or curated for this project. No confidential quality reports, personal data, proprietary company text, or copied textbook passages are included. Quality-analytics examples are generic and synthetic.
+
+## Creation process
+
+`scripts/build_extended_dataset.py` combines the original seed records with a structured curriculum covering classical ML, deep learning, Transformers, instruction tuning, LoRA, evaluation, deployment, MLOps, quality analytics, and responsible AI. The generator creates multiple task styles only when the responses can be grounded in a curated concept record.
 
 ## Cleaning and validation
 
-The preparation script checks empty required fields, short outputs, duplicate prompt/input combinations, JSON validity, and simple patterns that may indicate sensitive data. Technical correctness still requires human review.
+The project checks:
+
+- valid JSONL records;
+- required fields;
+- duplicate prompt/input pairs;
+- minimum and maximum response length;
+- simple sensitive-data patterns;
+- valid train, validation, and test labels;
+- topic-group isolation across splits.
+
+The generated validation report currently contains zero structural issues. Technical correctness still requires human review.
 
 ## Splits
 
-A deterministic pattern assigns approximately 80% training, 10% validation, and 10% test examples.
+Splits are assigned deterministically at the **topic-group level**, not at the individual-row level. Therefore, paraphrases and prompt variants for one topic cannot appear in both training and test sets. The target allocation is approximately 80% training, 10% validation, and 10% test.
 
 ## Known limitations
 
-- Small size and limited linguistic diversity.
-- Primarily English-language content.
-- Reference answers are concise and do not represent every valid response.
-- Code examples require execution and version-specific review.
-- Synthetic examples may not match real learner phrasing.
+- The curriculum is synthetic and primarily English.
+- Reference answers are concise and do not represent every valid answer.
+- Some related concepts remain semantically close even when topic groups differ.
+- Code examples require execution and package-version review.
+- The dataset is sufficient for a portfolio-scale LoRA experiment, not a production-grade educational model.
+- Expert review should be expanded before high-stakes or broad public use.
 
 ## License and use
 
-Dataset content is released with this repository under the MIT License for educational and portfolio use. Users remain responsible for reviewing generated outputs and third-party model licenses.
+Dataset content is released with this repository under the MIT License for educational and portfolio use. Users remain responsible for reviewing generated outputs and complying with third-party model licenses.
 
 ## Responsible use
 
-Do not add private, confidential, proprietary, copyrighted, or personally identifiable material. Do not use this dataset or model as a high-stakes advisor.
+Do not add private, confidential, proprietary, copyrighted, or personally identifiable material. Do not use this dataset or resulting model as a legal, medical, financial, immigration, safety-critical, or official advisor.
 
 ## Example
 
 ```json
 {
-  "instruction": "Explain supervised learning in simple terms.",
+  "instruction": "Explain LoRA in simple terms.",
   "input": "",
-  "output": "Supervised learning trains a model from labeled examples, where each input is paired with a known target. The model learns a mapping that can predict targets for new data. Common tasks are classification and regression.",
-  "response": "Supervised learning trains a model from labeled examples, where each input is paired with a known target. The model learns a mapping that can predict targets for new data. Common tasks are classification and regression.",
+  "output": "LoRA adds trainable low-rank matrices to selected layers while leaving base weights frozen...",
   "category": "concept_explanation",
   "difficulty": "beginner",
-  "topic": "supervised learning",
-  "source": "self-authored synthetic curriculum",
-  "reference_answer": "Supervised learning trains a model from labeled examples, where each input is paired with a known target. The model learns a mapping that can predict targets for new data. Common tasks are classification and regression.",
-  "id": "mlds-0001",
-  "split": "test"
+  "topic": "LoRA",
+  "topic_group": "lora",
+  "source": "self-authored and curated public-safe ML/DS curriculum",
+  "reference_answer": "LoRA adds trainable low-rank matrices to selected layers while leaving base weights frozen...",
+  "id": "mlds-ext-...",
+  "split": "train"
 }
 ```

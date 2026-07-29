@@ -1,20 +1,22 @@
 {
   "project": "05-instruction-tuned-domain-llm",
   "base_model_id": "google/flan-t5-small",
+  "architecture": "encoder-decoder Transformer",
   "fine_tuning_method": "LoRA / PEFT",
   "peft_task_type": "SEQ_2_SEQ_LM",
-  "adapter_model_id": "YOUR_HF_USERNAME/ml-ds-instruction-tuned-flan-t5-small-lora",
-  "adapter_status": "not_trained_in_generated_bundle",
-  "demo_behavior": "Loads adapter when ADAPTER_MODEL_ID is configured; otherwise transparently loads the base model.",
-  "lora": {
-    "r": 8,
-    "alpha": 16,
+  "adapter_model_id": "YOUR_HF_USERNAME/flan-t5-small-ml-ds-assistant-lora",
+  "adapter_status": "train with notebooks/05_end_to_end_gpu_lora_training_evaluation.ipynb",
+  "demo_behavior": "Loads the adapter when ADAPTER_MODEL_ID is configured; otherwise transparently loads the base model.",
+  "portfolio_experiment_lora": {
+    "r": 16,
+    "alpha": 32,
     "dropout": 0.05,
-    "target_modules": [
-      "q",
-      "v"
-    ]
+    "target_modules": ["q", "v"]
   },
-  "training_dataset": "data/ml_ds_instruction_dataset.jsonl",
-  "responsible_use": "Educational portfolio demonstration only."
+  "training_dataset": "data/ml_ds_instruction_dataset_extended.jsonl",
+  "dataset_examples": 401,
+  "held_out_examples": 36,
+  "split_policy": "topic-grouped 80/10/10",
+  "evaluation_status": "not_run_until_local_RTX_notebook_executes",
+  "responsible_use": "Educational portfolio demonstration only. Human review is required."
 }

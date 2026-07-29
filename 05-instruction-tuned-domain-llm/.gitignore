@@ -17,3 +17,15 @@ web/.vite/
 # Merged / exported browser models
 models/merged_model/
 models/browser_model/
+
+# Local GPU training checkpoints and adapter weights
+models/experiments/**/checkpoints/
+models/experiments/**/adapter/*.safetensors
+models/experiments/**/adapter/*.bin
+models/experiments/**/optimizer.pt
+models/experiments/**/scheduler.pt
+models/experiments/**/rng_state.pth
+
+# Jupyter local state
+.ipynb_checkpoints/
+models/experiments/

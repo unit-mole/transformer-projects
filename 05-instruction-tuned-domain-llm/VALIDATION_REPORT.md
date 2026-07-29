@@ -1,20 +1,32 @@
-# Validation Report
-
-The updated Project 05 package was checked before packaging.
+# Validation Report — Portfolio-Scale Project 05 Upgrade
 
 ## Completed checks
 
-- Existing Python unit tests: **8 passed**
-- Python syntax compilation for `app.py`, `gradio_app.py`, `src/`, `scripts/`, and `tests/`
-- JavaScript syntax checks for all `web/src/*.js`, `web/scripts/*.mjs`, and `web/vite.config.js`
-- Static Space metadata validation (`sdk: static`, build command, and `dist/index.html` output)
-- JSON parsing for project and web metadata files
-- ZIP integrity verification
+- Expanded dataset rebuilt successfully.
+- Expanded dataset size: 401 examples.
+- Topic groups: 203.
+- Splits: 323 training, 42 validation, and 36 test examples.
+- Dataset structural validation issues: 0.
+- Topic-group split leakage issues: 0.
+- Python test suite: 11 tests passed.
+- Python compilation: passed for application, source, scripts, and tests.
+- End-to-end notebook: valid Jupyter JSON and all code cells parse as Python.
+- Project JSON files: valid.
+- Static frontend JavaScript syntax: passed.
+- Dedicated GitHub Actions workflow: included.
 
-## Environment limitation
+## Checks that require the user's RTX environment
 
-The local execution environment could not complete the npm package download, so the Vite production build was not executed here. The dedicated GitHub Actions job installs the exact package versions from `package.json`, validates the Static Space configuration, and runs `npm run build` on every relevant push or pull request.
+The generated package cannot claim trained-model scores until the notebook is run on the user's system. The following remain intentionally unexecuted in this source bundle:
 
-## Model status
+- downloading FLAN-T5 and metric models;
+- LoRA training on the NVIDIA RTX GPU;
+- held-out base-model generation;
+- held-out LoRA-adapter generation;
+- BERTScore, ROUGE, semantic relevance, loss, perplexity, and latency calculation;
+- paired bootstrap comparison;
+- manual factuality review;
+- Hugging Face adapter upload;
+- merged ONNX export and browser-model publication.
 
-The package does not claim that a Project 05 LoRA adapter or merged ONNX model already exists. The live static app works in transparent base-model mode and supports a custom merged ONNX model after real training, merging, export, evaluation, and Hub publication.
+The notebook saves each real result directly into JSON, CSV, Markdown, and PNG artifacts after execution.

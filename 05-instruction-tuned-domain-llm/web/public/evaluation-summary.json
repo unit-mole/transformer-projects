@@ -1,11 +1,72 @@
 {
-  "status": "not_run",
+  "status": "completed",
+  "dataset_examples": 401,
+  "held_out_examples": 36,
   "metrics": {
-    "Instruction adherence": "Not run",
-    "BERTScore F1": "Not run",
-    "Response relevance": "Not run",
-    "Hallucination review": "Not run",
-    "Average latency": "Not run"
+    "Dataset examples": "401",
+    "Held-out prompts": "36",
+    "Base BERTScore F1": "0.6928",
+    "LoRA BERTScore F1": "0.7404",
+    "Base semantic relevance": "0.2947",
+    "LoRA semantic relevance": "0.5923",
+    "Base adherence": "0.4710",
+    "LoRA adherence": "0.8452",
+    "LoRA mean latency (s)": "1.2847"
   },
-  "note": "Run the Python evaluation scripts against the trained adapter before replacing these values."
+  "base_model": {
+    "bertscore_f1": 0.6927635669708252,
+    "rouge_l": 0.042336523995608694,
+    "semantic_relevance": 0.2946806848049164,
+    "instruction_adherence": 0.4709953611111113,
+    "hallucination_risk_flag_rate": 0.75,
+    "latency_seconds": 0.23449727777777774,
+    "heldout_loss": 4.652777777777778,
+    "perplexity": 104.875903291259
+  },
+  "lora_model": {
+    "bertscore_f1": 0.7404325008392334,
+    "rouge_l": 0.14375174007909677,
+    "semantic_relevance": 0.5923054814338684,
+    "instruction_adherence": 0.8452083333333333,
+    "hallucination_risk_flag_rate": 0.19444444444444445,
+    "latency_seconds": 1.2846893333333336,
+    "heldout_loss": 3.920138888888889,
+    "perplexity": 50.407445325978124
+  },
+  "paired_improvement": {
+    "bertscore_f1": {
+      "mean_delta": 0.04766889909903208,
+      "median_delta": 0.032231926918029785,
+      "ci_low": 0.02351174031694731,
+      "ci_high": 0.07413784501453241,
+      "n": 36,
+      "win_rate": 0.7222222222222222,
+      "tie_rate": 0.0,
+      "loss_rate": 0.2777777777777778,
+      "wilcoxon_p_value": 0.0014461304526776075
+    },
+    "semantic_relevance": {
+      "mean_delta": 0.2976248698929946,
+      "median_delta": 0.3725248873233795,
+      "ci_low": 0.21100677302521137,
+      "ci_high": 0.38472308164669405,
+      "n": 36,
+      "win_rate": 0.7777777777777778,
+      "tie_rate": 0.0,
+      "loss_rate": 0.2222222222222222,
+      "wilcoxon_p_value": 2.0539737306535244e-06
+    },
+    "instruction_adherence": {
+      "mean_delta": 0.37421297222222216,
+      "median_delta": 0.36374999999999996,
+      "ci_low": 0.3328900555555555,
+      "ci_high": 0.41722222291666655,
+      "n": 36,
+      "win_rate": 1.0,
+      "tie_rate": 0.0,
+      "loss_rate": 0.0,
+      "wilcoxon_p_value": 1.6562316014786972e-07
+    }
+  },
+  "disclaimer": "Automated metrics are quality proxies and require human factuality review."
 }

@@ -31,7 +31,7 @@ This project is for educational and portfolio demonstration purposes. The assist
 | Application | Fine-tune a small instruction-following model using LoRA / PEFT |
 | Assistant theme | ML and Data Science Learning Assistant |
 | Base model | `google/flan-t5-small` |
-| Dataset | Custom self-authored ML/DS instruction dataset |
+| Dataset | 401-example public-safe ML/DS instruction curriculum with topic-grouped splits |
 | Evaluation | Instruction adherence, BERTScore, response relevance, hallucination analysis, manual review, latency |
 | Deployment | Hugging Face Spaces with Gradio |
 
@@ -50,14 +50,15 @@ Instruction dataset → validation and prompt formatting → FLAN-T5-small
 
 ## Dataset
 
-The repository contains **82 self-authored synthetic curriculum examples** across **8 capability categories** and **77 topics**. The data is public-safe and contains no private company data.
+The repository contains an original 82-example seed curriculum and an expanded **401-example public-safe instruction dataset** across **9 capability categories**. The extended dataset uses **203 topic groups** so paraphrases of the same concept remain in one split and cannot inflate held-out results. No private company data is included.
 
 | Statistic | Value |
 |---|---:|
-| Examples | 82 |
-| Train / validation / test | 64 / 9 / 9 |
-| Average prompt words | 6.63 |
-| Average response words | 35.94 |
+| Extended examples | 401 |
+| Train / validation / test | 323 / 42 / 36 |
+| Topic groups | 203 |
+| Average prompt words | 7.79 |
+| Average response words | 43.84 |
 
 See [DATASET_CARD.md](DATASET_CARD.md) and [data/README_data.md](data/README_data.md).
 
@@ -79,37 +80,68 @@ The same formatter is used during training and inference.
 
 ## LoRA / PEFT design
 
-LoRA keeps the pretrained FLAN-T5 weights frozen and trains small low-rank matrices in selected attention modules. This project uses `SEQ_2_SEQ_LM`, targets the T5 `q` and `v` modules, and starts with rank 8, alpha 16, and dropout 0.05. The resulting adapter is smaller and easier to publish than a fully fine-tuned model.
+LoRA keeps the pretrained FLAN-T5 weights frozen and trains small low-rank matrices in selected attention modules. This project uses `SEQ_2_SEQ_LM` and targets the T5 `q` and `v` modules. The original lightweight profile uses rank 8 and alpha 16; the portfolio-scale RTX experiment uses rank 16, alpha 32, and dropout 0.05. The resulting adapter is smaller and easier to publish than a fully fine-tuned model.
 
 ## Training workflow
 
 ```bash
-python scripts/prepare_dataset.py
-python scripts/train_lora.py
+python scripts/build_extended_dataset.py
+python scripts/run_complete_experiment.py
 ```
 
-Training should run in Colab, Kaggle, or a GPU environment. The Gradio Space only performs inference.
+For the recommended step-by-step RTX workflow, run `notebooks/05_end_to_end_gpu_lora_training_evaluation.ipynb`. Training happens locally on the GPU; the public Space performs inference only.
 
 ## Evaluation
 
 ```bash
-# Base-model baseline
-python scripts/evaluate_model.py --base-only
+# Recommended complete GPU experiment
+python scripts/run_complete_experiment.py
 
-# LoRA adapter after ADAPTER_MODEL_ID is configured
-python scripts/evaluate_model.py
-python scripts/run_hallucination_analysis.py
+# Or use the step-by-step notebook
+jupyter lab notebooks/05_end_to_end_gpu_lora_training_evaluation.ipynb
 ```
 
-The repository intentionally ships with `status: not_run` instead of invented metrics. Evaluation writes actual results into `outputs/`.
+The repository intentionally ships with `status: not_run` until the RTX notebook is executed. The notebook compares the untouched base model and LoRA adapter on the same 36 topic-isolated held-out prompts and writes auditable per-example outputs.
 
 | Metric | Purpose | Important limitation |
 |---|---|---|
-| Instruction adherence | Checks task, format, scope, and refusal behavior | Heuristic rubric requires human review |
-| BERTScore | Semantic similarity to reference answers | Not a factuality measure |
-| Response relevance | Prompt/reference alignment | TF-IDF similarity is only a proxy |
-| Hallucination review | Flags unsupported or overconfident output | Semi-automated triage, not proof |
-| Latency | Measures user-facing generation time | Depends on hardware and first-load caching |
+| Held-out loss and perplexity | Measures target-token prediction on unseen prompts | Not a complete measure of answer usefulness |
+| Instruction adherence | Checks category-specific task and format behavior | Transparent heuristic rubric requires human review |
+| BERTScore precision/recall/F1 | Measures semantic similarity to reference answers | Not a factuality measure |
+| ROUGE-1/2/L | Measures lexical overlap with references | Penalizes valid paraphrases |
+| Semantic relevance | Sentence-Transformer similarity to prompt and reference | Embedding similarity is a proxy |
+| Reference-support and risk flags | Flags low support, unsupported numbers, attributions, and absolutes | Triage only; not proof of hallucination |
+| Latency, throughput, and GPU memory | Measures deployment behavior on the recorded hardware | Hardware and decoding dependent |
+| Paired bootstrap intervals | Quantifies uncertainty in base-versus-LoRA deltas | Applies only to this held-out set |
+| Manual review | Scores correctness, relevance, clarity, preference, and hallucinations | Reviewer judgment must be documented |
+
+
+## Portfolio-scale executed experiment
+
+Project 05 now includes a complete RTX experiment notebook:
+
+```text
+notebooks/05_end_to_end_gpu_lora_training_evaluation.ipynb
+```
+
+It expands the curriculum, validates topic-group isolation, trains a real LoRA adapter, evaluates base FLAN-T5 and the adapter with identical deterministic decoding, produces paired confidence intervals, saves predictions and charts, and creates a manual factuality-review template. See [PORTFOLIO_EXPERIMENT_GUIDE.md](PORTFOLIO_EXPERIMENT_GUIDE.md) and [MANUAL_EVALUATION_RUBRIC.md](MANUAL_EVALUATION_RUBRIC.md).
+
+Expected result artifacts include:
+
+```text
+outputs/portfolio_experiment/model_metrics.json
+outputs/portfolio_experiment/base_model_metrics.json
+outputs/portfolio_experiment/lora_model_metrics.json
+outputs/portfolio_experiment/base_vs_lora_comparison.json
+outputs/portfolio_experiment/base_vs_lora_per_example.csv
+outputs/portfolio_experiment/category_metrics.csv
+outputs/portfolio_experiment/manual_review_results.csv
+outputs/portfolio_experiment/hallucination_analysis.md
+outputs/portfolio_experiment/before_after_finetuning_examples.md
+outputs/portfolio_experiment/*.png
+```
+
+Numeric results must be copied into the public README and model card only after the notebook completes and the manual review is performed.
 
 ## Gradio application
 
@@ -130,9 +162,11 @@ source .venv/bin/activate
 
 pip install --upgrade pip
 pip install -r requirements.txt
-python scripts/prepare_dataset.py
+python scripts/build_extended_dataset.py
 python app.py
 ```
+
+For GPU training and the complete evaluation notebook, install `requirements-training.txt`.
 
 To use the trained adapter:
 
@@ -182,6 +216,9 @@ https://huggingface.co/spaces/YOUR_HF_USERNAME/ml-ds-instruction-tuned-assistant
 ├── images/
 ├── MODEL_CARD.md
 ├── DATASET_CARD.md
+├── PORTFOLIO_EXPERIMENT_GUIDE.md
+├── MANUAL_EVALUATION_RUBRIC.md
+├── requirements-training.txt
 ├── DEPLOYMENT_HUGGINGFACE.md
 ├── DEPLOYMENT_STATIC_SPACE.md
 ├── STATIC_BROWSER_DEPLOYMENT_ROADMAP.md
@@ -204,4 +241,4 @@ For a Quality Data Scientist moving toward ML, Applied AI, and Generative AI rol
 
 ## Future improvements
 
-Expand the curriculum with expert review, add multilingual examples, execute generated code in a sandbox, compare FLAN-T5-small with a 0.5B causal instruction model, add retrieval grounding with citations, calibrate human-evaluation rubrics, and publish reproducible experiment tracking.
+Add a second human reviewer, increase the number of independently reviewed examples, execute generated code in a sandbox, compare FLAN-T5-small with a compact causal instruction model, add retrieval grounding with citations, test multilingual prompts, and publish the merged quantized ONNX model after verifying browser quality.

@@ -113,8 +113,9 @@ with gr.Blocks(title="ML & Data Science Instruction-Tuned Assistant", fill_width
 
     with gr.Tab("Evaluation"):
         gr.Markdown(
-            "Evaluation includes instruction adherence, BERTScore, response relevance, latency, manual review, and hallucination analysis. "
-            "Metrics are intentionally marked **not run** until the supplied evaluation scripts are executed against a trained adapter."
+            "Evaluation includes held-out loss, perplexity, BERTScore, ROUGE, semantic relevance, category-aware instruction adherence, "
+            "latency, paired base-versus-LoRA analysis, manual review, and hallucination-risk triage. "
+            "The JSON below reports whether a real local RTX experiment has been completed."
         )
         gr.JSON(value=_read_json(METRICS_PATH), label="Current evaluation status")
 

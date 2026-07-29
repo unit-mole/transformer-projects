@@ -20,21 +20,24 @@ Legal, medical, financial, immigration, safety-critical, official, or autonomous
 
 ## Training data
 
-A self-authored public ML/Data Science instruction curriculum described in `DATASET_CARD.md`. The generated bundle does not contain a trained adapter; run the training workflow and update this card with actual run metadata.
+A 401-example self-authored and curated public-safe ML/Data Science instruction curriculum described in `DATASET_CARD.md`. Topic-grouped splits prevent prompt variants for one concept from crossing into the held-out set. The source bundle does not claim a trained adapter; run the RTX experiment notebook and update this card with actual run metadata.
 
 ## Evaluation
 
-Planned evaluation includes:
+The executed experiment framework includes:
 
-- instruction adherence rubric,
-- BERTScore precision, recall, and F1 where references exist,
-- heuristic response relevance,
-- latency,
-- manual review,
-- before-vs-after base model comparison,
-- hallucination and unsupported-claim analysis.
+- held-out sequence loss and perplexity,
+- category-aware instruction adherence,
+- BERTScore precision, recall, and F1,
+- ROUGE-1, ROUGE-2, and ROUGE-L,
+- Sentence-Transformer relevance to prompts and references,
+- reference-support and hallucination-risk triage,
+- warm-cache latency, throughput, output length, and peak GPU memory,
+- paired bootstrap confidence intervals and per-category deltas,
+- before-vs-after examples,
+- a stratified manual correctness, relevance, clarity, and hallucination review.
 
-No numeric model results are claimed until `scripts/evaluate_model.py` has been run against actual saved artifacts.
+No numeric model results are claimed until `notebooks/05_end_to_end_gpu_lora_training_evaluation.ipynb` has been executed against actual saved artifacts.
 
 ## Limitations and risks
 
@@ -54,3 +57,14 @@ Response:
 ## Responsible use
 
 All generated explanations, code, and recommendations require human review. Do not submit private or sensitive content to the public Space.
+
+
+## Reproducible experiment files
+
+- `configs/portfolio_experiment.yaml`
+- `notebooks/05_end_to_end_gpu_lora_training_evaluation.ipynb`
+- `outputs/portfolio_experiment/model_metrics.json` after execution
+- `outputs/portfolio_experiment/base_vs_lora_per_example.csv` after execution
+- `outputs/portfolio_experiment/manual_review_results.csv` after execution
+
+The model card should be updated with the run ID, hardware, adapter repository, exact metrics, confidence intervals, and manual-review results before public release.
