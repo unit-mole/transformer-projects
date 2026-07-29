@@ -1,5 +1,6 @@
 import './styles.css';
 import { SAMPLES } from './samples.js';
+import { BROWSER_MODEL_LABEL } from './runtime-config.js';
 import { SummarizerClient } from './summarizer-client.js';
 import {
   buildDownloadFileName,
@@ -175,7 +176,7 @@ async function ensureModelLoaded() {
     showError(error);
     setStatus({
       state: 'error',
-      message: 'Model load failed — retry with WASM / CPU',
+      message: 'Model load failed — reload and retry the FP32 browser model',
     });
     throw error;
   } finally {
@@ -304,7 +305,7 @@ function downloadSummary() {
     '',
     currentSummary,
     '',
-    `Generated with: Xenova/distilbart-cnn-12-6`,
+    `Generated with browser model: ${BROWSER_MODEL_LABEL}`,
     `Runtime: ${elements.runtime.textContent}`,
     `Quantization: ${elements.dtype.textContent}`,
     `Latency: ${elements.latency.textContent}`,
@@ -326,7 +327,9 @@ async function loadEvaluationStatus() {
     if (!response.ok) throw new Error('Evaluation file unavailable.');
     const data = await response.json();
     const status = data.status === 'completed' ? 'Completed' : 'Not run';
-    elements.evaluationStatus.textContent = `${status} · ROUGE and BERTScore values are published only after an actual Python evaluation run.`;
+    elements.evaluationStatus.textContent =
+      `${status} · These ROUGE and BERTScore values belong to the Python ` +
+      `DistilBART benchmark, not the separate browser T5 checkpoint.`;
     elements.evaluationStatus.classList.add(data.status === 'completed' ? 'evaluation-complete' : 'evaluation-pending');
   } catch (error) {
     elements.evaluationStatus.textContent = error.message;

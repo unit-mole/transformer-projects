@@ -3,74 +3,49 @@ import assert from 'node:assert/strict';
 
 import {
   MODEL_ID,
-  MODEL_REVISION,
+  BROWSER_MODEL_LABEL,
+  BROWSER_MODEL_ARCHITECTURE,
+  BROWSER_MODEL_DTYPE,
   buildRuntimePlan,
   formatRuntimeError,
 } from '../src/runtime-config.js';
 
-test('uses explicit int8 then uint8 on WASM', () => {
-  const plan = buildRuntimePlan('wasm', true);
-
-  assert.deepEqual(
-    plan.map((candidate) => candidate.label),
-    [
-      'WASM / CPU (int8)',
-      'WASM / CPU (uint8 fallback)',
-    ],
-  );
-
-  assert.deepEqual(plan[0].pipelineOptions.dtype, {
-    encoder_model: 'int8',
-    decoder_model_merged: 'int8',
-  });
-
-  assert.deepEqual(plan[1].pipelineOptions.dtype, {
-    encoder_model: 'uint8',
-    decoder_model_merged: 'uint8',
-  });
-
-  assert.equal(plan[0].pipelineOptions.device, undefined);
-});
-
-test('never uses the q8 alias for the compatibility path', () => {
-  const plan = buildRuntimePlan('wasm', true);
-  const serialized = JSON.stringify(plan);
-  assert.equal(serialized.includes('"q8"'), false);
-  assert.equal(serialized.includes('quantized'), false);
-});
-
-test('explicit WebGPU keeps int8 and uint8 fallbacks', () => {
-  const plan = buildRuntimePlan('webgpu', true);
-  assert.deepEqual(
-    plan.map((candidate) => candidate.runtime),
-    ['webgpu', 'wasm', 'wasm'],
-  );
-  assert.deepEqual(plan[0].pipelineOptions.dtype, {
-    encoder_model: 'q4',
-    decoder_model_merged: 'q4',
-  });
-});
-
-test('unavailable WebGPU starts directly with int8 WASM', () => {
-  const plan = buildRuntimePlan('webgpu', false);
-  assert.equal(plan[0].label, 'WASM / CPU (int8)');
-});
-
-test('pins the model revision containing explicit int8 files', () => {
-  assert.equal(MODEL_ID, 'Xenova/distilbart-cnn-12-6');
+test('uses the official T5-small summarization ONNX model', () => {
   assert.equal(
-    MODEL_REVISION,
-    'a6c58857723a89bde6162f7cd64a80fd644711f6',
+    MODEL_ID,
+    'onnx-community/text_summarization-ONNX',
   );
+  assert.match(BROWSER_MODEL_LABEL, /T5-small/u);
+  assert.match(BROWSER_MODEL_ARCHITECTURE, /encoder-decoder Transformer/u);
 });
 
-test('explains the legacy q8 MatMulNBits failure', () => {
+test('uses a single full-precision WASM runtime', () => {
+  const plan = buildRuntimePlan('wasm');
+
+  assert.equal(plan.length, 1);
+  assert.equal(plan[0].runtime, 'wasm');
+  assert.equal(plan[0].pipelineOptions.device, undefined);
+  assert.equal(plan[0].pipelineOptions.dtype, 'fp32');
+  assert.equal(BROWSER_MODEL_DTYPE, 'fp32');
+});
+
+test('does not request any quantized browser dtype', () => {
+  const serialized = JSON.stringify(buildRuntimePlan());
+  for (const forbidden of ['q8', 'int8', 'uint8', 'q4', 'q4f16', 'bnb4']) {
+    assert.equal(serialized.includes(forbidden), false);
+  }
+});
+
+test('formats memory errors with recovery guidance', () => {
   const message = formatRuntimeError(
-    new Error(
-      "qdq_actions.cc:137 MatMulNBits Missing required scale: " +
-      "decoder_model_merged_quantized.onnx",
-    ),
+    new Error('WASM out of memory'),
   );
-  assert.match(message, /legacy q8\/quantized decoder graph/u);
-  assert.match(message, /int8 or uint8/u);
+  assert.match(message, /Close other memory-heavy tabs/u);
+});
+
+test('formats download errors with recovery guidance', () => {
+  const message = formatRuntimeError(
+    new Error('Failed to fetch model file'),
+  );
+  assert.match(message, /could not finish downloading/u);
 });

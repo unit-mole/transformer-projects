@@ -6,7 +6,7 @@ import {
   formatRuntimeError,
 } from './runtime-config.js';
 
-const MAX_INPUT_TOKENS = 900;
+const MAX_INPUT_TOKENS = 480;
 const TOKEN_OVERLAP_SENTENCES = 1;
 
 env.allowLocalModels = false;
@@ -62,10 +62,6 @@ function normalizeProgress(info) {
   };
 }
 
-function supportsWebGPU() {
-  return Boolean(self.navigator && 'gpu' in self.navigator);
-}
-
 async function disposePipeline() {
   if (summarizer && typeof summarizer.dispose === 'function') {
     try {
@@ -89,10 +85,7 @@ async function loadModel(runtimePreference = 'wasm') {
   if (loadPromise) return loadPromise;
 
   loadPromise = (async () => {
-    const candidates = buildRuntimePlan(
-      runtimePreference,
-      supportsWebGPU(),
-    );
+    const candidates = buildRuntimePlan(runtimePreference);
     const failures = [];
 
     for (let index = 0; index < candidates.length; index += 1) {
@@ -151,7 +144,7 @@ async function loadModel(runtimePreference = 'wasm') {
       [
         'Unable to load the browser summarization model.',
         ...failures,
-        'Reload the page, select WASM / CPU, and try again.',
+        'Reload the page and try the full-precision WASM model again.',
       ].join(' '),
     );
   })();

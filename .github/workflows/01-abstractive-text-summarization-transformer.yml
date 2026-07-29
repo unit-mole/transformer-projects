@@ -246,14 +246,14 @@ jobs:
           pinned: false
           license: mit
           models:
-            - Xenova/distilbart-cnn-12-6
-          short_description: Browser-based DistilBART text summarization
+            - onnx-community/text_summarization-ONNX
+          short_description: Browser-based Transformer text summarization
           ---
 
           # Abstractive Text Summarization Transformer
 
           Real browser-based Transformer summarization using Transformers.js,
-          ONNX Runtime Web, and `Xenova/distilbart-cnn-12-6`.
+          ONNX Runtime Web, and `onnx-community/text_summarization-ONNX`.
 
           The frontend is prebuilt by GitHub Actions. Hugging Face directly
           serves `index.html`; no paid Static Space build job is requested.
@@ -278,7 +278,7 @@ jobs:
           required_metadata = [
               "sdk: static",
               "app_file: index.html",
-              "short_description: Browser-based DistilBART text summarization",
+              "short_description: Browser-based Transformer text summarization",
           ]
           for value in required_metadata:
               if value not in readme:
@@ -290,7 +290,7 @@ jobs:
           if "dist/index.html" in readme:
               raise SystemExit("README must point to root index.html, not dist/index.html.")
 
-          short_description = "Browser-based DistilBART text summarization"
+          short_description = "Browser-based Transformer text summarization"
           if len(short_description) > 60:
               raise SystemExit("short_description exceeds 60 characters.")
 

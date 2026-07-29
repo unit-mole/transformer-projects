@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Browser-based abstractive text summarization with DistilBART, Transformers.js, and ONNX Runtime Web."
+      content="Browser-based abstractive text summarization with a fine-tuned T5-small Transformer and ONNX Runtime Web."
     />
     <meta name="theme-color" content="#0b1220" />
     <title>Abstractive Text Summarization Transformer</title>
@@ -21,7 +21,7 @@
         </a>
         <div class="nav-links">
           <a href="https://github.com/unit-mole/transformer-projects" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="https://huggingface.co/Xenova/distilbart-cnn-12-6" target="_blank" rel="noreferrer">Browser model</a>
+          <a href="https://huggingface.co/onnx-community/text_summarization-ONNX" target="_blank" rel="noreferrer">Browser model</a>
         </div>
       </nav>
 
@@ -29,15 +29,21 @@
         <p class="eyebrow">Real browser-based Transformer inference</p>
         <h1>Abstractive Text Summarization</h1>
         <p class="hero-copy">
-          Generate concise summaries with a DistilBART encoder-decoder Transformer running locally in your
-          browser through Transformers.js and ONNX Runtime Web. No paid inference server is used.
+          Generate concise summaries with a fine-tuned T5-small encoder-decoder Transformer running locally in
+          your browser through Transformers.js and ONNX Runtime Web. No paid inference server is used.
         </p>
         <div class="hero-badges" aria-label="Technology badges">
-          <span>DistilBART</span>
+          <span>T5-small</span>
           <span>Transformers.js</span>
           <span>ONNX Runtime Web</span>
           <span>Static Space</span>
         </div>
+        <p class="technical-copy">
+          <strong>Deployment distinction:</strong> the live browser uses the
+          compact T5-small summarization checkpoint for reliable free static
+          inference. The repository's personally fine-tuned and evaluated
+          model remains DistilBART.
+        </p>
       </div>
     </header>
 
@@ -112,12 +118,11 @@
             <label class="control">
               <span>Runtime</span>
               <select id="runtime-select">
-                <option value="wasm" selected>Recommended: WASM / CPU (int8)</option>
-                <option value="webgpu">Experimental: WebGPU (q4, with int8 fallback)</option>
+                <option value="wasm" selected>Reliable: WASM / CPU (FP32)</option>
               </select>
               <small>
-                WASM int8 is the reliable default. WebGPU is faster on some systems
-                but remains browser- and driver-dependent.
+                The browser uses full-precision ONNX files to avoid the
+                incompatible quantized DistilBART decoder graphs.
               </small>
             </label>
 
@@ -169,7 +174,7 @@
             <span id="progress-percent">0%</span>
           </div>
           <progress id="model-progress" max="100" value="0">0%</progress>
-          <p id="progress-detail">The first model load downloads quantized ONNX weights and stores them in the browser cache.</p>
+          <p id="progress-detail">The first model load downloads full-precision ONNX weights and stores them in the browser cache.</p>
         </div>
 
         <div id="error-panel" class="error-panel" role="alert" hidden></div>
@@ -214,7 +219,7 @@
               <strong id="runtime-metric">—</strong>
             </article>
             <article class="metric-card">
-              <span>Quantization</span>
+              <span>Model precision</span>
               <strong id="dtype-metric">—</strong>
             </article>
           </div>
@@ -253,17 +258,17 @@
             <h2 id="architecture-title">Where the Transformer runs</h2>
           </div>
         </div>
-        <div class="flow" role="img" aria-label="Text enters browser preprocessing, DistilBART encoder, autoregressive decoder, then summary metrics">
+        <div class="flow" role="img" aria-label="Text enters browser preprocessing, T5 encoder, autoregressive decoder, then summary metrics">
           <div class="flow-node">Source text</div><span aria-hidden="true">→</span>
           <div class="flow-node">Browser preprocessing</div><span aria-hidden="true">→</span>
-          <div class="flow-node accent">DistilBART encoder</div><span aria-hidden="true">→</span>
+          <div class="flow-node accent">T5 encoder</div><span aria-hidden="true">→</span>
           <div class="flow-node accent">Transformer decoder</div><span aria-hidden="true">→</span>
           <div class="flow-node">Summary + metrics</div>
         </div>
         <p class="technical-copy">
-          Static deployment changes the execution location, not the model. Quantized ONNX weights are executed
-          locally through ONNX Runtime Web. The application does not send the article to a Python backend or a
-          paid inference endpoint.
+          The live application uses a browser-compatible fine-tuned T5-small ONNX checkpoint. The repository's
+          separate Python training and benchmark layer uses DistilBART. Both are encoder-decoder Transformers,
+          and no article is sent to a paid inference endpoint.
         </p>
       </section>
 
@@ -293,20 +298,20 @@
         <div class="section-heading">
           <div>
             <p class="eyebrow">Model comparison</p>
-            <h2 id="lstm-title">Transformer vs LSTM Seq2Seq</h2>
+            <h2 id="lstm-title">Modern Transformers vs LSTM Seq2Seq</h2>
           </div>
         </div>
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>Dimension</th><th>LSTM Seq2Seq with attention</th><th>DistilBART Transformer</th></tr>
+              <tr><th>Dimension</th><th>LSTM Seq2Seq with attention</th><th>Transformer project</th></tr>
             </thead>
             <tbody>
               <tr><td>Sequence processing</td><td>Recurrent, token by token</td><td>Attention-based parallel encoding</td></tr>
               <tr><td>Long-range context</td><td>Compressed through recurrent states</td><td>Direct token-to-token attention</td></tr>
-              <tr><td>Pretraining</td><td>Earlier custom project</td><td>Large-scale pretrained checkpoint</td></tr>
-              <tr><td>Browser deployment</td><td>Requires a separate conversion</td><td>ONNX model runs through Transformers.js</td></tr>
-              <tr><td>Published metrics</td><td>Requires actual prior predictions</td><td>Generated by repository evaluation scripts</td></tr>
+              <tr><td>Pretraining</td><td>Earlier custom project</td><td>Pretrained T5 browser model and DistilBART Python model</td></tr>
+              <tr><td>Browser deployment</td><td>Requires a separate conversion</td><td>Fine-tuned T5-small ONNX runs through Transformers.js</td></tr>
+              <tr><td>Published metrics</td><td>Requires actual prior predictions</td><td>Generated for the Python DistilBART benchmark</td></tr>
             </tbody>
           </table>
         </div>
@@ -318,8 +323,8 @@
           <h2 id="limitations-title">What reviewers should know</h2>
         </div>
         <ul>
-          <li>The initial model download is large and can take several minutes on a slower connection.</li>
-          <li>Browser speed depends on device memory, WebGPU availability, browser support, and beam count.</li>
+          <li>The initial full-precision model download is several hundred megabytes and can take time on a slower connection.</li>
+          <li>Browser speed depends on CPU performance, available memory, connection speed, and beam count.</li>
           <li>The model is news-oriented and may perform less reliably on legal, medical, or specialized technical text.</li>
           <li>Chunked long-document summarization can lose cross-section context or over-compress details.</li>
           <li>Generated text may contain unsupported or incorrect facts and always requires review.</li>

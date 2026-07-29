@@ -4,80 +4,61 @@ emoji: 📝
 colorFrom: blue
 colorTo: purple
 sdk: static
-app_build_command: npm run build
-app_file: dist/index.html
+app_file: index.html
 pinned: false
 license: mit
 models:
-  - Xenova/distilbart-cnn-12-6
-short_description: Real browser-based DistilBART summarization with decoding controls, chunking, and latency metrics.
+  - onnx-community/text_summarization-ONNX
+short_description: Browser-based Transformer text summarization
 ---
 
 # Abstractive Text Summarization Transformer
 
-A free Hugging Face **Static Space** that performs real Transformer inference inside the visitor's browser using **Transformers.js**, **ONNX Runtime Web**, and the browser-compatible `Xenova/distilbart-cnn-12-6` model.
+This Static Space performs real encoder-decoder Transformer inference directly
+inside the visitor's browser.
 
-## What makes this a real ML demo
+## Browser deployment model
 
-- No mock summaries and no server-side inference API.
-- The encoder-decoder Transformer is downloaded and executed in the browser.
-- WebGPU is used when selected and available; WASM provides a broad compatibility fallback.
-- Quantized ONNX weights reduce download and memory requirements.
-- Generation controls expose beam search, output length, length penalty, and repetition control.
-- Long inputs are split into token-aware chunks and optionally summarized in a second pass.
+The live demo uses:
 
-## How to use
+```text
+onnx-community/text_summarization-ONNX
+```
 
-1. Paste an English article or choose a bundled example.
-2. Select the browser runtime.
-3. Adjust summary-length and beam-search controls.
-4. Select **Generate summary**.
-5. Review latency, compression, token counts, chunk count, runtime, and model details.
-6. Copy or download the generated summary.
+This is a fine-tuned T5-small summarization checkpoint with Transformers.js and
+ONNX support. The application deliberately loads the full-precision FP32 model
+through ONNX Runtime Web WASM. This avoids the incompatible `MatMulNBits`
+quantized decoder graphs that repeatedly failed in the earlier DistilBART
+browser export.
 
-## Models
+## Python model-development layer
 
-| Layer | Model |
-|---|---|
-| Python implementation | `sshleifer/distilbart-cnn-12-6` |
-| Static browser implementation | `Xenova/distilbart-cnn-12-6` |
+The GitHub repository separately contains the original Project 01 DistilBART
+work:
 
-The browser model is an ONNX/Transformers.js conversion of the same DistilBART checkpoint used by the Python project. It is not presented as a model trained by the portfolio author.
+- pretrained DistilBART inference;
+- RTX fine-tuning;
+- 5,000 training, 500 validation, and 500 held-out test examples;
+- ROUGE and BERTScore;
+- Lead-3 and TextRank comparisons;
+- latency, compression, and error analysis;
+- generated JSON, CSV, Markdown, and PNG evidence.
 
-## Evaluation
+The live T5 browser checkpoint and Python DistilBART benchmark are clearly
+separated. Metrics produced by the Python notebook must not be represented as
+T5 browser-model metrics.
 
-The GitHub repository contains Python evaluation scripts for ROUGE-1, ROUGE-2, ROUGE-L, BERTScore, compression ratio, and inference time. Metrics are shown only after an actual evaluation run; this Space does not fabricate scores.
+## Runtime
 
-## Transformer vs LSTM
+```text
+Backend: ONNX Runtime Web WASM
+Precision: FP32
+Server-side inference: none
+Paid Hugging Face compute: none
+```
 
-The repository includes a strict comparison framework against the earlier LSTM Seq2Seq summarization project. Actual LSTM predictions are required before publishing comparison metrics.
+The first load downloads several hundred megabytes of model files and stores
+them in the browser cache.
 
-## Responsible use
-
-Generated summaries can omit context, distort details, or hallucinate. Do not paste private, confidential, sensitive, copyrighted, or personally identifiable text into a public Space. Do not use outputs as the sole basis for legal, medical, financial, safety-critical, academic, journalistic, or official decisions. Human review is required.
-
-## Portfolio links
-
-- GitHub repository: `https://github.com/unit-mole/transformer-projects`
-- Project folder: `https://github.com/unit-mole/transformer-projects/tree/main/01-abstractive-text-summarization-transformer`
-- Base Python model: `https://huggingface.co/sshleifer/distilbart-cnn-12-6`
-- Browser ONNX model: `https://huggingface.co/Xenova/distilbart-cnn-12-6`
-
-## Browser runtime reliability
-
-The deployed application defaults to the quantized WASM/int8 runtime because it
-has the broadest browser compatibility. Visitors can explicitly select the
-experimental WebGPU/q4 runtime; if that model session fails, the application
-automatically attempts a clean WASM/int8 fallback.
-
-The frontend uses `@huggingface/transformers` 4.2.0. A low-level numeric error
-from a WebGPU model session is converted into a readable recovery message
-instead of being shown as an unexplained integer.
-
-
-## Explicit int8 compatibility fix
-
-The browser requests `encoder_model_int8.onnx` and
-`decoder_model_merged_int8.onnx` from the pinned model revision. It does not
-request the legacy `*_quantized.onnx` files selected by the `q8` alias.
-`uint8` is retained as an automatic second WASM fallback.
+Source repository:
+https://github.com/unit-mole/transformer-projects/tree/main/01-abstractive-text-summarization-transformer

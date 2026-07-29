@@ -1,9 +1,9 @@
 {
   "name": "project-01-abstractive-summarization-static-space",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
-  "description": "Reliable free Static Space for browser-based DistilBART summarization with WASM-first inference and optional WebGPU.",
+  "description": "Free Static Space with reliable full-precision browser summarization using a fine-tuned T5-small ONNX checkpoint.",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
