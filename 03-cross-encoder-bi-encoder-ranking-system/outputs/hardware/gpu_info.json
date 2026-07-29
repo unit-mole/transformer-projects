@@ -1,0 +1,14 @@
+{
+  "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "torch_version": "2.13.0+cu132",
+  "cuda_available": true,
+  "cuda_runtime": "13.2",
+  "cudnn_version": 92000,
+  "gpu_name": "NVIDIA GeForce RTX 5090",
+  "gpu_count": 1,
+  "gpu_total_memory_gb": 31.842,
+  "compute_capability": "12.0",
+  "bf16_supported": true,
+  "nvidia_smi": "NVIDIA GeForce RTX 5090, 595.95, 32607 MiB"
+}

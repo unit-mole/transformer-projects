@@ -1,0 +1,22 @@
+[
+  {
+    "dataset": "scifact",
+    "split": "test",
+    "corpus_documents": 5183,
+    "queries": 300,
+    "relevance_judgments": 339,
+    "average_relevant_documents_per_query": 1.13,
+    "source_directory": ".\\data\\benchmarks\\scifact",
+    "source": "BEIR benchmark"
+  },
+  {
+    "dataset": "nfcorpus",
+    "split": "test",
+    "corpus_documents": 3633,
+    "queries": 323,
+    "relevance_judgments": 12334,
+    "average_relevant_documents_per_query": 38.18575851393189,
+    "source_directory": ".\\data\\benchmarks\\nfcorpus",
+    "source": "BEIR benchmark"
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "python": "3.13.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "torch": "2.13.0+cu132",
+  "cuda_available": true,
+  "requested_device": "cuda",
+  "resolved_device": "cuda",
+  "cuda_version": "13.2",
+  "gpu_name": "NVIDIA GeForce RTX 5090",
+  "gpu_count": 1,
+  "gpu_total_memory_gb": 31.842,
+  "bf16_supported": true
+}

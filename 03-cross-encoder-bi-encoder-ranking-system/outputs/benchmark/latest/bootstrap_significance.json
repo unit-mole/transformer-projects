@@ -1,0 +1,66 @@
+{
+  "scifact": {
+    "mrr_at_10": {
+      "mean_before": 0.6068452380952382,
+      "mean_after": 0.6559100529100529,
+      "mean_delta": 0.04906481481481482,
+      "ci_lower": 0.009614285714285716,
+      "ci_upper": 0.0858023148148148,
+      "probability_delta_positive": 0.9935,
+      "bootstrap_samples": 2000.0,
+      "confidence": 0.95
+    },
+    "ndcg_at_10": {
+      "mean_before": 0.6484032131749053,
+      "mean_after": 0.6867687810573595,
+      "mean_delta": 0.038365567882454155,
+      "ci_lower": 0.005116448399790363,
+      "ci_upper": 0.07096590227370432,
+      "probability_delta_positive": 0.986,
+      "bootstrap_samples": 2000.0,
+      "confidence": 0.95
+    },
+    "map_at_100": {
+      "mean_before": 0.6054747169613449,
+      "mean_after": 0.6481242796955604,
+      "mean_delta": 0.042649562734215454,
+      "ci_lower": 0.005161958807484393,
+      "ci_upper": 0.07741630600200086,
+      "probability_delta_positive": 0.989,
+      "bootstrap_samples": 2000.0,
+      "confidence": 0.95
+    }
+  },
+  "nfcorpus": {
+    "mrr_at_10": {
+      "mean_before": 0.5088210722885644,
+      "mean_after": 0.5634490638360607,
+      "mean_delta": 0.05462799154749619,
+      "ci_lower": 0.02013805960980884,
+      "ci_upper": 0.08691102756892231,
+      "probability_delta_positive": 0.9995,
+      "bootstrap_samples": 2000.0,
+      "confidence": 0.95
+    },
+    "ndcg_at_10": {
+      "mean_before": 0.3190178170546874,
+      "mean_after": 0.34532762078059503,
+      "mean_delta": 0.026309803725907594,
+      "ci_lower": 0.008924228509278296,
+      "ci_upper": 0.04361704201565459,
+      "probability_delta_positive": 0.9985,
+      "bootstrap_samples": 2000.0,
+      "confidence": 0.95
+    },
+    "map_at_100": {
+      "mean_before": 0.15369184432188,
+      "mean_after": 0.17572959062699858,
+      "mean_delta": 0.022037746305118566,
+      "ci_lower": 0.010084227170233962,
+      "ci_upper": 0.03544517023053487,
+      "probability_delta_positive": 1.0,
+      "bootstrap_samples": 2000.0,
+      "confidence": 0.95
+    }
+  }
+}

@@ -444,3 +444,35 @@ The architecture can support:
 
 Confidential company data must remain outside GitHub and public Hugging Face
 repositories.
+
+
+## Large-scale experimental evidence
+
+The repository now includes a GPU-ready benchmark suite and master notebook:
+
+```text
+notebooks/04-large-scale-ranking-benchmark.ipynb
+```
+
+It evaluates TF-IDF, BM25, the MiniLM bi-encoder and the complete two-stage
+Transformer pipeline on official BEIR SciFact and NFCorpus test collections.
+The suite generates Recall@K, Precision@10, Hit@10, MRR@10, nDCG@10, MAP@100,
+latency, ranking examples and paired bootstrap confidence intervals.
+
+Run:
+
+```bash
+pip install -r requirements-benchmark.txt
+python scripts/check_gpu.py
+python scripts/run_portfolio_benchmark.py --datasets scifact nfcorpus --device cuda
+python scripts/sync_benchmark_results.py
+```
+
+Complete execution guide:
+
+[`docs/BENCHMARK_EXECUTION_GUIDE.md`](docs/BENCHMARK_EXECUTION_GUIDE.md)
+
+Optional domain adaptation is available through
+`scripts/fine_tune_bi_encoder.py`, which trains on SciFact positives with BM25
+hard negatives and saves the resulting model for separate Hugging Face Model
+Hub publication.

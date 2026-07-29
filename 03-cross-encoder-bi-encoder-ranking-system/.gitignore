@@ -27,3 +27,20 @@ data/raw/
 data/private/
 *.parquet
 *.arrow
+
+# Downloaded BEIR benchmark data (reproducible; do not commit)
+data/benchmarks/*
+!data/benchmarks/README.md
+
+# Fine-tuned model weights should be uploaded to Hugging Face Model Hub
+models/fine_tuned/*
+!models/fine_tuned/README.md
+
+# Keep only the reviewed latest benchmark artifacts in Git
+outputs/benchmark/*
+!outputs/benchmark/README.md
+!outputs/benchmark/latest/
+!outputs/benchmark/latest/**
+.venv-benchmark/
+data/benchmarks/
+models/fine_tuned/
