@@ -827,3 +827,4 @@ This project connects naturally to a Quality Data Scientist background because m
 **Anmol Tripathi**
 
 Quality Data Scientist building a professional portfolio in Data Science, Machine Learning, Applied AI, Generative AI, Multimodal AI, Computer Vision, Natural Language Processing, Analytics Engineering, and Quality Analytics.
+
