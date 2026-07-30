@@ -1,0 +1,73 @@
+name: 10 AI Portfolio RAG Assistant CI
+
+on:
+  push:
+    paths:
+      - "10-ai-portfolio-rag-assistant/**"
+      - ".github/workflows/10-ai-portfolio-rag-assistant.yml"
+  pull_request:
+    paths:
+      - "10-ai-portfolio-rag-assistant/**"
+      - ".github/workflows/10-ai-portfolio-rag-assistant.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 10-ai-portfolio-rag-assistant
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: 10-ai-portfolio-rag-assistant/requirements.txt
+
+      - name: Validate required files
+        shell: bash
+        run: |
+          test -f app/page.tsx
+          test -f app/api/chat/route.ts
+          test -f app/api/retrieve/route.ts
+          test -f app/api/health/route.ts
+          test -f public/data/document_chunks.json
+          test -f public/data/embeddings.json
+          test -f public/data/metadata.json
+          test -f public/data/evaluation_questions.json
+          test -f public/data/evaluation_summary.json
+          test -f notebooks/01-build-and-evaluate-transformer-rag.ipynb
+
+      - name: Install Node dependencies
+        run: npm install
+
+      - name: Install lightweight Python test dependencies
+        run: python -m pip install --upgrade pip pytest numpy scikit-learn beautifulsoup4 requests
+
+      - name: Validate data
+        run: npm run validate:data
+
+      - name: Run Node tests
+        run: npm test
+
+      - name: Run Python tests
+        run: python -m pytest -q
+
+      - name: Type-check
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
