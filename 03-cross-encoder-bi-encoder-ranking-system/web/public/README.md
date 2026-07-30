@@ -10,7 +10,7 @@ license: mit
 models:
   - Xenova/all-MiniLM-L6-v2
   - Xenova/ms-marco-MiniLM-L-6-v2
-short_description: Browser-based bi-encoder retrieval and cross-encoder reranking.
+short_description: MiniLM retrieval and cross-encoder reranking.
 tags:
   - transformers-js
   - semantic-search

@@ -55,6 +55,49 @@ jobs:
           python -m pip install --upgrade pip
           pip install numpy pandas scipy scikit-learn pyyaml pytest gradio
 
+      - name: Validate Hugging Face Space metadata
+        working-directory: ${{ env.PROJECT_DIR }}
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          readme = Path("web/public/README.md")
+
+          if not readme.exists():
+              raise SystemExit(
+                  "Missing Hugging Face metadata file: "
+                  "web/public/README.md"
+              )
+
+          lines = readme.read_text(encoding="utf-8").splitlines()
+
+          short_description = None
+          for line in lines:
+              if line.startswith("short_description:"):
+                  short_description = line.split(":", 1)[1].strip()
+                  break
+
+          if not short_description:
+              raise SystemExit(
+                  "short_description is missing from "
+                  "web/public/README.md"
+              )
+
+          description_length = len(short_description)
+
+          print("Short description:", short_description)
+          print("Character count:", description_length)
+
+          if description_length > 60:
+              raise SystemExit(
+                  "Hugging Face short_description must contain "
+                  "60 characters or fewer."
+              )
+
+          print("Hugging Face metadata validation passed.")
+          PY
+
       - name: Validate browser project structure
         working-directory: ${{ env.PROJECT_DIR }}
         run: python scripts/validate_web_project.py
@@ -79,6 +122,43 @@ jobs:
         working-directory: ${{ env.PROJECT_DIR }}
         run: python scripts/validate_dist.py
 
+      - name: Validate built Space metadata
+        working-directory: ${{ env.PROJECT_DIR }}
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          readme = Path("web/dist/README.md")
+
+          if not readme.exists():
+              raise SystemExit(
+                  "Vite build did not generate web/dist/README.md"
+              )
+
+          lines = readme.read_text(encoding="utf-8").splitlines()
+
+          short_description = None
+          for line in lines:
+              if line.startswith("short_description:"):
+                  short_description = line.split(":", 1)[1].strip()
+                  break
+
+          if not short_description:
+              raise SystemExit(
+                  "short_description is missing from the built README."
+              )
+
+          if len(short_description) > 60:
+              raise SystemExit(
+                  "Built short_description exceeds 60 characters."
+              )
+
+          print("Built Hugging Face metadata validation passed.")
+          print("Short description:", short_description)
+          print("Character count:", len(short_description))
+          PY
+
       - name: Compile Python files
         working-directory: ${{ env.PROJECT_DIR }}
         run: python -m compileall app.py gradio_app.py src scripts tests
@@ -99,10 +179,6 @@ jobs:
     name: Deploy Project 03 Static Space
     needs: test
 
-    # Allows deployment from:
-    # 1. A push to main
-    # 2. A manual workflow run on main
-    # Pull requests will not deploy.
     if: >-
       (github.event_name == 'push' ||
        github.event_name == 'workflow_dispatch') &&
@@ -120,6 +196,7 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           HF_SPACE_ID: ${{ vars.HF_SPACE_ID }}
+        shell: bash
         run: |
           if [ -z "$HF_TOKEN" ]; then
             echo "HF_TOKEN repository secret is missing."
@@ -152,11 +229,50 @@ jobs:
           python-version: "3.11"
 
       - name: Install Hugging Face Hub client
-        run: python -m pip install "huggingface_hub>=0.28,<2"
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "huggingface_hub>=0.28,<2"
 
       - name: Validate generated Static Space
         working-directory: ${{ env.PROJECT_DIR }}
         run: python scripts/validate_dist.py
+
+      - name: Validate final Hugging Face metadata
+        working-directory: ${{ env.PROJECT_DIR }}
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          readme = Path("web/dist/README.md")
+
+          if not readme.exists():
+              raise SystemExit(
+                  "Missing web/dist/README.md in deployment build."
+              )
+
+          lines = readme.read_text(encoding="utf-8").splitlines()
+
+          short_description = None
+          for line in lines:
+              if line.startswith("short_description:"):
+                  short_description = line.split(":", 1)[1].strip()
+                  break
+
+          if not short_description:
+              raise SystemExit(
+                  "short_description is missing from deployment README."
+              )
+
+          if len(short_description) > 60:
+              raise SystemExit(
+                  "Hugging Face short_description exceeds 60 characters."
+              )
+
+          print("Final metadata validation passed.")
+          print("Short description:", short_description)
+          print("Character count:", len(short_description))
+          PY
 
       - name: Upload Vite build to Hugging Face Static Space
         working-directory: ${{ env.PROJECT_DIR }}
