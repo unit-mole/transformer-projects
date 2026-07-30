@@ -1,322 +1,725 @@
-# 10 — AI Portfolio RAG Assistant
+# AI Portfolio RAG Assistant with MiniLM and Vercel
 
-A full-stack, Vercel-ready **Transformer Retrieval-Augmented Generation capstone** that searches Anmol Tripathi's verified public AI portfolio, generates evidence-grounded answers, and exposes source citations, retrieval scores, evaluation results, and latency.
+[![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-CUDA%20GPU-ee4c2c.svg?logo=pytorch)](https://pytorch.org/)
+[![Sentence Transformers](https://img.shields.io/badge/Sentence%20Transformers-MiniLM-f59e0b.svg)](https://www.sbert.net/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black.svg?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6.svg?logo=typescript)](https://www.typescriptlang.org/)
+[![Hugging Face](https://img.shields.io/badge/Hugging%20Face-Inference-ffd21e.svg?logo=huggingface&logoColor=black)](https://huggingface.co/)
+[![Vercel](https://img.shields.io/badge/Vercel-Live%20Application-black.svg?logo=vercel)](https://10-ai-portfolio-rag-assistant.vercel.app/)
+[![Project 10 CI](https://github.com/unit-mole/transformer-projects/actions/workflows/10-ai-portfolio-rag-assistant.yml/badge.svg)](https://github.com/unit-mole/transformer-projects/actions/workflows/10-ai-portfolio-rag-assistant.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../LICENSE)
 
-[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](#)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?logo=typescript)](#)
-[![Transformer](https://img.shields.io/badge/Retriever-MiniLM%20%7C%20E5-orange)](#transformer-models)
-[![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](#vercel-deployment)
-[![Evaluation](https://img.shields.io/badge/Evaluation-Retrieval%20%7C%20Grounding%20%7C%20Citations-green)](#evaluation)
+An end-to-end **Transformer-powered Retrieval-Augmented Generation application** that searches Anmol Tripathi's public machine-learning and AI portfolio, retrieves relevant project evidence with **MiniLM semantic embeddings**, and returns grounded answers with source citations, similarity scores, retrieved context, and runtime latency.
 
-> **Responsible use:** The assistant answers only from indexed public portfolio documentation. It is not an official resume, employment verification, professional reference, or source of confidential company information. Never index Hach/GCS files, internal quality data, private email, customer or supplier records, credentials, proprietary documents, or PII. Review generated answers before official use.
+The project combines a reproducible Python evaluation pipeline, RTX GPU inference, static vector-store generation, a Next.js and TypeScript web application, GitHub Actions validation, Hugging Face inference, and production deployment through Vercel.
 
-## Live demo
+**Status:** Portfolio-ready and deployed  
+**Live application:** [Open the AI Portfolio RAG Assistant](https://10-ai-portfolio-rag-assistant.vercel.app/#assistant)  
+**Primary stack:** Python · PyTorch · Sentence Transformers · MiniLM · FLAN-T5 · DeBERTa NLI · Next.js · TypeScript · Hugging Face · GitHub Actions · Vercel
 
-- **Vercel:** `https://YOUR-PROJECT.vercel.app`
-- **Health:** `https://YOUR-PROJECT.vercel.app/api/health`
-- **Evaluation:** `https://YOUR-PROJECT.vercel.app/api/evaluation`
+---
 
-## Project pattern
+## Responsible Use
 
-| Field | Final implementation |
+This project is intended for educational, technical-learning, and portfolio demonstration purposes.
+
+- The assistant answers from indexed public portfolio documentation and may still retrieve incomplete, duplicated, or weakly relevant text.
+- Generated or extractive responses must be reviewed before they are used in a resume, job application, professional profile, or formal decision.
+- The application is not an official resume, employment verification, legal document, professional reference, or source of confidential company information.
+- Do not index private emails, credentials, personally identifiable information, internal reports, customer or supplier data, proprietary documents, or employer-confidential records.
+- Similarity scores indicate retrieval relevance and do not prove that every answer is complete or correct.
+- Automated groundedness and citation scores are evaluation signals rather than guarantees.
+
+---
+
+## Business Problem
+
+A growing machine-learning portfolio can contain dozens of repositories, model cards, deployment guides, evaluation reports, and README files. Recruiters and technical reviewers may not have time to inspect every project individually, while keyword search may fail when questions use different wording from the documentation.
+
+This project answers:
+
+> Can a Transformer-based retrieval system search an entire public AI portfolio and provide concise, evidence-backed answers about models, skills, results, datasets, and deployments?
+
+The deployed application returns:
+
+- Evidence-grounded portfolio answers
+- Project and repository references
+- Source-file citations
+- Retrieved document chunks
+- Semantic and lexical relevance information
+- Embedding, retrieval, generation, and total latency
+- Corpus and model metadata
+- Responsible-use and low-support warnings
+
+---
+
+## Project Objective
+
+Build a professional portfolio RAG system that can:
+
+1. Collect safe public documentation across multiple ML and AI repositories.
+2. Clean Markdown while preserving headings, technologies, datasets, metrics, and deployment details.
+3. Create section-aware document chunks with overlap and traceable metadata.
+4. Generate real Transformer embeddings with `sentence-transformers/all-MiniLM-L6-v2`.
+5. Compare MiniLM retrieval with TF-IDF, hash-vector, E5-small, and reranking baselines.
+6. Retrieve evidence using normalized vector similarity and lexical matching.
+7. Generate or compose answers only from retrieved portfolio evidence.
+8. Display source citations, chunk identifiers, similarity scores, and latency.
+9. Evaluate retrieval quality, answer groundedness, citation behavior, refusals, and runtime performance.
+10. Export a static Vercel-ready vector store and deploy the full-stack application.
+
+---
+
+## Portfolio Corpus
+
+The final public corpus combines documentation from six model families:
+
+| Portfolio category | Included content |
 |---|---|
-| Project number | 10 |
-| Application | RAG assistant over ANN, Simple RNN, LSTM, BiLSTM, CNN, and Transformer documentation |
-| Retriever | `sentence-transformers/all-MiniLM-L6-v2`; optional E5-small comparison and MiniLM cross-encoder reranking |
-| Generator | Small instruction Transformer through Hugging Face; FLAN-T5 local evaluation; grounded extractive fallback |
-| Vector store | Normalized, precomputed static JSON embeddings |
-| Metrics | Hit Rate@K, Precision@K, Recall@K, MRR, MAP, nDCG@K, groundedness, citation precision/completeness, refusal accuracy, latency |
-| Deployment | Next.js serverless routes on Vercel |
+| ANN | Artificial-neural-network and tabular deep-learning projects |
+| Simple RNN | Recurrent neural-network projects and sequence modeling |
+| LSTM | Long short-term memory projects and NLP applications |
+| BiLSTM | Bidirectional LSTM, attention, matching, and tagging projects |
+| CNN | Computer-vision, classification, detection, and segmentation projects |
+| Transformer | NLP, ranking, semantic search, vision, multimodal, and RAG projects |
 
-## Why this is a genuine Transformer project
+### Deployed corpus statistics
 
-The final workflow generates document embeddings with a Sentence Transformer and embeds each user question with the same model. Semantic retrieval is therefore performed in a learned Transformer embedding space—not with the starter hash vectors. An instruction-tuned Transformer can then compose an answer from the retrieved evidence. The deterministic extractive composer remains available as a safe fallback.
+| Property | Value |
+|---|---:|
+| Public source documents | 220 |
+| Section-aware chunks | 3,157 |
+| Embedding model | `sentence-transformers/all-MiniLM-L6-v2` |
+| Embedding dimension | 384 |
+| Vector normalization | L2 normalized |
+| Evaluation questions | 40 curated questions |
+| Deployment format | Static JSON vector store |
 
-The checked-in starter artifacts are intentionally marked as incomplete until the GPU notebook is run. Do not describe the starter hash mode as the final Transformer implementation.
+The raw source-copy directory is kept local and excluded from Git. The processed chunks, metadata, evaluation artifacts, and deployment-ready vector store are committed for reproducibility and Vercel inference.
 
-## Architecture
+---
+
+## Tools and Technologies
+
+| Area | Technology |
+|---|---|
+| Language | Python, TypeScript, JavaScript |
+| Deep learning | PyTorch with CUDA |
+| Primary retriever | Sentence Transformers MiniLM |
+| Retriever comparison | E5-small, TF-IDF, hash-vector baseline |
+| Reranking | MiniLM cross-encoder |
+| Local generator | FLAN-T5-base |
+| Groundedness evaluation | DeBERTa NLI cross-encoder |
+| Data processing | NumPy, pandas, scikit-learn |
+| Evaluation | Custom IR metrics, NLI support, citation analysis, latency benchmarking |
+| Visualization | Matplotlib |
+| Web application | Next.js App Router, React, TypeScript |
+| API layer | Next.js server-side route handlers |
+| Hosted inference | Hugging Face Inference Providers |
+| Local hardware | NVIDIA GeForce RTX 5090 |
+| Automation | GitHub Actions |
+| Hosting | Vercel |
+| Runtime data | Precomputed JSON chunks, embeddings, metadata, and evaluation summary |
+
+---
+
+## Project Workflow
 
 ```text
-Public GitHub portfolio Markdown
-        ↓
-Safe collection + duplicate detection
-        ↓
-Markdown cleaning + section-aware chunking
-        ↓
-MiniLM / E5 document embeddings on local RTX GPU
-        ↓
-Normalized static JSON vector store
-        ↓
-Vercel Next.js API
-        ↓
-Question embedding + hybrid vector/lexical retrieval
-        ↓
-Optional cross-encoder reranking
-        ↓
-Grounded instruction-model answer
-        ↓
-[S#] citations + evidence cards + latency + warnings
+Public portfolio repositories
+          │
+          ▼
+Safe README, model-card, dataset-card, and deployment documentation
+          │
+          ▼
+Markdown cleaning and duplicate-aware document loading
+          │
+          ▼
+Section-aware chunking with metadata and overlap
+          │
+          ▼
+MiniLM document embeddings generated on RTX GPU
+          │
+          ▼
+Normalized static vector store
+          │
+          ▼
+TF-IDF, hash, MiniLM, E5, and reranker evaluation
+          │
+          ▼
+Question embedding through the same MiniLM model
+          │
+          ▼
+Semantic and lexical retrieval
+          │
+          ▼
+Grounded extractive or instruction-model response
+          │
+          ▼
+Source citations, evidence cards, scores, and latency
+          │
+          ▼
+Next.js application and API routes
+          │
+          ▼
+GitHub Actions validation
+          │
+          ▼
+Vercel production deployment
 ```
 
-## Transformer models
+---
 
-### Retriever
-
-Primary model:
+## RAG Architecture
 
 ```text
-sentence-transformers/all-MiniLM-L6-v2
+User question
+     │
+     ▼
+MiniLM query embedding
+     │
+     ├──────────────► Lexical token matching
+     │
+     ▼
+Cosine-similarity vector search
+     │
+     ▼
+Category and deployment filters
+     │
+     ▼
+Top-K portfolio evidence
+     │
+     ├──────────────► Optional cross-encoder reranking
+     │
+     ▼
+Grounded response composer
+     │
+     ▼
+Answer + [S#] citations + evidence + latency
 ```
 
-It produces normalized 384-dimensional document/query vectors suitable for compact static deployment. The evaluation pipeline can also compare:
+### Why MiniLM?
+
+`sentence-transformers/all-MiniLM-L6-v2` provides compact 384-dimensional semantic embeddings. It is well suited to this application because it offers a practical balance between semantic quality, vector-store size, inference latency, and serverless deployment requirements.
+
+The same model family is used for document and query embeddings so that both are represented in a shared semantic vector space.
+
+---
+
+## Document Preprocessing and Chunking
+
+The preprocessing pipeline is designed for technical portfolio documentation.
+
+- Markdown section and heading detection
+- Whitespace and formatting normalization
+- Code-block and technical-term preservation
+- Section-aware splitting
+- Overlapping word windows
+- Stable document and chunk identifiers
+- Repository, category, project, path, and source metadata
+- Duplicate and checksum support
+- Safe exclusion of virtual environments, secrets, private data, and generated dependency folders
+
+Default chunking uses approximately **220 words** with **50-word overlap**. This preserves enough context for project descriptions while keeping individual evidence blocks compact enough for retrieval and generation.
+
+---
+
+## Transformer Retrieval
+
+The deployed application combines semantic and lexical signals.
 
 ```text
-intfloat/e5-small-v2
-cross-encoder/ms-marco-MiniLM-L6-v2
+hybrid relevance = semantic similarity + lexical query coverage
 ```
 
-### Generator
+The retriever supports:
 
-Offline evaluation supports:
+- MiniLM semantic query embeddings
+- Cosine-similarity vector search
+- Lexical token-overlap scoring
+- Project-category filters
+- Deployment-platform filters
+- Top-K result selection
+- Minimum retrieval-score thresholds
+- Source metadata and evidence excerpts
+- Safe fallback behavior when Hugging Face inference is unavailable
+
+The live interface identifies the active retrieval mode, such as:
+
+```text
+huggingface-minilm
+```
+
+---
+
+## Grounded Response Generation
+
+The initial production deployment uses:
+
+```text
+Generation mode: grounded-extractive
+```
+
+This mode composes answers directly from retrieved evidence and preserves source references. It is intentionally used as the safer default while instruction-model generation is evaluated and improved.
+
+The local evaluation pipeline also supports:
 
 ```text
 google/flan-t5-base
 ```
 
-The deployed app supports a server-side Hugging Face instruction model configured through environment variables. The app never exposes API tokens in browser code.
+A hosted instruction model can be enabled through Vercel environment variables. API tokens remain server-side and are never exposed through `NEXT_PUBLIC_` variables or browser code.
 
-### Groundedness evaluator
+---
 
-Claim support is measured with:
+## Source Citations
 
-```text
-cross-encoder/nli-deberta-v3-small
-```
-
-Each answer claim is compared with its cited evidence. This automated score is clearly labeled as an NLI-based evaluation and can be supplemented with human review.
-
-## Portfolio corpus
-
-The complete corpus should include public documents from:
-
-- ANN / deep-learning projects
-- Simple RNN projects
-- LSTM projects
-- Bidirectional LSTM projects
-- CNN / computer-vision projects
-- Transformer projects 01–10
-- Model cards, dataset cards, deployment guides, and verified evaluation summaries
-
-Each chunk stores project, repository, source file, heading, path, checksum, category, deployment, keywords, word boundaries, and source URL.
-
-## Chunking strategy
-
-Markdown is split by section and then into overlapping word windows. Default settings are 220 words with 50-word overlap. Headings and technical terms are preserved so that model names, datasets, metrics, and deployment details remain searchable.
-
-## Retrieval
-
-The Vercel runtime combines:
+Each retrieved source receives a citation identifier such as:
 
 ```text
-hybrid score = semantic weight × cosine similarity
-             + lexical weight × query-token coverage
+[S1] [S2] [S3]
 ```
 
-Filters are supported for project category, deployment platform, and project ID. Weak results are rejected by the grounded fallback rather than converted into confident unsupported answers.
+Citation cards can expose:
 
-## Source citations
+- Project category
+- Project name
+- Repository
+- Source file
+- Document section
+- Chunk ID
+- Evidence excerpt
+- Semantic score
+- Lexical score
+- Combined relevance score
+- Source path or repository link
 
-Every retrieved source receives `[S1]`, `[S2]`, and so on. Citation cards expose:
+This structure makes the assistant more transparent than a conventional chatbot because users can inspect the evidence used to construct the response.
 
-- project name and ID
-- source file and section
-- chunk ID
-- evidence excerpt
-- semantic, lexical, and combined relevance
-- source path and repository URL
-
-The instruction prompt requires a citation after each factual claim. Unsupported questions must return the documented refusal sentence.
+---
 
 ## Evaluation
 
-The evaluation notebook uses at least 40 curated questions, including factual, paraphrased, cross-project, deployment, metric, ambiguous, and unsupported cases.
+The project evaluates both retrieval and answer behavior rather than relying on a single accuracy value.
 
 ### Retrieval metrics
 
-| Metric | Interpretation |
+| Metric | Purpose |
 |---|---|
-| Hit Rate@K | Whether at least one relevant project is retrieved |
-| Precision@K | Fraction of top-K retrieved projects that are relevant |
+| Hit Rate@K | Whether at least one relevant project appears in the top K |
+| Precision@K | Fraction of retrieved projects that are relevant |
 | Recall@K | Fraction of all expected relevant projects retrieved |
-| MRR | Rank of the first relevant project |
-| MAP@K | Precision across relevant ranks |
-| nDCG@K | Ranking quality with position discounting |
+| MRR | Rank of the first relevant result |
+| MAP@K | Precision across relevant result positions |
+| nDCG@K | Ranking quality with position-based discounting |
 
-This corrects the earlier starter calculation that treated any relevant hit as full recall.
-
-### Answer metrics
+### Answer and system metrics
 
 - Claim-level NLI groundedness
 - Citation precision
 - Citation completeness
 - Unsupported-claim rate
 - Unsupported-question refusal accuracy
-- Local embedding, retrieval, generation, total, median, P90, and P95 latency
-- Deployed Vercel wall-clock latency
+- Query-embedding latency
+- Vector-search latency
+- Generation latency
+- End-to-end latency
+- Median, P90, and P95 timing summaries
 - Manual error analysis
 
-No metric is presented as final until it is generated from the complete corpus and committed evaluation artifacts.
+### Evaluation dataset
 
-## Recommended quality gates
+The curated evaluation set includes:
 
-| Gate | Target |
-|---|---:|
-| Portfolio category coverage | 6/6 |
-| Evaluation set | ≥ 40 questions |
-| Recall@5 | ≥ 0.80 |
-| nDCG@5 | ≥ 0.75 |
-| Groundedness | ≥ 0.85 |
-| Citation precision | ≥ 0.85 |
-| Citation completeness | ≥ 0.85 |
-| Refusal accuracy | ≥ 0.80 |
+- Direct factual questions
+- Paraphrased questions
+- Project-comparison questions
+- Model and dataset questions
+- Deployment questions
+- Cross-category questions
+- Ambiguous questions
+- Unsupported and private-information questions
 
-These are portfolio targets, not fabricated results. A failed gate is a signal to improve data, chunking, retrieval, reranking, or prompting.
+Measured results are stored in committed JSON, CSV, and PNG artifacts. The project does not replace pending or weak metrics with invented values.
 
-## GPU notebook workflow
+---
 
-The main reproducible notebook is:
+## Live Application
+
+[![Open Live Demo](https://img.shields.io/badge/Open-Live%20AI%20Portfolio%20RAG%20Assistant-5eead4?style=for-the-badge&logo=vercel&logoColor=black)](https://10-ai-portfolio-rag-assistant.vercel.app/#assistant)
+
+### Application Homepage
+
+![AI Portfolio RAG Assistant Homepage](images/01-rag-assistant-homepage.png)
+
+*Production Vercel interface showing the public corpus summary, Transformer embedding model, navigation, responsible-use notice, and assistant entry point.*
+
+### Source-Cited RAG Answer
+
+![Source-Cited Portfolio Answer](images/02-source-cited-rag-answer.png)
+
+*Evidence-grounded response with source citations, retrieved portfolio context, project references, and relevance information.*
+
+### Retrieval and Latency Details
+
+![RAG Evaluation and Latency](images/03-rag-evaluation-and-latency.png)
+
+*Live runtime panel showing MiniLM retrieval, grounded-extractive generation, support status, embedding model, indexed document and chunk counts, and latency breakdown.*
+
+---
+
+## Application Features
+
+The deployed application supports:
+
+- Natural-language portfolio questions
+- Example prompts
+- Project-category filters
+- Deployment-platform filters
+- MiniLM semantic retrieval
+- Lexical fallback retrieval
+- Source-cited answers
+- Retrieved-context inspection
+- Similarity and relevance scores
+- Embedding, retrieval, generation, and total latency
+- Corpus coverage statistics
+- Evaluation summary panels
+- Responsible-use warnings
+- Unsupported-question refusal behavior
+- GitHub repository and live Vercel links
+
+---
+
+## API Routes
+
+### `POST /api/chat`
+
+Returns:
+
+- Grounded answer
+- Source citations
+- Retrieved chunks
+- Retrieval and generation modes
+- Model and corpus metadata
+- Support warnings
+- Detailed latency
+
+### `POST /api/retrieve`
+
+Returns ranked source chunks without answer generation.
+
+### `GET /api/health`
+
+Checks the deployment and reports whether the corpus and Transformer vector store are available.
+
+### `GET /api/evaluation`
+
+Returns the committed evaluation summary displayed by the application.
+
+---
+
+## GPU Evaluation Workflow
+
+The main notebook is:
 
 ```text
 notebooks/01-build-and-evaluate-transformer-rag.ipynb
 ```
 
-It performs GPU diagnostics, corpus preparation, MiniLM/E5 embedding generation, retrieval comparisons, instruction-model evaluation, groundedness/citation scoring, latency benchmarking, chart creation, tests, and quality-gate reporting.
+The notebook performs:
 
-See [PROJECT_10_GPU_RUNBOOK.md](PROJECT_10_GPU_RUNBOOK.md) for Windows/RTX steps.
+1. Python, PyTorch, CUDA, and GPU verification.
+2. Local public-document collection.
+3. Markdown preprocessing and chunk generation.
+4. MiniLM and E5 embedding generation on the RTX GPU.
+5. Static vector-store export.
+6. TF-IDF, hash, MiniLM, E5, and reranker comparison.
+7. Information-retrieval metric calculation.
+8. FLAN-T5 answer generation.
+9. NLI groundedness evaluation.
+10. Citation and refusal evaluation.
+11. Latency benchmarking.
+12. JSON, CSV, and PNG artifact generation.
+13. Portfolio quality-gate reporting.
+14. Python, data, TypeScript, and production-build validation.
 
-## Quick local setup
+See [`PROJECT_10_GPU_RUNBOOK.md`](PROJECT_10_GPU_RUNBOOK.md) for the detailed RTX workflow.
+
+---
+
+## Run the Python Evaluation Locally
+
+### 1. Open the project
+
+```bat
+cd 10-ai-portfolio-rag-assistant
+```
+
+### 2. Create and activate a virtual environment
+
+```bat
+py -3.12 -m venv .venv
+.venv\Scripts\activate
+```
+
+### 3. Install the CUDA-enabled PyTorch build
+
+Use the current command generated by the official PyTorch installation selector for the local NVIDIA GPU and Python version.
+
+### 4. Install evaluation dependencies
+
+```bat
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install -r requirements-evaluation.txt
+```
+
+### 5. Register the Jupyter kernel
+
+```bat
+python -m ipykernel install --user --name project10-rag --display-name "Project 10 RAG"
+```
+
+### 6. Launch the notebook
+
+```bat
+jupyter lab notebooks\01-build-and-evaluate-transformer-rag.ipynb
+```
+
+Select the `Project 10 RAG` kernel and confirm that the GPU diagnostic reports `cuda:0` before running the complete evaluation pipeline.
+
+---
+
+## Run the Next.js Application Locally
+
+Node.js is required only for local frontend development and validation.
 
 ```bash
 npm install
 npm run validate:data
+npm test
+npm run typecheck
 npm run dev
 ```
 
-For the complete offline evaluation:
-
-```bash
-python -m venv .venv
-# Windows: .venv\Scripts\activate
-pip install -r requirements-evaluation.txt
-python scripts/collect_github_portfolio_docs.py --clean
-python scripts/run_full_evaluation.py --device cuda --generator flan-t5-base --include-e5 --include-reranker
-npm run validate:data
-npm test
-npm run typecheck
-npm run build
-```
-
-Install the CUDA-enabled PyTorch build for the local machine before installing the evaluation requirements.
-
-## Generated artifacts
+Open:
 
 ```text
-public/data/document_chunks.json
-public/data/embeddings.json
-public/data/metadata.json
-public/data/evaluation_questions.json
-public/data/evaluation_summary.json
-outputs/retrieval_benchmark.json
-outputs/answer_groundedness_results.json
-outputs/citation_correctness_results.json
-outputs/response_latency_results.json
-outputs/deployed_latency_results.json
-outputs/rag_answer_examples.csv
-outputs/retrieval_method_comparison.png
-outputs/rag_answer_quality.png
-outputs/response_latency_distribution.png
+http://localhost:3000
 ```
 
-Only commit measured outputs. Never manually replace pending values with estimated numbers.
+The Python and Transformer evaluation pipeline can be completed independently of local Node.js installation. GitHub Actions and Vercel perform the remote Next.js production validation and build.
 
-## API routes
+---
 
-### `POST /api/chat`
+## Environment Variables
 
-Returns the grounded answer, citations, retrieved chunks, runtime modes, support warning, model/corpus metadata, and latency.
+Create server-side environment variables through Vercel or a local `.env.local` file.
 
-### `POST /api/retrieve`
-
-Returns ranked source chunks without generation.
-
-### `GET /api/health`
-
-Checks artifact loading and reports whether real Transformer embeddings are active.
-
-### `GET /api/evaluation`
-
-Returns the committed evaluation summary displayed by the UI.
-
-## Vercel deployment
-
-Import `unit-mole/transformer-projects` into Vercel and select:
-
-```text
-Root Directory: 10-ai-portfolio-rag-assistant
-Framework: Next.js
-Build command: npm run build
-Install command: npm install
-```
-
-Configure the same embedding model used to create `public/data/embeddings.json`:
-
-```text
-HF_API_TOKEN=...
+```env
+HF_API_TOKEN=your_private_hugging_face_token
 HF_EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
+USE_HF_GENERATOR=false
+MIN_RETRIEVAL_SCORE=0.15
+NEXT_PUBLIC_GITHUB_URL=https://github.com/unit-mole/transformer-projects
 ```
 
-Optional generation:
+Optional hosted generation:
 
-```text
+```env
 USE_HF_GENERATOR=true
-HF_GENERATOR_MODEL=your-supported-instruction-model
+HF_GENERATOR_MODEL=your_supported_instruction_model
 ```
 
-See [README_VERCEL.md](README_VERCEL.md).
+Never commit real tokens or secrets. Only public links and non-sensitive configuration values should use the `NEXT_PUBLIC_` prefix.
 
-## Folder structure
+---
+
+## Deployment
+
+- **Repository:** `unit-mole/transformer-projects`
+- **Source branch:** `main`
+- **Vercel root directory:** `10-ai-portfolio-rag-assistant`
+- **Framework preset:** Next.js
+- **Production application:** https://10-ai-portfolio-rag-assistant.vercel.app/
+- **Assistant link:** https://10-ai-portfolio-rag-assistant.vercel.app/#assistant
+
+The deployment workflow:
+
+1. Pushes the project and generated artifacts to GitHub.
+2. Runs data validation, tests, type checking, and the Next.js production build through GitHub Actions.
+3. Triggers a Vercel deployment from the connected `main` branch.
+4. Installs Node dependencies in Vercel's managed build environment.
+5. Builds the Next.js application and route handlers.
+6. Publishes the static vector store and web assets.
+7. Makes the server-side Hugging Face token available to API routes.
+8. Assigns the production Vercel domain.
+
+The GitHub Actions workflow is stored at:
 
 ```text
-10-ai-portfolio-rag-assistant/
-├── app/                         # Next.js UI and API routes
-├── components/                  # Assistant, citations, metrics, evaluation UI
-├── config/                      # Public repository collection config
-├── data/                        # Raw safe corpus and processed artifacts
-├── lib/                         # Vercel retrieval/generation implementation
-├── notebooks/                   # End-to-end GPU evaluation notebook
-├── outputs/                     # Measured evaluation JSON/CSV/PNG files
-├── public/data/                 # Runtime vector store and summary
-├── scripts/                     # Reproducible pipeline commands
-├── src/                         # Python data, retrieval, generation, evaluation modules
-├── tests/ and tests-ts/         # Python and Node validation
-├── PROJECT_10_GPU_RUNBOOK.md
-├── MODEL_CARD.md
-├── DATASET_CARD.md
-└── README_VERCEL.md
+.github/workflows/10-ai-portfolio-rag-assistant.yml
 ```
 
-## Portfolio positioning
+---
 
-**One-line description:** Built and deployed an evaluated Transformer RAG assistant that semantically searches a multi-repository AI portfolio, generates grounded answers, and exposes claim-level citations, retrieval quality, and latency.
+## Generated Artifacts
 
-**Skills demonstrated:** Transformer embeddings, semantic search, RAG, cross-encoder reranking, instruction models, NLI evaluation, source attribution, information retrieval metrics, Python pipelines, GPU inference, Next.js, TypeScript, Vercel serverless APIs, testing, and CI.
+| Artifact | Purpose |
+|---|---|
+| `data/processed/portfolio_corpus.json` | Processed source-document records |
+| `data/processed/document_chunks.json` | Section-aware evidence chunks |
+| `data/processed/embeddings.json` | Transformer document vectors |
+| `data/processed/metadata.json` | Corpus and model metadata |
+| `data/processed/evaluation_questions.json` | Curated evaluation set |
+| `public/data/document_chunks.json` | Vercel runtime chunks |
+| `public/data/embeddings.json` | Vercel runtime vector store |
+| `public/data/metadata.json` | Runtime corpus and embedding metadata |
+| `public/data/evaluation_summary.json` | UI evaluation summary |
+| `outputs/retrieval_recall_at_k.json` | Retrieval metric results |
+| `outputs/answer_groundedness_results.json` | Claim-support evaluation |
+| `outputs/citation_correctness_results.json` | Citation evaluation |
+| `outputs/response_latency_results.json` | Local timing benchmark |
+| `outputs/rag_answer_examples.csv` | Reviewed answer examples |
+| `outputs/retrieval_method_comparison.png` | Retrieval comparison chart |
+| `outputs/rag_answer_quality.png` | Answer-quality chart |
+| `outputs/response_latency_distribution.png` | Runtime distribution chart |
 
-The architecture also relates naturally to trusted enterprise search over approved quality documentation, root-cause knowledge, SOPs, technical manuals, CAPA records, and analytics documentation. This public demo must never contain internal business data.
+---
 
-## Current honesty label
+## Project Structure
 
-The repository is **9/10-capable**, not automatically 9/10 merely because the code exists. It becomes a defensible 9/10 portfolio capstone after the complete public corpus is indexed, real Transformer artifacts replace the starter hash vectors, the notebook passes its quality gates, the Vercel build succeeds, and the committed README shows actual measured results.
+```text
+transformer-projects/
+├── .github/
+│   └── workflows/
+│       └── 10-ai-portfolio-rag-assistant.yml
+│
+└── 10-ai-portfolio-rag-assistant/
+    ├── app/
+    │   ├── api/
+    │   │   ├── chat/
+    │   │   ├── evaluation/
+    │   │   ├── health/
+    │   │   └── retrieve/
+    │   ├── globals.css
+    │   ├── layout.tsx
+    │   └── page.tsx
+    ├── components/
+    ├── config/
+    ├── data/
+    │   ├── evaluation/
+    │   └── processed/
+    ├── images/
+    │   ├── 01-rag-assistant-homepage.png
+    │   ├── 02-source-cited-rag-answer.png
+    │   └── 03-rag-evaluation-and-latency.png
+    ├── lib/
+    ├── notebooks/
+    │   └── 01-build-and-evaluate-transformer-rag.ipynb
+    ├── outputs/
+    ├── public/
+    │   └── data/
+    ├── scripts/
+    ├── scripts-node/
+    ├── src/
+    ├── tests/
+    ├── tests-ts/
+    ├── DATASET_CARD.md
+    ├── MODEL_CARD.md
+    ├── PROJECT_10_GPU_RUNBOOK.md
+    ├── README.md
+    ├── README_VERCEL.md
+    ├── package.json
+    ├── requirements-evaluation.txt
+    ├── requirements.txt
+    └── vercel.json
+```
+
+---
+
+## Limitations
+
+- Retrieval quality depends on the completeness, structure, and wording of the indexed documentation.
+- Markdown tables, roadmap notes, and deployment instructions can sometimes produce noisy evidence fragments.
+- A relevant top result does not guarantee that every required project was retrieved.
+- The grounded-extractive composer may be less fluent than a hosted instruction model.
+- Instruction-model generation can introduce unsupported statements or weak citations and must be evaluated before activation.
+- Automated NLI groundedness scores may disagree with human judgment.
+- Hugging Face provider availability, rate limits, or credits may affect live semantic query embedding.
+- The static vector store must be regenerated when source documentation changes.
+- The application is optimized for portfolio exploration rather than unrestricted general-purpose question answering.
+- The project has not been validated for legal, medical, financial, hiring, or other high-stakes decisions.
+
+---
+
+## Future Improvements
+
+- Improve Markdown table parsing before chunk generation.
+- Add project-level canonical summaries to reduce noisy retrieval fragments.
+- Tune semantic and lexical score weights using the evaluation set.
+- Improve Recall@K and nDCG through metadata-aware retrieval.
+- Add query expansion and multi-query retrieval.
+- Add stronger cross-encoder reranking.
+- Evaluate larger embedding models and multilingual retrieval.
+- Improve claim-level citation placement.
+- Add answer-level confidence calibration.
+- Expand manual error analysis and human review.
+- Add automated deployed-API quality tests.
+- Add incremental corpus updates after repository changes.
+- Add authenticated analytics without collecting private query content.
+- Enable a hosted instruction model only after groundedness and citation quality meet the documented gates.
+
+---
+
+## Skills Demonstrated
+
+- Transformer embeddings
+- Sentence Transformers
+- Semantic search
+- Vector retrieval
+- Hybrid semantic and lexical search
+- Retrieval-Augmented Generation
+- Cross-encoder reranking
+- Instruction-model generation
+- NLI groundedness evaluation
+- Citation precision and completeness analysis
+- Information-retrieval metrics
+- Refusal and unsupported-query testing
+- Latency benchmarking
+- Python data pipelines
+- PyTorch CUDA inference
+- RTX GPU model execution
+- JSON vector-store design
+- Next.js App Router
+- React and TypeScript
+- Server-side API routes
+- Hugging Face inference integration
+- GitHub Actions
+- Vercel deployment
+- Responsible AI communication
+- Portfolio-focused ML engineering
+
+---
+
+## Portfolio Positioning
+
+**One-line description:** Transformer-powered portfolio RAG assistant that semantically searches 220 public AI documents and 3,157 evidence chunks, returns source-cited answers, exposes retrieval and latency details, and runs as a production Next.js application on Vercel.
+
+**Pinned project description:** End-to-end RAG portfolio capstone featuring MiniLM semantic embeddings, hybrid retrieval, source citations, grounded response generation, RTX GPU evaluation, information-retrieval metrics, Next.js APIs, GitHub Actions, Hugging Face inference, and Vercel deployment.
+
+This project connects naturally to a Quality Data Scientist background because the same approved-document retrieval architecture can support technical knowledge search, standard operating procedures, model documentation, analytics references, root-cause knowledge bases, and controlled internal information discovery. The public demonstration intentionally excludes employer-confidential data.
+
+---
+
+## Author
+
+**Anmol Tripathi**
+
+Quality Data Scientist building a professional portfolio in Data Science, Machine Learning, Applied AI, Generative AI, Natural Language Processing, Computer Vision, Retrieval-Augmented Generation, Analytics Engineering, and Quality Analytics.
+
+---
 
 ## License
 
-Code is MIT-licensed. Source documents, models, and datasets remain subject to their own licenses and usage terms.
+The project code is released under the MIT License. Source documents, pretrained models, third-party APIs, datasets, and external repositories remain subject to their respective licenses and usage terms.
