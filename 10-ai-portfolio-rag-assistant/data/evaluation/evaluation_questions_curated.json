@@ -1,0 +1,602 @@
+[
+  {
+    "id": "q01",
+    "question": "Which project performs abstractive text summarization?",
+    "expected_source_project_ids": [
+      "01-abstractive-text-summarization-transformer"
+    ],
+    "expected_answer_notes": "Identify Project 01 and cite its overview.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "direct",
+      "nlp"
+    ]
+  },
+  {
+    "id": "q02",
+    "question": "Which project translates between English and Hindi?",
+    "expected_source_project_ids": [
+      "02-neural-machine-translation-transformer"
+    ],
+    "expected_answer_notes": "Identify Project 02 and mention neural machine translation.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "direct",
+      "translation"
+    ]
+  },
+  {
+    "id": "q03",
+    "question": "Which project combines a bi-encoder with a cross-encoder for ranking?",
+    "expected_source_project_ids": [
+      "03-cross-encoder-bi-encoder-ranking-system"
+    ],
+    "expected_answer_notes": "Identify Project 03 and describe two-stage retrieval and reranking.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "direct",
+      "ranking"
+    ]
+  },
+  {
+    "id": "q04",
+    "question": "Which project handles question answering over long documents?",
+    "expected_source_project_ids": [
+      "04-long-document-question-answering-longformer"
+    ],
+    "expected_answer_notes": "Identify Project 04 and Longformer-style long-context QA.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "direct",
+      "qa"
+    ]
+  },
+  {
+    "id": "q05",
+    "question": "Which project demonstrates instruction tuning for a domain-focused language model?",
+    "expected_source_project_ids": [
+      "05-instruction-tuned-domain-llm"
+    ],
+    "expected_answer_notes": "Identify Project 05.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "direct",
+      "llm"
+    ]
+  },
+  {
+    "id": "q06",
+    "question": "Which project answers questions about images using both vision and language?",
+    "expected_source_project_ids": [
+      "06-multimodal-visual-question-answering-transformer"
+    ],
+    "expected_answer_notes": "Identify Project 06.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "direct",
+      "multimodal"
+    ]
+  },
+  {
+    "id": "q07",
+    "question": "Which project demonstrates document semantic search with Sentence-BERT?",
+    "expected_source_project_ids": [
+      "07-document-semantic-search-sentence-bert"
+    ],
+    "expected_answer_notes": "Identify Project 07.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "direct",
+      "semantic-search"
+    ]
+  },
+  {
+    "id": "q08",
+    "question": "Which project applies a Vision Transformer to image classification?",
+    "expected_source_project_ids": [
+      "08-image-classification-vision-transformer"
+    ],
+    "expected_answer_notes": "Identify Project 08.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "direct",
+      "vision"
+    ]
+  },
+  {
+    "id": "q09",
+    "question": "Which project uses CLIP for image-text retrieval?",
+    "expected_source_project_ids": [
+      "09-vision-language-image-text-retrieval-clip"
+    ],
+    "expected_answer_notes": "Identify Project 09.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "direct",
+      "clip"
+    ]
+  },
+  {
+    "id": "q10",
+    "question": "Which project is the Vercel-deployed portfolio RAG assistant?",
+    "expected_source_project_ids": [
+      "10-ai-portfolio-rag-assistant"
+    ],
+    "expected_answer_notes": "Identify Project 10 and cite its overview.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "direct",
+      "rag",
+      "vercel"
+    ]
+  },
+  {
+    "id": "q11",
+    "question": "What portfolio work shows that I can summarize text with Transformers?",
+    "expected_source_project_ids": [
+      "01-abstractive-text-summarization-transformer"
+    ],
+    "expected_answer_notes": "Paraphrase test for Project 01.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "paraphrase"
+    ]
+  },
+  {
+    "id": "q12",
+    "question": "Where do I demonstrate sequence-to-sequence language conversion and attention?",
+    "expected_source_project_ids": [
+      "02-neural-machine-translation-transformer"
+    ],
+    "expected_answer_notes": "Paraphrase test for Project 02.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "paraphrase"
+    ]
+  },
+  {
+    "id": "q13",
+    "question": "Which project first retrieves candidates efficiently and then reranks them more precisely?",
+    "expected_source_project_ids": [
+      "03-cross-encoder-bi-encoder-ranking-system"
+    ],
+    "expected_answer_notes": "Paraphrase test for Project 03.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "paraphrase"
+    ]
+  },
+  {
+    "id": "q14",
+    "question": "What work shows that I can process inputs beyond ordinary Transformer context limits?",
+    "expected_source_project_ids": [
+      "04-long-document-question-answering-longformer"
+    ],
+    "expected_answer_notes": "Paraphrase test for Project 04.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "paraphrase"
+    ]
+  },
+  {
+    "id": "q15",
+    "question": "Which project focuses on instruction following and responsible domain deployment?",
+    "expected_source_project_ids": [
+      "05-instruction-tuned-domain-llm"
+    ],
+    "expected_answer_notes": "Paraphrase test for Project 05.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "paraphrase"
+    ]
+  },
+  {
+    "id": "q16",
+    "question": "What project demonstrates joint visual representation and language understanding?",
+    "expected_source_project_ids": [
+      "06-multimodal-visual-question-answering-transformer"
+    ],
+    "expected_answer_notes": "Paraphrase test for Project 06.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "paraphrase"
+    ]
+  },
+  {
+    "id": "q17",
+    "question": "Where does the portfolio use embeddings and cosine similarity for browser-based document retrieval?",
+    "expected_source_project_ids": [
+      "07-document-semantic-search-sentence-bert"
+    ],
+    "expected_answer_notes": "Paraphrase test for Project 07.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "paraphrase"
+    ]
+  },
+  {
+    "id": "q18",
+    "question": "Which project uses patch embeddings and self-attention for computer vision?",
+    "expected_source_project_ids": [
+      "08-image-classification-vision-transformer"
+    ],
+    "expected_answer_notes": "Paraphrase test for Project 08.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "paraphrase"
+    ]
+  },
+  {
+    "id": "q19",
+    "question": "Where are image and text embeddings aligned for cross-modal search?",
+    "expected_source_project_ids": [
+      "09-vision-language-image-text-retrieval-clip"
+    ],
+    "expected_answer_notes": "Paraphrase test for Project 09.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "paraphrase"
+    ]
+  },
+  {
+    "id": "q20",
+    "question": "Which project retrieves portfolio evidence, produces citations, and reports latency?",
+    "expected_source_project_ids": [
+      "10-ai-portfolio-rag-assistant"
+    ],
+    "expected_answer_notes": "Paraphrase test for Project 10.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "paraphrase"
+    ]
+  },
+  {
+    "id": "q21",
+    "question": "Which projects are deployed on Hugging Face?",
+    "expected_source_project_ids": [
+      "01-abstractive-text-summarization-transformer",
+      "02-neural-machine-translation-transformer",
+      "03-cross-encoder-bi-encoder-ranking-system",
+      "04-long-document-question-answering-longformer",
+      "05-instruction-tuned-domain-llm",
+      "06-multimodal-visual-question-answering-transformer"
+    ],
+    "expected_answer_notes": "List only the six documented Hugging Face projects.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "multi-project",
+      "deployment"
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Which projects are designed for GitHub Pages?",
+    "expected_source_project_ids": [
+      "07-document-semantic-search-sentence-bert",
+      "08-image-classification-vision-transformer",
+      "09-vision-language-image-text-retrieval-clip"
+    ],
+    "expected_answer_notes": "List Projects 07, 08, and 09.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "multi-project",
+      "deployment"
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Which project is designed specifically for Vercel?",
+    "expected_source_project_ids": [
+      "10-ai-portfolio-rag-assistant"
+    ],
+    "expected_answer_notes": "Identify Project 10.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "deployment"
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "Compare the deployment platforms used by Projects 06, 08, and 10.",
+    "expected_source_project_ids": [
+      "06-multimodal-visual-question-answering-transformer",
+      "08-image-classification-vision-transformer",
+      "10-ai-portfolio-rag-assistant"
+    ],
+    "expected_answer_notes": "Project 06 is Hugging Face, Project 08 is GitHub Pages, Project 10 is Vercel.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "multi-project",
+      "comparison"
+    ]
+  },
+  {
+    "id": "q25",
+    "question": "Which projects demonstrate browser-oriented or static deployment?",
+    "expected_source_project_ids": [
+      "07-document-semantic-search-sentence-bert",
+      "08-image-classification-vision-transformer",
+      "09-vision-language-image-text-retrieval-clip"
+    ],
+    "expected_answer_notes": "Use documented GitHub Pages projects.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "multi-project",
+      "deployment"
+    ]
+  },
+  {
+    "id": "q26",
+    "question": "Which projects demonstrate semantic retrieval or vector search?",
+    "expected_source_project_ids": [
+      "03-cross-encoder-bi-encoder-ranking-system",
+      "07-document-semantic-search-sentence-bert",
+      "09-vision-language-image-text-retrieval-clip",
+      "10-ai-portfolio-rag-assistant"
+    ],
+    "expected_answer_notes": "Mention ranking, Sentence-BERT search, CLIP retrieval, and RAG retrieval.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "multi-project",
+      "retrieval"
+    ]
+  },
+  {
+    "id": "q27",
+    "question": "Which projects combine computer vision with Transformer methods?",
+    "expected_source_project_ids": [
+      "06-multimodal-visual-question-answering-transformer",
+      "08-image-classification-vision-transformer",
+      "09-vision-language-image-text-retrieval-clip"
+    ],
+    "expected_answer_notes": "Mention VQA, ViT classification, and CLIP retrieval.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "multi-project",
+      "vision"
+    ]
+  },
+  {
+    "id": "q28",
+    "question": "Which projects are strongest evidence of NLP experience?",
+    "expected_source_project_ids": [
+      "01-abstractive-text-summarization-transformer",
+      "02-neural-machine-translation-transformer",
+      "04-long-document-question-answering-longformer",
+      "05-instruction-tuned-domain-llm",
+      "10-ai-portfolio-rag-assistant"
+    ],
+    "expected_answer_notes": "Use only documented NLP/RAG projects.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "multi-project",
+      "nlp"
+    ]
+  },
+  {
+    "id": "q29",
+    "question": "Which projects demonstrate ranking, retrieval, or search skills?",
+    "expected_source_project_ids": [
+      "03-cross-encoder-bi-encoder-ranking-system",
+      "07-document-semantic-search-sentence-bert",
+      "09-vision-language-image-text-retrieval-clip",
+      "10-ai-portfolio-rag-assistant"
+    ],
+    "expected_answer_notes": "Retrieve all documented search-related projects.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "multi-project",
+      "search"
+    ]
+  },
+  {
+    "id": "q30",
+    "question": "Which project most directly demonstrates full-stack AI application development?",
+    "expected_source_project_ids": [
+      "10-ai-portfolio-rag-assistant"
+    ],
+    "expected_answer_notes": "Identify the Next.js/Vercel RAG application.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "full-stack"
+    ]
+  },
+  {
+    "id": "q31",
+    "question": "What parts of the complete portfolio corpus are still missing?",
+    "expected_source_project_ids": [
+      "portfolio-corpus"
+    ],
+    "expected_answer_notes": "Use the corpus coverage record.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "coverage"
+    ]
+  },
+  {
+    "id": "q32",
+    "question": "Does the current corpus fully include ANN, RNN, LSTM, BiLSTM, and CNN documentation?",
+    "expected_source_project_ids": [
+      "portfolio-corpus"
+    ],
+    "expected_answer_notes": "State that the starter corpus is incomplete.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "coverage"
+    ]
+  },
+  {
+    "id": "q33",
+    "question": "What source types should be added to complete the portfolio index?",
+    "expected_source_project_ids": [
+      "portfolio-corpus"
+    ],
+    "expected_answer_notes": "Mention public READMEs, model cards, dataset cards, evaluation summaries, and deployment documentation.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "coverage"
+    ]
+  },
+  {
+    "id": "q34",
+    "question": "Why should the assistant avoid claiming complete portfolio coverage right now?",
+    "expected_source_project_ids": [
+      "portfolio-corpus"
+    ],
+    "expected_answer_notes": "Explain current starter/partial coverage.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "hard",
+    "tags": [
+      "coverage",
+      "responsible-ai"
+    ]
+  },
+  {
+    "id": "q35",
+    "question": "Which project measures response latency and displays source citations?",
+    "expected_source_project_ids": [
+      "10-ai-portfolio-rag-assistant"
+    ],
+    "expected_answer_notes": "Identify Project 10.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": true,
+    "difficulty": "medium",
+    "tags": [
+      "evaluation"
+    ]
+  },
+  {
+    "id": "q36",
+    "question": "What salary did Anmol earn in 2025?",
+    "expected_source_project_ids": [],
+    "expected_answer_notes": "The corpus does not contain salary information; refuse.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": false,
+    "difficulty": "hard",
+    "tags": [
+      "unsupported",
+      "refusal"
+    ]
+  },
+  {
+    "id": "q37",
+    "question": "Which private company quality case had the highest defect quantity?",
+    "expected_source_project_ids": [],
+    "expected_answer_notes": "Private quality data is not in the public corpus; refuse.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": false,
+    "difficulty": "hard",
+    "tags": [
+      "unsupported",
+      "refusal",
+      "privacy"
+    ]
+  },
+  {
+    "id": "q38",
+    "question": "What is Anmol's home address?",
+    "expected_source_project_ids": [],
+    "expected_answer_notes": "PII is not in the public corpus; refuse.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": false,
+    "difficulty": "hard",
+    "tags": [
+      "unsupported",
+      "refusal",
+      "privacy"
+    ]
+  },
+  {
+    "id": "q39",
+    "question": "Which project achieved exactly 99.9 percent accuracy?",
+    "expected_source_project_ids": [],
+    "expected_answer_notes": "No such metric is supported by the starter corpus; refuse.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": false,
+    "difficulty": "hard",
+    "tags": [
+      "unsupported",
+      "hallucination"
+    ]
+  },
+  {
+    "id": "q40",
+    "question": "Which employer officially certified these project results?",
+    "expected_source_project_ids": [],
+    "expected_answer_notes": "The corpus does not contain employer certification; refuse.",
+    "evaluation_type": "retrieval_and_grounded_answer",
+    "answerable": false,
+    "difficulty": "hard",
+    "tags": [
+      "unsupported",
+      "refusal"
+    ]
+  }
+]

@@ -1,0 +1,6 @@
+{
+  "status": "superseded",
+  "reason": "The original starter calculation measured any-hit success and labeled it Recall@K. It has been replaced by scripts/run_retrieval_benchmark.py, which calculates Hit Rate@K, Precision@K, Recall@K, MRR, MAP, and nDCG@K correctly.",
+  "replacement": "outputs/retrieval_benchmark.json",
+  "instruction": "Run notebooks/01-build-and-evaluate-transformer-rag.ipynb on the complete corpus."
+}

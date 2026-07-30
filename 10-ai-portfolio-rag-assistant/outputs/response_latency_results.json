@@ -1,0 +1,415 @@
+{
+  "status": "measured_locally",
+  "summary": {
+    "count": 40,
+    "mean_ms": 152.515,
+    "median_ms": 113.407,
+    "p90_ms": 159.268,
+    "p95_ms": 348.339,
+    "min_ms": 42.672,
+    "max_ms": 1337.153
+  },
+  "records": [
+    {
+      "question_id": "q01",
+      "query_embedding_ms": 51.022,
+      "retrieval_ms": 0.693,
+      "generation_ms": 292.458,
+      "total_ms": 344.174,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q02",
+      "query_embedding_ms": 3.48,
+      "retrieval_ms": 0.497,
+      "generation_ms": 112.51,
+      "total_ms": 116.488,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q03",
+      "query_embedding_ms": 4.027,
+      "retrieval_ms": 0.453,
+      "generation_ms": 143.378,
+      "total_ms": 147.857,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q04",
+      "query_embedding_ms": 3.431,
+      "retrieval_ms": 0.48,
+      "generation_ms": 114.978,
+      "total_ms": 118.888,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q05",
+      "query_embedding_ms": 3.508,
+      "retrieval_ms": 0.328,
+      "generation_ms": 87.377,
+      "total_ms": 91.213,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q06",
+      "query_embedding_ms": 3.161,
+      "retrieval_ms": 0.611,
+      "generation_ms": 141.18,
+      "total_ms": 144.952,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q07",
+      "query_embedding_ms": 3.234,
+      "retrieval_ms": 0.297,
+      "generation_ms": 82.159,
+      "total_ms": 85.69,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q08",
+      "query_embedding_ms": 3.078,
+      "retrieval_ms": 0.291,
+      "generation_ms": 59.407,
+      "total_ms": 62.775,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q09",
+      "query_embedding_ms": 3.011,
+      "retrieval_ms": 0.447,
+      "generation_ms": 119.181,
+      "total_ms": 122.639,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q10",
+      "query_embedding_ms": 3.121,
+      "retrieval_ms": 0.624,
+      "generation_ms": 93.088,
+      "total_ms": 96.832,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q11",
+      "query_embedding_ms": 3.241,
+      "retrieval_ms": 0.369,
+      "generation_ms": 149.144,
+      "total_ms": 152.754,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q12",
+      "query_embedding_ms": 3.457,
+      "retrieval_ms": 0.409,
+      "generation_ms": 62.32,
+      "total_ms": 66.186,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q13",
+      "query_embedding_ms": 3.627,
+      "retrieval_ms": 0.5,
+      "generation_ms": 118.024,
+      "total_ms": 122.151,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q14",
+      "query_embedding_ms": 3.499,
+      "retrieval_ms": 0.396,
+      "generation_ms": 58.969,
+      "total_ms": 62.864,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q15",
+      "query_embedding_ms": 3.047,
+      "retrieval_ms": 0.331,
+      "generation_ms": 39.294,
+      "total_ms": 42.672,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q16",
+      "query_embedding_ms": 2.958,
+      "retrieval_ms": 0.533,
+      "generation_ms": 133.26,
+      "total_ms": 136.751,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q17",
+      "query_embedding_ms": 7.001,
+      "retrieval_ms": 0.438,
+      "generation_ms": 1329.715,
+      "total_ms": 1337.153,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q18",
+      "query_embedding_ms": 3.933,
+      "retrieval_ms": 0.438,
+      "generation_ms": 75.576,
+      "total_ms": 79.948,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q19",
+      "query_embedding_ms": 5.761,
+      "retrieval_ms": 0.536,
+      "generation_ms": 70.402,
+      "total_ms": 76.698,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q20",
+      "query_embedding_ms": 3.37,
+      "retrieval_ms": 0.302,
+      "generation_ms": 113.416,
+      "total_ms": 117.087,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q21",
+      "query_embedding_ms": 2.978,
+      "retrieval_ms": 0.394,
+      "generation_ms": 116.07,
+      "total_ms": 119.443,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q22",
+      "query_embedding_ms": 4.217,
+      "retrieval_ms": 0.521,
+      "generation_ms": 95.128,
+      "total_ms": 99.867,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q23",
+      "query_embedding_ms": 3.927,
+      "retrieval_ms": 0.304,
+      "generation_ms": 144.023,
+      "total_ms": 148.254,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q24",
+      "query_embedding_ms": 3.022,
+      "retrieval_ms": 0.479,
+      "generation_ms": 214.39,
+      "total_ms": 217.891,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q25",
+      "query_embedding_ms": 7.181,
+      "retrieval_ms": 0.458,
+      "generation_ms": 419.83,
+      "total_ms": 427.469,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q26",
+      "query_embedding_ms": 4.346,
+      "retrieval_ms": 0.564,
+      "generation_ms": 99.54,
+      "total_ms": 104.449,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q27",
+      "query_embedding_ms": 3.052,
+      "retrieval_ms": 0.327,
+      "generation_ms": 116.081,
+      "total_ms": 119.461,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q28",
+      "query_embedding_ms": 4.17,
+      "retrieval_ms": 0.504,
+      "generation_ms": 140.937,
+      "total_ms": 145.611,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q29",
+      "query_embedding_ms": 9.572,
+      "retrieval_ms": 0.658,
+      "generation_ms": 84.234,
+      "total_ms": 94.464,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q30",
+      "query_embedding_ms": 3.261,
+      "retrieval_ms": 0.684,
+      "generation_ms": 77.44,
+      "total_ms": 81.385,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q31",
+      "query_embedding_ms": 4.1,
+      "retrieval_ms": 0.471,
+      "generation_ms": 99.613,
+      "total_ms": 104.183,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q32",
+      "query_embedding_ms": 4.613,
+      "retrieval_ms": 0.726,
+      "generation_ms": 40.909,
+      "total_ms": 46.248,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q33",
+      "query_embedding_ms": 2.981,
+      "retrieval_ms": 0.417,
+      "generation_ms": 132.587,
+      "total_ms": 135.985,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q34",
+      "query_embedding_ms": 8.832,
+      "retrieval_ms": 0.446,
+      "generation_ms": 116.503,
+      "total_ms": 125.782,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q35",
+      "query_embedding_ms": 3.023,
+      "retrieval_ms": 0.424,
+      "generation_ms": 89.809,
+      "total_ms": 93.256,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q36",
+      "query_embedding_ms": 3.086,
+      "retrieval_ms": 0.349,
+      "generation_ms": 79.313,
+      "total_ms": 82.747,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q37",
+      "query_embedding_ms": 3.028,
+      "retrieval_ms": 0.601,
+      "generation_ms": 86.87,
+      "total_ms": 90.499,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q38",
+      "query_embedding_ms": 3.227,
+      "retrieval_ms": 0.397,
+      "generation_ms": 143.32,
+      "total_ms": 146.944,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q39",
+      "query_embedding_ms": 3.89,
+      "retrieval_ms": 0.985,
+      "generation_ms": 105.451,
+      "total_ms": 110.326,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    },
+    {
+      "question_id": "q40",
+      "query_embedding_ms": 3.118,
+      "retrieval_ms": 0.365,
+      "generation_ms": 77.066,
+      "total_ms": 80.549,
+      "top_k": 5,
+      "corpus_size": 3157,
+      "generator_mode": "google/flan-t5-base"
+    }
+  ],
+  "note": "Rerun scripts/benchmark_deployed_api.py after Vercel deployment for production latency."
+}

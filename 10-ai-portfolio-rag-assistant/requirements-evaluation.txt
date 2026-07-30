@@ -1,0 +1,5 @@
+-r requirements.txt
+
+# PyTorch is intentionally not pinned here. Install the CUDA wheel that matches
+# your Windows/NVIDIA environment from the official PyTorch installation selector
+# before running this file. Sentence Transformers and Transformers will then use it.

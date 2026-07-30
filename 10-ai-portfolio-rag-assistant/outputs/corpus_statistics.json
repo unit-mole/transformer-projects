@@ -1,0 +1,24 @@
+{
+  "document_count": 220,
+  "chunk_count": 3157,
+  "category_document_counts": {
+    "ANN": 40,
+    "BiLSTM": 23,
+    "CNN": 37,
+    "LSTM": 34,
+    "Simple RNN": 23,
+    "Transformer": 63
+  },
+  "deployment_document_counts": {
+    "Not specified": 44,
+    "Streamlit": 84,
+    "Hugging Face": 49,
+    "Vercel": 19,
+    "Gradio": 4,
+    "GitHub Pages": 19,
+    "TensorFlow.js": 1
+  },
+  "mean_chunk_words": 55.72,
+  "min_chunk_words": 1,
+  "max_chunk_words": 220
+}

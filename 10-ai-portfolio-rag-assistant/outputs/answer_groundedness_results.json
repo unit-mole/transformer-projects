@@ -1,0 +1,1072 @@
+{
+  "status": "measured",
+  "metric": "claim_level_nli_groundedness",
+  "nli_model": "cross-encoder/nli-deberta-v3-small",
+  "entailment_threshold": 0.6,
+  "summary": {
+    "answer_count": 40,
+    "mean_groundedness": 0.025,
+    "mean_citation_precision": 0.0,
+    "mean_citation_completeness": 0.275,
+    "mean_unsupported_claim_rate": 0.975,
+    "refusal_accuracy": 0.875
+  },
+  "records": [
+    {
+      "question_id": "q01",
+      "question": "Which project performs abstractive text summarization?",
+      "answer": "Transformer",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Transformer",
+          "citation_ids": [],
+          "evidence_text": "Summaries can omit, distort, or hallucinate details. Do not paste sensitive or confidential text. Human review is mandatory before real-world use.\n![Project 01 Description](images/Description.png) *Project overview showing the summarization objective, Transformer workflow, evaluation layer, and deployment architecture.* ---\n- GitHub: https://github.com/unit-mole/transformer-projects - Project: https://github.com/unit-mole/transformer-projects/tree/main/01-abstractive-text-summarization-transformer - Browser model: https://huggingface.co/Xenova/distilbart-cnn-12-6\n![Project 01 Generated Summary Result](images/generated_summary_result.png) *Generated summary with source text, decoding controls, runtime information, compression statistics, and browser inference output.* ---\n- Autonomous legal, medical, financial, safety, compliance, academic, journalistic, or official decision-making. - Processing confidential, personal, restricted, or proprietary text through a public demo. - Producing authoritative factual records without source review. - Plagiarism, misrepresentation, or bypassing copyright restrictions.",
+          "entailment_score": 0.000273,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q02",
+      "question": "Which project translates between English and Hindi?",
+      "answer": "Neural Machine Translation Transformer",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Neural Machine Translation Transformer",
+          "citation_ids": [],
+          "evidence_text": "Build a professional neural machine translation solution that can: 1. Translate English text into Hindi. 2. Translate Hindi text into English. 3. Detect translation direction using Latin and Devanagari script ratios. 4. Apply Unicode-safe preprocessing and SentencePiece tokenization. 5. Establish pretrained MarianMT baselines. 6. Fine-tune separate direction-specific MarianMT models. 7. Evaluate both directions on the same held-out test data. 8. Report SacreBLEU, chrF, chrF++, TER, latency, throughput, and preservation diagnostics. 9. Perform structured manual error analysis on difficult examples. 10. Save reproducible JSON, CSV, and PNG artifacts. 11. Validate Python and browser code through GitHub Actions. 12. Deploy a static browser application through Hugging Face Spaces. ---\nThe portfolio-grade experiment uses deterministic subsets of the **IIT Bombay English\u2013Hindi Parallel Corpus** through the Hugging Face dataset integration. | Property | Portfolio configuration | |---|---:| | Task | Bidirectional neural machine translation | | Language directions | English \u2192 Hindi and Hindi \u2192 English | | Training pairs | 50,000 | | Validation pairs | 520 | | Held-out test pairs | 1,000 per direction | | Training epochs | 2 | | Fine-tuned models | Two direction-specific MarianMT models | | Manual review set | 30 automatically selected difficult translations | | Dataset committed to GitHub | No | The full downloaded corpus, cached data, model checkpoints, and optimizer states are excluded from normal Git tracking. Reproducible dataset metadata and evaluation summaries are retained in the repository. ---\n- **GitHub repository:** `unit-mole/transformer-projects` - **Project folder:** `02-neural-machine-translation-transformer/` - **Source branch:** `main` - **Published folder:** `02-neural-machine-translation-transformer/web/` - **Hosting:** Hugging Face Static Space - **Space owner:** `anmol-unitmole` - **Space repository:** `english-hindi-neural-machine-translation` - **Live application:** https://huggingface.co/spaces/anmol-unitmole/english-hindi-neural-machine-translation\n![Live English-to-Hindi Translation Demo](images/HuggingFace_Live_Translation_Demo.png) *English-to-Hindi MarianMT translation with detected language, token counts, inference latency, confidence proxy, and tokenizer diagnostics.*\n[![Open Live Demo](https://img.shields.io/badge/Open-Hugging%20Face%20Translation%20Demo-yellow?style=for-the-badge)](https://huggingface.co/spaces/anmol-unitmole/english-hindi-neural-machine-translation)",
+          "entailment_score": 0.083705,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q03",
+      "question": "Which project combines a bi-encoder with a cross-encoder for ranking?",
+      "answer": "Cross Encoder Bi Encoder Ranking System",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Cross Encoder Bi Encoder Ranking System",
+          "citation_ids": [],
+          "evidence_text": "The cross-encoder reads each query-document pair jointly. ```text [Query, Candidate document] \u2502 \u25bc MS MARCO MiniLM cross-encoder \u2502 \u25bc Pairwise relevance score \u2502 \u25bc Final reranked candidate list ``` Joint attention allows the model to capture more detailed relationships than independent embeddings, but the computational cost is higher.\nThis project contributes: - modular Python retrieval and reranking code; - preprocessing and dataset validation; - NumPy vector indexing; - ranking metrics; - latency benchmarking; - Gradio comparison application; - Vite browser application; - Transformers.js inference; - Static Space deployment; - tests and CI; - pipeline documentation and responsible-use controls.\n![DocRank360 Ranking Results and Metrics](images/project-03-ranking-results-and-metrics.png) *Live MiniLM retrieval and MS MARCO reranking with rank movement, query-level Recall, MRR, nDCG, and latency.* ---\nThe bi-encoder processes the query and each document independently. ```text Query \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba MiniLM encoder \u2500\u25ba Query embedding Document collection \u2500\u25ba MiniLM encoder \u2500\u25ba Document embeddings \u2502 \u25bc Cosine similarity \u2502 \u25bc Top-K candidates ``` Independent document embeddings can be computed in advance, making this stage suitable for fast candidate generation.\n[![Open Live Demo](https://img.shields.io/badge/Open-Live%20DocRank360%20Demo-2ea44f?style=for-the-badge)](https://huggingface.co/spaces/anmol-unitmole/03-cross-encoder-bi-encoder-ranking-system)",
+          "entailment_score": 0.00114,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q04",
+      "question": "Which project handles question answering over long documents?",
+      "answer": "Long Document Question Answering Longformer",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Long Document Question Answering Longformer",
+          "citation_ids": [],
+          "evidence_text": "Upload a TXT, Markdown, CSV, or selectable-text PDF document and ask a focused question. The application returns an extractive answer, an uncalibrated model confidence proxy, the supporting paragraph, highlighted evidence, document length, window count, and latency.\nThis project is for educational and portfolio demonstration only. The model may produce incomplete, incorrect, unsupported, or misleading answers. Do not upload private or sensitive documents to the public application, and do not use outputs as the sole basis for high-impact decisions.\n`LongformerForQuestionAnswering`\n- Educational demonstrations of Longformer and long-context inference - Extracting explicit answer spans from public or synthetic reports - Demonstrating Document AI, evidence localization, Gradio, and Hugging Face Spaces deployment - Prototyping question answering over SOP-like, CAPA-like, supplier-quality, or technical documents using safe non-confidential content\nImportant information is often buried inside long research papers, quality reports, policies, SOPs, technical manuals, CAPA records, complaint investigations, supplier reports, and case histories. Manual review is time-consuming, repetitive, and difficult to scale. This project answers: > Given a long document and a focused question, can a Transformer locate a relevant answer span, recover the supporting evidence, and communicate its result transparently? The system returns: - Predicted answer - Model confidence proxy - Supporting paragraph - Highlighted evidence - Document and context statistics - Number of processed windows or chunks - Inference latency - Model and deployment disclosure ---",
+          "entailment_score": 0.005412,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q05",
+      "question": "Which project demonstrates instruction tuning for a domain-focused language model?",
+      "answer": "Neural Machine Translation Transformer",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Neural Machine Translation Transformer",
+          "citation_ids": [],
+          "evidence_text": "- The deployed checkpoint does not contain attention. - The original source contained target docstrings and therefore had leakage risk. - The original tokenizer removed important programming operators. - The supplied accuracy includes padding positions. - Only 4,000 examples were sampled. - Only 2,800 examples were used for training. - Only five training epochs were completed. - BLEU on 100 examples is zero. - Exact match is zero. - Mean token overlap is low. - Generated outputs are often repetitive. - The output vocabulary is limited. - Repository-specific identifiers create sparsity. - Word-level tokenization struggles with unseen identifiers. - The model supports Python only. - Long functions are truncated. - Beam search does not guarantee correctness. - A fluent comment can still be wrong. - A comment can omit side effects or exception behaviour. - The model cannot verify security. - The model cannot detect licensing restrictions. - The public application is not suitable for proprietary code. - Automatic metrics do not replace developer evaluation.\n1. Retrain the true Bahdanau-attention model. 2. Increase the training corpus substantially. 3. Use official or repository-grouped data splits. 4. Deduplicate repositories and functions. 5. Use SentencePiece or another subword tokenizer. 6. Improve identifier segmentation. 7. Add copy or pointer mechanisms for important identifiers. 8. Add coverage penalty. 9. Add repetition blocking. 10. Add length-normalized beam search. 11. Add diverse beam search. 12. Add semantic similarity metrics. 13. Add code-aware pretrained embeddings. 14. Compare with CodeT5 or another transformer baseline. 15. Add human developer ratings. 16. Evaluate by function complexity and code category. 17. Add empty-output and repetition-rate monitoring. 18. Add model quantization for lower-memory hosting. 19. Add API serving with authentication. 20. Add secure private deployment for authorized code. 21. Add deployment smoke tests. 22. Add experiment tracking and model versioning. 23. Add a formal data card. 24. Add model-card updates for every trained checkpoint.\nThis is a complete, deployable portfolio project rebuilt from the supplied notebook and Streamlit prototype. The underlying task is **character-level next-character prediction**, not word-level generation or a Transformer-based language model. The project is suitable for demonstrating: - NLP preprocessing - Sequential data preparation - Simple RNN architecture design - Model training and evaluation - Autoregressive text generation - Sampling controls - Saved-model inference - Testing, CI/CD, and deployment The model should not be presented as production-grade generative AI. Its compact public-domain corpus and Simple RNN architecture limit long-range context, factuality, grammar, and domain generalization. ---\n- The model can mistranslate names, organizations, locations, numbers, dates, units, and technical terminology. - Long or syntactically complex sentences can be under-translated or over-translated. - Mixed Hindi-English input can produce uncertain direction detection or unstable output. - Automatic reference-based metrics depend on the quality and wording of the reference translation. - A valid translation can receive a low overlap score when it uses different but correct wording. - The manual review set contains deliberately difficult examples and does not represent the full test distribution. - Fine-tuning improved English-to-Hindi more strongly than Hindi-to-English. - Hindi-to-English TER became slightly worse even though SacreBLEU and chrF improved. - Local GPU latency is not identical to browser latency. - First-time browser inference can be slower because model assets must be downloaded and cached. - Browser performance varies by device, available memory, WebAssembly support, and browser implementation. - The current live worker uses pretrained quantized ONNX models rather than the locally fine-tuned checkpoints. - The system has not been validated for production or safety-critical use. ---\n- Export both fine-tuned MarianMT models to browser-compatible ONNX format. - Quantize and publish the fine-tuned EN\u2192HI and HI\u2192EN models on Hugging Face Model Hub. - Replace the current pretrained browser models with the fine-tuned ONNX models. - Add a direct pretrained-versus-fine-tuned browser comparison mode. - Add COMET or another learned translation-quality metric. - Increase the training subset and tune learning rate, batch size, warmup, and generation settings. - Add named-entity and number-preservation constrained decoding. - Add domain-specific fine-tuning for quality reports, service notes, and customer complaints. - Add confidence calibration and uncertainty analysis. - Add a translation history panel stored only in browser memory. - Add downloadable evaluation reports from the Static Space. - Add automated browser integration tests. - Add mobile-performance profiling and progressive model-loading improvements. ---",
+          "entailment_score": 0.002036,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q06",
+      "question": "Which project answers questions about images using both vision and language?",
+      "answer": "[S3]",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 1,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 1.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "[S3]",
+          "citation_ids": [
+            "S3"
+          ],
+          "evidence_text": "The PNG scenes are programmatically drawn original assets created for this project. The repository license applies to these assets. They do not contain real people, private information, brands, workplace material, or copied photographs.",
+          "entailment_score": 0.000272,
+          "has_citation": true,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q07",
+      "question": "Which project demonstrates document semantic search with Sentence-BERT?",
+      "answer": "[S1]",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 1,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 1.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "[S1]",
+          "citation_ids": [
+            "S1"
+          ],
+          "evidence_text": "[![Open Live Demo](https://img.shields.io/badge/Open-Live%20Semantic%20Search%20Demo-2ea44f?style=for-the-badge)](https://unit-mole.github.io/transformer-projects/07-document-semantic-search-sentence-bert/)",
+          "entailment_score": 0.160469,
+          "has_citation": true,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q08",
+      "question": "Which project applies a Vision Transformer to image classification?",
+      "answer": "Vision Transformer",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Vision Transformer",
+          "citation_ids": [],
+          "evidence_text": "![Vision Transformer Browser Demo](images/Demo_Images.png) *Browser-based CIFAR-10 application deployed through GitHub Pages and ONNX Runtime Web.*\nMedical, legal, financial, surveillance, identity recognition, sensitive-attribute inference, security, hiring, insurance, product-release, quality-release, or other high-impact decisions. It must not be used as a substitute for human review.\n![Vision Transformer Model Performance](images/Model_Performance%20.png) *Real Vision Transformer and ResNet-18 evaluation results generated from the project pipeline.*\nRepository code: MIT. Model and dataset assets retain their original licenses and terms.\n[![Open Live Demo](https://img.shields.io/badge/Open-Live%20Vision%20Transformer%20Demo-2ea44f?style=for-the-badge)](https://unit-mole.github.io/transformer-projects/08-image-classification-vision-transformer/)",
+          "entailment_score": 0.001443,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q09",
+      "question": "Which project uses CLIP for image-text retrieval?",
+      "answer": "Vision Language Image Text Retrieval",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Vision Language Image Text Retrieval",
+          "citation_ids": [],
+          "evidence_text": "![CLIP Project Overview](images/01-project-overview.png) *Browser-based CLIP image-text retrieval and zero-shot classification interface deployed through GitHub Pages.*\n![CLIP Text-to-Image Retrieval Results](images/02-text-to-image-retrieval-results.png) *Natural-language image search using a CLIP text embedding, precomputed gallery image embeddings, cosine-similarity ranking, and top-k result cards.*\nA small, redistributable image-caption gallery for demonstrating browser-based CLIP retrieval and zero-shot classification without committing private, restricted, or copyrighted datasets.\nThe gallery is intentionally tiny and visually simple. It is useful for deployment validation and qualitative exploration, not for estimating general CLIP performance. A permitted Flickr8k subset may be used locally for stronger evaluation, but the full dataset is not redistributed here.\n```text Image input \u2193 Vision Transformer image encoder \u2193 Image projection layer \u2193 512-dimensional image embedding \u2193 L2 normalization ``` ```text Text query or label prompt \u2193 CLIP tokenizer \u2193 Transformer text encoder \u2193 Text projection layer \u2193 512-dimensional text embedding \u2193 L2 normalization ``` ```text Normalized image embedding + Normalized text embedding \u2193 Cosine similarity \u2193 Retrieval ranking or zero-shot label ranking ```",
+          "entailment_score": 0.002458,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q10",
+      "question": "Which project is the Vercel-deployed portfolio RAG assistant?",
+      "answer": "Ai Portfolio",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Ai Portfolio",
+          "citation_ids": [],
+          "evidence_text": "The production app is a Next.js App Router application. All expensive corpus work\u2014document collection, cleaning, chunking, Transformer embedding generation, and formal evaluation\u2014runs offline on the local RTX GPU. Vercel loads committed static JSON artifacts and uses server-side API routes for question embedding, retrieval, and optional hosted generation.\n- Recruiters and technical reviewers exploring documented projects. - Portfolio visitors asking about models, datasets, metrics, skills, and deployments. - Educational demonstration of RAG, semantic search, evaluation, source attribution, full-stack AI development, and Vercel deployment.\nThe Next.js application is deployed on Vercel. Python, PyTorch, and local models are used offline only; runtime vector artifacts are static JSON. API tokens remain server-side.\n- **Vercel:** `https://YOUR-PROJECT.vercel.app` - **Health:** `https://YOUR-PROJECT.vercel.app/api/health` - **Evaluation:** `https://YOUR-PROJECT.vercel.app/api/evaluation`\nThe Vercel runtime combines: ```text hybrid score = semantic weight \u00d7 cosine similarity + lexical weight \u00d7 query-token coverage ``` Filters are supported for project category, deployment platform, and project ID. Weak results are rejected by the grounded fallback rather than converted into confident unsupported answers.",
+          "entailment_score": 0.014644,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q11",
+      "question": "What portfolio work shows that I can summarize text with Transformers?",
+      "answer": "Project: Abstractive Text Summarization Transformer",
+      "claim_count": 1,
+      "grounded_claim_count": 1,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 1.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 0.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Project: Abstractive Text Summarization Transformer",
+          "citation_ids": [],
+          "evidence_text": "- Educational demonstration of Transformer summarization. - Portfolio review by recruiters and technical reviewers. - Experimentation with beam search and summary-length controls. - Research prototypes for human-reviewed news, quality, complaint, case, root-cause, and report summarization.\n- GitHub: https://github.com/unit-mole/transformer-projects - Project: https://github.com/unit-mole/transformer-projects/tree/main/01-abstractive-text-summarization-transformer - Browser model: https://huggingface.co/Xenova/distilbart-cnn-12-6\n![Project 01 Description](images/Description.png) *Project overview showing the summarization objective, Transformer workflow, evaluation layer, and deployment architecture.* ---\n**One-line description:** End-to-end abstractive text-summarization project featuring RTX fine-tuning of DistilBART, controlled held-out evaluation, baseline comparison, error analysis, and free browser-based Transformer inference through Hugging Face Spaces. **Pinned repository description:** Production-structured NLP portfolio project with DistilBART fine-tuning, CNN/DailyMail evaluation, ROUGE and BERTScore, Lead-3 and TextRank baselines, latency and factual-risk analysis, Transformers.js browser inference, automated testing, and Hugging Face Static Space deployment. This project connects naturally to a Quality Data Scientist background because summarization can support complaint review, issue-detail condensation, root-cause narratives, GCS case preparation, quality-report generation, historical-case retrieval, corrective-action review, and human-in-the-loop quality analytics. ---\n[![Open Live Demo](https://img.shields.io/badge/Open-Live%20Summarization%20Demo-2ea44f?style=for-the-badge)](https://huggingface.co/spaces/anmol-unitmole/01-abstractive-text-summarization-transformer)",
+          "entailment_score": 0.790209,
+          "has_citation": false,
+          "supported": true
+        }
+      ]
+    },
+    {
+      "question_id": "q12",
+      "question": "Where do I demonstrate sequence-to-sequence language conversion and attention?",
+      "answer": "[S1]",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 1,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 1.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "[S1]",
+          "citation_ids": [
+            "S1"
+          ],
+          "evidence_text": "MarianMT is a sequence-to-sequence Transformer architecture designed for machine translation. It uses a Transformer encoder to represent the source sentence and an autoregressive Transformer decoder to generate the target sentence. The selected Helsinki-NLP checkpoints provide strong pretrained multilingual translation foundations while remaining compact enough for local GPU fine-tuning and browser-oriented ONNX deployment. ---",
+          "entailment_score": 0.000455,
+          "has_citation": true,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q13",
+      "question": "Which project first retrieves candidates efficiently and then reranks them more precisely?",
+      "answer": "Ai Portfolio RAG Assistant",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Ai Portfolio RAG Assistant",
+          "citation_ids": [],
+          "evidence_text": "The `rank_candidates` workflow repeats one query across multiple candidates, scores every pair, and sorts by match probability. ```text One question \u2193 Candidate 1 \u2500\u2510 Candidate 2 \u2500\u253c\u2500\u2192 shared pair scorer \u2192 probability \u2192 rank Candidate 3 \u2500\u2518 ``` The ranking workflow is useful for demonstrating: - FAQ candidate retrieval, - answer recommendation, - similar-ticket retrieval, - knowledge-base search, - troubleshooting recommendation, and - semantic candidate ordering. Because the bundled probabilities are undertrained and poorly separated, the ranking should be interpreted as a workflow demonstration rather than reliable retrieval quality. Meaningful ranking evaluation should report: - Mean Reciprocal Rank, - Recall@K, - Precision@K, - Mean Average Precision, and - NDCG.\n| Metric | Interpretation | |---|---| | Hit Rate@K | Whether at least one relevant project is retrieved | | Precision@K | Fraction of top-K retrieved projects that are relevant | | Recall@K | Fraction of all expected relevant projects retrieved | | MRR | Rank of the first relevant project | | MAP@K | Precision across relevant ranks | | nDCG@K | Ranking quality with position discounting | This corrects the earlier starter calculation that treated any relevant hit as full recall.\nThe ranking workflow scores multiple candidate texts against one question and sorts them by the neural match probability. ![Candidate answer ranking demonstration](images/candidate_answer_ranking_demo.png) No batch screenshot is included in this README. The batch workflow remains available in the application and source code.\nBuild a professional two-stage Transformer ranking system that can: 1. Validate and preprocess queries, documents, and graded relevance judgments. 2. Preserve Unicode text during normalization. 3. Encode queries and documents using a MiniLM sentence-transformer bi-encoder. 4. Retrieve top-K candidates through normalized vector similarity. 5. Rerank selected query-document pairs using an MS MARCO cross-encoder. 6. Compare lexical retrieval, dense retrieval, and two-stage Transformer ranking. 7. Measure Recall@K, MRR@10, nDCG@10, MAP@100, and latency. 8. Evaluate on recognized BEIR datasets. 9. Quantify reranking improvements with paired bootstrap confidence intervals. 10. Run real Transformer inference directly inside the browser. 11. Export reusable JSON, CSV, Markdown, and chart artifacts. 12. Validate and deploy the application automatically through GitHub Actions. ---\nThe ranking workflow requires: ```csv resume_id,resume_text Candidate_001,\"Synthetic anonymized resume text\" Candidate_002,\"Another synthetic anonymized resume text\" ``` The user provides one job description, and the system: 1. scores every resume against the role, 2. sorts candidates by fit score, 3. displays the ranking, and 4. provides a downloadable ranking file. Ranking must not be used as an autonomous hiring decision.",
+          "entailment_score": 0.000979,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q14",
+      "question": "What work shows that I can process inputs beyond ordinary Transformer context limits?",
+      "answer": "[S1]",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 1,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 1.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "[S1]",
+          "citation_ids": [
+            "S1"
+          ],
+          "evidence_text": "- 4-beam search; - early stopping; - maximum source length of 512 tokens; - maximum 256 new target tokens; - 3-gram repetition blocking; - renormalized logits.",
+          "entailment_score": 0.008744,
+          "has_citation": true,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q15",
+      "question": "Which project focuses on instruction following and responsible domain deployment?",
+      "answer": "CNN",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "CNN",
+          "citation_ids": [],
+          "evidence_text": "Each numbered project contains its own documentation, source modules, notebooks, tests, data notes, model and dataset cards, evaluation artifacts, and deployment files. Project-specific GitHub Actions workflows live in `.github/workflows/`. ```text transformer-projects/ \u251c\u2500\u2500 .github/workflows/ \u251c\u2500\u2500 01-abstractive-text-summarization-transformer/ \u251c\u2500\u2500 02-neural-machine-translation-transformer/ \u251c\u2500\u2500 03-cross-encoder-bi-encoder-ranking-system/ \u251c\u2500\u2500 04-long-document-question-answering-longformer/ \u251c\u2500\u2500 05-instruction-tuned-domain-llm/ \u251c\u2500\u2500 06-multimodal-visual-question-answering-transformer/ \u251c\u2500\u2500 .gitignore \u251c\u2500\u2500 CITATION.cff \u251c\u2500\u2500 CONTRIBUTING.md \u251c\u2500\u2500 LICENSE \u251c\u2500\u2500 README.md \u2514\u2500\u2500 SECURITY.md ```\nEvery project is structured to move beyond notebook-only experimentation. The repository demonstrates: - business and analytical problem definition; - reproducible image, mask, annotation, and label preparation; - image resizing, color conversion, normalization, and augmentation; - train, validation, and test separation; - CNN architecture development and evaluation; - saved Keras models, TensorFlow.js models, metadata, labels, thresholds, and preprocessing settings; - reusable classification, detection, segmentation, and visualization pipelines; - manual upload and safe sample-image inference; - downloadable masks or visual prediction outputs where appropriate; - local execution; - cloud and static-site deployment; - CI-based validation.\nThe repository includes practices required for dependable inference: - training and inference preprocessing consistency; - saved image size, channel order, normalization method, label mapping, and threshold configuration; - modular source files rather than notebook-only logic; - pretrained application startup without automatic retraining; - safe sample data for public demonstrations; - automated preprocessing and inference tests; - project-specific GitHub Actions workflows; - lightweight CI that avoids full model retraining; - GitHub-safe data and model-artifact management; - Git LFS or external model hosting guidance where needed; - static browser deployment without a Python backend where feasible.\nThe portfolio intentionally demonstrates multiple delivery approaches: | Platform | Demonstrated Through | |---|---| | Vercel | Object Detection, VGG16 Fine-Grained Classification, Satellite U-Net Segmentation | | TensorFlow.js | Browser-based classification, detection, and segmentation | | GitHub Pages | ResNet browser inference and planned AlexNet deployment | | Hugging Face Spaces | Gradio-based model demonstrations | | Gradio | Upload-driven image prediction interfaces | | Kaggle Notebooks | Training, evaluation, GPU execution, and reproducibility | | GitHub Actions | Project-specific CI and deployment validation | | Docker | Reproducible local or container-based execution where useful | This diversity shows that the portfolio covers not only model development but also practical model packaging and deployment. ---\n- Convolutional neural networks - ResNet architecture - Transfer learning - Multi-class image classification - Image preprocessing - Data augmentation - Model evaluation - Top-k prediction analysis - Error analysis - Model artifact management - TensorFlow.js conversion - Browser-based machine learning - JavaScript inference pipelines - Static web application development - GitHub Actions - GitHub Pages deployment - Responsible AI communication - Portfolio-focused ML engineering ---",
+          "entailment_score": 0.142633,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q16",
+      "question": "What project demonstrates joint visual representation and language understanding?",
+      "answer": "1. Load and unload",
+      "claim_count": 2,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "1.",
+          "citation_ids": [],
+          "evidence_text": "A vision-language model jointly processes visual and textual information. Unlike a conventional image classifier, it is not restricted to a fixed set of class labels. The same image can be queried in different ways, such as: ```text What object is visible? What color is the circle? How many blocks are present? Is the triangle yellow? What is happening in the image? Where is the circle relative to the square? ``` This flexibility makes multimodal Transformers useful for visual inspection support, product-image review, document understanding, operator assistance, and future quality-analytics systems that combine images with natural-language reasoning. ---\n```text Input image \u2193 Vision encoder \u2193 Visual token representations Natural-language question \u2193 Text tokenizer and embedding layers \u2193 Text token representations Visual tokens + text tokens \u2193 Multimodal Transformer reasoning \u2193 Autoregressive language decoder \u2193 Generated answer tokens \u2193 Decoded natural-language answer ```\n- **Model:** `dandelin/vilt-b32-finetuned-vqa` - **Architecture:** ViLT with a VQA classification head - **Purpose:** local reproducible inference and classification-style evaluation experiments\nBuild a professional multimodal visual question-answering solution that can: 1. Load and validate uploaded images. 2. Convert images into a format supported by the vision-language processor. 3. Clean natural-language questions without changing their meaning. 4. Combine visual and textual inputs through a vision-language Transformer. 5. Generate concise answers about objects, colors, counts, actions, scenes, and spatial relationships. 6. Run inference entirely in the browser using Transformers.js and WebGPU. 7. Report question type, answer type, and inference latency. 8. Explain confidence honestly for a generative model. 9. Evaluate the model on a balanced 60-pair synthetic VQA suite. 10. Calculate overall accuracy, category-wise accuracy, answer failure rate, and latency statistics. 11. Support manual failure analysis and downloadable evaluation results. 12. Validate and publish the static application through GitHub Actions and Hugging Face Spaces. ---\nThe project intentionally maintains two model paths.",
+          "entailment_score": 0.005633,
+          "has_citation": false,
+          "supported": false
+        },
+        {
+          "claim": "Load and unload",
+          "citation_ids": [],
+          "evidence_text": "A vision-language model jointly processes visual and textual information. Unlike a conventional image classifier, it is not restricted to a fixed set of class labels. The same image can be queried in different ways, such as: ```text What object is visible? What color is the circle? How many blocks are present? Is the triangle yellow? What is happening in the image? Where is the circle relative to the square? ``` This flexibility makes multimodal Transformers useful for visual inspection support, product-image review, document understanding, operator assistance, and future quality-analytics systems that combine images with natural-language reasoning. ---\n```text Input image \u2193 Vision encoder \u2193 Visual token representations Natural-language question \u2193 Text tokenizer and embedding layers \u2193 Text token representations Visual tokens + text tokens \u2193 Multimodal Transformer reasoning \u2193 Autoregressive language decoder \u2193 Generated answer tokens \u2193 Decoded natural-language answer ```\n- **Model:** `dandelin/vilt-b32-finetuned-vqa` - **Architecture:** ViLT with a VQA classification head - **Purpose:** local reproducible inference and classification-style evaluation experiments\nBuild a professional multimodal visual question-answering solution that can: 1. Load and validate uploaded images. 2. Convert images into a format supported by the vision-language processor. 3. Clean natural-language questions without changing their meaning. 4. Combine visual and textual inputs through a vision-language Transformer. 5. Generate concise answers about objects, colors, counts, actions, scenes, and spatial relationships. 6. Run inference entirely in the browser using Transformers.js and WebGPU. 7. Report question type, answer type, and inference latency. 8. Explain confidence honestly for a generative model. 9. Evaluate the model on a balanced 60-pair synthetic VQA suite. 10. Calculate overall accuracy, category-wise accuracy, answer failure rate, and latency statistics. 11. Support manual failure analysis and downloadable evaluation results. 12. Validate and publish the static application through GitHub Actions and Hugging Face Spaces. ---\nThe project intentionally maintains two model paths.",
+          "entailment_score": 0.007069,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q17",
+      "question": "Where does the portfolio use embeddings and cosine similarity for browser-based document retrieval?",
+      "answer": "1. Project: Vision Language Image Text Retrieval CLIP Source: MODEL_CARD.md Section: Retrieval method 2. Document embeddings are generated offline using the pretrained CLIP image encoder. 3. Document embeddings are generated in browser memory using the same model and prefix configuration. 4. Cosine similarity is combined with lexical coverage. 5. Word Embedding Source: README.md Section: Word Explorer",
+      "claim_count": 9,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "1.",
+          "citation_ids": [],
+          "evidence_text": "1. Public Markdown is cleaned without removing technical terminology. 2. Documents are split into section-aware overlapping chunks. 3. Normalized document embeddings are generated offline. 4. Runtime queries are embedded using the same model and prefix configuration. 5. Cosine similarity is combined with lexical coverage. 6. Optional filters and cross-encoder reranking refine results. 7. Low-confidence evidence can trigger refusal.\nThe deployed application uses a browser-efficient retrieval design: 1. Gallery images are encoded offline using the pretrained CLIP image encoder. 2. The normalized image embeddings are stored in a browser-friendly JSON file. 3. A user enters a natural-language query. 4. The browser CLIP text encoder creates a query embedding. 5. JavaScript calculates cosine similarity against every gallery embedding. 6. Results are sorted from highest to lowest similarity. 7. The top-k images are displayed with rank, score, caption, category, tags, and latency. This approach avoids repeatedly encoding the complete gallery during every browser session. ---\nThe Static Space: 1. downloads q8 ONNX models; 2. generates document embeddings in browser memory; 3. embeds the query; 4. performs cosine retrieval; 5. tokenizes query-document pairs; 6. applies the sequence-classification reranker; 7. displays rank movement and metrics.\n- select or enter a vocabulary word; - inspect its index and embedding-vector preview; - retrieve nearest words using cosine similarity; - visualize the local embedding neighborhood; and - download similarity results.\n```text User enters a natural-language query \u2502 \u25bc Browser validates and cleans the text \u2502 \u25bc Transformers.js loads the quantized CLIP text encoder \u2502 \u25bc Tokenizer prepares the query \u2502 \u25bc CLIP creates a normalized text embedding \u2502 \u25bc Browser loads precomputed gallery image embeddings \u2502 \u25bc JavaScript calculates cosine similarity \u2502 \u25bc Images are ranked by similarity \u2502 \u25bc Top-k image cards are displayed ``` ---",
+          "entailment_score": 0.006897,
+          "has_citation": false,
+          "supported": false
+        },
+        {
+          "claim": "Project: Vision Language Image Text Retrieval CLIP Source: MODEL_CARD.md Section: Retrieval method 2.",
+          "citation_ids": [],
+          "evidence_text": "1. Public Markdown is cleaned without removing technical terminology. 2. Documents are split into section-aware overlapping chunks. 3. Normalized document embeddings are generated offline. 4. Runtime queries are embedded using the same model and prefix configuration. 5. Cosine similarity is combined with lexical coverage. 6. Optional filters and cross-encoder reranking refine results. 7. Low-confidence evidence can trigger refusal.\nThe deployed application uses a browser-efficient retrieval design: 1. Gallery images are encoded offline using the pretrained CLIP image encoder. 2. The normalized image embeddings are stored in a browser-friendly JSON file. 3. A user enters a natural-language query. 4. The browser CLIP text encoder creates a query embedding. 5. JavaScript calculates cosine similarity against every gallery embedding. 6. Results are sorted from highest to lowest similarity. 7. The top-k images are displayed with rank, score, caption, category, tags, and latency. This approach avoids repeatedly encoding the complete gallery during every browser session. ---\nThe Static Space: 1. downloads q8 ONNX models; 2. generates document embeddings in browser memory; 3. embeds the query; 4. performs cosine retrieval; 5. tokenizes query-document pairs; 6. applies the sequence-classification reranker; 7. displays rank movement and metrics.\n- select or enter a vocabulary word; - inspect its index and embedding-vector preview; - retrieve nearest words using cosine similarity; - visualize the local embedding neighborhood; and - download similarity results.\n```text User enters a natural-language query \u2502 \u25bc Browser validates and cleans the text \u2502 \u25bc Transformers.js loads the quantized CLIP text encoder \u2502 \u25bc Tokenizer prepares the query \u2502 \u25bc CLIP creates a normalized text embedding \u2502 \u25bc Browser loads precomputed gallery image embeddings \u2502 \u25bc JavaScript calculates cosine similarity \u2502 \u25bc Images are ranked by similarity \u2502 \u25bc Top-k image cards are displayed ``` ---",
+          "entailment_score": 0.006053,
+          "has_citation": false,
+          "supported": false
+        },
+        {
+          "claim": "Document embeddings are generated offline using the pretrained CLIP image encoder.",
+          "citation_ids": [],
+          "evidence_text": "1. Public Markdown is cleaned without removing technical terminology. 2. Documents are split into section-aware overlapping chunks. 3. Normalized document embeddings are generated offline. 4. Runtime queries are embedded using the same model and prefix configuration. 5. Cosine similarity is combined with lexical coverage. 6. Optional filters and cross-encoder reranking refine results. 7. Low-confidence evidence can trigger refusal.\nThe deployed application uses a browser-efficient retrieval design: 1. Gallery images are encoded offline using the pretrained CLIP image encoder. 2. The normalized image embeddings are stored in a browser-friendly JSON file. 3. A user enters a natural-language query. 4. The browser CLIP text encoder creates a query embedding. 5. JavaScript calculates cosine similarity against every gallery embedding. 6. Results are sorted from highest to lowest similarity. 7. The top-k images are displayed with rank, score, caption, category, tags, and latency. This approach avoids repeatedly encoding the complete gallery during every browser session. ---\nThe Static Space: 1. downloads q8 ONNX models; 2. generates document embeddings in browser memory; 3. embeds the query; 4. performs cosine retrieval; 5. tokenizes query-document pairs; 6. applies the sequence-classification reranker; 7. displays rank movement and metrics.\n- select or enter a vocabulary word; - inspect its index and embedding-vector preview; - retrieve nearest words using cosine similarity; - visualize the local embedding neighborhood; and - download similarity results.\n```text User enters a natural-language query \u2502 \u25bc Browser validates and cleans the text \u2502 \u25bc Transformers.js loads the quantized CLIP text encoder \u2502 \u25bc Tokenizer prepares the query \u2502 \u25bc CLIP creates a normalized text embedding \u2502 \u25bc Browser loads precomputed gallery image embeddings \u2502 \u25bc JavaScript calculates cosine similarity \u2502 \u25bc Images are ranked by similarity \u2502 \u25bc Top-k image cards are displayed ``` ---",
+          "entailment_score": 0.004523,
+          "has_citation": false,
+          "supported": false
+        },
+        {
+          "claim": "3.",
+          "citation_ids": [],
+          "evidence_text": "1. Public Markdown is cleaned without removing technical terminology. 2. Documents are split into section-aware overlapping chunks. 3. Normalized document embeddings are generated offline. 4. Runtime queries are embedded using the same model and prefix configuration. 5. Cosine similarity is combined with lexical coverage. 6. Optional filters and cross-encoder reranking refine results. 7. Low-confidence evidence can trigger refusal.\nThe deployed application uses a browser-efficient retrieval design: 1. Gallery images are encoded offline using the pretrained CLIP image encoder. 2. The normalized image embeddings are stored in a browser-friendly JSON file. 3. A user enters a natural-language query. 4. The browser CLIP text encoder creates a query embedding. 5. JavaScript calculates cosine similarity against every gallery embedding. 6. Results are sorted from highest to lowest similarity. 7. The top-k images are displayed with rank, score, caption, category, tags, and latency. This approach avoids repeatedly encoding the complete gallery during every browser session. ---\nThe Static Space: 1. downloads q8 ONNX models; 2. generates document embeddings in browser memory; 3. embeds the query; 4. performs cosine retrieval; 5. tokenizes query-document pairs; 6. applies the sequence-classification reranker; 7. displays rank movement and metrics.\n- select or enter a vocabulary word; - inspect its index and embedding-vector preview; - retrieve nearest words using cosine similarity; - visualize the local embedding neighborhood; and - download similarity results.\n```text User enters a natural-language query \u2502 \u25bc Browser validates and cleans the text \u2502 \u25bc Transformers.js loads the quantized CLIP text encoder \u2502 \u25bc Tokenizer prepares the query \u2502 \u25bc CLIP creates a normalized text embedding \u2502 \u25bc Browser loads precomputed gallery image embeddings \u2502 \u25bc JavaScript calculates cosine similarity \u2502 \u25bc Images are ranked by similarity \u2502 \u25bc Top-k image cards are displayed ``` ---",
+          "entailment_score": 0.006411,
+          "has_citation": false,
+          "supported": false
+        },
+        {
+          "claim": "Document embeddings are generated in browser memory using the same model and prefix configuration.",
+          "citation_ids": [],
+          "evidence_text": "1. Public Markdown is cleaned without removing technical terminology. 2. Documents are split into section-aware overlapping chunks. 3. Normalized document embeddings are generated offline. 4. Runtime queries are embedded using the same model and prefix configuration. 5. Cosine similarity is combined with lexical coverage. 6. Optional filters and cross-encoder reranking refine results. 7. Low-confidence evidence can trigger refusal.\nThe deployed application uses a browser-efficient retrieval design: 1. Gallery images are encoded offline using the pretrained CLIP image encoder. 2. The normalized image embeddings are stored in a browser-friendly JSON file. 3. A user enters a natural-language query. 4. The browser CLIP text encoder creates a query embedding. 5. JavaScript calculates cosine similarity against every gallery embedding. 6. Results are sorted from highest to lowest similarity. 7. The top-k images are displayed with rank, score, caption, category, tags, and latency. This approach avoids repeatedly encoding the complete gallery during every browser session. ---\nThe Static Space: 1. downloads q8 ONNX models; 2. generates document embeddings in browser memory; 3. embeds the query; 4. performs cosine retrieval; 5. tokenizes query-document pairs; 6. applies the sequence-classification reranker; 7. displays rank movement and metrics.\n- select or enter a vocabulary word; - inspect its index and embedding-vector preview; - retrieve nearest words using cosine similarity; - visualize the local embedding neighborhood; and - download similarity results.\n```text User enters a natural-language query \u2502 \u25bc Browser validates and cleans the text \u2502 \u25bc Transformers.js loads the quantized CLIP text encoder \u2502 \u25bc Tokenizer prepares the query \u2502 \u25bc CLIP creates a normalized text embedding \u2502 \u25bc Browser loads precomputed gallery image embeddings \u2502 \u25bc JavaScript calculates cosine similarity \u2502 \u25bc Images are ranked by similarity \u2502 \u25bc Top-k image cards are displayed ``` ---",
+          "entailment_score": 0.006728,
+          "has_citation": false,
+          "supported": false
+        },
+        {
+          "claim": "4.",
+          "citation_ids": [],
+          "evidence_text": "1. Public Markdown is cleaned without removing technical terminology. 2. Documents are split into section-aware overlapping chunks. 3. Normalized document embeddings are generated offline. 4. Runtime queries are embedded using the same model and prefix configuration. 5. Cosine similarity is combined with lexical coverage. 6. Optional filters and cross-encoder reranking refine results. 7. Low-confidence evidence can trigger refusal.\nThe deployed application uses a browser-efficient retrieval design: 1. Gallery images are encoded offline using the pretrained CLIP image encoder. 2. The normalized image embeddings are stored in a browser-friendly JSON file. 3. A user enters a natural-language query. 4. The browser CLIP text encoder creates a query embedding. 5. JavaScript calculates cosine similarity against every gallery embedding. 6. Results are sorted from highest to lowest similarity. 7. The top-k images are displayed with rank, score, caption, category, tags, and latency. This approach avoids repeatedly encoding the complete gallery during every browser session. ---\nThe Static Space: 1. downloads q8 ONNX models; 2. generates document embeddings in browser memory; 3. embeds the query; 4. performs cosine retrieval; 5. tokenizes query-document pairs; 6. applies the sequence-classification reranker; 7. displays rank movement and metrics.\n- select or enter a vocabulary word; - inspect its index and embedding-vector preview; - retrieve nearest words using cosine similarity; - visualize the local embedding neighborhood; and - download similarity results.\n```text User enters a natural-language query \u2502 \u25bc Browser validates and cleans the text \u2502 \u25bc Transformers.js loads the quantized CLIP text encoder \u2502 \u25bc Tokenizer prepares the query \u2502 \u25bc CLIP creates a normalized text embedding \u2502 \u25bc Browser loads precomputed gallery image embeddings \u2502 \u25bc JavaScript calculates cosine similarity \u2502 \u25bc Images are ranked by similarity \u2502 \u25bc Top-k image cards are displayed ``` ---",
+          "entailment_score": 0.006135,
+          "has_citation": false,
+          "supported": false
+        },
+        {
+          "claim": "Cosine similarity is combined with lexical coverage.",
+          "citation_ids": [],
+          "evidence_text": "1. Public Markdown is cleaned without removing technical terminology. 2. Documents are split into section-aware overlapping chunks. 3. Normalized document embeddings are generated offline. 4. Runtime queries are embedded using the same model and prefix configuration. 5. Cosine similarity is combined with lexical coverage. 6. Optional filters and cross-encoder reranking refine results. 7. Low-confidence evidence can trigger refusal.\nThe deployed application uses a browser-efficient retrieval design: 1. Gallery images are encoded offline using the pretrained CLIP image encoder. 2. The normalized image embeddings are stored in a browser-friendly JSON file. 3. A user enters a natural-language query. 4. The browser CLIP text encoder creates a query embedding. 5. JavaScript calculates cosine similarity against every gallery embedding. 6. Results are sorted from highest to lowest similarity. 7. The top-k images are displayed with rank, score, caption, category, tags, and latency. This approach avoids repeatedly encoding the complete gallery during every browser session. ---\nThe Static Space: 1. downloads q8 ONNX models; 2. generates document embeddings in browser memory; 3. embeds the query; 4. performs cosine retrieval; 5. tokenizes query-document pairs; 6. applies the sequence-classification reranker; 7. displays rank movement and metrics.\n- select or enter a vocabulary word; - inspect its index and embedding-vector preview; - retrieve nearest words using cosine similarity; - visualize the local embedding neighborhood; and - download similarity results.\n```text User enters a natural-language query \u2502 \u25bc Browser validates and cleans the text \u2502 \u25bc Transformers.js loads the quantized CLIP text encoder \u2502 \u25bc Tokenizer prepares the query \u2502 \u25bc CLIP creates a normalized text embedding \u2502 \u25bc Browser loads precomputed gallery image embeddings \u2502 \u25bc JavaScript calculates cosine similarity \u2502 \u25bc Images are ranked by similarity \u2502 \u25bc Top-k image cards are displayed ``` ---",
+          "entailment_score": 0.007518,
+          "has_citation": false,
+          "supported": false
+        },
+        {
+          "claim": "5.",
+          "citation_ids": [],
+          "evidence_text": "1. Public Markdown is cleaned without removing technical terminology. 2. Documents are split into section-aware overlapping chunks. 3. Normalized document embeddings are generated offline. 4. Runtime queries are embedded using the same model and prefix configuration. 5. Cosine similarity is combined with lexical coverage. 6. Optional filters and cross-encoder reranking refine results. 7. Low-confidence evidence can trigger refusal.\nThe deployed application uses a browser-efficient retrieval design: 1. Gallery images are encoded offline using the pretrained CLIP image encoder. 2. The normalized image embeddings are stored in a browser-friendly JSON file. 3. A user enters a natural-language query. 4. The browser CLIP text encoder creates a query embedding. 5. JavaScript calculates cosine similarity against every gallery embedding. 6. Results are sorted from highest to lowest similarity. 7. The top-k images are displayed with rank, score, caption, category, tags, and latency. This approach avoids repeatedly encoding the complete gallery during every browser session. ---\nThe Static Space: 1. downloads q8 ONNX models; 2. generates document embeddings in browser memory; 3. embeds the query; 4. performs cosine retrieval; 5. tokenizes query-document pairs; 6. applies the sequence-classification reranker; 7. displays rank movement and metrics.\n- select or enter a vocabulary word; - inspect its index and embedding-vector preview; - retrieve nearest words using cosine similarity; - visualize the local embedding neighborhood; and - download similarity results.\n```text User enters a natural-language query \u2502 \u25bc Browser validates and cleans the text \u2502 \u25bc Transformers.js loads the quantized CLIP text encoder \u2502 \u25bc Tokenizer prepares the query \u2502 \u25bc CLIP creates a normalized text embedding \u2502 \u25bc Browser loads precomputed gallery image embeddings \u2502 \u25bc JavaScript calculates cosine similarity \u2502 \u25bc Images are ranked by similarity \u2502 \u25bc Top-k image cards are displayed ``` ---",
+          "entailment_score": 0.006511,
+          "has_citation": false,
+          "supported": false
+        },
+        {
+          "claim": "Word Embedding Source: README.md Section: Word Explorer",
+          "citation_ids": [],
+          "evidence_text": "1. Public Markdown is cleaned without removing technical terminology. 2. Documents are split into section-aware overlapping chunks. 3. Normalized document embeddings are generated offline. 4. Runtime queries are embedded using the same model and prefix configuration. 5. Cosine similarity is combined with lexical coverage. 6. Optional filters and cross-encoder reranking refine results. 7. Low-confidence evidence can trigger refusal.\nThe deployed application uses a browser-efficient retrieval design: 1. Gallery images are encoded offline using the pretrained CLIP image encoder. 2. The normalized image embeddings are stored in a browser-friendly JSON file. 3. A user enters a natural-language query. 4. The browser CLIP text encoder creates a query embedding. 5. JavaScript calculates cosine similarity against every gallery embedding. 6. Results are sorted from highest to lowest similarity. 7. The top-k images are displayed with rank, score, caption, category, tags, and latency. This approach avoids repeatedly encoding the complete gallery during every browser session. ---\nThe Static Space: 1. downloads q8 ONNX models; 2. generates document embeddings in browser memory; 3. embeds the query; 4. performs cosine retrieval; 5. tokenizes query-document pairs; 6. applies the sequence-classification reranker; 7. displays rank movement and metrics.\n- select or enter a vocabulary word; - inspect its index and embedding-vector preview; - retrieve nearest words using cosine similarity; - visualize the local embedding neighborhood; and - download similarity results.\n```text User enters a natural-language query \u2502 \u25bc Browser validates and cleans the text \u2502 \u25bc Transformers.js loads the quantized CLIP text encoder \u2502 \u25bc Tokenizer prepares the query \u2502 \u25bc CLIP creates a normalized text embedding \u2502 \u25bc Browser loads precomputed gallery image embeddings \u2502 \u25bc JavaScript calculates cosine similarity \u2502 \u25bc Images are ranked by similarity \u2502 \u25bc Top-k image cards are displayed ``` ---",
+          "entailment_score": 0.013146,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q18",
+      "question": "Which project uses patch embeddings and self-attention for computer vision?",
+      "answer": "Vision Transformer",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Vision Transformer",
+          "citation_ids": [],
+          "evidence_text": "A Vision Transformer divides an image into fixed-size patches and processes those patches as a sequence of visual tokens. Self-attention allows the model to learn relationships between distant image regions rather than relying only on local convolutional neighborhoods. This project uses DeiT-tiny because it offers: - A compact transformer architecture - ImageNet-pretrained visual representations - 16 \u00d7 16 patch processing - Approximately 5.53 million trainable parameters after adapting the classifier - Strong CIFAR-10 performance - A practical size for ONNX browser deployment - Attention tensors that support interpretability analysis ---\nThe project generates real attention-rollout visualizations from the trained Vision Transformer. The method: 1. Collects attention tensors from all 12 transformer layers. 2. Averages the three attention heads per layer. 3. Adds identity matrices to include residual connections. 4. Row-normalizes the attention matrices. 5. Multiplies attention matrices across layers. 6. Extracts classification-token attention to the 196 image patches. 7. Reshapes the result into a 14 \u00d7 14 patch grid. 8. Resizes the mask to 224 \u00d7 224. 9. Overlays the attention map on the source image. Generated interpretability assets include: - 10 correct-prediction visualizations - 10 incorrect-prediction visualizations - Correct-example summary grid - Incorrect-example summary grid - 20 raw NumPy attention masks - CSV metadata - JSON method and summary files Attention rollout illustrates attention propagation; it does not prove why the model made a decision. ---\nThe live interface offers occlusion-based patch sensitivity. It does not call this raw attention. The Python attention module can generate actual class-token attention rollout if the final model exposes attention tensors.\n```text Input image: 224 \u00d7 224 \u00d7 3 \u2193 16 \u00d7 16 image patches \u2193 14 \u00d7 14 patch grid = 196 patch tokens \u2193 Patch embeddings \u2193 Classification token + position embeddings \u2193 12 Transformer encoder layers \u2193 3 self-attention heads per layer \u2193 Classification-token representation \u2193 Linear classification head \u2193 10 output logits ```\n**One-line description:** DeiT-tiny Vision Transformer fine-tuned on CIFAR-10, compared against ResNet-18, exported to a validated ONNX model, explained with attention rollout, and deployed for private browser inference through GitHub Pages. **Pinned repository description:** End-to-end computer-vision portfolio project featuring Vision Transformer transfer learning, ResNet comparison, ONNX conversion and parity validation, attention-rollout interpretability, WebGPU/WASM browser inference, automated CI validation, and GitHub Pages deployment. This project connects naturally to a Quality Data Scientist background because image classification can support visual inspection, product categorization, defect review, automated quality checks, image-based anomaly analysis, and applied AI for inspection workflows. ---",
+          "entailment_score": 0.007359,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q19",
+      "question": "Where are image and text embeddings aligned for cross-modal search?",
+      "answer": "Image-text matching",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Image-text matching",
+          "citation_ids": [],
+          "evidence_text": "```text Image input \u2193 Vision Transformer image encoder \u2193 Image projection layer \u2193 512-dimensional image embedding \u2193 L2 normalization ``` ```text Text query or label prompt \u2193 CLIP tokenizer \u2193 Transformer text encoder \u2193 Text projection layer \u2193 512-dimensional text embedding \u2193 L2 normalization ``` ```text Normalized image embedding + Normalized text embedding \u2193 Cosine similarity \u2193 Retrieval ranking or zero-shot label ranking ```\n![CLIP Text-to-Image Retrieval Results](images/02-text-to-image-retrieval-results.png) *Natural-language image search using a CLIP text embedding, precomputed gallery image embeddings, cosine-similarity ranking, and top-k result cards.*\nCLIP is a vision-language model trained to align images and natural-language descriptions in a shared embedding space. This makes one model useful for multiple tasks: - Natural-language image search - Image-text matching - Zero-shot image classification - Visual semantic search - Similar-image knowledge retrieval - Multimodal search pipelines - Future multimodal RAG systems CLIP was selected because it supports both the primary retrieval use case and the additional zero-shot classification feature without training a separate classifier for every label set. ---\n- Normalized text and image embeddings. - Ranked images with cosine similarity. - Ranked zero-shot labels with cosine similarity and candidate-set softmax values. - Browser latency measurements.\n```text User enters a natural-language query \u2502 \u25bc Browser validates and cleans the text \u2502 \u25bc Transformers.js loads the quantized CLIP text encoder \u2502 \u25bc Tokenizer prepares the query \u2502 \u25bc CLIP creates a normalized text embedding \u2502 \u25bc Browser loads precomputed gallery image embeddings \u2502 \u25bc JavaScript calculates cosine similarity \u2502 \u25bc Images are ranked by similarity \u2502 \u25bc Top-k image cards are displayed ``` ---",
+          "entailment_score": 0.493334,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q20",
+      "question": "Which project retrieves portfolio evidence, produces citations, and reports latency?",
+      "answer": "Ai Portfolio RAG Assistant",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Ai Portfolio RAG Assistant",
+          "citation_ids": [],
+          "evidence_text": "Every retrieved source receives `[S1]`, `[S2]`, and so on. Citation cards expose: - project name and ID - source file and section - chunk ID - evidence excerpt - semantic, lexical, and combined relevance - source path and repository URL The instruction prompt requires a citation after each factual claim. Unsupported questions must return the documented refusal sentence.\n- An incomplete corpus produces incomplete answers. - NLI-based groundedness is an automated proxy and may misclassify nuanced claims. - Citation presence does not alone prove citation correctness. - Similarity thresholds require validation against supported and unsupported questions. - Hosted model availability and latency may change. - Public documents can become stale. - Multiple similar projects can confuse retrieval unless metadata and evaluation labels are accurate.\n- Claim-level NLI groundedness - Citation precision - Citation completeness - Unsupported-claim rate - Unsupported-question refusal accuracy - Local embedding, retrieval, generation, total, median, P90, and P95 latency - Deployed Vercel wall-clock latency - Manual error analysis No metric is presented as final until it is generated from the complete corpus and committed evaluation artifacts.\n- Public README content may be incomplete or stale. - Repository naming and document quality vary. - Deployment descriptions may not reflect current availability. - Expected evaluation labels require manual verification. - Similar projects can share terminology and produce retrieval ambiguity. - The corpus is a portfolio dataset, not a general-purpose ML knowledge base.\nContains the original uploaded notebook and project brief for traceability. The cleaned portfolio implementation lives in `src/`, `app/`, and `notebooks/`.",
+          "entailment_score": 0.02797,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q21",
+      "question": "Which projects are deployed on Hugging Face?",
+      "answer": "Section: Transformer Projects",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Section: Transformer Projects",
+          "citation_ids": [],
+          "evidence_text": "Add these after local or Hugging Face deployment: 1. app home and responsible-use notice; 2. English\u2192Hindi example; 3. Hindi\u2192English example; 4. mixed-input manual-direction message; 5. CSV batch results; 6. downloadable output; 7. direction-wise metric table; 8. latency plot; 9. manual error-analysis examples; 10. Hugging Face Space page. Use descriptive filenames and avoid screenshots containing private data.\n```text .github/workflows/02-neural-machine-translation-transformer-huggingface.yml ``` The deployment workflow: 1. Checks out the repository. 2. Reads the dedicated `HF_TOKEN_PROJECT_02` GitHub secret. 3. Selects only the `web/` subdirectory from the monorepo. 4. Synchronizes the files to the Hugging Face Space. 5. Publishes the application using `sdk: static`. 6. Runs automatically when the Static frontend changes. ---\nAfter deploying the Hugging Face Space, add: 1. Full app landing page. 2. Uploaded image and prediction panel. 3. Probability table and disclaimer. 4. Optional Grad-CAM output. 5. Kaggle training curves and confusion matrix. 6. GitHub Actions successful workflow run. Recommended filename: `demo_screenshot.png`.\nPython, PyTorch, Hugging Face Transformers, Transformers.js, ONNX Runtime Web, multimodal vision-language models, ViLT, Moondream2, Pillow, pandas, NumPy, pytest, HTML, CSS, JavaScript, WebGPU, Hugging Face Static Spaces, and GitHub Actions.\n- GitHub: complete Python ML project - Hugging Face Static Space: Transformers.js browser demo - Hugging Face Model Hub: this pipeline card and evaluation documentation",
+          "entailment_score": 0.050683,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q22",
+      "question": "Which projects are designed for GitHub Pages?",
+      "answer": "CNN Projects",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "CNN Projects",
+          "citation_ids": [],
+          "evidence_text": "```text cnn convolutional-neural-networks computer-vision deep-learning image-segmentation semantic-segmentation object-detection image-classification medical-imaging satellite-image-segmentation remote-sensing unet densenet resnet vgg16 alexnet transfer-learning tensorflow keras tensorflowjs gradio huggingface-spaces vercel github-pages kaggle-notebooks machine-learning data-science portfolio-projects ``` ---\nEach numbered project contains its own documentation, source modules, notebooks, tests, data notes, model and dataset cards, evaluation artifacts, and deployment files. Project-specific GitHub Actions workflows live in `.github/workflows/`. ```text transformer-projects/ \u251c\u2500\u2500 .github/workflows/ \u251c\u2500\u2500 01-abstractive-text-summarization-transformer/ \u251c\u2500\u2500 02-neural-machine-translation-transformer/ \u251c\u2500\u2500 03-cross-encoder-bi-encoder-ranking-system/ \u251c\u2500\u2500 04-long-document-question-answering-longformer/ \u251c\u2500\u2500 05-instruction-tuned-domain-llm/ \u251c\u2500\u2500 06-multimodal-visual-question-answering-transformer/ \u251c\u2500\u2500 .gitignore \u251c\u2500\u2500 CITATION.cff \u251c\u2500\u2500 CONTRIBUTING.md \u251c\u2500\u2500 LICENSE \u251c\u2500\u2500 README.md \u2514\u2500\u2500 SECURITY.md ```\nThis repository uses one permanent GitHub Pages configuration for all static browser projects: ```text Source: Deploy from a branch Branch: main Folder: /docs ``` GitHub Pages publishes the content already committed under `/docs`. Project-specific workflows validate files and tests only; they do not deploy the site.\nProject 09 follows the permanent Pages structure already configured for the `transformer-projects` repository. ```text Source: Deploy from a branch Branch: main Folder: /docs ``` Do not change these repository settings for Project 09.\nThe repository is organized as a monorepo. Each project generally follows this structure: ```text ann-deep-learning-projects/ \u251c\u2500\u2500 .github/ \u2502 \u2514\u2500\u2500 workflows/ \u2502 \u2514\u2500\u2500 project-specific-ci.yml \u2502 \u251c\u2500\u2500 project-folder/ \u2502 \u251c\u2500\u2500 app/ \u2502 \u2502 \u251c\u2500\u2500 streamlit_app.py \u2502 \u2502 \u2514\u2500\u2500 requirements.txt \u2502 \u251c\u2500\u2500 data/ \u2502 \u2502 \u251c\u2500\u2500 sample_input.csv \u2502 \u2502 \u2514\u2500\u2500 README_data.md \u2502 \u251c\u2500\u2500 images/ \u2502 \u251c\u2500\u2500 models/ \u2502 \u251c\u2500\u2500 notebooks/ \u2502 \u251c\u2500\u2500 outputs/ \u2502 \u251c\u2500\u2500 src/ \u2502 \u251c\u2500\u2500 tests/ \u2502 \u251c\u2500\u2500 .gitignore \u2502 \u251c\u2500\u2500 README.md \u2502 \u251c\u2500\u2500 README_HOSTING.md \u2502 \u251c\u2500\u2500 requirements.txt \u2502 \u2514\u2500\u2500 supporting project files \u2502 \u251c\u2500\u2500 LICENSE \u2514\u2500\u2500 README.md ``` The exact files vary by project, but the standards remain consistent: - reproducible workflows; - modular code; - deployable inference; - automated validation; - clear documentation; - safe repository practices; - transparent model limitations. ---",
+          "entailment_score": 0.021046,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q23",
+      "question": "Which project is designed specifically for Vercel?",
+      "answer": "Object Detection Using CNN",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Object Detection Using CNN",
+          "citation_ids": [],
+          "evidence_text": "The production app is a Next.js App Router application. All expensive corpus work\u2014document collection, cleaning, chunking, Transformer embedding generation, and formal evaluation\u2014runs offline on the local RTX GPU. Vercel loads committed static JSON artifacts and uses server-side API routes for question embedding, retrieval, and optional hosted generation.\n1. Push all final files to `unit-mole/transformer-projects`. 2. In Vercel, select **Add New \u2192 Project**. 3. Import the GitHub repository. 4. Set **Root Directory** to `10-ai-portfolio-rag-assistant`. 5. Keep **Framework Preset: Next.js**. 6. Use **Install Command: `npm install`**. 7. Use **Build Command: `npm run build`**. 8. Add environment variables to Preview and Production. 9. Deploy. The included `vercel.json` assigns explicit maximum durations to the chat, retrieval, and health routes. Hosted generation may take longer than local extractive generation, so test the selected provider before publishing.\n- **Repository:** `unit-mole/cnn-projects` - **Branch:** `main` - **Root directory:** `02-object-detection-using-cnn` - **Framework preset:** `Other` - **Build command:** Leave empty - **Output directory:** Leave empty - **Install command:** Leave empty - **Live application:** https://cnn-object-detection.vercel.app/ The Vercel project is connected to GitHub. New commits affecting the project can trigger updated deployments automatically. See `README_VERCEL.md` for deployment-specific instructions. ---\nThis project is a static TensorFlow.js application. No Python backend or model training runs on Vercel.\n- **Repository:** `unit-mole/cnn-projects` - **Branch:** `main` - **Framework preset:** `Other` - **Root directory:** `01-image-segmentation-unet-medical-imaging/web` - **Build command:** Blank / disabled - **Output directory:** Blank / disabled - **Install command:** Blank / disabled - **Environment variables:** None - **Live application:** https://medical-image-segmentation-unet.vercel.app/ The selected Vercel root is the `web` folder because it contains the complete static application and its `vercel.json` configuration. Future pushes to the connected `main` branch can trigger automatic production deployments. See `README_VERCEL.md` for additional deployment and troubleshooting guidance. ---",
+          "entailment_score": 0.001066,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q24",
+      "question": "Compare the deployment platforms used by Projects 06, 08, and 10.",
+      "answer": "Project: ANN Deep Learning Projects",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Project: ANN Deep Learning Projects",
+          "citation_ids": [],
+          "evidence_text": "The portfolio intentionally demonstrates multiple delivery approaches: | Platform | Demonstrated Through | |---|---| | Vercel | Object Detection, VGG16 Fine-Grained Classification, Satellite U-Net Segmentation | | TensorFlow.js | Browser-based classification, detection, and segmentation | | GitHub Pages | ResNet browser inference and planned AlexNet deployment | | Hugging Face Spaces | Gradio-based model demonstrations | | Gradio | Upload-driven image prediction interfaces | | Kaggle Notebooks | Training, evaluation, GPU execution, and reproducibility | | GitHub Actions | Project-specific CI and deployment validation | | Docker | Reproducible local or container-based execution where useful | This diversity shows that the portfolio covers not only model development but also practical model packaging and deployment. ---\nThe repository includes practices required for dependable inference: - modular source files rather than notebook-only logic; - consistent preprocessing between training and prediction; - saved tokenizers, vocabularies, label mappings, metadata, Keras models, weights, and portable artifacts; - safe handling of empty text, malformed uploads, unknown tokens, invalid labels, incompatible shapes, and missing artifacts; - pretrained application startup without automatic retraining; - artifact-validation scripts and transparent checkpoint auditing; - automated tests for important preprocessing and inference paths; - project-specific GitHub Actions workflows; - nested `app/requirements.txt` files for Streamlit Community Cloud; - project-level Docker support; - Git LFS handling for large model artifacts; - GitHub-safe data, dependency, and artifact management.\nThe repository includes practices required for dependable inference: - preprocessing fitted on training data only; - consistent feature, token, channel, and sequence order between training and prediction; - saved scalers, tokenizers, label mappings, thresholds, model metadata, Keras models, PyTorch weights, and portable NumPy weights; - safe handling of missing values, invalid timestamps, unknown tokens, malformed uploads, non-finite arrays, and incompatible shapes; - modular source files rather than notebook-only logic; - pretrained application startup without automatic retraining; - automated tests for important preprocessing and inference paths; - project-specific GitHub Actions workflows; - Streamlit deployment from the main repository branch; - GitHub-safe data, artifact, and dependency management.\nThe repository is organized as a monorepo. Each project generally follows this structure: ```text ann-deep-learning-projects/ \u251c\u2500\u2500 .github/ \u2502 \u2514\u2500\u2500 workflows/ \u2502 \u2514\u2500\u2500 project-specific-ci.yml \u2502 \u251c\u2500\u2500 project-folder/ \u2502 \u251c\u2500\u2500 app/ \u2502 \u2502 \u251c\u2500\u2500 streamlit_app.py \u2502 \u2502 \u2514\u2500\u2500 requirements.txt \u2502 \u251c\u2500\u2500 data/ \u2502 \u2502 \u251c\u2500\u2500 sample_input.csv \u2502 \u2502 \u2514\u2500\u2500 README_data.md \u2502 \u251c\u2500\u2500 images/ \u2502 \u251c\u2500\u2500 models/ \u2502 \u251c\u2500\u2500 notebooks/ \u2502 \u251c\u2500\u2500 outputs/ \u2502 \u251c\u2500\u2500 src/ \u2502 \u251c\u2500\u2500 tests/ \u2502 \u251c\u2500\u2500 .gitignore \u2502 \u251c\u2500\u2500 README.md \u2502 \u251c\u2500\u2500 README_HOSTING.md \u2502 \u251c\u2500\u2500 requirements.txt \u2502 \u2514\u2500\u2500 supporting project files \u2502 \u251c\u2500\u2500 LICENSE \u2514\u2500\u2500 README.md ``` The exact files vary by project, but the standards remain consistent: - reproducible workflows; - modular code; - deployable inference; - automated validation; - clear documentation; - safe repository practices; - transparent model limitations. ---\nThe repository is organized as a monorepo. Each project generally follows this structure: ```text lstm-projects/ \u251c\u2500\u2500 .github/ \u2502 \u2514\u2500\u2500 workflows/ \u2502 \u2514\u2500\u2500 project-specific-ci.yml \u2502 \u251c\u2500\u2500 project-folder/ \u2502 \u251c\u2500\u2500 .streamlit/ \u2502 \u2502 \u2514\u2500\u2500 config.toml \u2502 \u251c\u2500\u2500 app/ \u2502 \u2502 \u251c\u2500\u2500 streamlit_app.py \u2502 \u2502 \u2514\u2500\u2500 requirements.txt \u2502 \u251c\u2500\u2500 archive/ \u2502 \u251c\u2500\u2500 data/ \u2502 \u2502 \u251c\u2500\u2500 sample_input.csv \u2502 \u2502 \u2514\u2500\u2500 README_data.md \u2502 \u251c\u2500\u2500 images/ \u2502 \u251c\u2500\u2500 models/ \u2502 \u251c\u2500\u2500 notebooks/ \u2502 \u251c\u2500\u2500 outputs/ \u2502 \u251c\u2500\u2500 scripts/ \u2502 \u251c\u2500\u2500 src/ \u2502 \u251c\u2500\u2500 tests/ \u2502 \u251c\u2500\u2500 .gitignore \u2502 \u251c\u2500\u2500 README.md \u2502 \u251c\u2500\u2500 README_HOSTING.md \u2502 \u251c\u2500\u2500 requirements.txt \u2502 \u251c\u2500\u2500 requirements-dev.txt \u2502 \u251c\u2500\u2500 train_model.py \u2502 \u2514\u2500\u2500 supporting project files \u2502 \u251c\u2500\u2500 .gitignore \u251c\u2500\u2500 LICENSE \u2514\u2500\u2500 README.md ``` The exact files vary by project, but the standards remain consistent: - reproducible workflows; - modular code; - deployable pretrained inference; - automated validation; - clear documentation; - safe repository practices; - transparent model assumptions and limitations. ---",
+          "entailment_score": 0.00242,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q25",
+      "question": "Which projects demonstrate browser-oriented or static deployment?",
+      "answer": "[S3] Project: CNN Projects Source: README.md Section: Reliable and Reusable Engineering Evidence: [S1]",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 1,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 1.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "[S3] Project: CNN Projects Source: README.md Section: Reliable and Reusable Engineering Evidence: [S1]",
+          "citation_ids": [
+            "S1",
+            "S3"
+          ],
+          "evidence_text": "The source frontend is stored under `web/`. ```bash cd web npm install npm test npm run build ``` The final static output can then be prepared for credit-free deployment. ---\nThe portfolio intentionally demonstrates multiple delivery approaches: | Platform | Demonstrated Through | |---|---| | Vercel | Object Detection, VGG16 Fine-Grained Classification, Satellite U-Net Segmentation | | TensorFlow.js | Browser-based classification, detection, and segmentation | | GitHub Pages | ResNet browser inference and planned AlexNet deployment | | Hugging Face Spaces | Gradio-based model demonstrations | | Gradio | Upload-driven image prediction interfaces | | Kaggle Notebooks | Training, evaluation, GPU execution, and reproducibility | | GitHub Actions | Project-specific CI and deployment validation | | Docker | Reproducible local or container-based execution where useful | This diversity shows that the portfolio covers not only model development but also practical model packaging and deployment. ---",
+          "entailment_score": 0.000829,
+          "has_citation": true,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q26",
+      "question": "Which projects demonstrate semantic retrieval or vector search?",
+      "answer": "Word Embedding",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Word Embedding",
+          "citation_ids": [],
+          "evidence_text": "- Semantic similarity can return plausible but irrelevant results. - The evaluation uses a small sample corpus and eight labelled queries. - Recall@K and MRR do not capture every aspect of search usefulness. - Cosine similarity is not a calibrated probability. - The structured cosine false-positive review is still pending. - First-time browser model loading may take longer because model files must be downloaded. - Browser performance varies by device, browser, available memory, and hardware acceleration. - Large public embedding JSON files can increase initial page-load time. - The sample corpus does not represent a production enterprise knowledge base. - Access-controlled or confidential corpora require authentication, authorization, logging, and a governed backend. - Lexical highlighting does not explain every semantic relationship. - A static browser demo is not a substitute for a production vector-search platform. ---\n- Search public ML portfolio READMEs, model cards, dataset cards, and technical notes. - Demonstrate browser-based Transformer inference and vector ranking. - Explore semantic retrieval quality with Recall@K, MRR, similarity analysis, and latency benchmarking. - Prototype a safe precursor to knowledge-base search and RAG.\n- convert a query into a sentence vector; - compare it with included sentence representations; - rank results using cosine similarity; and - download the ranked table.\nThe semantic-search workflow converts the query into a sentence vector and ranks the included sentences by cosine similarity, with results available for download. ![Semantic-search results](images/04_semantic_search_results.png) ---\nThis project is intended for educational, technical-learning, and portfolio demonstration purposes. - Semantic-search results may be incomplete, outdated, irrelevant, or ranked imperfectly. - Cosine similarity is a model-based relevance signal and is not a probability or guarantee that a result fully answers a query. - Do not add private company files, internal quality records, complaint investigations, customer information, emails, credentials, copyrighted documents, proprietary material, or personally identifiable information to a public corpus. - Retrieved passages should be reviewed by a human before they are used for real-world decisions. - The application must not be used as the sole basis for medical, legal, security, safety-critical, hiring, insurance, financial, or production decisions. - Only public, self-authored, redistributable, or synthetic documents should be published through the GitHub Pages corpus. ---",
+          "entailment_score": 0.003917,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q27",
+      "question": "Which projects combine computer vision with Transformer methods?",
+      "answer": "Transformer Projects",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Transformer Projects",
+          "citation_ids": [],
+          "evidence_text": "Python, PyTorch, Hugging Face Transformers, Transformers.js, ONNX Runtime Web, multimodal vision-language models, ViLT, Moondream2, Pillow, pandas, NumPy, pytest, HTML, CSS, JavaScript, WebGPU, Hugging Face Static Spaces, and GitHub Actions.\nA professional Transformer and multimodal-AI portfolio covering summarization, translation, ranking, long-document question answering, instruction-tuned language models, visual question answering, semantic search, Vision Transformers, CLIP retrieval, and retrieval-augmented generation. > **Career positioning:** I am a Quality Data Scientist building an applied > Machine Learning, NLP, Generative AI, Computer Vision, and Multimodal AI > portfolio with reproducible code, evaluation, CI, and free deployment demos. [![Repository](https://img.shields.io/badge/GitHub-transformer--projects-181717?logo=github)](https://github.com/unit-mole/transformer-projects) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Hugging Face](https://img.shields.io/badge/Hugging%20Face-Static%20Spaces-FFD21E?logo=huggingface)](https://huggingface.co/anmol-unitmole)\nThese projects are educational portfolio demonstrations. Model output can be incorrect, biased, incomplete, or misleading. Do not use the demos for medical, legal, financial, surveillance, identity verification, employment, insurance, security, or other high-stakes decisions. Never upload private or confidential content to a public demo.\n| # | Planned project | |---:|---| | 07 | Document Semantic Search with Sentence-BERT | | 08 | Image Classification with Vision Transformer | | 09 | Vision-Language Image\u2013Text Retrieval with CLIP | | 10 | AI Portfolio RAG Assistant |\nA Vision Transformer divides an image into fixed-size patches and processes those patches as a sequence of visual tokens. Self-attention allows the model to learn relationships between distant image regions rather than relying only on local convolutional neighborhoods. This project uses DeiT-tiny because it offers: - A compact transformer architecture - ImageNet-pretrained visual representations - 16 \u00d7 16 patch processing - Approximately 5.53 million trainable parameters after adapting the classifier - Strong CIFAR-10 performance - A practical size for ONNX browser deployment - Attention tensors that support interpretability analysis ---",
+          "entailment_score": 0.007071,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q28",
+      "question": "Which projects are strongest evidence of NLP experience?",
+      "answer": "Project: Word Embedding",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Project: Word Embedding",
+          "citation_ids": [],
+          "evidence_text": "This project is for education and portfolio demonstration. The learned relationships: - depend on a small curated corpus; - may be incomplete or misleading; - may not generalize to new domains; - should not be treated as dictionary definitions; - should not be used as fairness evidence; and - should not support high-impact decisions. Human review is required before embedding outputs are used in any real workflow. ---\n- understand the model workflow; - review artifact information; - read responsible-use guidance; and - inspect the portfolio skills demonstrated. The app loads committed artifacts and does not retrain or download external data during startup. ---\n- An incomplete corpus produces incomplete answers. - NLI-based groundedness is an automated proxy and may misclassify nuanced claims. - Citation presence does not alone prove citation correctness. - Similarity thresholds require validation against supported and unsupported questions. - Hosted model availability and latency may change. - Public documents can become stale. - Multiple similar projects can confuse retrieval unless metadata and evaluation labels are accurate.\n- Claim-level NLI groundedness - Citation precision - Citation completeness - Unsupported-claim rate - Unsupported-question refusal accuracy - Manual error analysis\n- Claim-level NLI groundedness - Citation precision - Citation completeness - Unsupported-claim rate - Unsupported-question refusal accuracy - Local embedding, retrieval, generation, total, median, P90, and P95 latency - Deployed Vercel wall-clock latency - Manual error analysis No metric is presented as final until it is generated from the complete corpus and committed evaluation artifacts.",
+          "entailment_score": 0.009922,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q29",
+      "question": "Which projects demonstrate ranking, retrieval, or search skills?",
+      "answer": "[S3]",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 1,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 1.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "[S3]",
+          "citation_ids": [
+            "S3"
+          ],
+          "evidence_text": "- Transformer inference - Sentence-BERT and MiniLM - Bi-encoder architecture - Cross-encoder architecture - Dense semantic retrieval - Query-document reranking - Information retrieval - Cosine similarity - TF-IDF - Okapi BM25 - Graded relevance judgments - Recall@K - MRR@10 - nDCG@10 - MAP@100 - Paired bootstrap confidence intervals - Latency benchmarking - Per-query error analysis - PyTorch - Hugging Face Transformers - Sentence Transformers - Transformers.js - ONNX Runtime Web - Vite and browser application development - Gradio - Hugging Face Static Spaces - Model documentation - GitHub Actions - Automated testing - Responsible AI communication - Portfolio-focused ML engineering ---",
+          "entailment_score": 0.008149,
+          "has_citation": true,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q30",
+      "question": "Which project most directly demonstrates full-stack AI application development?",
+      "answer": "CLIP",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "CLIP",
+          "citation_ids": [],
+          "evidence_text": "- Natural-language processing - Encoder-decoder Transformers - DistilBART - T5 - Abstractive text summarization - Hugging Face Transformers - PyTorch GPU fine-tuning - Mixed-precision training - Gradient accumulation - Gradient checkpointing - Beam-search decoding - Long-document chunking - ROUGE evaluation - BERTScore evaluation - Baseline comparison - Error analysis - Latency benchmarking - Responsible AI communication - Model artifact management - Reproducible experiment configuration - Jupyter notebook pipelines - Python package organization - Unit testing - Transformers.js - ONNX Runtime Web - Browser-based machine learning - Static web application development - GitHub Actions - Hugging Face Static Space deployment - Portfolio-focused ML engineering ---\n- Transformer architecture - Longformer sparse attention - Long-document question answering - Extractive QA fine-tuning - QASPER dataset preparation - Start/end span supervision - Long-context tokenization - Overlapping sliding windows - Global-attention handling - Evidence extraction and highlighting - Supporting-paragraph selection - Confidence-proxy design - Exact Match evaluation - Token-level F1 evaluation - Evidence recovery evaluation - Evidence-token recall - Context-length analysis - Answer-position analysis - Latency and throughput benchmarking - GPU training with BF16 - Model artifact management - Hugging Face Model Hub publishing - Transformers.js browser inference - ONNX Runtime Web - Static web application development - Automated testing - GitHub Actions - Hugging Face Static Space deployment - Responsible AI communication - Portfolio-focused ML engineering ---\n- Transformer models - Vision Transformers - CLIP architecture - Vision-language modeling - Multimodal AI - Natural-language image search - Image-text retrieval - Zero-shot image classification - Image preprocessing - Text preprocessing and tokenization - Embedding generation - Embedding normalization - Cosine-similarity ranking - Recall@K evaluation - Similarity-score analysis - Latency benchmarking - Failure analysis - PyTorch inference - Hugging Face Transformers - Transformers.js - ONNX Runtime Web - Quantized browser inference - Static web application development - JavaScript inference pipelines - GitHub Actions - GitHub Pages deployment - Responsible AI communication - Portfolio-focused ML engineering ---\n- Code intelligence - Python source preprocessing - Code-to-text generation - Sequence-to-sequence modeling - Bidirectional LSTM encoding - LSTM decoding - Bahdanau attention - Teacher forcing - Masked sequence loss - Masked token accuracy - Greedy decoding - Beam-search decoding - BLEU evaluation - ROUGE evaluation - Exact-match analysis - Token-overlap analysis - Generation-length analysis - Error analysis - Identifier-based baselines - Separate source and target vocabularies - Saved Keras artifacts - Custom Keras layer serialization - TensorFlow/Keras deployment compatibility - Streamlit application development - Single-record and batch inference - Git LFS model management - Unit testing - GitHub Actions - Docker packaging - Responsible AI and code-privacy communication - Deployment-ready ML engineering\nEvery project is structured to move beyond notebook-only experimentation. The repository demonstrates: - business-problem definition; - reproducible data preparation; - feature engineering; - training, validation, and test separation; - model evaluation; - saved preprocessing and model artifacts; - reusable prediction pipelines; - manual and batch inference; - downloadable outputs; - local execution; - cloud deployment.",
+          "entailment_score": 0.142285,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q31",
+      "question": "What parts of the complete portfolio corpus are still missing?",
+      "answer": "[S1]",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 1,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 1.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "[S1]",
+          "citation_ids": [
+            "S1"
+          ],
+          "evidence_text": "The complete corpus should include public documents from: - ANN / deep-learning projects - Simple RNN projects - LSTM projects - Bidirectional LSTM projects - CNN / computer-vision projects - Transformer projects 01\u201310 - Model cards, dataset cards, deployment guides, and verified evaluation summaries Each chunk stores project, repository, source file, heading, path, checksum, category, deployment, keywords, word boundaries, and source URL.",
+          "entailment_score": 0.025856,
+          "has_citation": true,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q32",
+      "question": "Does the current corpus fully include ANN, RNN, LSTM, BiLSTM, and CNN documentation?",
+      "answer": "Yes",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "Yes",
+          "citation_ids": [],
+          "evidence_text": "The complete corpus should include public documents from: - ANN / deep-learning projects - Simple RNN projects - LSTM projects - Bidirectional LSTM projects - CNN / computer-vision projects - Transformer projects 01\u201310 - Model cards, dataset cards, deployment guides, and verified evaluation summaries Each chunk stores project, repository, source file, heading, path, checksum, category, deployment, keywords, word boundaries, and source URL.\nThe checked-in starter corpus is not the final dataset. The final metadata must report all six portfolio categories: ```text ANN Simple RNN LSTM BiLSTM CNN Transformer ``` Final document and chunk counts are generated automatically and must not be invented.\nNatural-language and paired-sequence problems require careful validation and preprocessing. The repository emphasizes: - training-only tokenizer and vocabulary fitting in corrected pipelines; - consistent token, label, padding, and sequence order during training and inference; - sample-, statement-, document-, pair-, or function-level splitting where appropriate; - leakage control for source docstrings and duplicated text patterns; - validation-based model, threshold, or stopping decisions; - entity-level evaluation rather than token accuracy alone for named entity recognition; - candidate-level and ranking-based evaluation for semantic retrieval; - untouched final test evaluation where applicable; - explicit documentation of synthetic-data, small-sample, checkpoint, calibration, and generalization risks.\nThe project uses a safe, public portfolio-documentation knowledge base. | Property | Value | |---|---| | Task | Document semantic search | | Documents | 12 | | Searchable chunks | 34 | | Evaluation queries | 8 | | Average document length | 89.58 words | | Average chunk length | 27.38 words | | Configured chunk size | 180 words | | Configured overlap | 40 words | | Embedding dimension | 384 | | Similarity metric | Cosine similarity | | Python embedding model | `sentence-transformers/all-MiniLM-L6-v2` | | Browser embedding model | `Xenova/all-MiniLM-L6-v2` | | Data-safety rule | Public, self-authored, redistributable, or synthetic documents only | The sample corpus represents documentation from areas such as: ```text Transformer / NLP Information retrieval Generative AI and LLMs Multimodal AI RNN and BiLSTM projects CNN and computer-vision projects Portfolio deployment engineering Quality analytics and applied AI ``` Document types include: ```text Project README files Model cards Deployment guides Knowledge notes ``` The corpus can later be replaced with additional public documentation from ANN, Simple RNN, LSTM, Bi-Directional LSTM, CNN, Transformer, analytics, or quality-focused projects. ---\nThe completed portfolio benchmark uses the **CNN/DailyMail 3.0.0** summarization dataset. | Property | Value | |---|---| | Task | Abstractive text summarization | | Dataset ID | `abisee/cnn_dailymail` | | Dataset configuration | `3.0.0` | | Source field | `article` | | Reference-summary field | `highlights`, renamed to `reference_summary` | | Training examples | 5,000 | | Validation examples | 500 | | Held-out test examples | 500 | | Random seed | 42 | | Maximum source tokens | 768 | | Maximum target tokens | 128 | | Published claim | Controlled portfolio subset, not full-dataset leaderboard training | The full CNN/DailyMail dataset is downloaded through Hugging Face Datasets when required and is not committed to GitHub. The repository keeps safe example CSV files and generated benchmark artifacts.",
+          "entailment_score": 0.005594,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q33",
+      "question": "What source types should be added to complete the portfolio index?",
+      "answer": "[S1] and [S2]",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 1,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 1.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "[S1] and [S2]",
+          "citation_ids": [
+            "S1",
+            "S2"
+          ],
+          "evidence_text": "The complete corpus should include public documents from: - ANN / deep-learning projects - Simple RNN projects - LSTM projects - Bidirectional LSTM projects - CNN / computer-vision projects - Transformer projects 01\u201310 - Model cards, dataset cards, deployment guides, and verified evaluation summaries Each chunk stores project, repository, source file, heading, path, checksum, category, deployment, keywords, word boundaries, and source URL.\nThe collection configuration is stored in `config/portfolio_repositories.json`. Repository names must be verified before collection. Only public GitHub Markdown is eligible.",
+          "entailment_score": 3e-05,
+          "has_citation": true,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q34",
+      "question": "Why should the assistant avoid claiming complete portfolio coverage right now?",
+      "answer": "[S1]",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 1,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 1.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "[S1]",
+          "citation_ids": [
+            "S1"
+          ],
+          "evidence_text": "The corpus reflects only selected public portfolio content and therefore does not represent all experience. Private employment records, company data, GCS cases, quality records, emails, customer/supplier information, credentials, proprietary files, and PII must not be included.",
+          "entailment_score": 0.001695,
+          "has_citation": true,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q35",
+      "question": "Which project measures response latency and displays source citations?",
+      "answer": "[S1]",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 1,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 1.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": true,
+      "claims": [
+        {
+          "claim": "[S1]",
+          "citation_ids": [
+            "S1"
+          ],
+          "evidence_text": "- Claim-level NLI groundedness - Citation precision - Citation completeness - Unsupported-claim rate - Unsupported-question refusal accuracy - Local embedding, retrieval, generation, total, median, P90, and P95 latency - Deployed Vercel wall-clock latency - Manual error analysis No metric is presented as final until it is generated from the complete corpus and committed evaluation artifacts.",
+          "entailment_score": 0.00064,
+          "has_citation": true,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q36",
+      "question": "What salary did Anmol earn in 2025?",
+      "answer": "Bitcoin price predictions inaccurate.",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": false,
+      "claims": [
+        {
+          "claim": "Bitcoin price predictions inaccurate.",
+          "citation_ids": [],
+          "evidence_text": "**Anmol Tripathi** Quality Data Scientist building a professional portfolio in Data Science, Machine Learning, Applied AI, Generative AI, Multimodal AI, Computer Vision, Natural Language Processing, Analytics Engineering, and Quality Analytics.\nThe supplied notebook reported the following on its final 20% chronological period: | Metric | Result | |---|---:| | MAE | **$1,651.02** | | RMSE | **$2,427.00** | | R\u00b2 | **0.9845** | | MAPE | Not reported |\nThis project uses a **deterministic synthetic dataset** generated by `src/data_generation.py`. No private customer, employee, product, or company data is included.\n**Anmol Tripathi** Quality Data Scientist transitioning toward Data Science, Machine Learning, Applied AI, Analytics Engineering, and Quality Analytics roles.\n- Bitcoin prices are affected by factors not represented in historical OHLCV features. - The supplied model has preprocessing and validation leakage limitations. - Price-level persistence can make R\u00b2 look strong without proving economic value. - The app does not model transaction costs, slippage, liquidity, or execution. - Recursive forecast uncertainty compounds across days. - No prediction intervals are included. - The packaged sample is synthetic demonstration data. - Optional current values may be outside the original training range. - The model does not use sentiment, on-chain, regulatory, macroeconomic, order-book, or derivative data. - The project is not a trading system and is not financial advice. ---",
+          "entailment_score": 0.003467,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q37",
+      "question": "Which private company quality case had the highest defect quantity?",
+      "answer": "[S1]",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 1,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 1.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": false,
+      "claims": [
+        {
+          "claim": "[S1]",
+          "citation_ids": [
+            "S1"
+          ],
+          "evidence_text": "A separate governed quality-analytics model could introduce labels such as: ```text PRODUCT DEFECT FAILURE_MODE ROOT_CAUSE COMPONENT SERIAL_NUMBER CUSTOMER_LOCATION ``` This would require domain annotation guidelines, privacy controls, data governance, inter-annotator agreement checks, and independent evaluation.",
+          "entailment_score": 0.002465,
+          "has_citation": true,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q38",
+      "question": "What is Anmol's home address?",
+      "answer": "text http://localhost:8501",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": false,
+      "claims": [
+        {
+          "claim": "text http://localhost:8501",
+          "citation_ids": [],
+          "evidence_text": "```bash python -m streamlit run app/streamlit_app.py ``` Open the local address displayed in the terminal, normally: ```text http://localhost:8501 ``` Windows users can also run: ```bat run_local.bat ``` macOS and Linux users can run: ```bash chmod +x run_local.sh ./run_local.sh ```\n```bash python -m streamlit run app/streamlit_app.py ``` Open the local address displayed in the terminal, normally: ```text http://localhost:8501 ``` Windows users can also run: ```bat run_local.bat ``` macOS and Linux users can run: ```bash chmod +x run_local.sh ./run_local.sh ```\n```bash python -m streamlit run app/streamlit_app.py ``` Open the local address displayed in the terminal, normally: ```text http://localhost:8501 ``` Windows users can also run: ```bat run_local.bat ``` macOS and Linux users can run: ```bash chmod +x run_local.sh ./run_local.sh ```\n```bash python -m streamlit run app/streamlit_app.py ``` Open the local address displayed in the terminal, normally: ```text http://localhost:8501 ```\n- **Owner:** `anmol-unitmole` - **Space name:** `06-multimodal-visual-question-answering-transformer` - **Short description:** Browser-based multimodal VQA with SmolVLM, WebGPU, generation-confidence diagnostics, and a 60-pair evaluation lab. - **License:** MIT - **SDK:** Static - **Template:** Blank - **Visibility:** Public Upload the **contents** of `space/` to the root of the Hugging Face Space. Do not upload the outer Project 06 folder or an extra nested `space` directory.",
+          "entailment_score": 0.007311,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q39",
+      "question": "Which project achieved exactly 99.9 percent accuracy?",
+      "answer": "ANN Deep Learning Projects",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": false,
+      "claims": [
+        {
+          "claim": "ANN Deep Learning Projects",
+          "citation_ids": [],
+          "evidence_text": "- Test accuracy: 98.24% - Macro F1: 98.23% - Correct predictions: 9,824 of 10,000 - Lowest class recall in the recorded test run: digit 8 at 97.23%\n- **Accuracy** measures the overall proportion of correct classifications. - **Precision** measures how reliable predictions for a class are. - **Recall** measures how many real examples of a class are captured. - **F1-score** balances precision and recall. - **Macro F1** gives each class equal importance. - **Weighted F1** accounts for class frequency. - **Confusion matrices** reveal which categories are commonly confused. - **Top-5 accuracy** is useful for large multi-class problems such as CIFAR-100. ---\n- **Accuracy** measures overall correctness. - **Precision** measures the reliability of predictions for a class. - **Recall** measures how many true examples of a class were captured. - **F1-score** balances precision and recall. - **Macro F1** gives equal importance to each class. - **Confusion analysis** shows whether one class is systematically mistaken for another. - **Confidence review** helps identify uncertain and potentially misleading predictions. ---\nThe projects use evaluation metrics that match the task rather than relying on accuracy alone. Examples include: - precision, recall, F1, ROC-AUC, and PR-AUC for classification; - MAE, RMSE, R\u00b2, and residual analysis for regression; - output-specific metrics for multi-task models; - confusion matrices and probability distributions; - threshold analysis for imbalanced and risk-oriented decisions; - baseline comparisons where they add meaningful context.\n- **Accuracy** measures the overall percentage of correct classifications. - **Precision** measures how reliable predictions for a class are. - **Recall** measures how many real examples of a class are captured. - **F1-score** balances precision and recall. - **Macro F1** gives each class equal importance. - **Confusion matrices** reveal which visual categories are commonly confused. - **Latency** measures deployment efficiency but depends on device and runtime. - **Prediction agreement** helps verify exported-model behavior. ---",
+          "entailment_score": 0.004263,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "question_id": "q40",
+      "question": "Which employer officially certified these project results?",
+      "answer": "Anmol Tripathi",
+      "claim_count": 1,
+      "grounded_claim_count": 0,
+      "cited_claim_count": 0,
+      "correct_citation_count": 0,
+      "groundedness_score": 0.0,
+      "citation_precision": 0.0,
+      "citation_completeness": 0.0,
+      "unsupported_claim_rate": 1.0,
+      "refusal_correct": false,
+      "claims": [
+        {
+          "claim": "Anmol Tripathi",
+          "citation_ids": [],
+          "evidence_text": "The original proof of concept was reviewed before the project was rebuilt.\n> **Educational use only:** This project is not a hiring, rejection, promotion, > compensation, immigration, legal, or employment-decision system. > > Do not upload real private resumes, names, email addresses, phone numbers, > home addresses, immigration information, protected attributes, confidential > job descriptions, or other personally identifiable information to the public > application. > > Model scores must not be used as the sole basis for candidate screening, > ranking, rejection, advancement, or any consequential employment decision. > Real use would require representative data, fairness evaluation, legal review, > human oversight, candidate notice, auditability, security controls, and an > appeal process.\nThe included backend-neutral Keras artifact was initialized with arrays trained using a mathematically equivalent PyTorch implementation because TensorFlow was not available in the artifact-generation environment at that time. The standard project training path remains: ```text scripts/train_model.py ``` which uses TensorFlow and Keras. The transferred Keras artifact was checked against the source predictions, with a recorded maximum probability difference below `1e-7`.\n```text outputs/fairness_and_limitations_note.md ```\n| Fit score | Displayed interpretation | |---:|---| | `0%\u201339%` | Weak Match | | `40%\u201369%` | Moderate Match | | `70%\u2013100%` | Strong Match | These bands are demonstration interface categories, not employment-decision policies.",
+          "entailment_score": 0.003525,
+          "has_citation": false,
+          "supported": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "status": "measured",
+  "generated_at": "2026-07-30T16:13:13.687151+00:00",
+  "corpus": {
+    "coverage_status": "complete",
+    "document_count": 220,
+    "chunk_count": 3157,
+    "categories": [
+      "ANN",
+      "BiLSTM",
+      "CNN",
+      "LSTM",
+      "Simple RNN",
+      "Transformer"
+    ]
+  },
+  "models": {
+    "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+    "embedding_provider": "huggingface-feature-extraction",
+    "groundedness_evaluator": "cross-encoder/nli-deberta-v3-small"
+  },
+  "retrieval": {
+    "best_method": "minilm-plus-cross-encoder",
+    "hit_rate_at_5": 0.742857,
+    "precision_at_5": 0.171429,
+    "recall_at_5": 0.64619,
+    "mrr_at_5": 0.617619,
+    "map_at_5": 0.557651,
+    "ndcg_at_5": 0.596122,
+    "question_count": 35,
+    "unsupported_question_count": 5
+  },
+  "groundedness": {
+    "answer_count": 40,
+    "mean_groundedness": 0.025,
+    "mean_citation_precision": 0.0,
+    "mean_citation_completeness": 0.275,
+    "mean_unsupported_claim_rate": 0.975,
+    "refusal_accuracy": 0.875
+  },
+  "citations": {
+    "mean_citation_precision": 0.0,
+    "mean_citation_completeness": 0.275,
+    "mean_unsupported_claim_rate": 0.975
+  },
+  "latency": {
+    "count": 40,
+    "mean_ms": 152.515,
+    "median_ms": 113.407,
+    "p90_ms": 159.268,
+    "p95_ms": 348.339,
+    "min_ms": 42.672,
+    "max_ms": 1337.153
+  },
+  "quality_gates": {
+    "passed": 4,
+    "total": 9,
+    "all_passed": false,
+    "details": {
+      "real_transformer_embeddings": true,
+      "complete_category_coverage": true,
+      "at_least_40_questions": true,
+      "recall_at_5_at_least_0_80": false,
+      "ndcg_at_5_at_least_0_75": false,
+      "groundedness_at_least_0_85": false,
+      "citation_precision_at_least_0_85": false,
+      "citation_completeness_at_least_0_85": false,
+      "refusal_accuracy_at_least_0_80": true
+    }
+  },
+  "source_files": {
+    "retrieval": "outputs/retrieval_benchmark.json",
+    "groundedness": "outputs/answer_groundedness_results.json",
+    "citations": "outputs/citation_correctness_results.json",
+    "latency": "outputs/response_latency_results.json"
+  }
+}

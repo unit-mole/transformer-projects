@@ -46,3 +46,30 @@ Thumbs.db
 08-image-classification-vision-transformer/outputs/checkpoints/
 08-image-classification-vision-transformer/backups/
 08-image-classification-vision-transformer/browser_test_images/
+
+# Project 10 local environments, caches, and source-corpus copies
+10-ai-portfolio-rag-assistant/.venv/
+10-ai-portfolio-rag-assistant/venv/
+10-ai-portfolio-rag-assistant/**/.venv*/
+10-ai-portfolio-rag-assistant/**/venv*/
+10-ai-portfolio-rag-assistant/**/__pycache__/
+10-ai-portfolio-rag-assistant/.ipynb_checkpoints/
+10-ai-portfolio-rag-assistant/**/.ipynb_checkpoints/
+10-ai-portfolio-rag-assistant/.pytest_cache/
+10-ai-portfolio-rag-assistant/.mypy_cache/
+
+# Raw portfolio documents are collected locally and must not be committed.
+# Keep processed corpus files, public/data artifacts, outputs, notebooks,
+# scripts, source code, tests, and documentation in Git.
+10-ai-portfolio-rag-assistant/data/raw_portfolio_docs/
+
+# Project 10 local Node / Next.js build artifacts
+10-ai-portfolio-rag-assistant/node_modules/
+10-ai-portfolio-rag-assistant/.next/
+
+# Project 10 secrets; keep only the public template
+10-ai-portfolio-rag-assistant/.env
+10-ai-portfolio-rag-assistant/.env.local
+10-ai-portfolio-rag-assistant/.env.production
+10-ai-portfolio-rag-assistant/.env.development
+!10-ai-portfolio-rag-assistant/.env.example

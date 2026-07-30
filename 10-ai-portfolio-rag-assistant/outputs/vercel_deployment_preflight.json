@@ -1,0 +1,32 @@
+{
+  "generated_at_utc": "2026-07-30T16:17:32.229871+00:00",
+  "status": "python_preflight_passed",
+  "local_node_validation": {
+    "performed": false,
+    "reason": "Node.js is intentionally not installed on the office computer."
+  },
+  "remote_validation_required": {
+    "github_actions": true,
+    "vercel_build": true
+  },
+  "application_files_present": 10,
+  "processed_files_present": 5,
+  "public_files_present": 4,
+  "evaluation_files_present": 5,
+  "vector_store": {
+    "chunk_count": 3157,
+    "embedding_count": 3157,
+    "embedding_dimension": 384,
+    "evaluation_question_count": 40
+  },
+  "api_routes": {
+    "chat": true,
+    "retrieve": true,
+    "health": true
+  },
+  "package_json": {
+    "build_script": "next build",
+    "next_version": "16.2.12",
+    "react_version": "19.2.8"
+  }
+}

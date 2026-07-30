@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "2.0",
+  "corpusName": "Anmol Tripathi public AI portfolio corpus",
+  "generatedAt": "2026-07-30T16:01:32.114635+00:00",
+  "documentCount": 220,
+  "chunkCount": 3157,
+  "coverageStatus": "complete",
+  "categories": [
+    "ANN",
+    "BiLSTM",
+    "CNN",
+    "LSTM",
+    "Simple RNN",
+    "Transformer"
+  ],
+  "deployments": [
+    "GitHub Pages",
+    "Gradio",
+    "Hugging Face",
+    "Not specified",
+    "Streamlit",
+    "TensorFlow.js",
+    "Vercel"
+  ],
+  "categoryDocumentCounts": {
+    "ANN": 40,
+    "BiLSTM": 23,
+    "CNN": 37,
+    "LSTM": 34,
+    "Simple RNN": 23,
+    "Transformer": 63
+  },
+  "deploymentDocumentCounts": {
+    "GitHub Pages": 19,
+    "Gradio": 4,
+    "Hugging Face": 49,
+    "Not specified": 44,
+    "Streamlit": 84,
+    "TensorFlow.js": 1,
+    "Vercel": 19
+  },
+  "sourceRepositories": [
+    "Simple RNN",
+    "ann-deep-learning-projects",
+    "bi-directional-lstm-projects",
+    "cnn-projects",
+    "lstm-projects",
+    "simple-rnn-projects",
+    "transformer-projects"
+  ],
+  "chunking": {
+    "strategy": "section-aware Markdown chunking",
+    "sizeWords": 220,
+    "overlapWords": 50
+  },
+  "embedding": {
+    "provider": "huggingface-feature-extraction",
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "dimension": 384,
+    "normalized": true,
+    "queryPrefix": "",
+    "passagePrefix": "",
+    "generatedAt": "2026-07-30T16:02:22.096891+00:00",
+    "documentEmbeddingsPrecomputed": true
+  },
+  "retrieval": {
+    "similarity": "cosine",
+    "defaultTopK": 5,
+    "hybridSemanticWeight": 0.78,
+    "hybridLexicalWeight": 0.22
+  },
+  "dataSafety": {
+    "publicDocumentsOnly": true,
+    "excluded": [
+      "private company files",
+      "emails",
+      "GCS data",
+      "proprietary documents",
+      "PII"
+    ]
+  },
+  "notes": [
+    "Every evaluation result must be regenerated after corpus changes.",
+    "Document embeddings and query embeddings must use the same model and normalization settings."
+  ]
+}

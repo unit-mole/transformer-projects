@@ -1,0 +1,10 @@
+{
+  "repositories": [
+    {"owner": "unit-mole", "repo": "ann-deep-learning-projects", "branch": "main", "category": "ANN"},
+    {"owner": "unit-mole", "repo": "simple-rnn-projects", "branch": "main", "category": "Simple RNN"},
+    {"owner": "unit-mole", "repo": "lstm-projects", "branch": "main", "category": "LSTM"},
+    {"owner": "unit-mole", "repo": "bi-directional-lstm-projects", "branch": "main", "category": "BiLSTM"},
+    {"owner": "unit-mole", "repo": "cnn-projects", "branch": "main", "category": "CNN"},
+    {"owner": "unit-mole", "repo": "transformer-projects", "branch": "main", "category": "Transformer"}
+  ]
+}

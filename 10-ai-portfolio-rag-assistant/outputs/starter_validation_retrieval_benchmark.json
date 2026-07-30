@@ -1,0 +1,5826 @@
+{
+  "status": "measured",
+  "question_count": 35,
+  "unsupported_question_count": 5,
+  "chunk_count": 23,
+  "k_values": [
+    1,
+    3,
+    5,
+    10
+  ],
+  "methods": [
+    {
+      "method": "tfidf-keyword",
+      "summary": {
+        "k=1": {
+          "hit_rate": 0.942857,
+          "precision": 0.942857,
+          "recall": 0.777143,
+          "mrr": 0.942857,
+          "map": 0.942857,
+          "ndcg": 0.942857
+        },
+        "k=3": {
+          "hit_rate": 1.0,
+          "precision": 0.409524,
+          "recall": 0.897143,
+          "mrr": 0.971429,
+          "map": 0.895238,
+          "ndcg": 0.921767
+        },
+        "k=5": {
+          "hit_rate": 1.0,
+          "precision": 0.285714,
+          "recall": 0.951905,
+          "mrr": 0.971429,
+          "map": 0.913016,
+          "ndcg": 0.940323
+        },
+        "k=10": {
+          "hit_rate": 1.0,
+          "precision": 0.157143,
+          "recall": 0.982857,
+          "mrr": 0.971429,
+          "map": 0.93254,
+          "ndcg": 0.956333
+        }
+      },
+      "latency_ms": {
+        "query_embedding_mean": 0.265,
+        "query_embedding_p95": 0.34,
+        "retrieval_mean": 0.11,
+        "retrieval_p95": 0.203
+      },
+      "details": [
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q01",
+          "k": 1,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q02",
+          "k": 1,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q03",
+          "k": 1,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q04",
+          "k": 1,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q05",
+          "k": 1,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q06",
+          "k": 1,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q07",
+          "k": 1,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q08",
+          "k": 1,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q09",
+          "k": 1,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q10",
+          "k": 1,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q11",
+          "k": 1,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q12",
+          "k": 1,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q13",
+          "k": 1,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q14",
+          "k": 1,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q15",
+          "k": 1,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q16",
+          "k": 1,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q17",
+          "k": 1,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q18",
+          "k": 1,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q19",
+          "k": 1,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q20",
+          "k": 1,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q21",
+          "k": 1,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.166667,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q22",
+          "k": 1,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.333333,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q23",
+          "k": 1,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q24",
+          "k": 1,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.333333,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q25",
+          "k": 1,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.333333,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q26",
+          "k": 1,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.25,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q27",
+          "k": 1,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.333333,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q28",
+          "k": 1,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.2,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q29",
+          "k": 1,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.25,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q30",
+          "k": 1,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q31",
+          "k": 1,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q32",
+          "k": 1,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q33",
+          "k": 1,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q34",
+          "k": 1,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q35",
+          "k": 1,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q01",
+          "k": 3,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q02",
+          "k": 3,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "02-neural-machine-translation-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q03",
+          "k": 3,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q04",
+          "k": 3,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q05",
+          "k": 3,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q06",
+          "k": 3,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q07",
+          "k": 3,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q08",
+          "k": 3,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q09",
+          "k": 3,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q10",
+          "k": 3,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q11",
+          "k": 3,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q12",
+          "k": 3,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "02-neural-machine-translation-transformer",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q13",
+          "k": 3,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "10-ai-portfolio-rag-assistant",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q14",
+          "k": 3,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q15",
+          "k": 3,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q16",
+          "k": 3,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q17",
+          "k": 3,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q18",
+          "k": 3,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q19",
+          "k": 3,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q20",
+          "k": 3,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "portfolio-corpus"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q21",
+          "k": 3,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.666667,
+          "recall": 0.333333,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.666667,
+          "ndcg": 0.765361
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q22",
+          "k": 3,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q23",
+          "k": 3,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q24",
+          "k": 3,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q25",
+          "k": 3,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "portfolio-corpus",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 0.333333,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.333333,
+          "ndcg": 0.469279
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q26",
+          "k": 3,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.666667,
+          "recall": 0.5,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.666667,
+          "ndcg": 0.765361
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q27",
+          "k": 3,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 0.333333,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.333333,
+          "ndcg": 0.469279
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q28",
+          "k": 3,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.666667,
+          "recall": 0.4,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.666667,
+          "ndcg": 0.765361
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q29",
+          "k": 3,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.666667,
+          "recall": 0.5,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.666667,
+          "ndcg": 0.765361
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q30",
+          "k": 3,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q31",
+          "k": 3,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q32",
+          "k": 3,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q33",
+          "k": 3,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q34",
+          "k": 3,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "portfolio-corpus"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q35",
+          "k": 3,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q01",
+          "k": 5,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q02",
+          "k": 5,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "02-neural-machine-translation-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q03",
+          "k": 5,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "06-multimodal-visual-question-answering-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q04",
+          "k": 5,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q05",
+          "k": 5,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm",
+            "06-multimodal-visual-question-answering-transformer",
+            "01-abstractive-text-summarization-transformer",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q06",
+          "k": 5,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q07",
+          "k": 5,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q08",
+          "k": 5,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q09",
+          "k": 5,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "08-image-classification-vision-transformer",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q10",
+          "k": 5,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "portfolio-corpus",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q11",
+          "k": 5,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q12",
+          "k": 5,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "02-neural-machine-translation-transformer",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "portfolio-corpus"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q13",
+          "k": 5,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "10-ai-portfolio-rag-assistant",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q14",
+          "k": 5,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q15",
+          "k": 5,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm",
+            "01-abstractive-text-summarization-transformer",
+            "portfolio-corpus",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q16",
+          "k": 5,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q17",
+          "k": 5,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "portfolio-corpus",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q18",
+          "k": 5,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "09-vision-language-image-text-retrieval-clip",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q19",
+          "k": 5,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q20",
+          "k": 5,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "portfolio-corpus",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q21",
+          "k": 5,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.8,
+          "recall": 0.666667,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.8,
+          "ndcg": 0.868795
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q22",
+          "k": 5,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.6,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q23",
+          "k": 5,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "09-vision-language-image-text-retrieval-clip",
+            "01-abstractive-text-summarization-transformer",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q24",
+          "k": 5,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.6,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q25",
+          "k": 5,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "portfolio-corpus",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.6,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.7,
+          "ndcg": 0.852928
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q26",
+          "k": 5,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "09-vision-language-image-text-retrieval-clip",
+            "portfolio-corpus"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.6,
+          "recall": 0.75,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.75,
+          "ndcg": 0.831872
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q27",
+          "k": 5,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.6,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.805556,
+          "ndcg": 0.906025
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q28",
+          "k": 5,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "10-ai-portfolio-rag-assistant",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.4,
+          "recall": 0.4,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.4,
+          "ndcg": 0.553146
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q29",
+          "k": 5,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "09-vision-language-image-text-retrieval-clip",
+            "portfolio-corpus",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.4,
+          "recall": 0.5,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.5,
+          "ndcg": 0.636682
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q30",
+          "k": 5,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q31",
+          "k": 5,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "01-abstractive-text-summarization-transformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q32",
+          "k": 5,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q33",
+          "k": 5,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q34",
+          "k": 5,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "portfolio-corpus",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q35",
+          "k": 5,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q01",
+          "k": 10,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q02",
+          "k": 10,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "02-neural-machine-translation-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "01-abstractive-text-summarization-transformer",
+            "10-ai-portfolio-rag-assistant",
+            "09-vision-language-image-text-retrieval-clip",
+            "05-instruction-tuned-domain-llm",
+            "portfolio-corpus",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q03",
+          "k": 10,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "06-multimodal-visual-question-answering-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q04",
+          "k": 10,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q05",
+          "k": 10,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm",
+            "06-multimodal-visual-question-answering-transformer",
+            "01-abstractive-text-summarization-transformer",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "02-neural-machine-translation-transformer",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q06",
+          "k": 10,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "10-ai-portfolio-rag-assistant",
+            "05-instruction-tuned-domain-llm",
+            "07-document-semantic-search-sentence-bert",
+            "04-long-document-question-answering-longformer",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q07",
+          "k": 10,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "04-long-document-question-answering-longformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "02-neural-machine-translation-transformer",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q08",
+          "k": 10,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "04-long-document-question-answering-longformer",
+            "portfolio-corpus",
+            "05-instruction-tuned-domain-llm",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q09",
+          "k": 10,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "08-image-classification-vision-transformer",
+            "01-abstractive-text-summarization-transformer",
+            "10-ai-portfolio-rag-assistant",
+            "06-multimodal-visual-question-answering-transformer",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q10",
+          "k": 10,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "portfolio-corpus",
+            "05-instruction-tuned-domain-llm",
+            "04-long-document-question-answering-longformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q11",
+          "k": 10,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant",
+            "portfolio-corpus",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q12",
+          "k": 10,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "02-neural-machine-translation-transformer",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "portfolio-corpus",
+            "09-vision-language-image-text-retrieval-clip",
+            "07-document-semantic-search-sentence-bert",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q13",
+          "k": 10,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "10-ai-portfolio-rag-assistant",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "05-instruction-tuned-domain-llm",
+            "portfolio-corpus",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q14",
+          "k": 10,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q15",
+          "k": 10,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm",
+            "01-abstractive-text-summarization-transformer",
+            "portfolio-corpus",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "06-multimodal-visual-question-answering-transformer",
+            "02-neural-machine-translation-transformer",
+            "10-ai-portfolio-rag-assistant",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q16",
+          "k": 10,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "05-instruction-tuned-domain-llm",
+            "02-neural-machine-translation-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q17",
+          "k": 10,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "portfolio-corpus",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "10-ai-portfolio-rag-assistant",
+            "04-long-document-question-answering-longformer",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q18",
+          "k": 10,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "09-vision-language-image-text-retrieval-clip",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q19",
+          "k": 10,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q20",
+          "k": 10,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "portfolio-corpus",
+            "08-image-classification-vision-transformer",
+            "01-abstractive-text-summarization-transformer",
+            "05-instruction-tuned-domain-llm",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q21",
+          "k": 10,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "05-instruction-tuned-domain-llm",
+            "04-long-document-question-answering-longformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "portfolio-corpus"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.6,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q22",
+          "k": 10,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "07-document-semantic-search-sentence-bert",
+            "10-ai-portfolio-rag-assistant",
+            "05-instruction-tuned-domain-llm",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.3,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q23",
+          "k": 10,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "09-vision-language-image-text-retrieval-clip",
+            "01-abstractive-text-summarization-transformer",
+            "05-instruction-tuned-domain-llm",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "06-multimodal-visual-question-answering-transformer",
+            "portfolio-corpus",
+            "04-long-document-question-answering-longformer",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q24",
+          "k": 10,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "10-ai-portfolio-rag-assistant",
+            "portfolio-corpus",
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.3,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q25",
+          "k": 10,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "portfolio-corpus",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.3,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.7,
+          "ndcg": 0.852928
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q26",
+          "k": 10,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "09-vision-language-image-text-retrieval-clip",
+            "portfolio-corpus",
+            "05-instruction-tuned-domain-llm",
+            "10-ai-portfolio-rag-assistant",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.4,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.916667,
+          "ndcg": 0.970929
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q27",
+          "k": 10,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "06-multimodal-visual-question-answering-transformer",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.3,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.805556,
+          "ndcg": 0.906025
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q28",
+          "k": 10,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "10-ai-portfolio-rag-assistant",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 0.4,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.4,
+          "ndcg": 0.553146
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q29",
+          "k": 10,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "09-vision-language-image-text-retrieval-clip",
+            "portfolio-corpus",
+            "05-instruction-tuned-domain-llm",
+            "07-document-semantic-search-sentence-bert",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.4,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.816667,
+          "ndcg": 0.926758
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q30",
+          "k": 10,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "02-neural-machine-translation-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q31",
+          "k": 10,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "01-abstractive-text-summarization-transformer",
+            "10-ai-portfolio-rag-assistant",
+            "02-neural-machine-translation-transformer",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "05-instruction-tuned-domain-llm",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q32",
+          "k": 10,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "05-instruction-tuned-domain-llm",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q33",
+          "k": 10,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "05-instruction-tuned-domain-llm",
+            "02-neural-machine-translation-transformer",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q34",
+          "k": 10,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "portfolio-corpus",
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "05-instruction-tuned-domain-llm",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "tfidf-keyword",
+          "question_id": "q35",
+          "k": 10,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "08-image-classification-vision-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "05-instruction-tuned-domain-llm",
+            "portfolio-corpus",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        }
+      ]
+    },
+    {
+      "method": "hash-vector",
+      "summary": {
+        "k=1": {
+          "hit_rate": 0.685714,
+          "precision": 0.685714,
+          "recall": 0.561905,
+          "mrr": 0.685714,
+          "map": 0.685714,
+          "ndcg": 0.685714
+        },
+        "k=3": {
+          "hit_rate": 0.942857,
+          "precision": 0.390476,
+          "recall": 0.832857,
+          "mrr": 0.814286,
+          "map": 0.753968,
+          "ndcg": 0.800248
+        },
+        "k=5": {
+          "hit_rate": 0.971429,
+          "precision": 0.257143,
+          "recall": 0.885238,
+          "mrr": 0.82,
+          "map": 0.750952,
+          "ndcg": 0.806758
+        },
+        "k=10": {
+          "hit_rate": 1.0,
+          "precision": 0.148571,
+          "recall": 0.956667,
+          "mrr": 0.823571,
+          "map": 0.776542,
+          "ndcg": 0.837105
+        }
+      },
+      "latency_ms": {
+        "query_embedding_mean": 0.021,
+        "query_embedding_p95": 0.033,
+        "retrieval_mean": 0.005,
+        "retrieval_p95": 0.006
+      },
+      "details": [
+        {
+          "method": "hash-vector",
+          "question_id": "q01",
+          "k": 1,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q02",
+          "k": 1,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q03",
+          "k": 1,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q04",
+          "k": 1,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q05",
+          "k": 1,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q06",
+          "k": 1,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q07",
+          "k": 1,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q08",
+          "k": 1,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q09",
+          "k": 1,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q10",
+          "k": 1,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q11",
+          "k": 1,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q12",
+          "k": 1,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q13",
+          "k": 1,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q14",
+          "k": 1,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q15",
+          "k": 1,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q16",
+          "k": 1,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q17",
+          "k": 1,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q18",
+          "k": 1,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q19",
+          "k": 1,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q20",
+          "k": 1,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q21",
+          "k": 1,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.166667,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q22",
+          "k": 1,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.333333,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q23",
+          "k": 1,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q24",
+          "k": 1,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.333333,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q25",
+          "k": 1,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q26",
+          "k": 1,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.25,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q27",
+          "k": 1,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.333333,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q28",
+          "k": 1,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q29",
+          "k": 1,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.25,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q30",
+          "k": 1,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q31",
+          "k": 1,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q32",
+          "k": 1,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q33",
+          "k": 1,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q34",
+          "k": 1,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q35",
+          "k": 1,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q01",
+          "k": 3,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q02",
+          "k": 3,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q03",
+          "k": 3,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "06-multimodal-visual-question-answering-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q04",
+          "k": 3,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q05",
+          "k": 3,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q06",
+          "k": 3,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q07",
+          "k": 3,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q08",
+          "k": 3,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q09",
+          "k": 3,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q10",
+          "k": 3,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q11",
+          "k": 3,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q12",
+          "k": 3,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q13",
+          "k": 3,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q14",
+          "k": 3,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer",
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q15",
+          "k": 3,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q16",
+          "k": 3,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q17",
+          "k": 3,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q18",
+          "k": 3,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q19",
+          "k": 3,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q20",
+          "k": 3,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q21",
+          "k": 3,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.5,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q22",
+          "k": 3,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.666667,
+          "recall": 0.666667,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.666667,
+          "ndcg": 0.765361
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q23",
+          "k": 3,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q24",
+          "k": 3,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "08-image-classification-vision-transformer",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.666667,
+          "recall": 0.666667,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.666667,
+          "ndcg": 0.765361
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q25",
+          "k": 3,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm",
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 0.333333,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.166667,
+          "ndcg": 0.296082
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q26",
+          "k": 3,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 1.0,
+          "recall": 0.75,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q27",
+          "k": 3,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "portfolio-corpus",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 0.333333,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.333333,
+          "ndcg": 0.469279
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q28",
+          "k": 3,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "01-abstractive-text-summarization-transformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.666667,
+          "recall": 0.4,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.388889,
+          "ndcg": 0.530721
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q29",
+          "k": 3,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "09-vision-language-image-text-retrieval-clip",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.666667,
+          "recall": 0.5,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.666667,
+          "ndcg": 0.765361
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q30",
+          "k": 3,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q31",
+          "k": 3,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "portfolio-corpus"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q32",
+          "k": 3,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q33",
+          "k": 3,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "10-ai-portfolio-rag-assistant",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q34",
+          "k": 3,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "portfolio-corpus",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q35",
+          "k": 3,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "06-multimodal-visual-question-answering-transformer",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.333333,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q01",
+          "k": 5,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q02",
+          "k": 5,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q03",
+          "k": 5,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "06-multimodal-visual-question-answering-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q04",
+          "k": 5,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "04-long-document-question-answering-longformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q05",
+          "k": 5,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q06",
+          "k": 5,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "04-long-document-question-answering-longformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q07",
+          "k": 5,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q08",
+          "k": 5,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer",
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q09",
+          "k": 5,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "01-abstractive-text-summarization-transformer",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q10",
+          "k": 5,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "08-image-classification-vision-transformer",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q11",
+          "k": 5,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q12",
+          "k": 5,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q13",
+          "k": 5,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "reciprocal_rank": 0.0,
+          "average_precision": 0.0,
+          "ndcg": 0.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q14",
+          "k": 5,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer",
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "portfolio-corpus"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q15",
+          "k": 5,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm",
+            "10-ai-portfolio-rag-assistant",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q16",
+          "k": 5,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q17",
+          "k": 5,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant",
+            "05-instruction-tuned-domain-llm",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q18",
+          "k": 5,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q19",
+          "k": 5,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q20",
+          "k": 5,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q21",
+          "k": 5,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.8,
+          "recall": 0.666667,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.8,
+          "ndcg": 0.868795
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q22",
+          "k": 5,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.6,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q23",
+          "k": 5,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant",
+            "05-instruction-tuned-domain-llm",
+            "portfolio-corpus"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q24",
+          "k": 5,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "08-image-classification-vision-transformer",
+            "05-instruction-tuned-domain-llm",
+            "02-neural-machine-translation-transformer",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.4,
+          "recall": 0.666667,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.666667,
+          "ndcg": 0.765361
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q25",
+          "k": 5,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm",
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 0.333333,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.166667,
+          "ndcg": 0.296082
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q26",
+          "k": 5,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "09-vision-language-image-text-retrieval-clip",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.6,
+          "recall": 0.75,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.75,
+          "ndcg": 0.831872
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q27",
+          "k": 5,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "portfolio-corpus",
+            "10-ai-portfolio-rag-assistant",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.4,
+          "recall": 0.666667,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.466667,
+          "ndcg": 0.650821
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q28",
+          "k": 5,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "01-abstractive-text-summarization-transformer",
+            "10-ai-portfolio-rag-assistant",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.4,
+          "recall": 0.4,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.233333,
+          "ndcg": 0.383566
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q29",
+          "k": 5,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "09-vision-language-image-text-retrieval-clip",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.4,
+          "recall": 0.5,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.5,
+          "ndcg": 0.636682
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q30",
+          "k": 5,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 0.2,
+          "average_precision": 0.2,
+          "ndcg": 0.386853
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q31",
+          "k": 5,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "portfolio-corpus",
+            "02-neural-machine-translation-transformer",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q32",
+          "k": 5,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "10-ai-portfolio-rag-assistant",
+            "02-neural-machine-translation-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q33",
+          "k": 5,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "10-ai-portfolio-rag-assistant",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q34",
+          "k": 5,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "portfolio-corpus",
+            "08-image-classification-vision-transformer",
+            "05-instruction-tuned-domain-llm",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q35",
+          "k": 5,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "06-multimodal-visual-question-answering-transformer",
+            "05-instruction-tuned-domain-llm",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q01",
+          "k": 10,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant",
+            "05-instruction-tuned-domain-llm",
+            "02-neural-machine-translation-transformer",
+            "08-image-classification-vision-transformer",
+            "04-long-document-question-answering-longformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q02",
+          "k": 10,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "05-instruction-tuned-domain-llm",
+            "04-long-document-question-answering-longformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q03",
+          "k": 10,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "06-multimodal-visual-question-answering-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "01-abstractive-text-summarization-transformer",
+            "08-image-classification-vision-transformer",
+            "05-instruction-tuned-domain-llm",
+            "02-neural-machine-translation-transformer",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q04",
+          "k": 10,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "04-long-document-question-answering-longformer",
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "05-instruction-tuned-domain-llm",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q05",
+          "k": 10,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "portfolio-corpus",
+            "09-vision-language-image-text-retrieval-clip",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q06",
+          "k": 10,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "04-long-document-question-answering-longformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant",
+            "02-neural-machine-translation-transformer",
+            "portfolio-corpus",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q07",
+          "k": 10,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q08",
+          "k": 10,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer",
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "07-document-semantic-search-sentence-bert",
+            "04-long-document-question-answering-longformer",
+            "portfolio-corpus",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q09",
+          "k": 10,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "01-abstractive-text-summarization-transformer",
+            "08-image-classification-vision-transformer",
+            "05-instruction-tuned-domain-llm",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q10",
+          "k": 10,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "08-image-classification-vision-transformer",
+            "05-instruction-tuned-domain-llm",
+            "02-neural-machine-translation-transformer",
+            "04-long-document-question-answering-longformer",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q11",
+          "k": 10,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "portfolio-corpus",
+            "02-neural-machine-translation-transformer",
+            "05-instruction-tuned-domain-llm",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q12",
+          "k": 10,
+          "relevant_ids": [
+            "02-neural-machine-translation-transformer"
+          ],
+          "retrieved_ids": [
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer",
+            "01-abstractive-text-summarization-transformer",
+            "portfolio-corpus",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q13",
+          "k": 10,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "01-abstractive-text-summarization-transformer",
+            "05-instruction-tuned-domain-llm",
+            "portfolio-corpus",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 0.125,
+          "average_precision": 0.125,
+          "ndcg": 0.315465
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q14",
+          "k": 10,
+          "relevant_ids": [
+            "04-long-document-question-answering-longformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer",
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "portfolio-corpus",
+            "05-instruction-tuned-domain-llm",
+            "06-multimodal-visual-question-answering-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q15",
+          "k": 10,
+          "relevant_ids": [
+            "05-instruction-tuned-domain-llm"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm",
+            "10-ai-portfolio-rag-assistant",
+            "02-neural-machine-translation-transformer",
+            "08-image-classification-vision-transformer",
+            "04-long-document-question-answering-longformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q16",
+          "k": 10,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "01-abstractive-text-summarization-transformer",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q17",
+          "k": 10,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant",
+            "05-instruction-tuned-domain-llm",
+            "04-long-document-question-answering-longformer",
+            "portfolio-corpus",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q18",
+          "k": 10,
+          "relevant_ids": [
+            "08-image-classification-vision-transformer"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "05-instruction-tuned-domain-llm",
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q19",
+          "k": 10,
+          "relevant_ids": [
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "05-instruction-tuned-domain-llm",
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q20",
+          "k": 10,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "01-abstractive-text-summarization-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "05-instruction-tuned-domain-llm",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q21",
+          "k": 10,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "retrieved_ids": [
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.6,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q22",
+          "k": 10,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "05-instruction-tuned-domain-llm",
+            "02-neural-machine-translation-transformer",
+            "portfolio-corpus",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.3,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q23",
+          "k": 10,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant",
+            "05-instruction-tuned-domain-llm",
+            "portfolio-corpus",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "01-abstractive-text-summarization-transformer",
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q24",
+          "k": 10,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "08-image-classification-vision-transformer",
+            "05-instruction-tuned-domain-llm",
+            "02-neural-machine-translation-transformer",
+            "04-long-document-question-answering-longformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "01-abstractive-text-summarization-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.3,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.833333,
+          "ndcg": 0.932521
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q25",
+          "k": 10,
+          "relevant_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "05-instruction-tuned-domain-llm",
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "04-long-document-question-answering-longformer",
+            "10-ai-portfolio-rag-assistant",
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 0.666667,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.277778,
+          "ndcg": 0.463242
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q26",
+          "k": 10,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "07-document-semantic-search-sentence-bert",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "09-vision-language-image-text-retrieval-clip",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer",
+            "portfolio-corpus",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.4,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.892857,
+          "ndcg": 0.961999
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q27",
+          "k": 10,
+          "relevant_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "09-vision-language-image-text-retrieval-clip"
+          ],
+          "retrieved_ids": [
+            "08-image-classification-vision-transformer",
+            "portfolio-corpus",
+            "10-ai-portfolio-rag-assistant",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "01-abstractive-text-summarization-transformer",
+            "05-instruction-tuned-domain-llm"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 0.666667,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.466667,
+          "ndcg": 0.650821
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q28",
+          "k": 10,
+          "relevant_ids": [
+            "01-abstractive-text-summarization-transformer",
+            "02-neural-machine-translation-transformer",
+            "04-long-document-question-answering-longformer",
+            "05-instruction-tuned-domain-llm",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "01-abstractive-text-summarization-transformer",
+            "10-ai-portfolio-rag-assistant",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.2,
+          "recall": 0.4,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.233333,
+          "ndcg": 0.383566
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q29",
+          "k": 10,
+          "relevant_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "07-document-semantic-search-sentence-bert",
+            "09-vision-language-image-text-retrieval-clip",
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "09-vision-language-image-text-retrieval-clip",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.3,
+          "recall": 0.75,
+          "reciprocal_rank": 1.0,
+          "average_precision": 0.65,
+          "ndcg": 0.787702
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q30",
+          "k": 10,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "06-multimodal-visual-question-answering-transformer",
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer",
+            "07-document-semantic-search-sentence-bert",
+            "10-ai-portfolio-rag-assistant",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 0.2,
+          "average_precision": 0.2,
+          "ndcg": 0.386853
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q31",
+          "k": 10,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "portfolio-corpus",
+            "02-neural-machine-translation-transformer",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer",
+            "04-long-document-question-answering-longformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "01-abstractive-text-summarization-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q32",
+          "k": 10,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "10-ai-portfolio-rag-assistant",
+            "02-neural-machine-translation-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer",
+            "05-instruction-tuned-domain-llm",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q33",
+          "k": 10,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "portfolio-corpus",
+            "10-ai-portfolio-rag-assistant",
+            "05-instruction-tuned-domain-llm",
+            "08-image-classification-vision-transformer",
+            "02-neural-machine-translation-transformer",
+            "04-long-document-question-answering-longformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q34",
+          "k": 10,
+          "relevant_ids": [
+            "portfolio-corpus"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "portfolio-corpus",
+            "08-image-classification-vision-transformer",
+            "05-instruction-tuned-domain-llm",
+            "02-neural-machine-translation-transformer",
+            "06-multimodal-visual-question-answering-transformer",
+            "04-long-document-question-answering-longformer",
+            "03-cross-encoder-bi-encoder-ranking-system",
+            "01-abstractive-text-summarization-transformer",
+            "07-document-semantic-search-sentence-bert"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 0.5,
+          "average_precision": 0.5,
+          "ndcg": 0.63093
+        },
+        {
+          "method": "hash-vector",
+          "question_id": "q35",
+          "k": 10,
+          "relevant_ids": [
+            "10-ai-portfolio-rag-assistant"
+          ],
+          "retrieved_ids": [
+            "10-ai-portfolio-rag-assistant",
+            "06-multimodal-visual-question-answering-transformer",
+            "05-instruction-tuned-domain-llm",
+            "04-long-document-question-answering-longformer",
+            "01-abstractive-text-summarization-transformer",
+            "09-vision-language-image-text-retrieval-clip",
+            "08-image-classification-vision-transformer"
+          ],
+          "hit_rate": 1.0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "reciprocal_rank": 1.0,
+          "average_precision": 1.0,
+          "ndcg": 1.0
+        }
+      ]
+    }
+  ],
+  "metric_definitions": {
+    "hit_rate": "Fraction of questions with at least one relevant project in top K.",
+    "precision": "Mean fraction of the K retrieved projects that are relevant.",
+    "recall": "Mean fraction of all expected relevant projects retrieved in top K.",
+    "mrr": "Mean reciprocal rank of the first relevant project.",
+    "map": "Mean average precision at K.",
+    "ndcg": "Mean normalized discounted cumulative gain at K."
+  }
+}
