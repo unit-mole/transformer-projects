@@ -1,0 +1,46 @@
+{
+  "version": "3.0",
+  "default_reuse_teacher_records": false,
+  "min_output_words": 28,
+  "max_output_words": 260,
+  "benchmark_similarity_threshold": 0.88,
+  "near_duplicate_threshold": 0.92,
+  "required_structured_terms_for_concept": [
+    "example",
+    "caveat"
+  ],
+  "circular_patterns": [
+    "\\b([a-z][a-z\\- ]{2,30})\\s+is\\s+(?:a|an|the)\\s+\\1\\b",
+    "\\b([a-z][a-z\\- ]{2,30})\\s+are\\s+(?:a|an|the|a set of)\\s+\\1\\b"
+  ],
+  "weak_phrases": [
+    "classification is a classification",
+    "regression is not a linear regression",
+    "outliers are a set of outliers",
+    "a model is a model",
+    "learns a large number of data points at a time",
+    "can only learn data from a single set of data",
+    "manufacturing or process-quality setting would be a good example"
+  ],
+  "trusted_source_markers": [
+    "self-authored",
+    "curated-v3",
+    "expert-curated"
+  ],
+  "weak_topics_from_experiment_1": [
+    "supervised learning",
+    "classification",
+    "regression",
+    "data leakage",
+    "outliers",
+    "standardization",
+    "Transformer",
+    "attention",
+    "LoRA",
+    "parameter-efficient fine-tuning",
+    "precision",
+    "recall",
+    "F1-score",
+    "quality analytics"
+  ]
+}

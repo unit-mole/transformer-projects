@@ -1,0 +1,77 @@
+[
+  {
+    "topic": "quality classification workflow",
+    "instruction": "Outline a leakage-safe workflow for building a quality classification model from historical inspection data.",
+    "output": "1. Define the prediction time, positive class, and decision supported by the model. 2. Audit labels, repeated units, customers, lots, and time fields. 3. Create a group-aware or temporal train-validation-test design. 4. Put imputation, encoding, scaling, and feature selection inside a pipeline. 5. Compare an interpretable baseline with stronger models. 6. Evaluate precision, recall, F1, calibration, subgroup performance, and error cases. 7. Document limitations, obtain domain review, and monitor input and outcome drift after deployment."
+  },
+  {
+    "topic": "quality regression workflow",
+    "instruction": "Describe an end-to-end workflow for predicting a continuous quality measurement.",
+    "output": "Start by defining the measurement, prediction horizon, and acceptable error. Validate units, measurement-system changes, missingness, and outliers. Split data according to time or groups, build preprocessing inside a pipeline, and compare a mean baseline, linear model, and nonlinear model. Report MAE, RMSE, R-squared, residual plots, and subgroup errors. Review the largest misses with subject-matter experts before release and monitor both feature drift and delayed actual measurements."
+  },
+  {
+    "topic": "rare defect model",
+    "instruction": "Give a practical modeling plan for a rare-defect classification problem.",
+    "output": "Use a representative test set with the real defect prevalence. Create grouped or temporal splits before resampling. Compare class-weighted models and, when justified, training-only resampling. Evaluate precision-recall curves, recall at an acceptable precision, confusion matrices, calibration, and review workload. Inspect false negatives with engineers because missing true defects may be more costly than a modest reduction in overall accuracy."
+  },
+  {
+    "topic": "model selection",
+    "instruction": "Explain how to choose between a simple baseline and a more complex model for a portfolio project.",
+    "output": "Begin with a transparent baseline that establishes whether useful signal exists. Compare the complex model using the same leakage-safe folds, metrics, and preprocessing. Prefer the more complex model only when the gain is repeatable, practically important, and worth its latency, maintenance, and explainability cost. Show both results in the portfolio and explain the decision rather than presenting complexity as an achievement by itself."
+  },
+  {
+    "topic": "error analysis",
+    "instruction": "Provide a structured error-analysis process for an ML model.",
+    "output": "Create a table containing the prompt or record, true outcome, prediction, confidence, subgroup, and error type. Review high-confidence mistakes, severe business errors, rare classes, and examples from each category. Look for label problems, leakage, missing features, distribution shifts, and threshold issues. Convert recurring failure patterns into dataset fixes or modeling hypotheses, then confirm improvements on unchanged validation and test sets."
+  },
+  {
+    "topic": "LLM factual review",
+    "instruction": "Outline a human factual-review workflow for an educational language model.",
+    "output": "Use a held-out prompt set with reference answers and clear scoring rubrics. Review all high-risk or low-scoring responses, all code outputs, advanced questions, and a stratified sample from each category. Score factuality, relevance, clarity, instruction following, and hallucination. Record the preferred model and reviewer notes. Do not promote the adapter until severe errors are addressed and the improved run is evaluated on the same untouched benchmark."
+  },
+  {
+    "topic": "dataset curation",
+    "instruction": "Describe how to curate an instruction-tuning dataset for an ML learning assistant.",
+    "output": "Define the supported topics and answer format first. Use self-authored or permitted content, require technically reviewed outputs, and remove private or copyrighted text. Check empty fields, duplicates, circular definitions, unsupported claims, repetitive phrasing, benchmark overlap, and category imbalance. Keep the benchmark separate from training. Save a quality report, review samples manually, version the dataset, and link every training run to an immutable dataset file."
+  },
+  {
+    "topic": "deployment readiness",
+    "instruction": "Create a checklist for deciding whether a LoRA assistant is ready for Hugging Face deployment.",
+    "output": "Confirm that the adapter and tokenizer load against the intended base model; the app reports adapter mode rather than fallback; deterministic sample prompts work; latency and memory fit the Space; automated metrics and human review are complete; severe hallucinations are addressed; model and dataset cards disclose limitations; no private data are included; and the release manifest identifies the exact adapter, dataset, code version, and evaluation results."
+  },
+  {
+    "topic": "monitoring plan",
+    "instruction": "Propose a monitoring plan for a deployed ML and Data Science learning assistant.",
+    "output": "Track request volume, latency, failures, input length, topic distribution, refusal rate, and sampled response quality. Maintain a reviewed set of recurring prompts and rerun it after model or dependency changes. Collect user feedback without storing sensitive prompts, monitor emerging unsupported topics, and define rollback criteria. Periodically review factuality and hallucination examples because infrastructure health alone does not measure educational quality."
+  },
+  {
+    "topic": "experiment comparison",
+    "instruction": "Explain how to compare two LoRA experiments fairly.",
+    "output": "Use the same base model, tokenizer, prompt template, decoding settings, and held-out benchmark. Record dataset versions and training configurations. Compare per-example responses, automated metrics, latency, hallucination flags, and human preferences. Report confidence intervals and category-level results. Promote the new experiment only if its gains are meaningful and it does not introduce severe regressions in important categories."
+  },
+  {
+    "topic": "reproducible portfolio experiment",
+    "instruction": "List the artifacts that make a model-training experiment reproducible and recruiter-friendly.",
+    "output": "Save the immutable dataset, split counts, validation report, training configuration, random seed, package versions, GPU details, training logs, curve, adapter weights, tokenizer reference, model metadata, evaluation manifest, per-example comparison, completed human review, release decision, and checksums. Add a short experiment card explaining what changed, what improved, what failed, and why the next decision was made."
+  },
+  {
+    "topic": "data privacy",
+    "instruction": "Explain safe data practices for a public ML portfolio assistant.",
+    "output": "Use self-authored, synthetic, or clearly permitted public examples. Remove names, email addresses, customer identifiers, internal reports, proprietary processes, and confidential metrics. Keep private data out of Git, model repositories, notebooks, and public demos. Add automated checks for common identifiers, document data sources and limitations, and remind users not to paste sensitive information into the deployed app."
+  },
+  {
+    "topic": "benchmark design",
+    "instruction": "Describe how to design a held-out benchmark for an educational ML assistant.",
+    "output": "Cover the supported topics, task types, difficulty levels, code questions, quality scenarios, and known failure modes. Write reference answers independently from the training prompts. Keep the benchmark immutable and excluded from dataset generation. Evaluate every experiment with identical prompts and decoding settings. Store per-example outputs so human reviewers can inspect improvements and regressions rather than relying only on averages."
+  },
+  {
+    "topic": "second experiment decision",
+    "instruction": "Explain why a second experiment should improve data quality rather than only increasing training epochs.",
+    "output": "If the first adapter produces fluent but incorrect or circular answers, more epochs can reinforce the same weak targets. The next experiment should remove low-quality records, add reviewed anchor answers, balance weak topics, and preserve the benchmark. Training settings can be refined, but the central hypothesis should be that higher-quality supervision improves factuality and instruction following."
+  },
+  {
+    "topic": "release gate",
+    "instruction": "Define a responsible release gate for a portfolio language model.",
+    "output": "Require a completed dataset review, successful training artifacts, an unchanged held-out benchmark, automated comparison, completed human review, no unresolved severe factual errors, acceptable latency, and a documented release decision. Promotion should be a separate explicit action that copies only the approved adapter and reviewed metrics into deployment folders. Failed experiments remain archived as evidence and are never silently presented as final."
+  }
+]

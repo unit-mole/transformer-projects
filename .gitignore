@@ -73,3 +73,24 @@ Thumbs.db
 10-ai-portfolio-rag-assistant/.env.production
 10-ai-portfolio-rag-assistant/.env.development
 !10-ai-portfolio-rag-assistant/.env.example
+
+
+# Project 05 — local environment and caches
+05-instruction-tuned-domain-llm/.venv/
+05-instruction-tuned-domain-llm/**/__pycache__/
+05-instruction-tuned-domain-llm/**/*.pyc
+05-instruction-tuned-domain-llm/**/.ipynb_checkpoints/
+05-instruction-tuned-domain-llm/.env
+05-instruction-tuned-domain-llm/.streamlit/secrets.toml
+
+# Training checkpoints and model weights
+05-instruction-tuned-domain-llm/**/checkpoint-*/
+05-instruction-tuned-domain-llm/**/*.safetensors
+05-instruction-tuned-domain-llm/**/*.bin
+05-instruction-tuned-domain-llm/**/*.pt
+05-instruction-tuned-domain-llm/**/*.pth
+
+# Temporary files
+05-instruction-tuned-domain-llm/**/wandb/
+05-instruction-tuned-domain-llm/**/runs/
+Thumbs.db

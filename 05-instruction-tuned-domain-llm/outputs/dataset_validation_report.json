@@ -1,0 +1,12 @@
+{
+  "total_records": 93,
+  "valid_records": 93,
+  "removed_records": 0,
+  "empty_instructions": 0,
+  "empty_outputs": 0,
+  "duplicate_instructions": 0,
+  "too_short_outputs": 0,
+  "too_long_outputs": 0,
+  "possible_pii": 0,
+  "confidential_references": 0
+}

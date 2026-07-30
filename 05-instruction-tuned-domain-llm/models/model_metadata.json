@@ -1,0 +1,55 @@
+{
+  "status": "not_trained_run_full_notebook",
+  "model": {
+    "base_model_id": "google/flan-t5-base",
+    "adapter_id": "",
+    "local_adapter_path": "models/lora_adapter",
+    "max_input_length": 512,
+    "max_target_length": 256,
+    "device": "auto",
+    "torch_dtype": "auto",
+    "trust_remote_code": false
+  },
+  "generation": {
+    "max_new_tokens": 220,
+    "temperature": 0.2,
+    "top_p": 0.9,
+    "repetition_penalty": 1.12,
+    "do_sample": false,
+    "num_beams": 4,
+    "no_repeat_ngram_size": 3
+  },
+  "lora_training": {
+    "r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "target_modules": [
+      "q",
+      "v"
+    ],
+    "learning_rate": 0.0001,
+    "num_train_epochs": 6.0,
+    "lr_scheduler_type": "cosine",
+    "label_smoothing_factor": 0.05,
+    "early_stopping_patience": 2,
+    "precision": "hardware_auto_bf16_or_fp16"
+  },
+  "dataset": {
+    "seed_examples": 93,
+    "target_examples": 600,
+    "held_out_benchmark_examples": 80
+  },
+  "evaluation": [
+    "instruction_adherence",
+    "quality_rubric",
+    "BERTScore",
+    "ROUGE-L",
+    "semantic_similarity",
+    "latency",
+    "hallucination_review",
+    "bootstrap_confidence_intervals"
+  ],
+  "task": "ML and Data Science educational instruction following",
+  "fine_tuning_method": "LoRA through Hugging Face PEFT",
+  "note": "This placeholder is replaced by reviewed experiment metadata after training and promotion."
+}

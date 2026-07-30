@@ -1,0 +1,322 @@
+[
+  {
+    "topic": "supervised learning",
+    "compare_to": "unsupervised learning",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "unsupervised learning",
+    "compare_to": "supervised learning",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "semi-supervised learning",
+    "compare_to": "supervised learning",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "self-supervised learning",
+    "compare_to": "supervised learning",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "classification",
+    "compare_to": "regression",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "regression",
+    "compare_to": "classification",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "clustering",
+    "compare_to": "classification",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "anomaly detection",
+    "compare_to": "classification",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "data leakage",
+    "compare_to": "overfitting",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "class imbalance",
+    "compare_to": "",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "feature engineering",
+    "compare_to": "feature selection",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "feature selection",
+    "compare_to": "feature engineering",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "missing-value handling",
+    "compare_to": "",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "outlier handling",
+    "compare_to": "anomaly detection",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "standardization",
+    "compare_to": "normalization",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "categorical encoding",
+    "compare_to": "",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "linear regression",
+    "compare_to": "logistic regression",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "logistic regression",
+    "compare_to": "decision tree",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "decision tree",
+    "compare_to": "random forest",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "random forest",
+    "compare_to": "gradient boosting",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "gradient boosting",
+    "compare_to": "random forest",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "support vector machine",
+    "compare_to": "logistic regression",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "k-nearest neighbors",
+    "compare_to": "support vector machine",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "naive Bayes",
+    "compare_to": "logistic regression",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "k-means clustering",
+    "compare_to": "hierarchical clustering",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "hierarchical clustering",
+    "compare_to": "k-means clustering",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "principal component analysis",
+    "compare_to": "feature selection",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "t-SNE and UMAP",
+    "compare_to": "principal component analysis",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "confusion matrix",
+    "compare_to": "",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "precision",
+    "compare_to": "recall",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "recall",
+    "compare_to": "precision",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "F1-score",
+    "compare_to": "accuracy",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "specificity",
+    "compare_to": "recall",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "ROC-AUC",
+    "compare_to": "PR-AUC",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "PR-AUC",
+    "compare_to": "ROC-AUC",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "calibration",
+    "compare_to": "discrimination",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "threshold tuning",
+    "compare_to": "default 0.5 threshold",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "cross-validation",
+    "compare_to": "holdout validation",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "time-series validation",
+    "compare_to": "random cross-validation",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "grouped validation",
+    "compare_to": "random cross-validation",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "MAE",
+    "compare_to": "RMSE",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "RMSE",
+    "compare_to": "MAE",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "R-squared",
+    "compare_to": "MAE",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "error analysis",
+    "compare_to": "single aggregate metric",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "overfitting",
+    "compare_to": "underfitting",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "regularization",
+    "compare_to": "early stopping",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "bias-variance trade-off",
+    "compare_to": "",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "hyperparameter tuning",
+    "compare_to": "model selection",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "neural networks",
+    "compare_to": "tree ensembles",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "backpropagation",
+    "compare_to": "gradient descent",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "activation functions",
+    "compare_to": "",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "dropout",
+    "compare_to": "L2 regularization",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "batch normalization",
+    "compare_to": "layer normalization",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "CNN",
+    "compare_to": "Vision Transformer",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "RNN",
+    "compare_to": "Transformer",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "LSTM",
+    "compare_to": "GRU",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "attention mechanism",
+    "compare_to": "recurrence",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "Transformer architecture",
+    "compare_to": "LSTM",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "tokenization",
+    "compare_to": "word embeddings",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "sequence-to-sequence learning",
+    "compare_to": "causal language modeling",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "instruction tuning",
+    "compare_to": "prompt engineering",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "LoRA and PEFT",
+    "compare_to": "full fine-tuning",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "retrieval-augmented generation",
+    "compare_to": "fine-tuning",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  },
+  {
+    "topic": "LLM hallucination evaluation",
+    "compare_to": "semantic similarity evaluation",
+    "context": "educational ML/Data Science with optional non-confidential quality analytics examples"
+  }
+]

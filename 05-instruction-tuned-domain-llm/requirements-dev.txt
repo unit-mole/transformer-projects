@@ -1,0 +1,4 @@
+-r requirements-training.txt
+pytest>=8.0,<10.0
+ruff>=0.6,<1.0
+nbformat>=5.10,<6.0

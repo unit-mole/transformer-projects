@@ -1,0 +1,1 @@
+id,prompt,input,category,reference_answer,generated_answer,adherence_score,relevance_score,hallucination_flag,hallucination_severity,latency_seconds,model_mode,reviewer_notes

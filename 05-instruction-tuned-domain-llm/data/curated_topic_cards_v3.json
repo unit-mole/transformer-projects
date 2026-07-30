@@ -1,0 +1,442 @@
+[
+  {
+    "topic": "supervised learning",
+    "definition": "Supervised learning learns a mapping from input features to known target labels or values using labeled examples.",
+    "intuition": "The model studies past cases where both the inputs and correct outcomes are available, then predicts outcomes for new cases.",
+    "example": "A classifier can learn from inspection records labeled defect and non-defect, while a regressor can predict a continuous measurement such as cycle time.",
+    "caveat": "Performance depends on representative data and trustworthy labels, and the evaluation split must prevent leakage from repeated units, customers, or time periods.",
+    "quality_example": "Train a defect-risk classifier on historical inspection features and evaluate it on a later production period that was not used during training."
+  },
+  {
+    "topic": "unsupervised learning",
+    "definition": "Unsupervised learning finds structure in data without using a labeled target variable.",
+    "intuition": "Instead of being told the correct answer, the algorithm groups, compresses, or summarizes observations according to patterns in their features.",
+    "example": "Clustering can group products with similar failure signatures, and principal component analysis can reduce many correlated measurements to a smaller set of components.",
+    "caveat": "Discovered groups are not automatically meaningful; domain experts must validate whether the structure supports a real decision.",
+    "quality_example": "Cluster non-confidential sensor summaries to identify recurring process profiles, then ask engineers whether the clusters correspond to known operating conditions."
+  },
+  {
+    "topic": "classification",
+    "definition": "Classification predicts one of a finite set of categories, such as pass versus fail or one defect type among several classes.",
+    "intuition": "The model estimates which class is most plausible from the available features and often returns class probabilities as well as a label.",
+    "example": "A binary classifier can predict whether a returned product is likely to require rework.",
+    "caveat": "Accuracy can be misleading when classes are imbalanced, so precision, recall, F1-score, and the confusion matrix should also be reviewed.",
+    "quality_example": "Use process settings and inspection measurements to classify a unit as pass or fail, while evaluating recall for the rare failure class."
+  },
+  {
+    "topic": "regression",
+    "definition": "Regression predicts a continuous numerical target.",
+    "intuition": "The model estimates how the expected value of an outcome changes with the input features.",
+    "example": "A regression model can estimate remaining useful life, cycle time, concentration, or expected warranty cost.",
+    "caveat": "Residual diagnostics and error metrics such as MAE or RMSE are needed because a single average score can hide systematic bias.",
+    "quality_example": "Predict a continuous lab measurement from process variables and inspect whether residuals become larger at the high end of the measurement range."
+  },
+  {
+    "topic": "clustering",
+    "definition": "Clustering groups observations so that members of the same cluster are more similar to one another than to members of other clusters.",
+    "intuition": "The algorithm creates segments from feature patterns without using a known outcome label.",
+    "example": "K-means can group customers by usage behavior, while density-based methods can discover irregularly shaped groups and isolate noise points.",
+    "caveat": "Results depend strongly on feature scaling, distance choice, and the selected number of clusters, and clusters require domain interpretation.",
+    "quality_example": "Cluster complaint records by encoded symptoms and product families, then review whether each cluster represents a coherent failure pattern."
+  },
+  {
+    "topic": "train validation test split",
+    "definition": "A train-validation-test split separates data for fitting model parameters, selecting modeling choices, and estimating final generalization.",
+    "intuition": "The test set acts as an untouched final exam; using it repeatedly for tuning makes the score optimistic.",
+    "example": "A project can use 70 percent of records for training, 15 percent for validation, and 15 percent for final testing.",
+    "caveat": "Random splitting is inappropriate when time order, repeated entities, groups, or leakage-prone records require grouped or temporal splitting.",
+    "quality_example": "Train on earlier production months, tune on a later month, and reserve the newest month for the final test when the model will be used prospectively."
+  },
+  {
+    "topic": "cross-validation",
+    "definition": "Cross-validation repeatedly trains and evaluates a model on different folds to estimate how performance varies across subsets of the data.",
+    "intuition": "Each record is used for validation in one fold and for training in the other folds, producing several performance estimates.",
+    "example": "Five-fold stratified cross-validation can evaluate a classifier while preserving the class proportion in each fold.",
+    "caveat": "The fold strategy must match deployment conditions; grouped or time-series cross-validation is needed when ordinary random folds would leak information.",
+    "quality_example": "Use group cross-validation so records from the same customer or production lot never appear in both training and validation folds."
+  },
+  {
+    "topic": "data leakage",
+    "definition": "Data leakage occurs when training or feature preparation uses information that would not be available at prediction time or information from the evaluation set.",
+    "intuition": "The model appears unusually accurate because it has indirectly seen the answer or a proxy for it.",
+    "example": "Fitting a scaler on the full dataset before splitting, or including a post-failure repair code as a predictor of failure, causes leakage.",
+    "caveat": "Leakage can occur through time, repeated entities, target-derived features, preprocessing, labels, and manual data corrections.",
+    "quality_example": "Place imputation, scaling, and feature selection inside a pipeline that is fit separately within each training fold."
+  },
+  {
+    "topic": "overfitting",
+    "definition": "Overfitting occurs when a model learns training-specific noise or idiosyncrasies and performs worse on unseen data.",
+    "intuition": "The model memorizes details instead of learning patterns that generalize.",
+    "example": "A deep decision tree may perfectly classify training records but fail on a later production period.",
+    "caveat": "A small train-validation gap does not guarantee generalization if both sets share leaked or duplicated information.",
+    "quality_example": "Compare training and validation curves, use grouped validation, and simplify the model or increase regularization when validation performance deteriorates."
+  },
+  {
+    "topic": "underfitting",
+    "definition": "Underfitting occurs when a model is too simple, poorly trained, or missing important features, so it performs poorly on both training and unseen data.",
+    "intuition": "The model cannot capture the main relationship present in the data.",
+    "example": "A straight-line model may underfit a strongly nonlinear relationship between temperature and defect risk.",
+    "caveat": "Adding complexity is not the only remedy; data quality, feature representation, optimization, and label noise should also be investigated.",
+    "quality_example": "If both training and validation errors remain high, add meaningful features or use a model capable of representing nonlinear effects."
+  },
+  {
+    "topic": "L1 regularization",
+    "definition": "L1 regularization adds the absolute values of model coefficients to the loss function.",
+    "intuition": "The penalty encourages some coefficients to become exactly zero, creating a sparse model.",
+    "example": "Lasso regression can perform prediction while removing weak linear features.",
+    "caveat": "With highly correlated predictors, L1 may select one feature somewhat arbitrarily and discard others with similar information.",
+    "quality_example": "Use L1-regularized logistic regression when a sparse set of interpretable process variables is desirable, then validate stability across folds."
+  },
+  {
+    "topic": "L2 regularization",
+    "definition": "L2 regularization adds the squared values of model coefficients to the loss function.",
+    "intuition": "The penalty shrinks large coefficients smoothly instead of usually forcing them exactly to zero.",
+    "example": "Ridge regression can stabilize estimates when many predictors are correlated.",
+    "caveat": "Features should generally be on comparable scales so the penalty is applied fairly.",
+    "quality_example": "Apply L2 regularization to reduce unstable coefficients in a model built from correlated sensor measurements."
+  },
+  {
+    "topic": "feature engineering",
+    "definition": "Feature engineering creates or transforms variables so that the model can represent useful domain relationships.",
+    "intuition": "Raw data may not expose the pattern directly, but ratios, time windows, interactions, and aggregated histories can make the signal easier to learn.",
+    "example": "Create rolling averages, elapsed-time features, interaction terms, or defect rates by product family.",
+    "caveat": "Every feature must be computable at prediction time and created inside the validation process to avoid leakage.",
+    "quality_example": "Create a trailing 30-day defect rate using only records available before each prediction date."
+  },
+  {
+    "topic": "feature selection",
+    "definition": "Feature selection chooses a subset of available predictors to improve simplicity, stability, speed, or generalization.",
+    "intuition": "Removing redundant or noisy features can make the model easier to understand and less sensitive to random variation.",
+    "example": "Selection can use domain knowledge, regularization, permutation importance, or cross-validated recursive elimination.",
+    "caveat": "Selection must be performed within the training folds; selecting on the full dataset leaks validation information.",
+    "quality_example": "Run feature selection inside each cross-validation fold and compare whether the selected variables remain stable across folds."
+  },
+  {
+    "topic": "standardization",
+    "definition": "Standardization transforms a feature by subtracting its mean and dividing by its standard deviation.",
+    "intuition": "The transformed feature is centered near zero and measured in standard-deviation units.",
+    "example": "Standardization helps distance-based models, linear models with regularization, and neural networks when features use very different units.",
+    "caveat": "The mean and standard deviation must be learned from the training data only and then applied unchanged to validation and test data.",
+    "quality_example": "Fit StandardScaler inside a scikit-learn pipeline so production measurements are scaled with training statistics."
+  },
+  {
+    "topic": "normalization",
+    "definition": "Normalization rescales values to a chosen range or norm, such as mapping a feature to zero through one or scaling a vector to unit length.",
+    "intuition": "It changes magnitude while preserving a relative pattern defined by the selected normalization rule.",
+    "example": "Min-max scaling maps the training minimum to zero and training maximum to one.",
+    "caveat": "Min-max normalization is sensitive to outliers and future values may fall outside the original range.",
+    "quality_example": "Normalize bounded sensor features only after checking for extreme values and fit the transformation on the training period."
+  },
+  {
+    "topic": "missing values",
+    "definition": "Missing-value handling addresses absent observations through deletion, imputation, explicit missing indicators, or models that support missingness.",
+    "intuition": "A blank value can mean random loss, a systematic process condition, or that a measurement was not applicable.",
+    "example": "Median imputation can be combined with a binary indicator showing that the original value was missing.",
+    "caveat": "Imputation must be learned from training data, and missingness itself may change after deployment.",
+    "quality_example": "Track missing-rate trends by instrument and include a missing indicator when absence may reflect a process issue."
+  },
+  {
+    "topic": "outliers",
+    "definition": "Outliers are observations that differ substantially from the main data pattern.",
+    "intuition": "An extreme value may be a valid rare event, a measurement error, a data-entry problem, or evidence of a new process condition.",
+    "example": "A sensor reading far outside its historical range should be investigated before being removed.",
+    "caveat": "Automatic deletion can erase the very failures a quality model is intended to detect.",
+    "quality_example": "Flag extreme measurements for review, verify the measurement system, and compare robust and non-robust models before deciding how to handle them."
+  },
+  {
+    "topic": "class imbalance",
+    "definition": "Class imbalance occurs when one class is much rarer than another.",
+    "intuition": "A model can achieve high accuracy by mostly predicting the majority class while missing the events that matter.",
+    "example": "If only one percent of units fail, a classifier that predicts pass for every unit has 99 percent accuracy but zero failure recall.",
+    "caveat": "Resampling and class weights must be applied only to training data, and evaluation should reflect real deployment prevalence.",
+    "quality_example": "Use precision-recall curves and class-weighted training to evaluate rare-defect detection."
+  },
+  {
+    "topic": "precision",
+    "definition": "Precision is the fraction of predicted positive cases that are truly positive: TP divided by TP plus FP.",
+    "intuition": "It answers, 'When the model raises an alert, how often is the alert correct?'",
+    "example": "High precision reduces unnecessary inspections caused by false alarms.",
+    "caveat": "Precision depends on the classification threshold and the prevalence of the positive class.",
+    "quality_example": "Use precision when false defect alerts are costly because they trigger expensive manual investigation."
+  },
+  {
+    "topic": "recall",
+    "definition": "Recall is the fraction of actual positive cases that the model identifies: TP divided by TP plus FN.",
+    "intuition": "It answers, 'Of all real positive cases, how many did the model catch?'",
+    "example": "High recall is important when missing a true safety or quality failure is costly.",
+    "caveat": "Increasing recall often lowers precision, so the threshold should reflect business costs and capacity.",
+    "quality_example": "Prioritize recall when the main goal is to capture as many true failures as possible for follow-up."
+  },
+  {
+    "topic": "F1-score",
+    "definition": "F1-score is the harmonic mean of precision and recall.",
+    "intuition": "It becomes high only when both precision and recall are reasonably high.",
+    "example": "F1-score is useful for comparing classifiers on an imbalanced dataset when precision and recall are both important.",
+    "caveat": "It ignores true negatives and does not encode the actual cost of false positives versus false negatives.",
+    "quality_example": "Report F1 together with the confusion matrix and class prevalence rather than using it as the only success measure."
+  },
+  {
+    "topic": "ROC-AUC",
+    "definition": "ROC-AUC measures how well a scoring model ranks positive cases above negative cases across classification thresholds.",
+    "intuition": "It is the probability that a randomly selected positive case receives a higher score than a randomly selected negative case.",
+    "example": "An ROC-AUC of 0.5 indicates random ranking, while higher values indicate better discrimination.",
+    "caveat": "ROC-AUC can look strong on highly imbalanced data even when precision for the rare class is poor.",
+    "quality_example": "Use ROC-AUC for overall ranking ability but also review precision-recall performance for rare defects."
+  },
+  {
+    "topic": "PR-AUC",
+    "definition": "PR-AUC summarizes the precision-recall trade-off across thresholds.",
+    "intuition": "It focuses on performance for the positive class and is especially informative when positives are rare.",
+    "example": "A defect detector can be compared using the area under its precision-recall curve.",
+    "caveat": "PR-AUC depends on positive-class prevalence, so values from datasets with different prevalence are not directly comparable.",
+    "quality_example": "Use PR-AUC to compare rare-failure models evaluated on the same representative test population."
+  },
+  {
+    "topic": "confusion matrix",
+    "definition": "A confusion matrix counts true positives, true negatives, false positives, and false negatives.",
+    "intuition": "It shows which kinds of classification mistakes the model makes instead of reducing performance to one number.",
+    "example": "The matrix can reveal that a model catches most failures but generates many false alarms.",
+    "caveat": "Counts should be interpreted with class prevalence and, when relevant, normalized rates and business costs.",
+    "quality_example": "Review confusion matrices at the chosen operating threshold for each product family to detect uneven performance."
+  },
+  {
+    "topic": "mean absolute error",
+    "definition": "Mean absolute error is the average absolute difference between predicted and observed numerical values.",
+    "intuition": "It expresses a typical error in the same units as the target.",
+    "example": "An MAE of two hours means predictions differ from actual cycle time by two hours on average.",
+    "caveat": "MAE treats all absolute errors linearly and can hide whether errors are systematically positive or negative.",
+    "quality_example": "Use MAE to communicate average prediction error for a continuous process measurement in its original units."
+  },
+  {
+    "topic": "root mean squared error",
+    "definition": "Root mean squared error is the square root of the average squared prediction error.",
+    "intuition": "Squaring gives larger errors more influence, so RMSE penalizes occasional large misses more than MAE.",
+    "example": "RMSE is useful when large prediction errors are especially costly.",
+    "caveat": "It is sensitive to outliers and should be compared with MAE and residual plots.",
+    "quality_example": "Compare RMSE and MAE for a cycle-time model to determine whether a small number of large errors dominate performance."
+  },
+  {
+    "topic": "R-squared",
+    "definition": "R-squared is the proportion of target variance explained by a regression model relative to predicting the target mean.",
+    "intuition": "It compares the model's squared error with a simple mean baseline.",
+    "example": "An R-squared of 0.70 means the model explains 70 percent of the variance in the evaluated data under that definition.",
+    "caveat": "A high R-squared does not prove causality, unbiased predictions, or good performance on future data.",
+    "quality_example": "Report R-squared with MAE, RMSE, residual diagnostics, and a time-appropriate test set."
+  },
+  {
+    "topic": "logistic regression",
+    "definition": "Logistic regression models the log-odds of a class as a linear combination of input features and converts the result to a probability.",
+    "intuition": "Each coefficient changes the log-odds while the sigmoid function keeps the predicted probability between zero and one.",
+    "example": "It can estimate the probability that a unit fails inspection from process measurements.",
+    "caveat": "The linear log-odds assumption may be too restrictive without transformations or interactions, and probabilities may need calibration.",
+    "quality_example": "Use regularized logistic regression as an interpretable baseline for defect-risk prediction."
+  },
+  {
+    "topic": "linear regression",
+    "definition": "Linear regression predicts a continuous outcome as a weighted sum of input features plus an intercept.",
+    "intuition": "Each coefficient represents an expected change in the target for a one-unit feature change while other included features are held constant.",
+    "example": "It can estimate cycle time from workload and process settings.",
+    "caveat": "Interpretation depends on assumptions, feature specification, correlated predictors, and whether the data support a causal claim.",
+    "quality_example": "Inspect residuals and influential points before using a linear model to explain variation in a process measurement."
+  },
+  {
+    "topic": "decision tree",
+    "definition": "A decision tree recursively splits the feature space into regions and predicts from the observations in each terminal leaf.",
+    "intuition": "It behaves like a sequence of if-then questions.",
+    "example": "A tree may first split on temperature, then on pressure, to estimate failure risk.",
+    "caveat": "Deep trees can overfit and small data changes can produce a different tree.",
+    "quality_example": "Limit depth and leaf size, then validate the tree on a later production period."
+  },
+  {
+    "topic": "random forest",
+    "definition": "A random forest averages many decision trees trained on bootstrap samples and random subsets of features.",
+    "intuition": "Individual trees are noisy, but averaging decorrelated trees reduces variance.",
+    "example": "A random forest can model nonlinear interactions in defect-risk data without extensive manual feature transformations.",
+    "caveat": "Feature importance can be biased or misleading, and probability estimates may require calibration.",
+    "quality_example": "Use permutation importance on held-out data to investigate which process variables support a random-forest defect model."
+  },
+  {
+    "topic": "gradient boosting",
+    "definition": "Gradient boosting builds an additive sequence of weak learners, with each new learner focusing on errors left by the current ensemble.",
+    "intuition": "The model improves step by step by correcting residual mistakes.",
+    "example": "Boosted trees often perform well on structured tabular data with nonlinear relationships.",
+    "caveat": "Learning rate, tree depth, number of estimators, and leakage-safe validation require careful tuning.",
+    "quality_example": "Tune a boosted-tree model with grouped cross-validation when several records come from the same production lot."
+  },
+  {
+    "topic": "neural network",
+    "definition": "A neural network composes layers of weighted transformations and nonlinear activation functions to learn complex mappings.",
+    "intuition": "Each layer builds a new representation from the previous layer, allowing the model to capture interactions and nonlinear patterns.",
+    "example": "A feed-forward network can predict a continuous target from many sensor features.",
+    "caveat": "Neural networks can require more data and tuning than simpler models and may be difficult to interpret.",
+    "quality_example": "Compare a neural network with a simpler baseline and monitor validation performance rather than assuming greater complexity is better."
+  },
+  {
+    "topic": "convolutional neural network",
+    "definition": "A convolutional neural network uses learnable filters that scan local regions and share weights across positions.",
+    "intuition": "The same pattern detector can recognize an edge or texture wherever it appears in an image.",
+    "example": "A CNN can classify surface defects in product images.",
+    "caveat": "Performance can fail under changes in lighting, camera position, background, or product appearance.",
+    "quality_example": "Evaluate defect-image performance across production lines and lighting conditions, not only on random image splits."
+  },
+  {
+    "topic": "recurrent neural network",
+    "definition": "A recurrent neural network processes a sequence while carrying a hidden state from earlier steps.",
+    "intuition": "The current representation depends on both the current input and information accumulated from the past.",
+    "example": "An RNN can process time-ordered sensor readings or token sequences.",
+    "caveat": "Basic RNNs can struggle with long-range dependencies because gradients may vanish or explode.",
+    "quality_example": "Use a sequence-aware split when evaluating an RNN on time-ordered process data."
+  },
+  {
+    "topic": "long short-term memory network",
+    "definition": "An LSTM is a recurrent architecture with gates that control what information is stored, forgotten, and exposed.",
+    "intuition": "The gates help preserve useful information over longer sequences than a basic RNN.",
+    "example": "An LSTM can model temporal patterns in equipment measurements.",
+    "caveat": "LSTMs are sequential and can be slower to train than parallel Transformer architectures.",
+    "quality_example": "Compare an LSTM with lag-feature baselines and evaluate it on future time windows."
+  },
+  {
+    "topic": "Transformer",
+    "definition": "A Transformer represents sequences mainly through attention and position information rather than recurrent state updates.",
+    "intuition": "Each token can directly combine information from other relevant tokens, enabling parallel processing during training.",
+    "example": "Transformers support language generation, translation, document search, vision models, and multimodal systems.",
+    "caveat": "Attention cost can grow quickly with sequence length, and strong language generation does not guarantee factual correctness.",
+    "quality_example": "Use a Transformer to summarize non-confidential technical text, then evaluate faithfulness and require human review."
+  },
+  {
+    "topic": "attention",
+    "definition": "Attention computes weighted combinations of value vectors, where weights are derived from the compatibility of queries and keys.",
+    "intuition": "The model decides which other positions are most useful for representing the current position.",
+    "example": "In a sentence, a token can attend strongly to earlier words that clarify its meaning.",
+    "caveat": "Attention weights are not automatically faithful explanations of a model's decision.",
+    "quality_example": "Use attention-based models for long technical sequences but validate outputs with task-specific metrics and factual review."
+  },
+  {
+    "topic": "embeddings",
+    "definition": "Embeddings are dense numerical vectors learned or constructed to represent items such as words, documents, products, or categories.",
+    "intuition": "Items with similar usage or meaning tend to have nearby vectors in the embedding space.",
+    "example": "Sentence embeddings can support semantic search by comparing vector similarity.",
+    "caveat": "Similarity reflects the training objective and data, may encode bias, and is not the same as factual equivalence.",
+    "quality_example": "Embed issue descriptions for retrieval, then evaluate whether nearest neighbors are useful to quality engineers."
+  },
+  {
+    "topic": "LoRA",
+    "definition": "LoRA adapts a pretrained model by learning small low-rank update matrices for selected weight layers while keeping the base weights frozen.",
+    "intuition": "Instead of changing every parameter, LoRA learns a compact correction that specializes the model.",
+    "example": "A FLAN-T5 model can be adapted to ML education by training LoRA modules on instruction-response pairs.",
+    "caveat": "A small adapter cannot compensate for poor training data, and LoRA quality still requires held-out evaluation and human review.",
+    "quality_example": "Train a LoRA adapter on curated technical explanations and compare it with the unchanged base model on the same benchmark."
+  },
+  {
+    "topic": "parameter-efficient fine-tuning",
+    "definition": "Parameter-efficient fine-tuning adapts a pretrained model by training a small subset of parameters or added modules.",
+    "intuition": "The method reduces memory, storage, and training cost while preserving most pretrained weights.",
+    "example": "LoRA, adapters, and prompt tuning are PEFT approaches.",
+    "caveat": "Different tasks and architectures may require different target modules and capacity, and PEFT is not automatically better than full fine-tuning.",
+    "quality_example": "Store a small adapter per technical domain while sharing the same base model."
+  },
+  {
+    "topic": "full fine-tuning",
+    "definition": "Full fine-tuning updates all or most parameters of a pretrained model on task-specific data.",
+    "intuition": "The entire model can adapt, providing high capacity but requiring more memory, storage, and careful regularization.",
+    "example": "A large labeled corpus can be used to update every layer of a language model.",
+    "caveat": "Full fine-tuning can be expensive, overfit small datasets, and create a separate large checkpoint for each task.",
+    "quality_example": "Use full fine-tuning only when the data volume, compute budget, and expected gains justify it compared with PEFT."
+  },
+  {
+    "topic": "prompt engineering",
+    "definition": "Prompt engineering designs instructions, context, examples, and output constraints to guide a model's behavior without changing its weights.",
+    "intuition": "Clear task framing reduces ambiguity and makes desired structure explicit.",
+    "example": "A prompt can request a definition, one example, and one limitation in separate sections.",
+    "caveat": "Prompt improvements do not guarantee factuality and can be brittle across models or domains.",
+    "quality_example": "Use a fixed prompt template for technical explanations and evaluate whether it improves adherence on held-out questions."
+  },
+  {
+    "topic": "model deployment",
+    "definition": "Model deployment makes a trained model available for reliable inference in an application or service.",
+    "intuition": "Deployment connects model artifacts, preprocessing, inputs, outputs, monitoring, and user interaction.",
+    "example": "A Gradio app can load a base model and LoRA adapter from Hugging Face and answer educational questions.",
+    "caveat": "The deployed pipeline must match training preprocessing and handle latency, resource limits, failures, privacy, and model versioning.",
+    "quality_example": "Deploy the reviewed adapter only after confirming that the app reports adapter mode rather than base-model fallback."
+  },
+  {
+    "topic": "model monitoring",
+    "definition": "Model monitoring tracks input data, predictions, latency, errors, and performance after deployment.",
+    "intuition": "A model can become less useful when the operating environment changes even if the code still runs.",
+    "example": "A dashboard can track prediction distributions, missing rates, alert volume, and delayed ground-truth performance.",
+    "caveat": "Some outcomes arrive late or are selectively observed, so monitoring requires carefully defined proxies and retraining triggers.",
+    "quality_example": "Monitor defect-model recall by product family when verified inspection outcomes become available."
+  },
+  {
+    "topic": "data drift",
+    "definition": "Data drift is a change in the distribution of model inputs over time.",
+    "intuition": "The model sees different feature values or populations than it saw during training.",
+    "example": "A sensor upgrade can shift the scale of measurements even if the relationship with failure remains unchanged.",
+    "caveat": "Drift does not always reduce performance, but it should trigger investigation and comparison with outcome metrics.",
+    "quality_example": "Compare current and training-period feature distributions and review whether a process or measurement-system change explains the shift."
+  },
+  {
+    "topic": "concept drift",
+    "definition": "Concept drift is a change in the relationship between inputs and the target outcome.",
+    "intuition": "The same feature pattern may correspond to a different result after a process, policy, product, or environment changes.",
+    "example": "A new manufacturing method may alter which settings predict defects.",
+    "caveat": "Concept drift generally requires labeled outcomes to confirm and may be confused with data drift or label changes.",
+    "quality_example": "Track performance over time and retrain when the mapping from process features to verified failures changes."
+  },
+  {
+    "topic": "probability calibration",
+    "definition": "Probability calibration measures whether predicted probabilities match observed event frequencies.",
+    "intuition": "Among cases assigned a probability near 0.8, approximately 80 percent should be positive in a well-calibrated model.",
+    "example": "Reliability diagrams and Brier scores can assess calibration.",
+    "caveat": "A model can rank cases well but still be poorly calibrated, and calibration can change when prevalence changes.",
+    "quality_example": "Calibrate a defect-risk model on a validation period before using probabilities to allocate inspection capacity."
+  },
+  {
+    "topic": "model explainability",
+    "definition": "Model explainability uses methods and documentation to help people understand model behavior, important features, and individual predictions.",
+    "intuition": "Explanations provide evidence about how a model uses information, but they do not prove causality or correctness.",
+    "example": "Permutation importance can summarize global dependence, while SHAP values can describe contributions for one prediction.",
+    "caveat": "Explanations can be unstable, correlated features can share credit, and users may over-trust visually persuasive outputs.",
+    "quality_example": "Combine global and local explanations with domain review before changing a quality process."
+  },
+  {
+    "topic": "data pipeline",
+    "definition": "A data pipeline reliably moves and transforms data from sources into analysis, training, or inference-ready datasets.",
+    "intuition": "The pipeline makes data preparation repeatable instead of relying on manual one-off steps.",
+    "example": "A pipeline can validate schemas, clean records, create features, and write versioned datasets.",
+    "caveat": "Silent schema changes, duplicate records, late-arriving data, and inconsistent training-serving logic can invalidate results.",
+    "quality_example": "Add checks for duplicate case IDs, missing fields, and unexpected product categories before producing a monthly quality dataset."
+  },
+  {
+    "topic": "MLOps",
+    "definition": "MLOps applies software engineering, data management, automation, testing, versioning, deployment, and monitoring practices to machine-learning systems.",
+    "intuition": "A model is treated as one component of a reproducible product lifecycle rather than as a notebook-only experiment.",
+    "example": "A workflow can version data and models, run tests in CI, deploy a reviewed artifact, and monitor production behavior.",
+    "caveat": "More tooling is not automatically better; controls should match the system's risk, scale, and maintenance needs.",
+    "quality_example": "Store experiment metadata, tests, model cards, release manifests, and monitoring definitions for a quality-assistant project."
+  },
+  {
+    "topic": "quality analytics classification",
+    "definition": "Quality analytics classification predicts a discrete quality outcome such as pass, fail, defect type, or escalation category.",
+    "intuition": "Historical labeled records are used to estimate the class of a new unit, case, or event.",
+    "example": "Predict whether a complaint is likely to require engineering escalation from non-confidential structured features.",
+    "caveat": "Labels may reflect inconsistent human decisions, and repeated customers or products must be separated during validation.",
+    "quality_example": "Evaluate recall for true escalations and review false positives with process owners."
+  },
+  {
+    "topic": "quality analytics regression",
+    "definition": "Quality analytics regression predicts a continuous quality-related quantity.",
+    "intuition": "The model estimates a numerical outcome rather than assigning a class.",
+    "example": "Predict expected resolution time or a continuous measurement from process and product features.",
+    "caveat": "Large errors may be concentrated in certain product families, so aggregate MAE should be complemented by subgroup analysis.",
+    "quality_example": "Report MAE and RMSE by product family and time period before using the prediction operationally."
+  },
+  {
+    "topic": "quality analytics anomaly detection",
+    "definition": "Quality analytics anomaly detection identifies observations that differ from expected historical patterns.",
+    "intuition": "The method highlights unusual combinations or sequences for investigation without necessarily knowing every failure label.",
+    "example": "Flag an uncommon combination of sensor readings or a sudden increase in complaint volume.",
+    "caveat": "An anomaly is not automatically a defect; thresholds and alerts require domain review and capacity planning.",
+    "quality_example": "Route high-scoring anomalies to engineers and track how often reviewed alerts correspond to actionable issues."
+  }
+]

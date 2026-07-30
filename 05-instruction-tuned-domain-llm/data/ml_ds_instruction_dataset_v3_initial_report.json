@@ -1,0 +1,62 @@
+{
+  "status": "completed",
+  "dataset_path": "/mnt/data/exp2_complete/data/ml_ds_instruction_dataset_v3.jsonl",
+  "reuse_teacher_records": false,
+  "report": {
+    "seed_records_loaded": 93,
+    "previous_v2_records_loaded": 0,
+    "previous_v2_records_reused": 0,
+    "curated_topic_records": 275,
+    "curated_comparison_records": 40,
+    "curated_code_records": 20,
+    "curated_workflow_records": 15,
+    "rejected_quality": 0,
+    "rejected_benchmark_overlap": 0,
+    "rejected_near_duplicate": 0,
+    "final_records": 442,
+    "train_records": 352,
+    "validation_records": 45,
+    "test_records": 45,
+    "output_word_mean": 49.03,
+    "output_word_median": 48.0,
+    "source_counts": {
+      "expert-curated-v3-topic-card": 275,
+      "expert-curated-v3-workflow": 14,
+      "expert-curated-v3-comparison": 40,
+      "expert-curated-v3-code": 20,
+      "self-authored-synthetic": 93
+    },
+    "category_counts": {
+      "Example generation": 61,
+      "Data Science workflow": 12,
+      "Algorithm comparison": 30,
+      "Concept explanation": 90,
+      "Small code example": 26,
+      "Quality analytics": 61,
+      "Beginner-friendly explanation": 61,
+      "Interview-style answer": 81,
+      "Metric explanation": 10,
+      "ML project guidance": 10
+    },
+    "difficulty_counts": {
+      "intermediate": 312,
+      "advanced": 47,
+      "beginner": 83
+    }
+  },
+  "base_validation_report": {
+    "total_records": 443,
+    "valid_records": 442,
+    "removed_records": 1,
+    "empty_instructions": 0,
+    "empty_outputs": 0,
+    "duplicate_instructions": 0,
+    "too_short_outputs": 0,
+    "too_long_outputs": 0,
+    "possible_pii": 0,
+    "confidential_references": 1
+  },
+  "review_sample": "/mnt/data/exp2_complete/outputs/experiment2_dataset_build/dataset_v3_review_sample.csv",
+  "rejection_log": "/mnt/data/exp2_complete/outputs/experiment2_dataset_build/dataset_v3_rejection_log.json",
+  "important_note": "benchmark_prompts_v2.jsonl was used only for leakage screening, never as training data."
+}

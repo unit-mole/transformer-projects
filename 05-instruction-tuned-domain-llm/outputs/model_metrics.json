@@ -1,0 +1,5 @@
+{
+  "status": "not_run",
+  "message": "Run notebooks/05_full_training_evaluation_pipeline.ipynb. The reviewed experiment will promote base_model_metrics.json, lora_model_metrics.json, and base_vs_lora_comparison.json. No performance numbers are fabricated in this repository.",
+  "legacy_compatibility_file": true
+}

@@ -1,0 +1,25 @@
+{
+  "status": "dataset_prepared",
+  "examples": 93,
+  "splits": {
+    "train": 75,
+    "validation": 9,
+    "test": 9
+  },
+  "categories": {
+    "Concept explanation": 35,
+    "Metric explanation": 10,
+    "Algorithm comparison": 10,
+    "ML project guidance": 4,
+    "Data Science workflow": 4,
+    "Small code example": 6,
+    "Quality analytics": 6,
+    "Interview-style answer": 6,
+    "Beginner-friendly explanation": 6,
+    "Example generation": 6
+  },
+  "topics": 33,
+  "average_prompt_words": 6.03,
+  "average_response_words": 29.24,
+  "source": "self-authored-synthetic"
+}

@@ -1,0 +1,12 @@
+{
+  "status": "archived_without_deleting_source",
+  "source_experiment": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\05-instruction-tuned-domain-llm\\outputs\\experiments\\flan_t5_base_lora_20260730_120312",
+  "source_still_exists": true,
+  "archive_directory": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\05-instruction-tuned-domain-llm\\outputs\\experiment_archives\\experiment_1_initial_lora",
+  "full_zip": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\05-instruction-tuned-domain-llm\\outputs\\experiment_archives\\experiment_1_initial_lora\\experiment_1_initial_lora_full.zip",
+  "summary_file": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\05-instruction-tuned-domain-llm\\outputs\\experiment_archives\\experiment_1_initial_lora\\experiment_1_summary.json",
+  "card_file": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\05-instruction-tuned-domain-llm\\outputs\\experiment_archives\\experiment_1_initial_lora\\EXPERIMENT_1_CARD.md",
+  "manifest_file": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\05-instruction-tuned-domain-llm\\outputs\\experiment_archives\\experiment_1_initial_lora\\experiment_manifest.json",
+  "checksums_file": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\05-instruction-tuned-domain-llm\\outputs\\experiment_archives\\experiment_1_initial_lora\\sha256sums.txt",
+  "file_count": 53
+}

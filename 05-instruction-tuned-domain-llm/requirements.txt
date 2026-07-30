@@ -1,0 +1,7 @@
+gradio==6.20.0
+torch>=2.4,<3.0
+transformers>=4.46,<6.0
+peft>=0.13,<1.0
+accelerate>=1.0,<2.0
+sentencepiece>=0.2,<1.0
+safetensors>=0.4,<1.0

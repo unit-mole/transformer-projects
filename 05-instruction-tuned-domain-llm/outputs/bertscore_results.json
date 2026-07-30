@@ -1,0 +1,7 @@
+{
+  "status": "not_run",
+  "average_precision": null,
+  "average_recall": null,
+  "average_f1": null,
+  "limitation": "semantic similarity is not factual correctness"
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "topic": "leakage-safe train test split",
+    "instruction": "Write a compact scikit-learn example that splits data before fitting preprocessing and a classifier.",
+    "output": "Use a pipeline so preprocessing is learned only from the training data.\n\n```python\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.impute import SimpleImputer\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.linear_model import LogisticRegression\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, stratify=y, random_state=42\n)\n\nmodel = Pipeline([\n    (\"imputer\", SimpleImputer(strategy=\"median\")),\n    (\"scaler\", StandardScaler()),\n    (\"classifier\", LogisticRegression(max_iter=1000))\n])\n\nmodel.fit(X_train, y_train)\ntest_score = model.score(X_test, y_test)\n```\n\nThe split occurs before fitting the imputer or scaler, which prevents test-set leakage."
+  },
+  {
+    "topic": "cross validation pipeline",
+    "instruction": "Show how to evaluate a preprocessing and logistic-regression pipeline with stratified cross-validation.",
+    "output": "```python\nfrom sklearn.model_selection import StratifiedKFold, cross_validate\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.linear_model import LogisticRegression\n\npipeline = Pipeline([\n    (\"scaler\", StandardScaler()),\n    (\"model\", LogisticRegression(max_iter=1000))\n])\n\ncv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)\nscores = cross_validate(\n    pipeline,\n    X,\n    y,\n    cv=cv,\n    scoring=[\"precision\", \"recall\", \"f1\", \"roc_auc\"],\n    return_train_score=False\n)\n\nprint({name: values.mean() for name, values in scores.items()\n       if name.startswith(\"test_\")})\n```\n\nBecause the scaler is inside the pipeline, it is refit separately within every training fold."
+  },
+  {
+    "topic": "grouped cross validation",
+    "instruction": "Provide a grouped cross-validation example that keeps records from the same customer out of both train and validation folds.",
+    "output": "```python\nfrom sklearn.model_selection import GroupKFold, cross_val_score\nfrom sklearn.ensemble import RandomForestClassifier\n\ncv = GroupKFold(n_splits=5)\nmodel = RandomForestClassifier(\n    n_estimators=300,\n    class_weight=\"balanced\",\n    random_state=42,\n    n_jobs=-1\n)\n\nscores = cross_val_score(\n    model,\n    X,\n    y,\n    groups=customer_id,\n    cv=cv,\n    scoring=\"f1\"\n)\n\nprint(\"Mean grouped F1:\", scores.mean())\n```\n\n`GroupKFold` ensures that one customer's records appear in only one fold at a time."
+  },
+  {
+    "topic": "time series split",
+    "instruction": "Write a small time-series validation example that does not train on future observations.",
+    "output": "```python\nfrom sklearn.model_selection import TimeSeriesSplit, cross_val_score\nfrom sklearn.ensemble import HistGradientBoostingRegressor\n\nX_sorted = X.sort_values(\"timestamp\")\ny_sorted = y.loc[X_sorted.index]\n\ncv = TimeSeriesSplit(n_splits=5)\nmodel = HistGradientBoostingRegressor(random_state=42)\n\nmae_scores = -cross_val_score(\n    model,\n    X_sorted.drop(columns=\"timestamp\"),\n    y_sorted,\n    cv=cv,\n    scoring=\"neg_mean_absolute_error\"\n)\n\nprint(\"Mean temporal MAE:\", mae_scores.mean())\n```\n\nAlways sort by time first and confirm that each validation window occurs after its training window."
+  },
+  {
+    "topic": "classification metrics",
+    "instruction": "Create a concise evaluation snippet for precision, recall, F1-score, and the confusion matrix.",
+    "output": "```python\nfrom sklearn.metrics import (\n    classification_report,\n    confusion_matrix,\n    precision_score,\n    recall_score,\n    f1_score,\n)\n\npred = model.predict(X_test)\n\nprint(\"Precision:\", precision_score(y_test, pred))\nprint(\"Recall:\", recall_score(y_test, pred))\nprint(\"F1:\", f1_score(y_test, pred))\nprint(\"Confusion matrix:\n\", confusion_matrix(y_test, pred))\nprint(classification_report(y_test, pred, digits=3))\n```\n\nChoose the positive label deliberately and interpret the metrics with class prevalence and business costs."
+  },
+  {
+    "topic": "threshold tuning",
+    "instruction": "Show how to inspect precision and recall at multiple probability thresholds.",
+    "output": "```python\nimport numpy as np\nfrom sklearn.metrics import precision_score, recall_score\n\nprob = model.predict_proba(X_valid)[:, 1]\n\nfor threshold in np.arange(0.1, 1.0, 0.1):\n    pred = (prob >= threshold).astype(int)\n    precision = precision_score(y_valid, pred, zero_division=0)\n    recall = recall_score(y_valid, pred, zero_division=0)\n    print(f\"{threshold:.1f}  precision={precision:.3f}  recall={recall:.3f}\")\n```\n\nSelect the threshold on validation data, document the trade-off, and report final performance once on the untouched test set."
+  },
+  {
+    "topic": "class weights",
+    "instruction": "Give a logistic-regression example that handles class imbalance with class weights.",
+    "output": "```python\nfrom sklearn.linear_model import LogisticRegression\n\nmodel = LogisticRegression(\n    class_weight=\"balanced\",\n    max_iter=1000,\n    random_state=42\n)\nmodel.fit(X_train, y_train)\n```\n\n`class_weight=\"balanced\"` increases the contribution of minority-class errors according to class frequency. It should be compared with unweighted training using precision-recall metrics on representative validation data."
+  },
+  {
+    "topic": "column transformer",
+    "instruction": "Build a preprocessing pipeline for numeric and categorical features.",
+    "output": "```python\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.impute import SimpleImputer\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.linear_model import LogisticRegression\n\nnumeric_pipe = Pipeline([\n    (\"imputer\", SimpleImputer(strategy=\"median\")),\n    (\"scaler\", StandardScaler()),\n])\n\ncategorical_pipe = Pipeline([\n    (\"imputer\", SimpleImputer(strategy=\"most_frequent\")),\n    (\"onehot\", OneHotEncoder(handle_unknown=\"ignore\")),\n])\n\npreprocess = ColumnTransformer([\n    (\"num\", numeric_pipe, numeric_columns),\n    (\"cat\", categorical_pipe, categorical_columns),\n])\n\nmodel = Pipeline([\n    (\"preprocess\", preprocess),\n    (\"classifier\", LogisticRegression(max_iter=1000)),\n])\n```\n\nFit the complete pipeline on training folds so all learned preprocessing remains leakage-safe."
+  },
+  {
+    "topic": "permutation importance",
+    "instruction": "Show how to calculate permutation importance on held-out data.",
+    "output": "```python\nfrom sklearn.inspection import permutation_importance\n\nresult = permutation_importance(\n    model,\n    X_test,\n    y_test,\n    scoring=\"f1\",\n    n_repeats=20,\n    random_state=42,\n    n_jobs=-1,\n)\n\nimportance = (\n    pd.DataFrame({\n        \"feature\": X_test.columns,\n        \"mean_drop\": result.importances_mean,\n        \"std\": result.importances_std,\n    })\n    .sort_values(\"mean_drop\", ascending=False)\n)\nprint(importance.head(15))\n```\n\nPermutation importance measures the performance drop after shuffling a feature; correlated features can share or mask importance."
+  },
+  {
+    "topic": "calibration curve",
+    "instruction": "Write a short example that evaluates probability calibration.",
+    "output": "```python\nfrom sklearn.calibration import calibration_curve\nfrom sklearn.metrics import brier_score_loss\n\nprob = model.predict_proba(X_test)[:, 1]\nfraction_positive, mean_predicted = calibration_curve(\n    y_test, prob, n_bins=10, strategy=\"quantile\"\n)\n\nprint(\"Brier score:\", brier_score_loss(y_test, prob))\ncalibration_table = pd.DataFrame({\n    \"mean_predicted_probability\": mean_predicted,\n    \"observed_positive_rate\": fraction_positive,\n})\nprint(calibration_table)\n```\n\nUse a validation set for any recalibration step and reserve the test set for final reporting."
+  },
+  {
+    "topic": "regression metrics",
+    "instruction": "Provide code that calculates MAE, RMSE, and R-squared for a regression model.",
+    "output": "```python\nfrom sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score\n\npred = model.predict(X_test)\n\nmae = mean_absolute_error(y_test, pred)\nrmse = mean_squared_error(y_test, pred) ** 0.5\nr2 = r2_score(y_test, pred)\n\nprint({\"MAE\": mae, \"RMSE\": rmse, \"R2\": r2})\n```\n\nAlso inspect residuals and subgroup errors because aggregate metrics can hide systematic bias."
+  },
+  {
+    "topic": "residual analysis",
+    "instruction": "Create a simple residual-analysis table for a regression model.",
+    "output": "```python\nprediction = model.predict(X_test)\n\nresidual_table = pd.DataFrame({\n    \"actual\": y_test.to_numpy(),\n    \"predicted\": prediction,\n})\nresidual_table[\"residual\"] = (\n    residual_table[\"actual\"] - residual_table[\"predicted\"]\n)\nresidual_table[\"absolute_error\"] = residual_table[\"residual\"].abs()\n\nprint(residual_table.describe())\nprint(residual_table.nlargest(10, \"absolute_error\"))\n```\n\nReview the largest errors and plot residuals against predictions, time, and important subgroups."
+  },
+  {
+    "topic": "duplicate detection",
+    "instruction": "Write a concise pandas check for duplicate record identifiers and exact duplicate rows.",
+    "output": "```python\nduplicate_ids = df[df[\"record_id\"].duplicated(keep=False)]\nduplicate_rows = df[df.duplicated(keep=False)]\n\nprint(\"Duplicate IDs:\", len(duplicate_ids))\nprint(\"Exact duplicate rows:\", len(duplicate_rows))\n\nif not duplicate_ids.empty:\n    print(duplicate_ids.sort_values(\"record_id\"))\n```\n\nDecide whether repeated identifiers are legitimate repeated measurements or accidental duplication before removing them."
+  },
+  {
+    "topic": "missingness report",
+    "instruction": "Create a reusable missing-value summary in pandas.",
+    "output": "```python\nmissing_report = (\n    df.isna()\n      .mean()\n      .mul(100)\n      .rename(\"missing_percent\")\n      .to_frame()\n      .assign(missing_count=df.isna().sum())\n      .sort_values(\"missing_percent\", ascending=False)\n)\n\nprint(missing_report)\n```\n\nReview missingness by time and subgroup as well, because a stable overall percentage can hide a localized data-quality problem."
+  },
+  {
+    "topic": "drift check",
+    "instruction": "Show a simple numeric data-drift comparison between training and current data.",
+    "output": "```python\nsummary = pd.DataFrame({\n    \"train_mean\": train_df[numeric_columns].mean(),\n    \"current_mean\": current_df[numeric_columns].mean(),\n    \"train_std\": train_df[numeric_columns].std(),\n    \"current_std\": current_df[numeric_columns].std(),\n})\n\nsummary[\"standardized_mean_shift\"] = (\n    (summary[\"current_mean\"] - summary[\"train_mean\"])\n    / summary[\"train_std\"].replace(0, pd.NA)\n)\n\nprint(summary.sort_values(\n    \"standardized_mean_shift\",\n    key=lambda s: s.abs(),\n    ascending=False,\n))\n```\n\nThis is a screening check, not a complete drift decision; investigate operational causes and outcome performance."
+  },
+  {
+    "topic": "reproducible seed",
+    "instruction": "Provide a small function that sets common Python, NumPy, and PyTorch random seeds.",
+    "output": "```python\nimport os\nimport random\nimport numpy as np\nimport torch\n\ndef set_seed(seed: int = 42) -> None:\n    os.environ[\"PYTHONHASHSEED\"] = str(seed)\n    random.seed(seed)\n    np.random.seed(seed)\n    torch.manual_seed(seed)\n    if torch.cuda.is_available():\n        torch.cuda.manual_seed_all(seed)\n\nset_seed(42)\n```\n\nSome GPU operations can still be nondeterministic, so record package versions, hardware, and training configuration as well."
+  },
+  {
+    "topic": "LoRA configuration",
+    "instruction": "Show a PEFT LoRA configuration for a T5 sequence-to-sequence model.",
+    "output": "```python\nfrom peft import LoraConfig, TaskType\n\nlora_config = LoraConfig(\n    task_type=TaskType.SEQ_2_SEQ_LM,\n    r=32,\n    lora_alpha=64,\n    lora_dropout=0.05,\n    target_modules=[\"q\", \"v\"],\n    bias=\"none\",\n)\n```\n\nThe target modules must match the model architecture. Adapter capacity should be selected through held-out evaluation rather than assumed from rank alone."
+  },
+  {
+    "topic": "adapter loading",
+    "instruction": "Provide code that loads a FLAN-T5 base model and a local LoRA adapter for inference.",
+    "output": "```python\nimport torch\nfrom transformers import AutoModelForSeq2SeqLM, AutoTokenizer\nfrom peft import PeftModel\n\nbase_id = \"google/flan-t5-base\"\nadapter_path = \"models/lora_adapter\"\n\ntokenizer = AutoTokenizer.from_pretrained(base_id)\nbase_model = AutoModelForSeq2SeqLM.from_pretrained(\n    base_id,\n    dtype=torch.bfloat16,\n    device_map=\"auto\",\n)\nmodel = PeftModel.from_pretrained(base_model, adapter_path)\nmodel.eval()\n```\n\nThe adapter must have been trained against the same compatible base model, and the tokenizer and prompt template should match training."
+  },
+  {
+    "topic": "inference generation",
+    "instruction": "Write a deterministic generation example for a FLAN-T5 educational assistant.",
+    "output": "```python\nprompt = (\n    \"Instruction:\n\"\n    \"Explain precision and recall with one example and one caveat.\n\n\"\n    \"Input:\n\n\"\n    \"Response:\n\"\n)\n\ninputs = tokenizer(prompt, return_tensors=\"pt\").to(model.device)\n\nwith torch.inference_mode():\n    generated = model.generate(\n        **inputs,\n        max_new_tokens=220,\n        do_sample=False,\n        num_beams=4,\n        repetition_penalty=1.12,\n        no_repeat_ngram_size=3,\n    )\n\nanswer = tokenizer.decode(generated[0], skip_special_tokens=True)\nprint(answer)\n```\n\nDeterministic decoding improves reproducibility but does not replace factual evaluation."
+  },
+  {
+    "topic": "experiment metadata",
+    "instruction": "Show how to save a compact experiment metadata JSON file.",
+    "output": "```python\nimport json\nfrom pathlib import Path\n\nmetadata = {\n    \"run_name\": run_name,\n    \"base_model\": base_model_id,\n    \"dataset_path\": str(dataset_path),\n    \"seed\": seed,\n    \"training_config\": training_config,\n    \"metrics\": metrics,\n}\n\noutput_path = Path(\"outputs\") / run_name / \"experiment_metadata.json\"\noutput_path.parent.mkdir(parents=True, exist_ok=True)\noutput_path.write_text(\n    json.dumps(metadata, indent=2, default=str),\n    encoding=\"utf-8\",\n)\n```\n\nInclude hardware and package versions so the experiment can be audited and reproduced."
+  }
+]

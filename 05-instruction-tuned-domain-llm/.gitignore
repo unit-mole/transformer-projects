@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+.env
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Hugging Face / model caches
+.cache/
+huggingface/
+models/training_run/
+models/merged_model/
+models/lora_adapter/*
+!models/lora_adapter/README.md
+models/tokenizer/*
+!models/tokenizer/README.md
+
+# Full experiment work directories can contain checkpoints and raw generations.
+# Promote only reviewed summary artifacts into outputs/ before committing.
+outputs/experiments/
+outputs/dataset_generation/raw_teacher_generations.jsonl
+outputs/checkpoint-*/
+outputs/runs/
+outputs/*.xlsx
+outputs/*.log
+
+# Notebook checkpoints
+.ipynb_checkpoints/

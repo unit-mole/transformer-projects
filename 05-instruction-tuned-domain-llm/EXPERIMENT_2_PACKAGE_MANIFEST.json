@@ -1,0 +1,132 @@
+{
+  "package": "Project 05 Experiment 2 quality upgrade overlay",
+  "created_for": "FLAN-T5-base LoRA Experiment 2",
+  "file_count": 24,
+  "files": [
+    {
+      "path": "EXPERIMENT_2_FILE_PLACEMENT.md",
+      "bytes": 1227,
+      "sha256": "73e28febf46a310aff2724288f8bd8136196016ff7f923fe547fca80659385f6"
+    },
+    {
+      "path": "EXPERIMENT_2_README.md",
+      "bytes": 927,
+      "sha256": "433d3a3ce4abbcc061667e9288f5f400016990ca7d14b54ad26fd8024e4fd924"
+    },
+    {
+      "path": "data/curated_code_examples_v3.json",
+      "bytes": 14763,
+      "sha256": "4a48e9a1dbd694af38ad1046376f7ce8916ad9a8a8137aa1a1991def6b979e3e"
+    },
+    {
+      "path": "data/curated_comparisons_v3.json",
+      "bytes": 9984,
+      "sha256": "b4b96dde7a0c3595dbf64a97a39a16ef9d1f410fdee5249f225817c59c3f852c"
+    },
+    {
+      "path": "data/curated_topic_cards_v3.json",
+      "bytes": 37564,
+      "sha256": "83ac8a43b41b6e0bad26681a18c6dda440ae4a3d1e41a2b4fb06f682833f3653"
+    },
+    {
+      "path": "data/curated_workflows_v3.json",
+      "bytes": 9312,
+      "sha256": "fcd5909e318172cfdc9a87208f04bccde545db8cb74a6039b094404eb0ed33a2"
+    },
+    {
+      "path": "data/experiment2_quality_rules.json",
+      "bytes": 1217,
+      "sha256": "e05ba722c7808ef4decb2014418e42bca4d1156d4b384b784d4416e933bc83b0"
+    },
+    {
+      "path": "data/ml_ds_instruction_dataset_v3.jsonl",
+      "bytes": 315069,
+      "sha256": "dfc82e1e5cb88ad8370d66ce93efe651caf9f7a9f3e068abdfa91774164a4cca"
+    },
+    {
+      "path": "data/ml_ds_instruction_dataset_v3_initial_report.json",
+      "bytes": 2019,
+      "sha256": "1e362d6726123278dea6ca5ba8bb3d3b5d23236e6775af5322656259f08676ba"
+    },
+    {
+      "path": "data/ml_ds_instruction_dataset_v3_review_sample.csv",
+      "bytes": 37427,
+      "sha256": "d2bd013c0c20026d48747cdc0b7c1d409487efefdadecfac356f537e1b6efc47"
+    },
+    {
+      "path": "docs/EXPERIMENT_1_PRESERVATION_GUIDE.md",
+      "bytes": 1980,
+      "sha256": "d1b709da5394ca24f8786335854575da1ab1e31f28bf2d058f15fd9166a98e15"
+    },
+    {
+      "path": "docs/EXPERIMENT_2_GUIDE.md",
+      "bytes": 3666,
+      "sha256": "b22a967edef92027ad4d81973170d22956fffbd4cf856d79cccf771f951497ab"
+    },
+    {
+      "path": "notebooks/05_experiment_2_quality_upgrade_pipeline.ipynb",
+      "bytes": 21438,
+      "sha256": "c33b480c5b383ec3acde7b86e6bc9041b4919e134a1d0ba34b6f99fb3060f51f"
+    },
+    {
+      "path": "requirements-experiment2.txt",
+      "bytes": 47,
+      "sha256": "3b8deefc386f2bb7f60e5351841f03b574dce73c613c074e46448627f9d5eeed"
+    },
+    {
+      "path": "scripts/archive_experiment_1.py",
+      "bytes": 1249,
+      "sha256": "11baeee5b7479835fb0c1c0a7a6b930a1518c5c1bca383c299e348de9203ae7f"
+    },
+    {
+      "path": "scripts/build_dataset_v3.py",
+      "bytes": 1607,
+      "sha256": "03bbe494193b3f67a56c016fe07a2fb5e90826614926dd22490e1f5a2ce15e8c"
+    },
+    {
+      "path": "scripts/compare_experiment_1_vs_2.py",
+      "bytes": 1093,
+      "sha256": "625949f8d5dc498b198f436282cfb9545b38b520a613212e4d794aabf943a3b8"
+    },
+    {
+      "path": "src/experiment2_comparison.py",
+      "bytes": 9992,
+      "sha256": "3aa9afee33abbde8af644467daa7e93004846485303a2d9f5733f7c9ec61e2c0"
+    },
+    {
+      "path": "src/experiment2_dataset.py",
+      "bytes": 20750,
+      "sha256": "a46b9e9c55875cda6f0c15ec0579097f40a071ea3c5cf843080cc5115ca6c666"
+    },
+    {
+      "path": "src/experiment2_training.py",
+      "bytes": 13682,
+      "sha256": "1e577b1b9dc59c30c1141a4db9af64494545dfcea135273258e5b0f8d21af613"
+    },
+    {
+      "path": "src/experiment_archive.py",
+      "bytes": 10151,
+      "sha256": "1a8d9efd0e021c9e3f2997b814a1284d0472cc485d23fb17a00153e08287f4fa"
+    },
+    {
+      "path": "tests/test_experiment2_comparison.py",
+      "bytes": 2049,
+      "sha256": "668850362d39f384a3da1050aefe9c8679987f0c75669e13a326d5545cc1900f"
+    },
+    {
+      "path": "tests/test_experiment2_dataset.py",
+      "bytes": 2626,
+      "sha256": "58d9b188bbb68a58c27d8c8e614a2844a4b6fdce49d63eb32ad6d974ab4fa49b"
+    },
+    {
+      "path": "tests/test_experiment_archive.py",
+      "bytes": 1768,
+      "sha256": "cbe9dba65bd4c7aaea52542c9fd6b86c8fb6c88b42eb5154c75ac6122e958b7e"
+    }
+  ],
+  "validation": {
+    "new_tests_total_after_merge": 17,
+    "notebook_code_cells_parsed": 16,
+    "prebuilt_dataset_v3_records": 442
+  }
+}

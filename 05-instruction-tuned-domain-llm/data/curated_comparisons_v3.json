@@ -1,0 +1,162 @@
+[
+  {
+    "left": "classification",
+    "right": "regression",
+    "core_difference": "Classification predicts categories, whereas regression predicts continuous numerical values.",
+    "when_left": "Use classification when the target is a label such as pass/fail or defect type.",
+    "when_right": "Use regression when the target is a quantity such as cycle time or concentration.",
+    "caveat": "The same algorithm family may support both tasks, but metrics, output interpretation, and error costs differ."
+  },
+  {
+    "left": "precision",
+    "right": "recall",
+    "core_difference": "Precision measures correctness among predicted positives, whereas recall measures coverage among actual positives.",
+    "when_left": "Emphasize precision when false alarms are expensive.",
+    "when_right": "Emphasize recall when missing a true positive is expensive.",
+    "caveat": "The classification threshold usually trades one metric against the other."
+  },
+  {
+    "left": "standardization",
+    "right": "normalization",
+    "core_difference": "Standardization centers and scales by standard deviation, while normalization rescales by a range or vector norm.",
+    "when_left": "Use standardization for many linear, distance-based, and neural models when features have different units.",
+    "when_right": "Use normalization when a bounded range or unit-length representation is required.",
+    "caveat": "Both transformations must be fit using training data only."
+  },
+  {
+    "left": "overfitting",
+    "right": "underfitting",
+    "core_difference": "Overfitting captures training-specific noise, while underfitting fails to capture the main signal.",
+    "when_left": "Address overfitting with simpler models, regularization, more representative data, or stronger validation.",
+    "when_right": "Address underfitting with better features, more appropriate model capacity, or improved optimization.",
+    "caveat": "A leakage-prone validation design can hide both problems."
+  },
+  {
+    "left": "bagging",
+    "right": "boosting",
+    "core_difference": "Bagging trains learners largely independently and averages them to reduce variance, while boosting trains learners sequentially to correct errors.",
+    "when_left": "Use bagging when unstable base learners benefit from averaging.",
+    "when_right": "Use boosting when incremental error correction can improve predictive accuracy.",
+    "caveat": "Boosting can be more sensitive to noise and hyperparameters."
+  },
+  {
+    "left": "random forest",
+    "right": "gradient boosting",
+    "core_difference": "Random forests average many randomized trees, while gradient boosting builds trees sequentially to improve the current ensemble.",
+    "when_left": "Use random forests as robust nonlinear baselines with limited tuning.",
+    "when_right": "Use gradient boosting when careful tuning and strong tabular performance are priorities.",
+    "caveat": "Both require leakage-safe validation and subgroup error analysis."
+  },
+  {
+    "left": "L1 regularization",
+    "right": "L2 regularization",
+    "core_difference": "L1 encourages sparse coefficients and can set some to zero, while L2 smoothly shrinks coefficients.",
+    "when_left": "Use L1 when sparsity and variable selection are desirable.",
+    "when_right": "Use L2 when many correlated predictors may each contribute some signal.",
+    "caveat": "Scale features before applying either penalty."
+  },
+  {
+    "left": "mean absolute error",
+    "right": "root mean squared error",
+    "core_difference": "MAE weights absolute errors linearly, while RMSE gives larger errors more influence through squaring.",
+    "when_left": "Use MAE when a typical error in target units is easy to interpret.",
+    "when_right": "Use RMSE when large errors deserve stronger penalties.",
+    "caveat": "Review both with residual plots because neither reveals all error patterns."
+  },
+  {
+    "left": "ROC-AUC",
+    "right": "PR-AUC",
+    "core_difference": "ROC-AUC summarizes ranking across true-positive and false-positive rates, while PR-AUC focuses on precision and recall for the positive class.",
+    "when_left": "Use ROC-AUC for broad discrimination comparisons.",
+    "when_right": "Use PR-AUC when the positive class is rare and positive-case performance is central.",
+    "caveat": "PR-AUC changes with prevalence, and both are threshold-independent summaries rather than operating-point metrics."
+  },
+  {
+    "left": "train validation test split",
+    "right": "cross-validation",
+    "core_difference": "A fixed split uses one validation partition, while cross-validation rotates validation across multiple folds.",
+    "when_left": "Use a fixed split for large datasets or time-ordered deployment simulations.",
+    "when_right": "Use cross-validation when data are limited and repeated estimates improve stability.",
+    "caveat": "The split strategy must respect groups, entities, and time in either approach."
+  },
+  {
+    "left": "convolutional neural network",
+    "right": "Transformer",
+    "core_difference": "CNNs emphasize local patterns with shared filters, while Transformers use attention to combine information across positions.",
+    "when_left": "Use CNNs for efficient local visual pattern extraction.",
+    "when_right": "Use Transformers when long-range context or flexible token interactions are important.",
+    "caveat": "Architecture choice depends on data size, compute, latency, and deployment conditions."
+  },
+  {
+    "left": "recurrent neural network",
+    "right": "long short-term memory network",
+    "core_difference": "An LSTM is a gated recurrent network designed to retain information over longer spans than a basic RNN.",
+    "when_left": "Use a simple RNN for small sequence baselines when dependencies are short.",
+    "when_right": "Use an LSTM when longer temporal dependencies matter.",
+    "caveat": "Both are sequential and may be slower than Transformer-based alternatives."
+  },
+  {
+    "left": "LoRA",
+    "right": "full fine-tuning",
+    "core_difference": "LoRA trains compact low-rank updates while keeping base weights frozen, whereas full fine-tuning updates most or all model parameters.",
+    "when_left": "Use LoRA for lower memory, smaller artifacts, and multiple domain adapters.",
+    "when_right": "Use full fine-tuning when abundant data and compute justify maximum adaptation capacity.",
+    "caveat": "Neither method fixes weak or incorrect training data."
+  },
+  {
+    "left": "supervised learning",
+    "right": "unsupervised learning",
+    "core_difference": "Supervised learning uses labeled targets, while unsupervised learning discovers structure without target labels.",
+    "when_left": "Use supervised learning for prediction when reliable labels exist.",
+    "when_right": "Use unsupervised learning for exploration, segmentation, compression, or anomaly discovery.",
+    "caveat": "Unsupervised patterns require domain validation and are not substitute labels."
+  },
+  {
+    "left": "one-hot encoding",
+    "right": "embeddings",
+    "core_difference": "One-hot encoding gives each category an independent sparse indicator, while embeddings learn dense vectors that can capture similarity.",
+    "when_left": "Use one-hot encoding for low-cardinality categories and transparent linear models.",
+    "when_right": "Use embeddings for high-cardinality items or neural models where learned similarity is useful.",
+    "caveat": "Embeddings require sufficient data and may encode unwanted bias."
+  },
+  {
+    "left": "batch inference",
+    "right": "online inference",
+    "core_difference": "Batch inference scores many records on a schedule, while online inference returns predictions request by request with low latency.",
+    "when_left": "Use batch inference for periodic reports and large offline workloads.",
+    "when_right": "Use online inference when an application needs immediate responses.",
+    "caveat": "Online systems require stronger latency, availability, and observability controls."
+  },
+  {
+    "left": "data drift",
+    "right": "concept drift",
+    "core_difference": "Data drift changes the input distribution, while concept drift changes the relationship between inputs and outcomes.",
+    "when_left": "Investigate data drift when feature distributions move.",
+    "when_right": "Investigate concept drift when predictive performance declines despite similar inputs.",
+    "caveat": "Confirmed concept drift usually requires labeled outcomes."
+  },
+  {
+    "left": "probability calibration",
+    "right": "discrimination",
+    "core_difference": "Calibration asks whether probabilities match observed frequencies, while discrimination asks whether positives are ranked above negatives.",
+    "when_left": "Prioritize calibration when probabilities drive resource or risk decisions.",
+    "when_right": "Prioritize discrimination when ranking cases is the main goal.",
+    "caveat": "A model can be strong on one property and weak on the other."
+  },
+  {
+    "left": "feature engineering",
+    "right": "feature selection",
+    "core_difference": "Feature engineering creates new representations, while feature selection removes or retains existing predictors.",
+    "when_left": "Use engineering when domain transformations can expose signal.",
+    "when_right": "Use selection when redundancy, noise, or interpretability are concerns.",
+    "caveat": "Both steps must occur inside the validation workflow."
+  },
+  {
+    "left": "generative model",
+    "right": "discriminative model",
+    "core_difference": "A generative model represents how data or outputs can be produced, while a discriminative model directly predicts targets or decision boundaries.",
+    "when_left": "Use generative models for content generation, simulation, or modeling joint structure.",
+    "when_right": "Use discriminative models for focused prediction tasks.",
+    "caveat": "The distinction has several formal definitions, so the task and model family should be stated clearly."
+  }
+]

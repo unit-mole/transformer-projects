@@ -1,0 +1,77 @@
+{
+  "portfolio_readiness_score_out_of_10": 2.0,
+  "meaning": "Project evidence-completion score, not a universal model-quality score.",
+  "target_reached": false,
+  "checks": [
+    {
+      "name": "Transformer and LoRA implementation",
+      "weight": 1.0,
+      "passed": true,
+      "evidence": "src/model_training.py"
+    },
+    {
+      "name": "Reviewed dataset scale",
+      "weight": 1.0,
+      "passed": false,
+      "evidence": "0 records; splits={'train': 0, 'validation': 0, 'test': 0}"
+    },
+    {
+      "name": "Dataset validation, de-duplication, and leakage guard",
+      "weight": 1.0,
+      "passed": false,
+      "evidence": "enhanced_dataset_quality_report.json"
+    },
+    {
+      "name": "Trained LoRA adapter",
+      "weight": 1.5,
+      "passed": false,
+      "evidence": "models/lora_adapter"
+    },
+    {
+      "name": "Reproducible training metadata",
+      "weight": 1.0,
+      "passed": false,
+      "evidence": "models/model_metadata.json"
+    },
+    {
+      "name": "Independent held-out benchmark",
+      "weight": 1.0,
+      "passed": true,
+      "evidence": "80 benchmark records"
+    },
+    {
+      "name": "Multi-metric base and LoRA evaluation",
+      "weight": 1.5,
+      "passed": false,
+      "evidence": "outputs/base_model_metrics.json and lora_model_metrics.json"
+    },
+    {
+      "name": "Base-versus-LoRA comparison with confidence intervals",
+      "weight": 1.0,
+      "passed": false,
+      "evidence": "outputs/base_vs_lora_comparison.json"
+    },
+    {
+      "name": "Human factual and preference review",
+      "weight": 0.5,
+      "passed": false,
+      "evidence": "outputs/release_manifest.json"
+    },
+    {
+      "name": "Published model/demo links and deployment evidence",
+      "weight": 0.5,
+      "passed": false,
+      "evidence": "README.md and Hugging Face deployment"
+    }
+  ],
+  "next_actions": [
+    "Reviewed dataset scale",
+    "Dataset validation, de-duplication, and leakage guard",
+    "Trained LoRA adapter",
+    "Reproducible training metadata",
+    "Multi-metric base and LoRA evaluation",
+    "Base-versus-LoRA comparison with confidence intervals",
+    "Human factual and preference review",
+    "Published model/demo links and deployment evidence"
+  ]
+}

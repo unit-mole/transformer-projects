@@ -1,0 +1,45 @@
+{
+  "experiment_name": "flan_t5_base_lora_20260730_120312",
+  "source_path": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\05-instruction-tuned-domain-llm\\outputs\\experiments\\flan_t5_base_lora_20260730_120312",
+  "training_status": "completed",
+  "base_model": "google/flan-t5-base",
+  "fine_tuning_method": "LoRA/PEFT",
+  "dataset_path": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\05-instruction-tuned-domain-llm\\data\\ml_ds_instruction_dataset_v2.jsonl",
+  "dataset_split_sizes": {
+    "train": 434,
+    "validation": 53,
+    "test": 56
+  },
+  "validation_loss": 3.375509738922119,
+  "test_loss": 3.424408435821533,
+  "validation_perplexity": 29.239184,
+  "best_checkpoint": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\05-instruction-tuned-domain-llm\\outputs\\experiments\\flan_t5_base_lora_20260730_120312\\training\\checkpoint-168",
+  "trainable_parameters": 1769472,
+  "trainable_percentage": 0.709641,
+  "evaluation_status": "completed",
+  "benchmark_examples": 80,
+  "human_preference_counts": {
+    "base": 18,
+    "lora": 51,
+    "tie": 11,
+    "missing": 0
+  },
+  "base_human_review": {
+    "rows": 80,
+    "mean_factuality": 1.125,
+    "mean_relevance": 1.3875,
+    "mean_clarity": 2.2875,
+    "mean_instruction_following": 1.0125
+  },
+  "lora_human_review": {
+    "rows": 80,
+    "mean_factuality": 1.4125,
+    "mean_relevance": 2.4,
+    "mean_clarity": 2.3125,
+    "mean_instruction_following": 1.475
+  },
+  "decision": "preserved_as_experiment_1_not_promoted",
+  "reason": "Training completed and LoRA improved some relative metrics, but human review found weak factuality, circular answers, and hallucination risk.",
+  "archived_at_utc": "2026-07-30T20:38:43.222526+00:00",
+  "archive_path": "C:\\Users\\atripathi\\OneDrive - Veralto\\Desktop\\AI Codes\\GIT Projects\\transformer-projects\\05-instruction-tuned-domain-llm\\outputs\\experiment_archives\\experiment_1_initial_lora"
+}
