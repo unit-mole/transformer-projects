@@ -1,0 +1,171 @@
+name: Project 05 - Instruction-Tuned Domain LLM CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "05-instruction-tuned-domain-llm/**"
+      - ".github/workflows/05-instruction-tuned-domain-llm.yml"
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "05-instruction-tuned-domain-llm/**"
+      - ".github/workflows/05-instruction-tuned-domain-llm.yml"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-project:
+    name: Validate Project 05
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: 05-instruction-tuned-domain-llm
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Verify required project structure
+        shell: bash
+        run: |
+          test -f README.md
+          test -d src
+          test -d notebooks
+          test -d data
+          echo "Required Project 05 structure is present."
+
+      - name: Compile Python source files
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import py_compile
+          import sys
+
+          excluded = {
+              ".git",
+              ".venv",
+              "__pycache__",
+              ".ipynb_checkpoints",
+              "outputs",
+              "models",
+          }
+
+          python_files = [
+              path
+              for path in Path(".").rglob("*.py")
+              if not any(part in excluded for part in path.parts)
+          ]
+
+          failures = []
+          for path in python_files:
+              try:
+                  py_compile.compile(str(path), doraise=True)
+              except py_compile.PyCompileError as exc:
+                  failures.append(f"{path}: {exc}")
+
+          print(f"Checked {len(python_files)} Python files.")
+
+          if failures:
+              print("\n".join(failures))
+              sys.exit(1)
+
+          print("Python syntax validation passed.")
+          PY
+
+      - name: Validate JSON, JSONL, and notebook files
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          import sys
+
+          excluded = {
+              ".git",
+              ".venv",
+              "__pycache__",
+              ".ipynb_checkpoints",
+          }
+
+          failures = []
+          checked = 0
+
+          for path in Path(".").rglob("*"):
+              if not path.is_file():
+                  continue
+              if any(part in excluded for part in path.parts):
+                  continue
+
+              try:
+                  if path.suffix.lower() in {".json", ".ipynb"}:
+                      with path.open("r", encoding="utf-8") as handle:
+                          json.load(handle)
+                      checked += 1
+
+                  elif path.suffix.lower() == ".jsonl":
+                      with path.open("r", encoding="utf-8") as handle:
+                          for line_number, line in enumerate(handle, start=1):
+                              if line.strip():
+                                  json.loads(line)
+                      checked += 1
+
+              except Exception as exc:
+                  failures.append(f"{path}: {exc}")
+
+          print(f"Checked {checked} JSON, JSONL, and notebook files.")
+
+          if failures:
+              print("\n".join(failures))
+              sys.exit(1)
+
+          print("Structured-data validation passed.")
+          PY
+
+      - name: Check for oversized repository files
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import sys
+
+          limit_mb = 50
+          limit_bytes = limit_mb * 1024 * 1024
+          excluded = {".git", ".venv"}
+
+          oversized = [
+              (path, path.stat().st_size)
+              for path in Path(".").rglob("*")
+              if path.is_file()
+              and not any(part in excluded for part in path.parts)
+              and path.stat().st_size > limit_bytes
+          ]
+
+          if oversized:
+              for path, size in oversized:
+                  print(f"{path}: {size / (1024 * 1024):.2f} MB")
+              print(
+                  "Large model weights and checkpoints should be stored on "
+                  "Hugging Face, not in the Git repository."
+              )
+              sys.exit(1)
+
+          print(f"No files larger than {limit_mb} MB were found.")
+          PY
+
+      - name: Project 05 validation completed
+        run: |
+          echo "Project 05 source code and repository artifacts passed CI validation."
