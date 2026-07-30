@@ -358,11 +358,20 @@
     </section>
 
     <section id="evaluation" class="section container">
-      <div class="section-heading">
+      <div class="section-heading evaluation-heading">
         <div>
-          <span class="kicker">Evaluation framework</span>
-          <h2>Metrics beyond classification accuracy</h2>
+          <span class="kicker">Metric guide</span>
+          <h2>How ranking quality is measured</h2>
+          <p class="section-intro">
+            Live values for the currently selected query are displayed in the
+            results section above. The cards below explain each measure, while
+            the verified BEIR section reports aggregate performance across
+            hundreds of held-out benchmark queries.
+          </p>
         </div>
+        <span class="benchmark-proof">
+          Verified offline evaluation
+        </span>
       </div>
 
       <div class="evaluation-grid">
@@ -395,6 +404,56 @@
           </p>
         </article>
       </div>
+
+      <section id="benchmark" class="benchmark-section" aria-labelledby="benchmarkTitle">
+        <div class="benchmark-header">
+          <div>
+            <span class="kicker">Verified BEIR benchmark</span>
+            <h3 id="benchmarkTitle">Aggregate ranking evidence</h3>
+            <p>
+              These fixed values were generated offline with the Python
+              evaluation pipeline. They are separate from the live
+              query-specific metrics shown above.
+            </p>
+          </div>
+
+          <div class="benchmark-summary-strip" aria-label="Benchmark scale">
+            <span>
+              <strong id="benchmarkQueryCount">—</strong>
+              queries
+            </span>
+            <span>
+              <strong id="benchmarkDocumentCount">—</strong>
+              documents
+            </span>
+            <span>
+              <strong id="benchmarkBootstrapCount">—</strong>
+              bootstrap samples
+            </span>
+          </div>
+        </div>
+
+        <div id="benchmarkStatus" class="notice notice--benchmark-loading">
+          <strong>Loading verified benchmark results…</strong>
+        </div>
+
+        <div id="benchmarkCards" class="benchmark-cards" hidden></div>
+
+        <div class="benchmark-footer">
+          <p>
+            Candidate K and rerank K were both 100. Confidence intervals use
+            paired bootstrap resampling across queries.
+          </p>
+          <a
+            class="button button--secondary button--small"
+            href="https://github.com/unit-mole/transformer-projects/blob/main/03-cross-encoder-bi-encoder-ranking-system/BENCHMARK_RESULTS.md"
+            target="_blank"
+            rel="noreferrer"
+          >
+            View full benchmark report
+          </a>
+        </div>
+      </section>
     </section>
 
     <section id="responsible-use" class="section section--warning">

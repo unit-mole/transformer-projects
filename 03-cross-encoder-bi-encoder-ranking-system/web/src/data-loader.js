@@ -56,3 +56,8 @@ export async function loadDemoData() {
     qrelsByQuery: buildQrelsLookup(qrels),
   };
 }
+
+
+export async function loadBenchmarkSummary() {
+  return fetchJson("benchmark_summary.json");
+}

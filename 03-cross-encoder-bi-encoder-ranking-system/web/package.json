@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
-    "check": "node --check src/constants.js && node --check src/data-loader.js && node --check src/metrics.js && node --check src/export-results.js && node --check src/ranking-engine.js && node --check src/ui.js && node --check src/main.js",
+    "check": "node --check src/constants.js && node --check src/benchmark-summary.js && node --check src/data-loader.js && node --check src/metrics.js && node --check src/export-results.js && node --check src/ranking-engine.js && node --check src/ui.js && node --check src/main.js",
     "test": "node --test tests/*.test.js"
   },
   "dependencies": {

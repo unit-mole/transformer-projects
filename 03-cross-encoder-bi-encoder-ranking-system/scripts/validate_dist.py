@@ -11,6 +11,7 @@ REQUIRED = [
     DIST / "data" / "sample_documents.json",
     DIST / "data" / "sample_queries.json",
     DIST / "data" / "sample_qrels.json",
+    DIST / "data" / "benchmark_summary.json",
 ]
 
 

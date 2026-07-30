@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "status": "completed",
+  "generated_from": "BEIR benchmark evaluation",
+  "source": "outputs/benchmark/latest",
+  "completed_on": "2026-07-29",
+  "model_label": "base_minilm",
+  "models": {
+    "bi_encoder": "sentence-transformers/all-MiniLM-L6-v2",
+    "cross_encoder": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  },
+  "configuration": {
+    "candidate_k": 100,
+    "rerank_k": 100,
+    "bootstrap_samples": 2000,
+    "confidence": 0.95
+  },
+  "totals": {
+    "datasets": 2,
+    "queries": 623,
+    "documents": 8816
+  },
+  "datasets": [
+    {
+      "id": "scifact",
+      "dataset": "SciFact",
+      "domain": "Scientific claim and evidence retrieval",
+      "query_count": 300,
+      "corpus_documents": 5183,
+      "relevance_judgments": 339,
+      "bi_encoder": {
+        "mrr_at_10": 0.6068452380952382,
+        "ndcg_at_10": 0.6484032131749053,
+        "map_at_100": 0.6054747169613449,
+        "recall_at_10": 0.7883333333333333,
+        "recall_at_100": 0.925
+      },
+      "reranked": {
+        "mrr_at_10": 0.6559100529100529,
+        "ndcg_at_10": 0.6867687810573595,
+        "map_at_100": 0.6481242796955604,
+        "recall_at_10": 0.808888888888889,
+        "recall_at_100": 0.925
+      },
+      "improvement": {
+        "mrr_at_10": {
+          "absolute": 0.04906481481481482,
+          "ci_lower": 0.009614285714285716,
+          "ci_upper": 0.0858023148148148,
+          "probability_positive": 0.9935
+        },
+        "ndcg_at_10": {
+          "absolute": 0.038365567882454155,
+          "ci_lower": 0.005116448399790363,
+          "ci_upper": 0.07096590227370432,
+          "probability_positive": 0.986
+        },
+        "map_at_100": {
+          "absolute": 0.042649562734215454,
+          "ci_lower": 0.005161958807484393,
+          "ci_upper": 0.07741630600200086,
+          "probability_positive": 0.989
+        }
+      },
+      "latency_ms": {
+        "bi_encoder_mean_query": 0.2353769998687009,
+        "two_stage_mean_query": 41.980234333119974
+      }
+    },
+    {
+      "id": "nfcorpus",
+      "dataset": "NFCorpus",
+      "domain": "Biomedical information retrieval",
+      "query_count": 323,
+      "corpus_documents": 3633,
+      "relevance_judgments": 12334,
+      "bi_encoder": {
+        "mrr_at_10": 0.5088210722885644,
+        "ndcg_at_10": 0.3190178170546874,
+        "map_at_100": 0.15369184432188,
+        "recall_at_10": 0.15892031320875977,
+        "recall_at_100": 0.3148805321740235
+      },
+      "reranked": {
+        "mrr_at_10": 0.5634490638360607,
+        "ndcg_at_10": 0.34532762078059503,
+        "map_at_100": 0.17572959062699858,
+        "recall_at_10": 0.1593774633810361,
+        "recall_at_100": 0.3148805321740235
+      },
+      "improvement": {
+        "mrr_at_10": {
+          "absolute": 0.05462799154749619,
+          "ci_lower": 0.02013805960980884,
+          "ci_upper": 0.08691102756892231,
+          "probability_positive": 0.9995
+        },
+        "ndcg_at_10": {
+          "absolute": 0.026309803725907594,
+          "ci_lower": 0.008924228509278296,
+          "ci_upper": 0.04361704201565459,
+          "probability_positive": 0.9985
+        },
+        "map_at_100": {
+          "absolute": 0.022037746305118566,
+          "ci_lower": 0.010084227170233962,
+          "ci_upper": 0.03544517023053487,
+          "probability_positive": 1.0
+        }
+      },
+      "latency_ms": {
+        "bi_encoder_mean_query": 0.33761702777800545,
+        "two_stage_mean_query": 42.12068544878068
+      }
+    }
+  ]
+}

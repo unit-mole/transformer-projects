@@ -1,6 +1,10 @@
 import { DEPLOYMENT, MODEL_IDS } from "./constants.js";
-import { loadDemoData } from "./data-loader.js";
+import { loadBenchmarkSummary, loadDemoData } from "./data-loader.js";
 import { downloadJson } from "./export-results.js";
+import {
+  renderBenchmarkSummary,
+  renderBenchmarkSummaryError,
+} from "./benchmark-summary.js";
 import { calculateQueryMetrics } from "./metrics.js";
 import { BrowserRankingEngine } from "./ranking-engine.js";
 import {
@@ -174,6 +178,13 @@ async function initialize() {
   try {
     setRuntimeStatus("loading", "Loading sample data");
     state.data = await loadDemoData();
+
+    try {
+      const benchmarkSummary = await loadBenchmarkSummary();
+      renderBenchmarkSummary(benchmarkSummary);
+    } catch (benchmarkError) {
+      renderBenchmarkSummaryError(benchmarkError);
+    }
 
     state.engine = new BrowserRankingEngine(
       state.data.documents,

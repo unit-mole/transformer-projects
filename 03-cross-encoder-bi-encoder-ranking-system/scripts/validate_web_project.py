@@ -14,6 +14,7 @@ REQUIRED_FILES = [
     WEB_ROOT / "public" / "data" / "sample_documents.json",
     WEB_ROOT / "public" / "data" / "sample_queries.json",
     WEB_ROOT / "public" / "data" / "sample_qrels.json",
+    WEB_ROOT / "public" / "data" / "benchmark_summary.json",
     WEB_ROOT / "src" / "constants.js",
     WEB_ROOT / "src" / "data-loader.js",
     WEB_ROOT / "src" / "metrics.js",
@@ -62,6 +63,9 @@ def main() -> None:
     qrels = load_json(
         WEB_ROOT / "public" / "data" / "sample_qrels.json"
     )
+    benchmark = load_json(
+        WEB_ROOT / "public" / "data" / "benchmark_summary.json"
+    )
 
     if len(documents) != 24:
         raise SystemExit(f"Expected 24 documents, found {len(documents)}.")
@@ -69,6 +73,46 @@ def main() -> None:
         raise SystemExit(f"Expected 12 queries, found {len(queries)}.")
     if len(qrels) != 36:
         raise SystemExit(f"Expected 36 qrels, found {len(qrels)}.")
+
+    if benchmark.get("status") != "completed":
+        raise SystemExit("Benchmark summary must have status=completed.")
+    if benchmark.get("totals", {}).get("queries") != 623:
+        raise SystemExit("Expected 623 total benchmark queries.")
+    if benchmark.get("totals", {}).get("documents") != 8816:
+        raise SystemExit("Expected 8,816 total benchmark documents.")
+
+    benchmark_datasets = {
+        row.get("id"): row for row in benchmark.get("datasets", [])
+    }
+    expected_benchmark_datasets = {
+        "scifact": 300,
+        "nfcorpus": 323,
+    }
+    if set(benchmark_datasets) != set(expected_benchmark_datasets):
+        raise SystemExit(
+            "Benchmark summary must contain SciFact and NFCorpus."
+        )
+
+    for dataset_id, expected_queries in expected_benchmark_datasets.items():
+        row = benchmark_datasets[dataset_id]
+        if row.get("query_count") != expected_queries:
+            raise SystemExit(
+                f"Unexpected query count for {dataset_id}."
+            )
+
+        before = float(row["bi_encoder"]["ndcg_at_10"])
+        after = float(row["reranked"]["ndcg_at_10"])
+        delta = float(row["improvement"]["ndcg_at_10"]["absolute"])
+
+        if abs((after - before) - delta) > 1e-9:
+            raise SystemExit(
+                f"nDCG improvement is inconsistent for {dataset_id}."
+            )
+        if delta <= 0:
+            raise SystemExit(
+                f"Expected positive nDCG improvement for {dataset_id}."
+            )
+
 
     document_ids = {row["document_id"] for row in documents}
     query_ids = {row["query_id"] for row in queries}
@@ -107,6 +151,8 @@ def main() -> None:
     print("Documents: 24")
     print("Queries: 12")
     print("Qrels: 36")
+    print("Benchmark queries: 623")
+    print("Benchmark documents: 8,816")
     print("Browser runtime: Transformers.js + ONNX Runtime Web")
 
 
