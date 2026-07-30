@@ -2,24 +2,32 @@ name: 03 Cross Encoder Bi Encoder Ranking System CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - "03-cross-encoder-bi-encoder-ranking-system/**"
       - ".github/workflows/03-cross-encoder-bi-encoder-ranking-system.yml"
+
   pull_request:
     paths:
       - "03-cross-encoder-bi-encoder-ranking-system/**"
       - ".github/workflows/03-cross-encoder-bi-encoder-ranking-system.yml"
+
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: project-03-static-space-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   PROJECT_DIR: 03-cross-encoder-bi-encoder-ranking-system
 
 jobs:
   test:
+    name: Test Project 03
     runs-on: ubuntu-latest
     timeout-minutes: 25
 
@@ -35,6 +43,7 @@ jobs:
           cache-dependency-path: |
             03-cross-encoder-bi-encoder-ranking-system/requirements.txt
             03-cross-encoder-bi-encoder-ranking-system/requirements-dev.txt
+            03-cross-encoder-bi-encoder-ranking-system/requirements-benchmark.txt
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
@@ -87,11 +96,19 @@ jobs:
         run: pytest -q
 
   deploy-static-space:
+    name: Deploy Project 03 Static Space
     needs: test
+
+    # Allows deployment from:
+    # 1. A push to main
+    # 2. A manual workflow run on main
+    # Pull requests will not deploy.
     if: >-
-      github.event_name == 'push' &&
+      (github.event_name == 'push' ||
+       github.event_name == 'workflow_dispatch') &&
       github.ref == 'refs/heads/main' &&
       vars.HF_SPACE_ID != ''
+
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -99,16 +116,35 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
+      - name: Validate Hugging Face deployment configuration
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_SPACE_ID: ${{ vars.HF_SPACE_ID }}
+        run: |
+          if [ -z "$HF_TOKEN" ]; then
+            echo "HF_TOKEN repository secret is missing."
+            exit 1
+          fi
+
+          if [ -z "$HF_SPACE_ID" ]; then
+            echo "HF_SPACE_ID repository variable is missing."
+            exit 1
+          fi
+
+          echo "Target Hugging Face Space: $HF_SPACE_ID"
+
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
           node-version: "22"
 
-      - name: Build Static Space
+      - name: Install browser dependencies
         working-directory: ${{ env.PROJECT_DIR }}/web
-        run: |
-          npm install
-          npm run build
+        run: npm install
+
+      - name: Build production Static Space
+        working-directory: ${{ env.PROJECT_DIR }}/web
+        run: npm run build
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -116,7 +152,11 @@ jobs:
           python-version: "3.11"
 
       - name: Install Hugging Face Hub client
-        run: pip install "huggingface_hub>=0.28,<2"
+        run: python -m pip install "huggingface_hub>=0.28,<2"
+
+      - name: Validate generated Static Space
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: python scripts/validate_dist.py
 
       - name: Upload Vite build to Hugging Face Static Space
         working-directory: ${{ env.PROJECT_DIR }}
@@ -124,3 +164,10 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           HF_SPACE_ID: ${{ vars.HF_SPACE_ID }}
         run: python scripts/deploy_static_space.py
+
+      - name: Display deployed Space URL
+        env:
+          HF_SPACE_ID: ${{ vars.HF_SPACE_ID }}
+        run: |
+          echo "Project 03 deployed successfully."
+          echo "Space URL: https://huggingface.co/spaces/$HF_SPACE_ID"
