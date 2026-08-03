@@ -1,96 +1,399 @@
-# Python
+# =============================================================================
+# Transformer Projects Monorepo — .gitignore
+# =============================================================================
+# This repository intentionally tracks source code, notebooks, evaluation
+# reports, charts, screenshots, small metadata files, and static deployment
+# assets. The rules below exclude local environments, caches, secrets,
+# transient training files, and large model checkpoints.
+# =============================================================================
+
+
+# -----------------------------------------------------------------------------
+# Operating-system files
+# -----------------------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100/
+.Trashes/
+.fseventsd/
+Thumbs.db
+Thumbs.db:encryptable
+Desktop.ini
+desktop.ini
+$RECYCLE.BIN/
+ehthumbs.db
+ehthumbs_vista.db
+
+
+# -----------------------------------------------------------------------------
+# Editors and IDEs
+# -----------------------------------------------------------------------------
+.vscode/
+**/.vscode/
+.idea/
+**/.idea/
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*.swn
+*~
+.project
+.classpath
+.settings/
+
+
+# -----------------------------------------------------------------------------
+# Python bytecode and caches
+# -----------------------------------------------------------------------------
 __pycache__/
+**/__pycache__/
 *.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.python-version
+
 .pytest_cache/
+**/.pytest_cache/
 .mypy_cache/
+**/.mypy_cache/
+.pyright/
+**/.pyright/
+.ruff_cache/
+**/.ruff_cache/
+.hypothesis/
+**/.hypothesis/
+.tox/
+.nox/
+
+
+# -----------------------------------------------------------------------------
+# Python virtual environments
+# -----------------------------------------------------------------------------
 .venv/
+**/.venv/
 venv/
+**/venv/
+env/
+**/env/
+ENV/
+**/ENV/
+virtualenv/
+**/virtualenv/
+.python_env/
+**/.python_env/
+
+
+# -----------------------------------------------------------------------------
+# Python packaging and build artifacts
+# -----------------------------------------------------------------------------
+build/
+**/build/
+dist/
+**/dist/
+develop-eggs/
+eggs/
+.eggs/
+**/.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+**/*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+
+# -----------------------------------------------------------------------------
+# Test coverage and profiling
+# -----------------------------------------------------------------------------
+.coverage
+.coverage.*
+coverage.xml
+coverage.json
+htmlcov/
+**/htmlcov/
+.pytest_cache/
+.prof
+*.prof
+*.lprof
+.cachegrind
+nosetests.xml
+
+
+# -----------------------------------------------------------------------------
+# Jupyter notebooks
+# -----------------------------------------------------------------------------
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+*.nbconvert.ipynb
+.jupyter/
+**/.jupyter/
+
+
+# -----------------------------------------------------------------------------
+# Secrets, credentials, tokens, and local configuration
+# -----------------------------------------------------------------------------
 .env
 .env.*
 !.env.example
+!.env.template
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+service-account*.json
+secrets.json
+token.json
+tokens.json
 
-# Jupyter
-.ipynb_checkpoints/
+.streamlit/secrets.toml
+**/.streamlit/secrets.toml
+.gradio/
+**/.gradio/
 
-# ML artifacts and datasets
-**/data/raw/
-**/data/vqa_v2/
-**/checkpoints/
-**/models/cache/
-**/*.pt
-**/*.pth
-**/*.ckpt
-**/*.safetensors
-**/*.onnx
-**/outputs/runs/
+# Hugging Face local authentication and CLI state
+.huggingface/
+**/.huggingface/
+huggingface/token
+**/huggingface/token
+
+# Vercel local project state
+.vercel/
+**/.vercel/
+
+
+# -----------------------------------------------------------------------------
+# Logs and temporary files
+# -----------------------------------------------------------------------------
+*.log
+logs/
+**/logs/
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*.orig
+*.rej
+*.pid
+*.pid.lock
+*.lock
+tmp/
+**/tmp/
+temp/
+**/temp/
+.cache/
+**/.cache/
+
+
+# -----------------------------------------------------------------------------
+# Machine-learning framework caches
+# -----------------------------------------------------------------------------
+torch_cache/
+**/torch_cache/
+torch_extensions/
+**/torch_extensions/
+transformers_cache/
+**/transformers_cache/
+datasets_cache/
+**/datasets_cache/
+huggingface_cache/
+**/huggingface_cache/
+hf_cache/
+**/hf_cache/
+model_cache/
+**/model_cache/
+
+# Common user cache directories accidentally created inside projects
+.cache/huggingface/
+**/.cache/huggingface/
+.cache/torch/
+**/.cache/torch/
+
+
+# -----------------------------------------------------------------------------
+# Experiment tracking and visualization tools
+# -----------------------------------------------------------------------------
+wandb/
 **/wandb/
+mlruns/
+**/mlruns/
+mlartifacts/
+**/mlartifacts/
+tensorboard/
+**/tensorboard/
+tb_logs/
+**/tb_logs/
+lightning_logs/
+**/lightning_logs/
+ray_results/
+**/ray_results/
 
-# Node / static builds
+
+# -----------------------------------------------------------------------------
+# Training checkpoints and large native model weights
+# -----------------------------------------------------------------------------
+checkpoint-*/
+**/checkpoint-*/
+checkpoints/
+**/checkpoints/
+training_checkpoints/
+**/training_checkpoints/
+saved_checkpoints/
+**/saved_checkpoints/
+
+# Hugging Face Trainer checkpoint directories under output folders
+**/outputs/checkpoint-*/
+**/training/checkpoint-*/
+**/trainer/checkpoint-*/
+
+# Native framework model weights are stored outside normal Git when large
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.h5
+*.hdf5
+*.keras
+*.pb
+*.tflite
+
+# Optimizer and scheduler states
+optimizer.pt
+scheduler.pt
+scaler.pt
+rng_state.pth
+training_args.bin
+
+
+# -----------------------------------------------------------------------------
+# Downloaded or generated large datasets
+# -----------------------------------------------------------------------------
+**/data/raw/
+**/data/downloads/
+**/data/downloaded/
+**/data/external/
+**/data/cache/
+**/data/tmp/
+**/datasets/raw/
+**/datasets/downloads/
+**/datasets/cache/
+
+# Local dataset-library artifacts
+*.arrow
+*.parquet.lock
+dataset_dict.json.lock
+
+
+# -----------------------------------------------------------------------------
+# Generated prediction dumps and transient exports
+# -----------------------------------------------------------------------------
+predictions/
+**/predictions/
+generated_predictions/
+**/generated_predictions/
+inference_cache/
+**/inference_cache/
+batch_outputs/
+**/batch_outputs/
+*.json.tmp
+*.csv.tmp
+
+
+# -----------------------------------------------------------------------------
+# Node.js, JavaScript, and web-development artifacts
+# -----------------------------------------------------------------------------
+node_modules/
 **/node_modules/
-**/dist/
-**/.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+**/.npm/
+.yarn/
+**/.yarn/
+.pnpm-store/
+**/.pnpm-store/
+.next/
+**/.next/
+.nuxt/
+**/.nuxt/
+.svelte-kit/
+**/.svelte-kit/
+parcel-cache/
+**/.parcel-cache/
+.turbo/
+**/.turbo/
+out/
+**/out/
 
-# OS / editors
-.DS_Store
-Thumbs.db
-.vscode/
-.idea/
-
-# Project 08 local and temporary files
-08-image-classification-vision-transformer/.venv/
-08-image-classification-vision-transformer/.ipynb_checkpoints/
-08-image-classification-vision-transformer/**/__pycache__/
-08-image-classification-vision-transformer/data/raw/
-08-image-classification-vision-transformer/data/cifar-10-batches-py/
-08-image-classification-vision-transformer/data/cifar-10-python.tar.gz
-08-image-classification-vision-transformer/outputs/checkpoints/
-08-image-classification-vision-transformer/backups/
-08-image-classification-vision-transformer/browser_test_images/
-
-# Project 10 local environments, caches, and source-corpus copies
-10-ai-portfolio-rag-assistant/.venv/
-10-ai-portfolio-rag-assistant/venv/
-10-ai-portfolio-rag-assistant/**/.venv*/
-10-ai-portfolio-rag-assistant/**/venv*/
-10-ai-portfolio-rag-assistant/**/__pycache__/
-10-ai-portfolio-rag-assistant/.ipynb_checkpoints/
-10-ai-portfolio-rag-assistant/**/.ipynb_checkpoints/
-10-ai-portfolio-rag-assistant/.pytest_cache/
-10-ai-portfolio-rag-assistant/.mypy_cache/
-
-# Raw portfolio documents are collected locally and must not be committed.
-# Keep processed corpus files, public/data artifacts, outputs, notebooks,
-# scripts, source code, tests, and documentation in Git.
-10-ai-portfolio-rag-assistant/data/raw_portfolio_docs/
-
-# Project 10 local Node / Next.js build artifacts
-10-ai-portfolio-rag-assistant/node_modules/
-10-ai-portfolio-rag-assistant/.next/
-
-# Project 10 secrets; keep only the public template
-10-ai-portfolio-rag-assistant/.env
-10-ai-portfolio-rag-assistant/.env.local
-10-ai-portfolio-rag-assistant/.env.production
-10-ai-portfolio-rag-assistant/.env.development
-!10-ai-portfolio-rag-assistant/.env.example
+# Local browser-test artifacts
+playwright-report/
+**/playwright-report/
+test-results/
+**/test-results/
+blob-report/
+**/blob-report/
 
 
-# Project 05 — local environment and caches
-05-instruction-tuned-domain-llm/.venv/
-05-instruction-tuned-domain-llm/**/__pycache__/
-05-instruction-tuned-domain-llm/**/*.pyc
-05-instruction-tuned-domain-llm/**/.ipynb_checkpoints/
-05-instruction-tuned-domain-llm/.env
-05-instruction-tuned-domain-llm/.streamlit/secrets.toml
+# -----------------------------------------------------------------------------
+# Deployment-provider local state
+# -----------------------------------------------------------------------------
+.netlify/
+**/.netlify/
+.firebase/
+**/.firebase/
+.serverless/
+**/.serverless/
 
-# Training checkpoints and model weights
-05-instruction-tuned-domain-llm/**/checkpoint-*/
-05-instruction-tuned-domain-llm/**/*.safetensors
-05-instruction-tuned-domain-llm/**/*.bin
-05-instruction-tuned-domain-llm/**/*.pt
-05-instruction-tuned-domain-llm/**/*.pth
 
-# Temporary files
-05-instruction-tuned-domain-llm/**/wandb/
-05-instruction-tuned-domain-llm/**/runs/
-Thumbs.db
+# -----------------------------------------------------------------------------
+# Documentation build outputs
+# -----------------------------------------------------------------------------
+site/
+**/site/
+_build/
+**/_build/
+docs/_build/
+**/docs/_build/
+.mkdocs_cache/
+**/.mkdocs_cache/
+
+
+# -----------------------------------------------------------------------------
+# OneDrive and conflict-copy artifacts
+# -----------------------------------------------------------------------------
+*conflicted copy*
+*Conflicted copy*
+~$*
+*.sync-conflict-*
+
+
+# -----------------------------------------------------------------------------
+# Important repository policy
+# -----------------------------------------------------------------------------
+# Do NOT ignore entire project output folders. This portfolio intentionally
+# tracks compact evaluation JSON/CSV files, charts, screenshots, model cards,
+# dataset cards, human-review evidence, and static deployment assets.
+#
+# Do NOT ignore ONNX files globally. Some browser deployments intentionally
+# track validated ONNX artifacts under docs/ or project deployment folders.
+#
+# Large files already tracked by Git remain tracked even after adding these
+# rules. Use `git rm --cached <path>` only when you deliberately want to remove
+# an already tracked local artifact from future commits.
