@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Interactive evaluation showcase for FLAN-T5 LoRA instruction tuning." />
+  <title>Project 05 — Instruction-Tuned Domain LLM</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav class="nav shell">
+      <div class="brand">Project 05</div>
+      <div class="nav-links">
+        <a href="#performance">Performance</a>
+        <a href="#explorer">Benchmark</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#limitations">Limitations</a>
+        <a href="https://github.com/unit-mole/transformer-projects/tree/main/05-instruction-tuned-domain-llm" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </div>
+    </nav>
+
+    <div class="shell hero-grid">
+      <div>
+        <div class="eyebrow">TRANSFORMERS · LORA · PEFT · HUMAN EVALUATION</div>
+        <h1>Instruction-Tuned<br />Domain LLM</h1>
+        <p class="hero-copy">
+          An evidence-driven portfolio project covering dataset engineering,
+          two FLAN-T5-base LoRA experiments, automated metrics, human review,
+          release gating, CI, and static deployment.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#performance">View model performance</a>
+          <a class="button secondary" href="#workflow">See project workflow</a>
+        </div>
+        <p class="static-note">
+          Free Static Space · Real saved benchmark results · No live Python inference
+        </p>
+      </div>
+
+      <div class="model-card">
+        <div class="model-card-top">
+          <span class="status-dot"></span>
+          <span>Final model decision</span>
+        </div>
+        <div class="selected-model">Experiment 1</div>
+        <div class="model-detail"><span>Base model</span><strong>FLAN-T5-base</strong></div>
+        <div class="model-detail"><span>Fine-tuning</span><strong>LoRA / PEFT</strong></div>
+        <div class="model-detail"><span>Benchmark</span><strong>80 prompts</strong></div>
+        <div class="model-detail"><span>Exp1 vs Exp2 human wins</span><strong>57 vs 12</strong></div>
+        <div class="decision">Selected after automated evaluation, direct human review, and release-quality gating</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="performance" class="section shell">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow dark">MODEL PERFORMANCE DASHBOARD</div>
+          <h2>How well did the models perform?</h2>
+        </div>
+        <p>
+          The same 80-prompt benchmark was used across the untouched base model
+          and both LoRA experiments. Automated evidence was supplemented with
+          direct human review before model selection.
+        </p>
+      </div>
+
+      <div class="kpi-grid">
+        <article class="kpi"><span>Benchmark prompts</span><strong id="kpi-prompts">80</strong><small>Independent evaluation set</small></article>
+        <article class="kpi"><span>Experiment 1 wins</span><strong id="kpi-exp1">57</strong><small>Against Experiment 2</small></article>
+        <article class="kpi"><span>Experiment 2 wins</span><strong id="kpi-exp2">12</strong><small>Against Experiment 1</small></article>
+        <article class="kpi"><span>Human-review ties</span><strong id="kpi-ties">11</strong><small>Neither clearly stronger</small></article>
+      </div>
+
+      <div class="performance-grid">
+        <div class="panel training-panel">
+          <div class="panel-heading">
+            <div>
+              <h3>Training outcome comparison</h3>
+              <p>Lower loss and perplexity are better.</p>
+            </div>
+          </div>
+          <div id="training-comparison"></div>
+        </div>
+
+        <div class="panel decision-panel">
+          <div class="decision-icon">✓</div>
+          <div class="eyebrow dark">FINAL RELEASE DECISION</div>
+          <h3>Experiment 1 selected</h3>
+          <p>
+            Experiment 2 improved over the untouched base model in many prompt-level
+            comparisons, but Experiment 1 remained stronger overall and was preferred
+            on 57 of 80 direct human comparisons.
+          </p>
+          <div id="human-review-summary" class="human-review-summary"></div>
+        </div>
+      </div>
+
+      <div class="panel metrics-panel">
+        <div class="panel-heading">
+          <div>
+            <h3>Automated benchmark metrics</h3>
+            <p>Higher is better except hallucination-risk flag rate.</p>
+          </div>
+          <div class="legend">
+            <span><i class="swatch base"></i>Base</span>
+            <span><i class="swatch exp1"></i>Experiment 1</span>
+            <span><i class="swatch exp2"></i>Experiment 2</span>
+          </div>
+        </div>
+        <div id="metric-bars" class="metric-bars"></div>
+      </div>
+
+      <div class="panel metric-table-panel">
+        <div class="panel-heading">
+          <div>
+            <h3>Exact evaluation values</h3>
+            <p>Transparent reporting of all headline metrics used in the comparison.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="headline-metrics-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Untouched Base</th>
+                <th>Experiment 1</th>
+                <th>Experiment 2</th>
+                <th>Best result</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="metric-explanations">
+          <article><strong>Instruction adherence</strong><span>How well the response follows the requested task and format.</span></article>
+          <article><strong>Quality rubric</strong><span>Automated rubric score for relevance, completeness, and answer quality.</span></article>
+          <article><strong>ROUGE-L</strong><span>Longest-common-subsequence overlap with the reference answer.</span></article>
+          <article><strong>Semantic similarity</strong><span>Embedding-based similarity between generated and reference answers.</span></article>
+          <article><strong>BERTScore</strong><span>Contextual token similarity; useful but not a guarantee of factual correctness.</span></article>
+          <article><strong>Hallucination-risk flags</strong><span>Automated warning rate; lower is better and human verification remains necessary.</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="explorer" class="section shell">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow dark">INTERACTIVE BENCHMARK EXPLORER</div>
+          <h2>Inspect every evaluated prompt</h2>
+        </div>
+        <p>
+          Search and filter all 80 records. Compare the reference answer,
+          untouched base response, Experiment 1, Experiment 2, metrics, and
+          the final human-review note.
+        </p>
+      </div>
+
+      <div class="filters panel">
+        <label>
+          Search
+          <input id="search-input" type="search" placeholder="Search prompt, topic, or answer…" />
+        </label>
+        <label>
+          Category
+          <select id="category-filter"><option value="">All categories</option></select>
+        </label>
+        <label>
+          Topic
+          <select id="topic-filter"><option value="">All topics</option></select>
+        </label>
+        <label>
+          Human preference
+          <select id="preference-filter">
+            <option value="">All outcomes</option>
+            <option value="experiment1">Experiment 1</option>
+            <option value="experiment2">Experiment 2</option>
+            <option value="tie">Tie</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="explorer-layout">
+        <aside class="record-list panel">
+          <div class="record-list-head">
+            <strong>Benchmark records</strong>
+            <span id="record-count"></span>
+          </div>
+          <div id="record-list"></div>
+        </aside>
+
+        <article id="record-detail" class="record-detail panel">
+          <div class="empty-state">Select a benchmark prompt to inspect its results.</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="workflow" class="section workflow-section">
+      <div class="shell">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow dark">END-TO-END PROJECT WORKFLOW</div>
+            <h2>How the project was built</h2>
+          </div>
+          <p>
+            The workflow demonstrates more than fine-tuning: it covers data quality,
+            baseline design, reproducibility, model debugging, evaluation, human
+            governance, CI, and deployment.
+          </p>
+        </div>
+        <div id="workflow-timeline" class="workflow-timeline"></div>
+      </div>
+    </section>
+
+    <section id="limitations" class="section shell">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow dark">RESPONSIBLE REPORTING</div>
+          <h2>Known limitations and lessons</h2>
+        </div>
+      </div>
+
+      <div class="lessons-grid">
+        <article class="panel lesson">
+          <span>01</span>
+          <h3>Fine-tuning improved the baseline</h3>
+          <p>Both LoRA experiments improved several automated metrics over untouched FLAN-T5-base.</p>
+        </article>
+        <article class="panel lesson">
+          <span>02</span>
+          <h3>Higher LoRA capacity was not automatically better</h3>
+          <p>Experiment 2 used a higher rank but did not outperform Experiment 1 overall.</p>
+        </article>
+        <article class="panel lesson">
+          <span>03</span>
+          <h3>Automated metrics were insufficient</h3>
+          <p>Human factual review exposed weak answers that similarity metrics could not reliably identify.</p>
+        </article>
+        <article class="panel lesson">
+          <span>04</span>
+          <h3>Negative findings were preserved</h3>
+          <p>Experiment 2 remains documented rather than being hidden after it failed the final release decision.</p>
+        </article>
+      </div>
+
+      <div class="limitations panel">
+        <h3>Model limitation</h3>
+        <p>
+          The adapters may generate incomplete, circular, or factually inaccurate
+          explanations. This project is an educational demonstration of instruction
+          tuning, controlled evaluation, and responsible model selection—not a
+          production-grade expert assistant.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <div>Project 05 · Instruction-Tuned Domain LLM</div>
+      <a href="https://github.com/unit-mole/transformer-projects/tree/main/05-instruction-tuned-domain-llm" target="_blank" rel="noreferrer">Source code and notebooks on GitHub ↗</a>
+    </div>
+  </footer>
+
+  <script src="benchmark_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
